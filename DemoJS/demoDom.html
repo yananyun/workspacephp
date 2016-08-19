@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>DOM基础</title>
+</head>
+<body>
+
+BOM 浏览器基础模型  主要是操作 浏览器的<br/>
+DOM  是文档对象模型 D 表示整个网页 O 表示可以操作网页的对象 有属性与方法可以调用 M为文档的树型结构<br/>
+  DOM 树型结构 根节点html 子节点 head body； head 子节点 meta title ;body子节点 有 ul table 等  <br/>
+ html节点 又称为html元素 <br/>
+   
+   节点分为三类
+   元素节点 其实就是标签
+   文本节点 其实就是标签内的文本
+   属性节点 其实就是标签的属性<br/>
+   查找元素  查找元素节点  document.getElementById(); 
+   参数传递一个元素的id值 这样就获取可以操作该节点的对象<br/>
+   为什么  查找不到元素 这里需要注意
+   DOM操作必须等待HTML文档加载完毕 解决办法一： 把DOM操作的script标签代码放到html文档最后
+   解决办法二：用onload 事件
+   window.onload= function(){
+   //这里存放当网页加载完毕后 ，再执行的代码块
+   }
+   
+   id 表示元素节点的唯一性；一个页面的元素节点 id 不能重复；
+   如果是 IE5.0-一下 可能不兼容 getElementBtId 可以做个判断
+   非w3c标准  但是兼容性好  建议使用
+ 
+   
+   
+   <br/>
+      
+   <div id='box' class='divclass'></div>
+   <ul>
+   		<li name='liname' >1</li>
+   			<li>2</li>
+   				<li>3</li>
+   </ul>
+   <script type="text/javascript">
+   
+   
+     var box = getElementById('box');
+     alert(box.tagName); //获取这个元素节点的标签名
+     alert(box.innerHTML);//非W3C规范
+     //获取这个元素节点中的文本（如果 标签 之间 还有别的标签 返回的值中会包含 测试<span> 测</spam>试）
+     alert(box.id);//获取元素的id属性的值
+     alert(box.title);//获取元素的title属性的值
+     alert(box.style);//获取元素的style属性对象 这里出现不同
+     alert(box.style.color);//获取元素的style属性对象的color属性的值
+     alert(box.className);//获取class属性的值  不能直接用class class是保留字
+   
+   
+   
+   </script>
+     <script type="text/javascript">
+   
+      window.onload= function()
+      {
+    	  var box = document.getElementById('box');
+    	//赋值 可以解析html 不是单纯的纯文本输出刷新页面
+    	  box.innerHTML='玩转<strong>JS<strong>';
+    	  box.id='kkk';
+    	//参数传递一个标签名即可 返回一个数组集合
+    	  document.getElementsByTagName('li');
+    	alert(li.length);//返回数组的数量
+    	alert(li[0]);//HTMLElement ,li的节点对象
+    	alert(li.item[0])//功能同上
+    	alert(li.item[0].tagName);//li
+    	alert(li.item[0].innerHTML);//1
+    	
+    	
+    	var body = document.getElementsByTagName('body')[0];//获取 body节点
+    	
+    	var all = document.getElementsByTagName('*');
+    	alert(all.length);
+    	//火狐浏览器打开firebug后 会自动创建一个div 所以会多出一个
+    	alert(all[0].tagName);
+    	alert(all[0].innerHTML);
+    	
+    	
+    	
+      }
+   
+   
+   
+   </script>
+   
+        <script type="text/javascript">
+   
+      window.onload= function()
+      {
+    	  var box = document.getElementByName('liname')[0];
+    	  alert(box.id);
+    	  //IE浏览器在获取 不合法的属性 获取节点对象时 会不执行  不兼容
+    	  
+    	  alert(box.getAttribute('bbb'));
+    	 //这个获取自定义属性的值所有属性都兼容 当然也可以获取非自定义属性
+    	   alert(box.getAttribute('className')); //IE可以获取 其它不兼容
+    	   alert(box.getAttribute('class')); //IE不可以获取 其它兼容
+    	   alert(box.onclick); //均返回函数式
+    	   alert(box.getAttribute('onclick'));
+    	   //IE返回函数式（函数代码块）其它返回方法名（其实是方法调用代码）
+    	   
+    	   alert(box.setAttribute('style','color:red'));//IE7以下不兼容
+    	   alert(box.removeAttribute('style'));//IE6下不支持
+    	   
+    	   
+    	   
+    	   var input = document.getElementByName('test')[0];
+    	  alert(input.id);
+    	  
+    	 
+    	  
+    	  
+    
+    	
+    	
+      }
+   
+   
+   
+   </script>
+   <input type='submit' name='test' value='submit' />
+   
+   
+</body>
+</html>

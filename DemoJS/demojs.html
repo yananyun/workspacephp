@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>JS事件源 与 JS面向对象与原型</title>
+<script type="text/javascript">
+
+/* 页面加载事件 页面卸载事件 这两个事件 只能在 body元素中 处理回调调用 */
+			function loadHtml()
+			{
+				alert('欢迎您的登陆');
+			}
+			
+			function closeHtml()
+			{
+				
+				alert('关闭');
+			}
+			
+			function mouseHandle()
+			{
+				alert('鼠标事件触发');
+			}
+
+</script>
+</head>
+
+<!-- 对于一个事件源其实可以跟随多个回调处理的函数调用  多个函数可以用分号隔开 -->
+<body onload='loadHtml()' onunload='closehtml()'>
+
+ECMAscript有两种的开发模式 第一 函数式开发（过程化开发） 第二 面向对象OOP；<br/>
+很多开发语言也是这两种开发模式<br/>
+传统面向对象的语言有一个标志 那就是类的概念 那就是Class<br/>
+通过类可以创建任意多个相同属性和方法 属性本质是变量 只是放在相同的作用域管理后就变成了属性<br/>
+方法 本质是函数 只是放在相同的作用域管理后就变成了方法<br/>
+ECMAscript没有类的概念 这里的对象有点扭曲 没有继承 多态；与传统的对象的概念需要区别对待<br/>
+ 学习条件 ：一定的html基础 html5 xhtml javascript一定基于html与css开发<br/>
+ 接触过asp php 真正了解js的用途<br/>
+ 面向对象的基础  javascript的面向对象是非正统且怪异的 没有<br/>
+ 正统的面向对象是子类继承父类  而JS的继承是 通过原型或者对象冒充的方式实现<br/>
+<img src='default-coach.png'  height='60%' onmousedown='mouseHandle()'/>
+
+开始 由如何创建对象 开始<br/>
+<script type="text/javascript">
+
+	var box = new Object();//创建对象那
+	box.name = 'name';//添加属性
+	box.age = 100;
+	box.run=function(){ return this.name+'函数function'+this.age; };
+	//this表示当前作用域下的那个对象
+   //this 表示new Object() 实例化出来的那个对象
+   //this 要放在一个作用域下 比如box.run=functio(){};
+   
+   //放在这外边的this  就代表的是window;
+   //windwo 可以访问全局变量
+   var name22='我是window下的属性 也使全局变量';
+
+	alert(box.run());
+	
+    alert(this.name22);
+    
+    
+	var box1 = new Object();//创建对象那
+	box1.name = 'Lee';//添加属性
+	box1.age = 100;
+	box1.run=function(){ return this.name+'函数function'+this.age; };
+	
+	
+	var box2 = new Object();//创建对象那
+	box2.name = 'jack';//添加属性
+	box2.age = 200;
+	box2.run=function(){ return this.name+'函数function'+this.age; };
+	
+	alert(box1.run());
+	alert(box2.run());//这是两个完全独立的对象  但是数据结构完全相同 但是属性没有完全共享
+	
+	var box3 = new Object();//创建对象那
+	box3.name = 'Lee';//添加属性
+	box3.age = 100;
+	box3.run=function(){ return this.name+'函数function'+this.age; };
+	
+	
+	var box4 =box3;//创建对象那
+	box4.name = 'jack';//添加属性
+	box4.age = 200;
+	box4.run=function(){ return this.name+'函数function'+this.age; };
+	
+	alert(box3.run());
+	alert(box4.run());//这里不是两个完全独立的对象 
+	//但是数据结构完全相同 属性有完全共享  两个输出都是jack 引用传值
+	
+	//工厂模式创建对象
+	function createObject(name,age)//集中实例化 解决了很多重复代码的问题
+	{
+		var obj= new Object();
+		obj.name=name;
+		obj.age=age;
+		obj.run= function()
+		{
+			//this表示当前作用域下的那个对象
+			return this.name+this.age+'运行中';
+			
+		}
+		return obj;
+	}
+	function createObject2(name,age)//集中实例化 解决了很多重复代码的问题
+	{
+		var obj= new Object();
+		obj.name=name;
+		obj.age=age;
+		obj.run= function()
+		{
+			//this表示当前作用域下的那个对象
+			return this.name+this.age+'运行中';
+			
+		}
+		return obj;
+	}
+	var box5=createObject('Lee',44);
+	var box6=createObject('Jack',55);
+	var box7=createObject('Jack2',500);
+	alert(box5 instanceof Object);
+	alert(box6 instanceof Object);//这里两个对象都是Object类型 就无法区分 这个实例引用到底是谁的实例对象
+	alert(box7 instanceof Object);//这里两个对象都是Object类型 就无法区分 谁到底是谁的对象
+	//这5、6、7都是true 没有办法区分
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	  
+
+</body>
+</html>

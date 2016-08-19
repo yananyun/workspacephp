@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>原型的缺点与优点</title>
+</head>
+<body>
+原型的属性 两个不同的实例 共享这些属性 不能保持独立性；对于基本数据类型其实还行；<br/>
+但是若原型添加的属性中有 对象属性 比如 数组 Function 对象 这些引用类型就比较麻烦了 不能保持独立性 <br/>
+
+
+
+<script type="text/javascript">
+
+//用字面量的方式添加原型
+		function Box()
+		{};
+		Box.prototype = 
+			{
+				constructor:Box,
+				name:'Lee',
+				age:100,
+				family:['哥哥','姐姐' ,'妹妹'];
+		run:function()
+		{
+			return this.name+this.age+'运行中';
+		}
+				
+			}
+		//第一个 问题 无法通过传参 改变他们的值
+		var box1 = new Box();
+		box1.name='Jack';
+		alert(box1.name);
+		var box2 = new Box();
+		alert(box2.name);
+		
+		//第二个问题 原型中有引用类型  一个实例修改了引用对象后 数据共享 另一个实例调用也发现数据修改了
+		box1.family.push('弟弟');
+		alert(box1.family);//都发现数组多了弟弟这一项
+		alert(box2.family);//都发现数组多了弟弟这一项
+
+		
+		
+
+
+</script>
+
+</body>
+</html>

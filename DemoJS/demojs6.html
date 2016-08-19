@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>JS中面向对象 与 原型 实现继承</title>
+</head>
+<body>
+
+	继承的概念
+	其它语言实现继承的方式有两种 接口实现 ；继承<br/>
+	ECMA只支持继承 不支持接口实现  这里使用原型链<br/>
+	<script type="text/javascript">
+	//继承  通过原型链 实现
+	//被继承的函数叫超类型 父类 基类
+	//继承的函数叫做子类型 子类 超类
+	function Box()
+	{
+		this.name='Lee';
+	}
+	function Desk(){
+		
+		this.age=100;
+	}
+	var  desk = new Desk();
+	alert(desk.age);//这里没问题
+	alert(desk.name);//但这里没有 解决这问题  通过继承
+	//通过原型链继承 超类型实例化后的对象实例 赋值给子类型的原型属性
+	//new Box()会将Box构造里的信息与原型里的信息都交给了desk
+	
+	Desk.prototype = new Box();
+	alert(desk.name); //这次有了这个属性  但是这会传染 原型链弄乱了 
+	function Table(){
+		
+		this.level='AAAAAA';
+	}
+	// 但是这会传染 原型链弄乱了 
+	//(因为原型链会数据共享 搞乱 开发中没必要这么麻烦 要注意实现容易度 可维护度)
+	Table.prototype = new Desk();	
+	
+	
+	////////////
+		function Box2()
+	{
+		this.name='Lee';
+	}
+	function Desk2(){
+		
+		this.age=100;
+	}
+	Box2.prototype.name='Jack';
+	Desk2.prototype= new Box2();
+	var  desk2 = new Desk2();
+	alert(desk2.name);//这里输出的是 Lee 还是 Jack； 证明 就近原则 是Lee
+	
+	//对象冒充 实现继承
+	function Box3(name,age)
+	{
+		this.anme = name;
+		this.age = age;
+		this.family=['哥哥','姐姐',' meimei'];
+	}
+	Box3.prototype.run=function()
+	{
+		return this.name+this.age+'单一的对象冒充继承';
+	}
+	function Desk3(name,age)
+	{
+		Box3.call(this,name,age);//对象冒充 继承
+		//对象冒充 只能继承构造方法中的信息，原型中的信息不能继承
+	}
+	var desk3 = new Desk3('Lee',100);
+	desk3.family.push('弟弟');//这里添加弟弟
+	alert(desk3.family);// 这里输出内容中有弟弟
+	var desk4 = new Desk3('Lee',100);
+	alert(desk4.family);//这里保持了数据独立 没有 输出弟弟
+	//构造方法中 引用属性 保持了数据独立
+	
+	　//构造函数里的方法 放在构造里 每次实例化 都会分配一个内存地址 浪费
+	 //所以最好把方法 放到原型中
+	 //但是 单一通过 对象冒充继承 无法继承 原型中的信息
+	 //因此 通过组合 原型链继承 和 冒充继承的方式 来实现
+	 
+	 
+	 
+	 // 原型链 加 借用构造函数
+	 	function Box4(name,age)
+	{
+		this.anme = name;
+		this.age = age;
+		this.family=['哥哥','姐姐',' meimei'];
+	}
+	Box4.prototype.run=function()
+	{
+		return this.name+this.age+'组合模式继承';
+	}
+	function Desk4(name,age)
+	{
+		Box4.call(this,name,age);//对象冒充 继承
+		//对象冒充 只能继承构造方法中的信息，原型中的信息不能继承
+	}
+	
+	
+	Desk4.prototype= new Box4();
+	var desk5 = new Desk4('Lee',100);
+	 
+	
+	
+	
+	
+	
+	</script>
+	
+
+</body>
+</html>

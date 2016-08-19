@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>面向对象 原型</title>
+
+</head>
+<body>
+  对象冒充 解决了 传参 的继承 结合 原型链继承 解决了 方法共享 的继承<br/>
+  
+ 1、 原型链继承 2、 借用构造函数 对象冒充 继承 3 组合继承 <br/>
+ 4、原型式继承<br/>
+ 
+ <script type="text/javascript">
+ 
+ //原型式继承 造成实例属性中 引用属性 数据共享  
+ //不好 不好  还不如 原型链继承 至少解释的通
+ function obj(o)
+ {
+	 //o表示将要传递进入的一个对像
+	 function F(){};//F构造一个临时新建的对象 用来存储传递过来的对象
+	 F.prototype = o;//
+	 return new F();
+	  
+ }
+ 
+ //字面量方式创建
+ 
+ //寄生函数 该方法是在 原型式继承的基础上实现的
+ function create(o)
+ {
+	 var f = obj(o);
+	 f.run = function()
+	 {
+		 return this.name+'方法 寄生函数';
+	 }
+	 return f;
+ }
+ 
+ //6寄生组合继承   要有 临时中转函数  还要有 寄生函数
+ 
+ function create(box,desk)
+ {
+	 //目标是: 参数2 继承 参数1
+	 var f = obj(box.prototype);
+	 f.constructor=desk;//调整回 原型的 constructor指针 指回自己 
+	 desk.prototype=f;
+	
+ }
+ 
+ function Box(name,age)
+ {
+	 this.name = name;
+	 this.age = age;
+ }
+ Box.prototype.run = function()
+ {
+	 return this.name+'几声组合';
+ }
+ function Desk(name,age)
+ {
+	 Box.call(this,name,age);
+ }
+ create(Box,Desk);//这句话替代 Desk.prototye= new Box();
+ 
+ var  desk = new Desk('Lee',100);
+ //因为这里 create(Box,Desk) 才继承到方法的 
+ alert(desk.run());
+ 
+ 
+ 
+ </script>
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+</body>
+</html>

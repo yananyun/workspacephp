@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>面向对象JS 原型3</title>
+</head>
+<body>
+ECMA中 原型 <br/>
+js函数中会默认有一个属性prototype属性 而这个属性其实是另一个对象的引用<br/>
+它的功能是为所有实例共享属性和方法<br/>
+不必在构造函数中添加定义信息 而是可以直接将这些信息添加到原型中<br/>
+<script type="text/javascript">
+//构造函数
+function Box(user,age)
+{
+	this.user=user;
+	this.age=age;
+	this.run=function()
+	{
+		return this.user+this.age+"实例属性 实例方法"';
+	}
+	
+}
+
+//原型 
+function Box2();
+Box2.prototype.name='Lee2';
+Box2.prototype.age=100;
+Box2.prototype.run=function()
+{
+	return this.name+this.age+'原型属性 原型方法';
+}
+
+var box1 =new Box2();
+var box2 = new Box2();
+//如果是实例方法 不同的实例化 他们的方法地址是不一样的 是各自唯一的
+//如果 是原型的方法 那么他们的地址是共享的 大家都一样
+alert(box1.run==box2.run); //这里返回了true 需要注意
+
+//Box2实例化 会有一个属性 __proto__ 这个属性
+alert(box1.prototype);//这个属性是访问不到
+alert(box1.__proto__);//这个属性是实例指向原型对象的一个指针 
+//构造属性constructor 输出可以获取构造函数本身
+//是原型对象对实例的指针
+alert(box1.constructor);
+
+
+//如何判断一个对象实例（对象引用）是不是指向了这个对象的原型对象
+//基本上实例化了 他会自动指向的
+
+alert(Box.prototype.isPrototypeOf(box1)); //返回true
+
+var obj= new Object();
+
+alert(Box.prototype.isPrototypeOf(obj));//返回false
+
+alert(Object.prototype.isPrototypeOf(obj));//返回true
+
+
+//构造函数 创建对象  原型的执行流程？？
+function Box3()
+{
+	this.name='Jack';
+	};
+Box3.prototype.name='Lee2';
+Box3.prototype.age=100;
+Box3.prototype.run=function()
+{
+	return this.name+this.age+'原型属性 原型方法';
+}
+
+var box1 =new Box3();
+box1.age=300;//实例属性 并没有重写原型的属性值
+alert(box1.age);
+alert(box1.name);
+delete box1.name ; //删除实例中的属性
+alert(box1.name);//通过删除实列中的属性 获取原型中的属性
+Box.prototype.name = 'test';//覆盖原型属性中的值
+
+alert(box1.hasOwnProperty('name'));//判断实例中是否存在指定的属性
+alert ('name' in box1);//不管实例属性或原型属性 只要有一个存在 就反回true
+//判断只有原型中有属性 小函数
+function isProperty(object,property)
+{
+	return !object.hasOwnProperty(property)&&(property in object);
+	
+}
+
+
+</script>
+
+
+</body>
+</html>

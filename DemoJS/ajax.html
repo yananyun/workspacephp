@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>JavaScript如何访问服务器端 ajax</title>
+</head>
+<body>
+ajax能够向服务器请求额外的数据 并且不需要卸载刷新页面 2005年出现 因为此优点席卷全球<br/>
+在没有ajax之前 都是采用内嵌的framwork来实现<br/>
+xml 同步与异步的区别  Ajax x代表的是xml数据格式  但是后期服务器都采用了json<br/>
+火狐 safari chrome IE7以上都支持XHR原生对象<br/>
+IE6及以下 ajax 必须使用ActiveX 通过MSXML库来实现 <br/>
+<br/>
+<br/>
+<script type="text/javascript">
+
+function createXHR()
+{
+	if(typeof XMLHttpRequest!='undefined')
+	{
+	  return new XMLHttpRequest();
+	}
+	else if(typeof ActiveXObject!='undefined')
+		{
+		var version=[
+		             'MSXML2.XMLHttp.6.0',
+		             'MSXML2.XMLHttp.3.0',
+		             'MSXML2.XMLHttp'
+		             
+		             ];
+		for(var i = 0; version.length;i++)
+			{
+			try{
+				return new ActiveXObject(version[i]);
+			}catch(e)
+			{
+				//跳过
+			}
+			
+			}
+		}else{
+				alert('不支持ajax');
+			}
+		
+		
+}
+
+
+/* 	var xhr =new XMLHttpRequest();//创建XHR对象
+	
+	alert(xhr);
+	
+	//第一步创建XHR对象  第二步调用open方法
+	xhr.open('get','testAjax.php',false);   //准备发送请求，以get方式请求 并且不是异步的
+	xhr.send(null);//open只是准备发送 send方法才是真正的发送 由于是get方式所以send传参数null
+	//当是post请求时 可以在这里传参数
+	//如果没有向服务器发送 firebug 无提示 发送成功之后才有提示 
+	alert(xhr.responseText);
+	*/
+	
+	
+	//通过事件来调用ajax
+	
+	addEvent(document,'click',function(){
+		
+		var xhr =new XMLHttpRequest();//创建XHR对象		
+		//第一步创建XHR对象  第二步调用open方法
+		xhr.open('get','testAjax.php',false);   //准备发送请求，以get方式请求 并且不是异步的
+		xhr.send(null);//open只是准备发送 send方法才是真正的发送 由于是get方式所以send传参数null
+		//当是post请求时 可以在这里传参数
+		//如果没有向服务器发送 firebug 无提示 发送成功之后才有提示 
+		if(xhr.status == 200)
+			{
+			alert(xhr.responseText);//作为响应主体返回的文本
+			alert(xhr.status);//响应状态
+			alert(xhr.statusText);//响应状态文本
+			}else
+				{
+				alert('获取数据错误! 状态码:'+xhr.status+'状态信息:'+xhr.statusText);
+				}
+
+		/* xhr.open('get','testAjax.php?rand='+Math.random(),false); 
+		
+		解决IE 使用缓存数据的办法
+		*/
+		
+	});
+	//PS：IE浏览器第一次ajax是最新的数据 但是第二次竟然默认使用缓存数据 解决办法加
+	//解决办法 怎么处理缓存 可以使用JS随机字符串
+	
+	
+	
+
+
+</script>
+
+</body>
+</html>

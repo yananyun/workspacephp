@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>事件对象</title>
+<script type="text/javascript" src='eventjs2.js'></script>
+</head>
+
+<body style="border:1px solid black">
+
+
+事件对象 可以处理
+鼠标事件 键盘事件 更深入的细节 还可以处理冒泡流的函数<br/>
+事件处理三部分 上次内容 三部分组成  对象.事件处理函数=函数<br/>
+window.onload= function()
+{
+	var box =document.getElementsByTagName('input')[0];
+	box.onlick=function()
+	{
+	alert('input click');
+	}
+   document.onclick=function()
+   {
+   alert('document click');
+   }	
+	
+	}<br/>
+	
+	<div id ='box' style="background:red; width:200px ;height:200px"> 测试DIV 
+	<input type='button' name='name' value='阿牛' />
+	</div>
+	div把body撑开了 body 其实不是满屏 根据内容来撑开多大 有多大 body 不一定满屏<br/>
+	
+
+
+
+</body>
+</html>

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>ajax 回调 json 数据 回调json数据文件</title>
+</head>
+<body>
+
+
+<script type="text/javascript">
+//获取头信息
+
+    addEvent(document,'click',function()
+			{
+    	//这里使用post方式提交 还能在urlbase加中加这个 get post结合吗 事实证明可以
+    	var url='demo.json?rand='+Math.random();
+    /* 	url=params(url, 'name', 'Le&e');
+    	//参数中有特殊字符时 要进行url编码
+    	
+    	url=params(url, 'age', 100); */
+		var xhr = XMLHttpRequest();
+		xhr.onreadystatechange = function()
+		{
+			alert(xhr.readyState);
+			//0 未初始化 open方法还未调用 1  open方法调用 但send方法还未调用 2 已经send方法调用 但还未接受响应
+			//3 已经开始接受部分响应 4已经接受到全部响应数据 而且可以使用
+			
+			if(xhr.readyState==4)
+				{
+				if(xhr.status==200)
+				{
+				alert(xhr.getAllResponseHeaders());//获取所有的响应头信息
+				alert(xhr.getResponseHeader('Content-Type'));//获取指定的单个响应头信息
+			/* 	alert(xhr.responseText); */
+			
+			  var json=JSON.parse(xhr.responseText);
+		       	alert(json);
+				}else
+					{
+					 alert('获取数据错误');
+					}
+				}
+		
+		}
+       
+		 xhr.open('get',url,true); //第一步指明请求方式 改为post
+		//解决IE 使用缓存数据的办法
+		
+	/* 	xhr.abort();//取消异步请求 这里放在send方法之前会报错 应该放在send方法之后 */
+		xhr.setRequestHeader('myheader','Lee');//设置请求头信息
+	/* 	xhr.setRequestHeader('Content-Type','application/x-www-form-urlencoded');//第三步模拟表单提交
+		xhr.send('name=lee2&age=100');//第二步 将要post的数据放到send方法参数 */
+	
+		xhr.send(null);
+			});
+			
+			function params(url,name,value)
+			{
+				url+=url.indexOf('?')==-1?'?':'&';
+				//参数中有特殊字符时 要进行url编码
+				url+=encodeURIComponent(name)+'='+encodeURIComponent(value);	
+				return url;
+			}
+			
+			// 性能上post比get消耗资源多
+
+
+</script>
+
+
+</body>
+</html>

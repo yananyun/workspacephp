@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>ajax 异步</title>
+</head>
+<body>
+
+//使用同步方式的ajax固然简单  但是使用异步呢 需要触发事件 onreadystatechange<br/>
+	<script type="text/javascript">
+	
+	addEvent(document,'click',function()
+			{
+		var xhr = XMLHttpRequest();
+		xhr.onreadystatechange = function()
+		{
+			alert(xhr.readyState);
+			//0 未初始化 open方法还未调用 1  open方法调用 但send方法还未调用 2 已经send方法调用 但还未接受响应
+			//3 已经开始接受部分响应 4已经接受到全部响应数据 而且可以使用
+			
+			if(xhr.readyState==4)
+				{
+				if(xhr.status==200)
+				{
+				
+			/* 	alert(xhr.responseText); */
+			
+				}else
+					{
+					 alert('获取数据错误');
+					}
+				}
+		
+		}
+		xhr.open('get','testAjax.php',true);
+	/* 	xhr.abort();//取消异步请求 这里放在send方法之前会报错 应该放在send方法之后 */
+		xhr.send(null);
+		
+		
+			});
+	
+	
+	
+	</script>
+
+</body>
+</html>

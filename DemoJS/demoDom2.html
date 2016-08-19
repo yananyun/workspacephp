@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>元素节点 属性节点 文本节点</title>
+</head>
+<body>
+
+<div id = 'box'  >   测试Div<em>倾斜</em>结尾 </div>
+<script type="text/javascript">
+	var box = document.getElementById('box');
+	alert(box.nodeName);//获取元素节点的标签名 和 tagName 一样
+	alert(box.nodeType);//获取元素节点的类型值 元素节点Type值是1 属性 2 文本3
+	alert(box.nodeValue);//获取元素节点本身的内容 但本身没有内容 输出null？？
+	
+	
+	//node本身把节点指针放在元素<div></div>上 也就是说本身没有value
+	//如果要输出<div></div>中里面包含的文本内容 那么前面的innerHTML
+	// 测试Div<em>倾斜</em>结尾 ,如果当作元素节点文本内容 他就是一个整体
+	
+	//childnodes 获取当前元素 所有的字节点
+	
+	window.onload =function()
+	{
+		var box = document.getElementById('box');
+		alert(box.childNodes); //返回当前元素节点的所有字节点
+		alert(box.childNotes.length);//3个字节点
+		//第一个节点 为：  测试Div 这个节点为 文本节点
+		//第二个节点 为 <em>倾斜</em> 该节点为元素节点
+		//第三个节点 为 结尾 该节点为 文本节点
+		alert(box.childNodes[0].nodeType);//  返回3
+		alert(box.childNodes[0].nodeValue);//此时  返回文本节点内容 测试Div
+		alert(box.childNodes[0].innerHTML);//此时无效  返回undefined
+		alert(box.childNodes[0].nodeName);// 没有名字 默认返回#text
+		alert(box.childNodes[0].nodeName);//
+		
+		
+	}
+	
+</script>
+
+
+
+<script type="text/javascript">
+	var box = document.getElementById('box');
+  for(var i =0 ;i<box.childNodes.length;i++)
+	  {
+	  if(box.childNodes[i].nodeType === 1)
+		  {
+		  alert('元素节点 内容' +box.childNodes[i].nodeName);
+		  //元素节点 可以使用innerHTML 获取节点之间的文本内容
+		  //使用 nodeName 获取元素节点的 标签的名字 如 div 还是 strong 还是p
+		  
+		  }else if(box.childNodes[i].nodeType ===3)
+			  {
+			  alert('文本节点'+box.childNodes[i].nodeValue);
+			  //获取文本节点的内容时 是不可以使用innerHTML
+			  }
+	  
+	  }
+  //注意这里 不能遍历出 属性节点 
+	
+</script>
+
+  <p id = 'pox'>  nodevalue</p>
+<script type="text/javascript">
+	var box = document.getElementById('pox');
+    box.innerHTML='测试<strong>Pox<strong>';//成功动态刷新UI 并执行HTML UI渲染解析Strong
+    box.nodeValue='测试Pox';//这里没出错 但是没有刷新UI 因为nodeValue是在当前节点上操作
+    //很明显我们的目标节点是 box的字节点
+    box.childNodes[0].nodeValue='测试Pox node  Value';
+    box.childNodes[0].nodeValue='测试Pox <strong>node  Value<strong>';
+    //该修改了界面的值 但不能解析HTML标签 渲染UI 而是原样输出
+    //测试Pox <strong>node  Value<strong> 因为将尖括号 转码了 转为 < &lt;> &gt;
+</script>
+
+
+
+
+
+</body>
+</html>

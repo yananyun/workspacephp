@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>面向对象JS 原型4</title>
+</head>
+<body>
+		原型的属性的判断  上节课<br/>
+		本次 研究 原型的自变量 <br/>
+		
+		<script type="text/javascript">
+		
+		//构造函数 创建对象  原型的执行流程？？
+		function Box()
+		{
+			this.name='Jack';
+			};
+		Box.prototype.name='Lee2';
+		Box.prototype.age=100;
+		Box.prototype.run=function()
+		{
+			return this.name+this.age+'原型属性 原型方法';
+		}
+
+		var box1 =new Box();
+		alert(box1.prototype);//使用对象实例无法访问到prototype  
+		alert(box1.__proto__);//私用对象实例访问prototype指针
+		alert(Box.prototype);//使用对像方法名 访问prototype
+		
+		
+		</script>
+		
+</body>
+</html>

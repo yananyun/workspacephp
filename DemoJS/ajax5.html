@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>ajax 封装</title>
+</head>
+<body>
+ajax 有同步模式 有异步模式 有get请求 有post请求 所以要封装ajax<br/>
+<script type="text/javascript">
+//创建ajax
+	function ajax(method,url,data,async,obj)
+	{
+	//第一步 创建xhr
+	var xhr = new XMLHttpRequest();
+	//第二步创建 url url可以传值
+	url= url+'?rand='+Math.random()+'&'+data;
+	xhr.onreadystatechange=function()
+	{
+		if(xhr.readyState==4)
+			{
+			if(xhr.status==200)
+				{
+				alert(xhr.responseText);
+				obj.success(xhr.responseText);
+			/* 	return xhr.responseText;
+			这里是无法返回的
+			
+			*/
+				}else
+					{
+					alert('数据获取错误');
+					}
+			}
+	};
+	xhr.open(method,url,async);
+	xhr.send(null);
+	
+	}
+	//调用ajax
+	addEvent(document,'click',function(){
+		//如果需要添加数据包
+		ajax('get','demo.php','name=lee&age=100',true);
+	},{
+		success:function(text)
+		{
+			alert(text);
+		}
+	}
+	);
+	
+	
+	
+	//改良
+	function params2(data)
+	{
+		var arr = [];
+		for(var name in data)//循环拿到键值对的键名
+			{
+			//由键名获取键值
+			 arr.push(encodeURIComponent(name)+'='+encodeURIComponent(data[name]));
+			}
+		return arr.join('&');
+	}
+	ajax2(obj)
+	{
+		//第一步 创建xhr
+		var xhr = new XMLHttpRequest();
+		//第二步创建 url url可以传值
+		//但是这里需要考虑data中有特殊字符 需要编码  所以data 键值对 刚开始是 字符串 后改良为 键值对对像传输
+		
+	/* 	obj.url= obj.url+'?rand='+Math.random()+'&'+params2(obj.data);
+		//这里直接拼接就只能get 方式 考虑到post */
+	/* 	obj.url=obj.url+'?rand='+Math.random(); */
+		obj.data=params2(obj.data);
+		if(obj.method=='get')
+			{
+			obj.url=obj.url.indexOf('?')==-1?obj.url+'?'+obj.data:obj.url+obj.data;
+			}
+		if(obj.async==true)
+			{
+			xhr.onreadystatechange=function()
+			{
+				if(xhr.readyState==4)
+					{
+				     callBack();
+					}
+			};
+		}
+		xhr.open(obj.method,obj.url,obj.async);
+		if(obj.method=='post')
+			{
+			xhr.setRequestHeader('Content-Type','application/x-www-form-urlencoded');//第三步模拟表单提交
+			xhr.send(obj.data);//第二步 将要post的数据放到send方法参数 
+			}else
+				{
+				xhr.send(null);
+				}
+		
+		
+		if(obj.async==false)
+			{
+	      callBack();
+			}
+	
+		
+		
+		function callBack()
+		{
+			if(xhr.status==200)
+			{
+			//同步这里没有效果
+			obj.success(xhr.responseText);
+		/* 	return xhr.responseText;
+		这里是无法返回的
+		
+		*/
+			}else
+				{
+				alert('数据获取错误');
+				}
+		}
+	}
+	
+		addEvent(document,'click',function(){
+		//如果需要添加数据包
+		ajax2({
+			method:get,
+		    url:'demo.php',
+		    data:{
+		    	'name'=lee,
+		    	'age'=100;
+		    }
+			success:function(text)
+			{
+				alert(text);
+			},
+			aync:true
+		}
+			
+
+	);
+	
+	
+	
+	function a()
+	{
+		function b()
+		{
+			return 123;
+		}
+		return 456;
+	}
+			
+	
+  
+
+
+
+</script>
+
+</body>
+</html>

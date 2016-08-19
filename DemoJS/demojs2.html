@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>面向对象与原型JS2</title>
+</head>
+<body>
+<script type="text/javascript">
+
+//工厂模式创建对象
+function createObject(name,age)//集中实例化 解决了很多重复代码的问题
+{
+	var obj= new Object();
+	obj.name=name;
+	obj.age=age;
+	obj.run= function()
+	{
+		//this表示当前作用域下的那个对象
+		return this.name+this.age+'运行中';
+		
+	}
+	return obj;
+}
+//构造方法创建对象
+function Box(name,age)//使用构造方法 解决了重复实例化的问题 又解决了对像识别的问题
+{
+	//this表示当前作用域下的那个对象
+	this.name=name;
+	this.age=age;
+	this.run=function()
+	{
+		 return this.name+this.age+'构造方法运行中';		
+	};
+	
+}
+function Desk(name,age)//使用构造方法 解决了重复实例化的问题 又解决了对像识别的问题
+{
+	//this表示当前作用域下的那个对象
+	this.name=name;
+	this.age=age;
+	this.run=function()
+	{
+		 return this.name+this.age+'构造方法运行中';		
+	};
+	
+}
+var box1 =new Box('Lee',100);
+var box2 =new Box('Jack',200);
+var box3 =new Desk('newJack',300);
+//这里没有new Object  这个Box对象哪里来的 this 又怎么代表
+//1、构造函数没有new Object 但是后台 会自动 var obj = new Object();
+//2、this相当于obj
+//3、工厂模式 要把obj引用返回  而 构造模式 没有 return 而是后台自动返回
+//构造函数的规范  构造函数 也是函数 但函数 名必须 首字母大写（普通函数 首字母无需大写）
+//构造函数调用 必须使用 new 构造函数名(); 就像var obj = new Object();
+alert(box1 instanceof Box);
+alert(box1 instanceof Object);
+alert(box3 instanceof Box);
+alert(box3 instanceof Desk);
+alert(Box('不要这用使用',2222));//构造函数 用普通函数方式调用 是无效 必须使用 new 方式调用
+
+//对象 对象冒充
+var o = new Object();
+Box.call(o,'Lee',100); // java 的 反射机制 invoke 有什么不同  ？？ 对象冒充
+alert(o.run());
+
+
+var box4 =new Box('Lee',100);
+var box5 =new Box('Jack',200);
+
+alert(box4.run == box5.run); 
+//这里实例化后的地址不相同 
+//这里box.run返回了函数的代码块 但是其实做比较运算却比较的是引用地址 引用地址不同 发现这里是false
+//box.run() 却是返回的run的函数方法执行的结果 
+
+//把构造函数的方法写到全局变量 会将上面的引用地址不同的改为引用地址也相同 
+//但是这里只做学习研究 开发不建议这么使用
+function run()
+{
+	return this.user+this.age+'运行中';
+	
+}
+function Box2(name,age)//使用构造方法 解决了重复实例化的问题 又解决了对像识别的问题
+{
+	//this表示当前作用域下的那个对象
+	this.name=name;
+	this.age=age;
+	this.run=run;
+	
+}
+
+
+var box6 =new Box2('Lee',100);
+var box7 =new Box2('Jack',200);
+
+alert(box6.run == box7.run);//这里box的引用地址都相同了 
+//window 下已经内置 又name 属性  使用中要小心  尽量使用别的变量名
+
+</script>
+
+</body>
+</html>

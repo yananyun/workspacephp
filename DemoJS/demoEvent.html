@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>JS事件   入门</title>
+<script type="text/javascript" src='eventjs.js'></script>
+</head>
+
+<body>
+  事件介绍<br/>
+  内联模型<br/>
+  脚本模型<br/>
+  事件处理函数<br/>
+  javascript事件 是由 访问web页面的用户引起的一系列操作 用户点击 用户执行某些操作 <br/>
+  事件处理函数  函数代码块 用户触发事件执行一系列代码 就是事件处理函数 <br/>
+  DOM2级事件<br/>
+  javascript有三种事件模型 内联模型 脚本模型 DOM2模型<br/>
+  内联模型 是指 事件处理函数是作为HTML标签的一个属性，用于处理指定的事件  <br/>
+  onclick是事件处理函数 内联模型<br/>
+  <script type="text/javascript">
+  
+  function box()
+  {
+	  alert('哪里');
+  }
+  
+  </script>
+    <input type='text' name='user' value='按钮' onclick="alert('Lee')"/>
+    <input type='text' name='user' value='按钮2' onclick="box()"/>
+      <input type='submit' name='user' value='onsubmit不触发' />
+    
+    <form >
+     <input type='button' name='user' value='按钮3' />
+      <input type='submit' name='user' value='onsubmit触发' />
+    
+       <input type='reset' name='user' value='重置按钮' />
+    </form>
+    
+    <p> 1222222222</p>
+        <p> 1222222222</p>
+            <p> 1222222222</p>
+            <p> 1222222222</p>
+            <p> 1222222222</p>
+                <p> 1222222222</p>
+        <p> 1222222222</p>
+            <p> 1222222222</p>
+                <p> 1222222222</p>
+                    <p> 1222222222</p>
+                        <p> 1222222222</p>
+                            <p> 1222222222</p>
+                                <p> 1222222222</p>   
+                                 <p> 1222222222</p>    
+                                 <p> 1222222222</p>
+                                    <p> 1222222222</p>
+                                        <p> 1222222222</p>
+                                            <p> 1222222222</p>
+                                                <p> 1222222222</p>
+                                                    <p> 1222222222</p>
+                                                        <p> 1222222222</p>
+                                                            <p> 1222222222</p>
+                                                                <p> 1222222222</p>
+    内联模型 不能分离  因此 要用分离 要用脚本模型<br/>
+</body>
+</html>

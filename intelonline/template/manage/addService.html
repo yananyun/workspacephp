@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>客服应答</title>
+<link rel="stylesheet" href="/css/index.css">
+<link href="/jquery-ui.css" rel="stylesheet">
+<script src="/js/jquery.min.js"></script>
+<script src="/js/index.js"></script>
+<script src="/js/jquery-ui.js"></script>
+<script>
+	$(function(){
+		
+	})
+	</script>
+</head>
+<body>
+	<div class="top">
+		<img src="/images/logo.jpg" alt="" />
+		<p>
+			Intel China Online<br /> <em>微信管理后台</em>
+		</p>
+		<div class="topRight">
+			<ul>
+				<li>admin&nbsp;|</li>
+				<li>帮助&nbsp;|</li>
+				<li><a href="">{退出}</a></li>
+			</ul>
+		</div>
+	</div>
+	<div class="con">
+		<div class="leftDiv">
+			<ul id="navigation">
+				<li><a href="weixinManage.html">微信用户管理</a></li>
+				<li><a href="newInfoManage.html">最新资讯管理</a></li>
+				<li><a href="sendManage.html">主动发送管理</a></li>
+				<li><a href="labelManage.html">标签管理</a></li>
+				<li><a href="serviceManage.html" class="nowRight">客服应答</a></li>
+				<li><a href="dateManage.html">数据管理</a></li>
+				<li><a href="fodderManage.html">素材库</a></li>
+			</ul>
+		</div>
+		<div class="rightDiv webDiv">
+			<div class="webTitle weixinTitle serviceTitle">
+				<a href="" class="nowTitle">添加关键词回复</a> <input type="button"
+					class="groupBtn confirmBtn closeBtn"
+					onclick="window.history.back();" value="返回">
+			</div>
+			<div class="serCon">
+				<p>
+					关键词：<input type="text"><input type="radio">等同<input
+						type="radio">包含<input type="radio">特殊条件
+				</p>
+				<p>输入内容：</p>
+			</div>
+			<div class="sendTab" style="margin-top: 0px;">
+				<div class="tabT">
+					<ul>
+						<li>文字</li>
+						<li>图文消息</li>
+					</ul>
+				</div>
+				<div class="tabB"></div>
+			</div>
+			<div class="detailBtn serBtn">
+				<input type="button" value="发送" class="confirmBtn saveBtn">
+				<input type="button" value="取消" onclick="window.history.back();"
+					class="noneBtn">
+			</div>
+		</div>
+	</div>
+</body>
+</html>

@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="author" content="www.zevertech.com" />
+<meta http-equiv="copyright" content="zevertech 2014" />
+<meta http-equiv="pragma" content="no-cache" />
+<meta name="viewport" id="viewport"
+	content="width=device-width, minimum-scale=1, maximum-scale=1, initial-scale=1.0,user-scalable=no" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-touch-fullscreen" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+<meta name="MobileOptimized" content="800">
+<meta name="format-detection" content="telephone=no" />
+<title>积分兑换</title>
+<link rel="stylesheet" href="/template/intel_bb/css/reset.css">
+<link rel="stylesheet" href="/template/intel_bb/css/animate.css">
+<link rel="stylesheet" href="/template/intel_bb/css/layout.css">
+<script src="/template/intel_bb/js/jquery.js"></script>
+<script src="/template/intel_bb/js/swiper.min.js"></script>
+<script src="/template/intel_bb/js/common.js"></script>
+<script type="text/javascript"
+	src="/template/intel_bb/js/swiper.animate.min.js"></script>
+<script type="text/javascript"
+	src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+</head>
+<body>
+	<div class="swiper-container">
+		<input type="hidden" name="openid" id="openid" value="<{openid}>">
+		<div class="swiper-slider publicbg">
+			<div class="fivetop">
+				<img src="/template/intel_bb/img/logo.gif" class="logo"
+					width="13.28%"><img
+					src="/template/intel_bb/img/intelicon.gif" class="intelicon"
+					width="8.7%">
+			</div>
+			<div>
+				<a href="/template/intel_bb/index.html#8"><img
+					src="/template/intel_bb/img/back.png"
+					class="arrorr animated infinite fadeInRight" style="width: 10%;" /></a>
+			</div>
+			<ul class="dhlistitem">
+				<li class="itemline"><img src="/template/intel_bb/img/pic1.jpg"
+					width="88.75"></li>
+				<li class="itemline"><img src="/template/intel_bb/img/pic2.jpg"
+					width="88.75"></li>
+				<li class="itemline"><img src="/template/intel_bb/img/pic3.jpg"
+					width="88.75"></li>
+				<li class="itemline"><img src="/template/intel_bb/img/pic4.jpg"
+					width="88.75"></li>
+			</ul>
+		</div>
+	</div>
+	<script>
+function jsonpcallback(data){
+    wx.config({
+        debug: false, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
+        appId: data.appid, // 必填，公众号的唯一标识
+        timestamp:data.timestamp, // 必填，生成签名的时间戳
+        nonceStr: data.noncestr, // 必填，生成签名的随机串
+        signature: data.signature,// 必填，签名，见附录1
+        jsApiList: ['onMenuShareTimeline','onMenuShareAppMessage'] // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
+    });
+
+    wx.ready(function(){
+        // config信息验证后会执行ready方法，所有接口调用都必须在config接口获得结果之后，config是一个客户端的异步操作，所以如果需要在页面加载时就调用相关接口，则须把相关接口放在ready函数中调用来确保正确执行。对于用户触发时才调用的接口，则可以直接调用，不需要放在ready函数中。
+        //分享到朋友圈
+        wx.onMenuShareTimeline({
+              title: '你卖产品，我发钱！英特尔物联网合作伙伴（IoT Partner）招募开始了！',
+              link: 'http://intelonline.buzzopt.com/index.php/wapIntelBB/index/intel_bb/index',// 分享链接
+              imgUrl: 'http://intelonline.buzzopt.com/template/intel_bb/img/last4.png',
+              success: function (res) {
+                // 用户确认分享后执行的回调函数
+              },
+              cancel: function (res) {
+                // 用户取消分享后执行的回调函数
+              }
+            });
+          
+        wx.onMenuShareAppMessage({
+            title: '硬享公社', // 分享标题
+            desc: '你卖产品，我发钱！英特尔物联网合作伙伴（IoT Partner）招募开始了！', // 分享描述
+              link: 'http://intelonline.buzzopt.com/index.php/wapIntelBB/index/intel_bb/index',// 分享链接
+            imgUrl: 'http://intelonline.buzzopt.com/template/intel_bb/img/last4.png', // 分享图标
+            type: '', // 分享类型,music、video或link，不填默认为link
+            dataUrl: '', // 如果type是music或video，则要提供数据链接，默认为空
+            success: function () {
+                // 用户确认分享后执行的回调函数
+            },
+            cancel: function () {
+                // 用户取消分享后执行的回调函数
+            }
+        });
+    });
+}
+</script>
+	<script type="text/javascript"
+		src="http://m.zevertech.com/index.php/jssdk?jsonpcallback=jsonpcallback"></script>
+	<script type="text/javascript" src="/template/intel_bb/js/ga.js"></script>
+</body>
+</html>

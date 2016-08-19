@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>微信用户组管理</title>
+<link href="/css/main.css" type="text/css" rel="stylesheet" />
+<link rel="stylesheet" type="text/css" href="/css/skins/blue.css" />
+<link rel="stylesheet" type="text/css" href="/css/style.css" />
+<link rel="stylesheet" type="text/css" href="/css/index.css" />
+<script type="text/javascript" src="/js/jquery.js"></script>
+<script type="text/javascript" src="/js/main.js"></script>
+<script type="text/javascript" src="/js/artDialog.js"></script>
+<script type="text/javascript" src="/js/iframeTools.js"></script>
+</head>
+<body
+	onload="loadContent('',$('.intelListWrap'),'/index.php/group/groupList')">
+	<div class="container">
+		<{include 'admin/public/header.html'}>
+		<div class="main">
+			<{include 'admin/public/left_menu.html'}>
+			<div class="mainWrap">
+				<div class="webTitle weixinTitle">
+					<a href="/index.php/member/member_manage">粉丝管理</a> <a
+						href="/index.php/group/list_manage" class="nowTitle">微信用户组管理</a>
+					<!-- <span><input type="text" class="searchTxt"></span> -->
+					<span class="searchBox"><input type="text" class=""><img
+						src="/images/search2.png" alt="" onclick="search();"></span>
+				</div>
+				<a class="intelBtn addGroupBtn" href="/index.php/group/add">+
+					添加分组</a>
+
+				<ul class="intelListWrap usergroup"></ul>
+			</div>
+		</div>
+	</div>
+	<script>
+		$(':input[name=search]').click(function(){
+			var keyword = $.trim($(':input[name=keyword]').val());
+			loadContent('',$('.intelListWrap'),'/index.php/group/groupList/keyword/'+keyword)
+		});
+		
+		//添加组		
+    function addGroup(){
+        process=showloading('loading...');
+        $.ajax({
+            url: '/index.php/weixin/add_group',
+            success: function (data){
+                process.close();
+                art.dialog({
+                    title: '添加分组',
+                    content:data,
+                    lock:true
+                });
+            },
+            cache: false
+        });
+    }
+	
+	//修改分组		
+    function editGroup(o,id){
+        process=showloading('loading...');
+		var obj = $(o);
+		var id = obj.attr('groupid');
+		var group_name = obj.attr('name');
+        $.ajax({
+            url: '/index.php/membergroup/edit_group/id/'+id,
+			data:{id:id,group_name:group_name},
+			type:'post',
+            success: function (data){
+                process.close();
+                art.dialog({
+                    title: '修改分组',
+                    content:data,
+                    lock:true
+                });
+            },
+            cache: false
+        });
+    }
+	//删除分组
+	function fnDelGroup(self,id){
+		var flag=confirm('确定要删除该分组么？');
+		if(flag){
+			//process=showloading('loading...');
+			$.post('/index.php/group/deleteUserGroup/id/'+id,{group_id:id},function(){
+
+			},'json');
+			var self=$(self);
+			var li=self.parents('li');
+			li.slideUp();
+		}
+	}
+	
+	function showGroupDetail(id){
+		location.href="/index.php/group/groupMember/groupId/"+id;
+	}
+	</script>
+</body>
+</html>

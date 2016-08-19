@@ -1,0 +1,20 @@
+<table border="1" cellspacing="0" cellpadding="0">
+	<tr>
+		<td>序号</td>
+		<td>昵称</td>
+		<td>性别</td>
+		<td>地域</td>
+		<td>操作</td>
+	</tr>
+	<{foreach $list as $k => $member}>
+	<tr>
+		<td class="listOrder"><i><{$k + 1}></i></td>
+		<td><{$member.nickname}></td>
+		<td><{$sexArr[$member.sex]}></td>
+		<td><{$member.province}> <{$member.city}></td>
+		<td><a href="javascript:;" class="intelBtn delTagBtn"
+			tagid="<{$member.rid}>" onclick="fnDelTag(this,'<{$member.rid}>')">删除</a>
+		</td>
+		</li> <{/foreach}>
+</table>
+<{$pages}>

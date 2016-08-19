@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="author" content="www.zevertech.com" />
+<meta http-equiv="copyright" content="zevertech 2014" />
+<meta http-equiv="pragma" content="no-cache" />
+<meta name="viewport" id="viewport"
+	content="width=device-width, minimum-scale=1, maximum-scale=1, initial-scale=1.0,user-scalable=no" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-touch-fullscreen" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+<meta name="MobileOptimized" content="800">
+<meta name="format-detection" content="telephone=no" />
+<title>zerver Tech</title>
+<link rel="stylesheet" href="css/reset.css">
+<link rel="stylesheet" href="css/layout.css">
+<link rel="stylesheet" href="css/animate.css">
+<script src="js/jquery.js"></script>
+<script src="js/common.js"></script>
+<script>
+/*答案：adaba  03010*/
+	$(function(){
+		/*alert(localStorage.scoreNum);*/
+		var isOk=parseInt(localStorage.scoreNum); 
+		/*alert(isOk);*/
+		//var isOk=60;
+		$(".quizbg .options span").click(function(){
+			var indexNum=$(this).index();
+			if(indexNum==0){
+				isOk=isOk+20;
+			}
+			$(this).addClass("optionBg2");
+		})
+		$(".submit").click(function(){
+			$(".alertCon").show();
+			/*alert("不可用");
+			$(".submit").attr({"disabled":"true"});*/
+			//alert(isOk);
+			if(isOk>=80){
+				$(".okBg").show();
+				$(".nopassCon").html("恭喜您！您的考试成绩为"+isOk+",已经顺利通过考试！");
+			}else{
+				$(".passCon").html("很遗憾！您的考试成绩为"+isOk+"，未能通过考试。您可以点击“火热招募”→“视频培训”，观看培训视频。期待您的下次表现，加油哦！");
+				$(".falseBg").show();
+			}
+		})
+		$(".alertBg").click(function(){
+			/*alert(1);*/
+			wx.closeWindow();
+			//$(".alertCon").hide();
+			//$(".alertBg").hide();
+			//window.close();
+		})
+	})
+</script>
+</head>
+<body>
+	<div class="loadingbox"></div>
+	<div class="container">
+		<div class="quizbg quizbg5">
+			<img src="images/logo.png" alt="" class="logoImg">
+			<div class="titleImg">
+				<img src="images/titleImg.png" alt="">
+			</div>
+			<div class="quizs">
+				<!-- 第五题 -->
+				<div class="quizFive">
+					<div class="quizNumBg Bg5"></div>
+					<div class="issue">
+						<img src="images/issueBg2.png" alt="" class="issueIcon">
+						INTEL Edison模块本身一共分几种？
+					</div>
+					<div class="options">
+						<span class="optionList">A. 4种</span> <span class="optionList">B.
+							3种</span> <span class="optionList">C. 2种</span> <span class="optionList">D.
+							5种</span>
+					</div>
+				</div>
+			</div>
+			<div class="btm">
+				参与活动的报名者在提交信息时若尚无基于英特尔平台产品，则需通过考试并被审核通过后方为报名成功。</div>
+			<!-- <div class="submit">提交</div> -->
+			<div class="submit">
+				<input type="button" value="提交">
+			</div>
+		</div>
+	</div>
+	<div class="alertCon"></div>
+	<div class="alertBg okBg">
+		<img src="images/close.png" alt="" class="closeImg">
+		<div class="alertTitle">
+			<img src="images/okIcon.png" alt="">
+		</div>
+		<p class="nopassCon">恭喜您！您的考试成绩为…，已经顺利通过考试！</p>
+		<p>获取更多活动咨询，请关注【英特尔中国在线】。</p>
+	</div>
+	<div class="alertBg falseBg">
+		<img src="images/close.png" alt="" class="closeImg">
+		<div class="alertTitle">
+			<img src="images/falseIcon.png" alt="">
+		</div>
+		<p class="passCon">很遗憾！您的考试成绩为…，未能通过考试。您可以点击“火热招募”→“视频培训”，观看培训视频。期待您的下次表现，加油哦！</p>
+		<p>获取更多活动咨询，请关注【英特尔中国在线】。</p>
+	</div>
+	<script src="js/ga.js"></script>
+	<script type="text/javascript"
+		src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+	<script src="js/share.js"></script>
+	<script type="text/javascript"
+		src="http://m.zevertech.com/index.php/jssdk?jsonpcallback=jsonpcallback"></script>
+</body>
+</html>

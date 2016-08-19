@@ -1,0 +1,17 @@
+<li><span class="listOrder">序号</span> <span class="accountUserName">规则名</span>
+	<span class="accountUserName" style='width: 40%'>关键词内容</span> <span
+	class="accountUserName">创建时间</span> <span class="accountUserName"
+	style='width: 20%'>操作</span></li>
+
+<{foreach $list as $k=> $key}>
+<li><span class="listOrder"><i><{$k + 1}></i></span> <span
+	class="accountUserName"><{$key.name}></span> <span
+	class="accountUserName" style='width: 40%'><{$key.keyword}></span> <span
+	class="accountUserName"><{$key.ctime|date_format:'%Y-%m-%d
+		%H:%M'}></span> <span class="accountUserName" style='width: 20%'> <a
+		class="intelBtn editGroupBtn" groupid="<{$key.id}>" name=""
+		href="/index.php/reply/editKeywordReply/id/<{$key.id}>">修改</a> <input
+		type="button" class="intelBtn delGroupBtn" value="删除"
+		scan_id="<{$key.id}>" onclick="del_reply(this,<{$key.id}>)" /> <!-- <input type="button" class="intelBtnDel" value="删除" scan_id = "<{$key.id}>" onclick="del_reply(this,<{$key.id}>)" /> -->
+</span></li>
+<{/foreach}> <{$pages}>

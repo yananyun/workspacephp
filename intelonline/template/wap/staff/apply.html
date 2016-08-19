@@ -1,0 +1,67 @@
+<{include 'wap/head.html'}>
+<script type="text/javascript">
+	$(function () {
+		$(".list ul li").click(function () {
+			location.href=$(this).attr("data-href");
+		});
+	});
+</script>
+<body class="bggray">
+	<div class="loadingbox"></div>
+	<div class="container">
+		<div class="search">
+			<!-- <form action="search_result.html"> -->
+			<div class="search_c">
+				<div class="search_tit">
+					<img src="/template/wap/images/search_tit.jpg" alt="" />
+				</div>
+				<div class="search_frm">
+					<div class="search_frmli">
+						<div class="search_frmli_span">姓名：</div>
+						<div class="search_frmli_c">
+							<input type="text" class="searchipt" name="name" />
+						</div>
+					</div>
+					<div class="search_frmli">
+						<div class="search_frmli_span">证件类型：</div>
+						<div class="search_frmli_c">
+							<input type="text" class="searchipt searchipt_s" name="code" />
+							<select name="idtype" id="" class="searchipt search_sel">
+								<option value="1">身份证</option>
+								<option value="2">护照</option>
+							</select>
+						</div>
+					</div>
+				</div>
+			</div>
+			<button class="searchbtn" onclick="check_staff()">提交信息</button>
+			<!-- </form> -->
+		</div>
+	</div>
+	<script>
+		
+		function check_staff(){
+			var name = $('input[name=name]').val();
+			var idtype = $('select[name=idtype]').val();
+			var code = $('input[name=code]').val();
+			if(!name.match(/^[\u4e00-\u9fa5]{2,4}$/i)){
+				alert('姓名格式不正确');
+				return false;
+			}
+			$.ajax({
+				url:"/index.php/wapIndex/check_staff",
+				dataType:"json",
+				type:"post",
+				data:{name:name,idtype:idtype,code:code},
+				success: function (data){
+					alert(data.info);
+					if(data.status){
+						window.location.href ="/index.php/wapIndex/index";
+					}
+				},
+			});
+		}
+	</script>
+	<{include 'wap/footer.html'}>
+</body>
+</html>

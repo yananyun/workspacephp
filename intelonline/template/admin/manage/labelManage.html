@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>标签管理</title>
+<link rel="stylesheet" href="/css/index.css">
+<link href="/jquery-ui.css" rel="stylesheet">
+<script src="/js/jquery.min.js"></script>
+<script src="/js/index.js"></script>
+<script src="/js/jquery-ui.js"></script>
+<script>
+	$(function(){
+		$(".addId").click(function(){
+			$(".addIDCon").show();
+		})
+		/*$(".addId").live("click",function(){
+		  $(".addIDCon").show();
+		});*/
+		$(".closeLable").click(function(){
+			$(".addIDCon").hide();
+		})
+	})
+	</script>
+</head>
+<body>
+	<div class="top">
+		<img src="/images/logo.jpg" alt="" />
+		<p>
+			Intel China Online<br /> <em>微信管理后台</em>
+		</p>
+		<div class="topRight">
+			<ul>
+				<li>admin&nbsp;|</li>
+				<li>帮助&nbsp;|</li>
+				<li><a href="">{退出}</a></li>
+			</ul>
+		</div>
+	</div>
+	<div class="con">
+		<div class="leftDiv">
+			<ul id="navigation">
+				<li><a href="weixinManage.html">微信用户管理</a></li>
+				<li><a href="newInfoManage.html">最新资讯管理</a></li>
+				<li><a href="sendManage.html">主动发送管理</a></li>
+				<li><a href="labelManage.html" class="nowRight">标签管理</a></li>
+				<li><a href="serviceManage.html">客服应答</a></li>
+				<li><a href="dateManage.html">数据管理</a></li>
+				<li><a href="fodderManage.html">素材库</a></li>
+			</ul>
+		</div>
+		<div class="rightDiv weixinDiv">
+			<div class="webTitle labelTitle">
+				<img src="/images/icon1.png" alt=""> <a href="addLabel.html">添加标签</a>
+				<span><input type="text" class="searchTxt"></span>
+			</div>
+			<table border="1" cellspacing="0" cellpadding="0">
+				<tr>
+					<td>序号</td>
+					<td>名称</td>
+					<td>人数</td>
+					<td>描述</td>
+					<td>创建日期</td>
+					<td>操作</td>
+				</tr>
+				<tr>
+					<td>1</td>
+					<td>Edison</td>
+					<td>50</td>
+					<td>CCE活动</td>
+					<td>2015-3-25</td>
+					<td><a class="addId">添加openid</a> <a href="updateLabel.html">修改</a>
+						<a href="">删除</a> <a href="detailLabel.html">详情</a></td>
+				</tr>
+				<tr>
+					<td>2</td>
+					<td>CCE</td>
+					<td>50</td>
+					<td>CCE活动</td>
+					<td>2015-3-25</td>
+					<td><a href="">添加openid</a> <a href="updateLabel.html">修改</a>
+						<a href="">删除</a> <a href="detailLabel.html">详情</a></td>
+				</tr>
+				<tr>
+					<td>3</td>
+					<td>CCE</td>
+					<td>50</td>
+					<td>CCE活动</td>
+					<td>2015-3-25</td>
+					<td><a href="">添加openid</a> <a href="updateLabel.html">修改</a>
+						<a href="">删除</a> <a href="detailLabel.html">详情</a></td>
+				</tr>
+				<tr>
+					<td>4</td>
+					<td>CCE</td>
+					<td>50</td>
+					<td>CCE活动</td>
+					<td>2015-3-25</td>
+					<td><a href="">添加openid</a> <a href="updateLabel.html">修改</a>
+						<a href="">删除</a> <a href="detailLabel.html">详情</a></td>
+				</tr>
+				<tr>
+					<td>5</td>
+					<td>CCE</td>
+					<td>50</td>
+					<td>CCE活动</td>
+					<td>2015-3-25</td>
+					<td><a href="">添加openid</a> <a href="updateLabel.html">修改</a>
+						<a href="">删除</a> <a href="detailLabel.html">详情</a></td>
+				</tr>
+			</table>
+			<div class="page">
+				<span>当前共有6条记录，共1页</span> <a href="">首页</a> <a href="">上一页</a> <a
+					href="">1</a> <a href="">下一页</a> <a href="">末页</a>
+			</div>
+		</div>
+	</div>
+	<div class="addIDCon">
+		<div class="detailTitle">
+			<p>编辑标签</p>
+			<img src="/images/closeLabel.png" alt="" class="closeLable">
+		</div>
+		<p>openid</p>
+		<textarea name="" id="" cols="50" rows="12"
+			placeholder="添加openid,单次最多20个"></textarea>
+		<input type="button" class="confirmBtn openIDBtn" value="确定">
+	</div>
+</body>
+</html>

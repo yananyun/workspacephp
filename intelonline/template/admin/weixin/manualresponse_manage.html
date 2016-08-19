@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>人工应答管理</title>
+<link href="/css/main.css" type="text/css" rel="stylesheet" />
+<link rel="stylesheet" type="text/css" href="/css/skins/blue.css" />
+<link rel="stylesheet" type="text/css" href="/css/K_admin.css" />
+<link rel="stylesheet" type="text/css" href="/css/style.css" />
+<link rel="stylesheet" type="text/css" href="/css/index.css" />
+<script type="text/javascript" src="/js/jquery.js"></script>
+<script type="text/javascript" src="/js/main.js"></script>
+<script type="text/javascript" src="/js/artDialog.js"></script>
+<script type="text/javascript" src="/js/iframeTools.js"></script>
+</head>
+<body
+	onload="loadContent('',$('.intelListWrap'),'/index.php/manualresponse_manage/manualresponse_list/')">
+	<div class="container">
+		<{include '../public/header.html'}>
+		<div class="main">
+			<div class="mainWrap">
+				<span class="searchWrap"> <!--<input type="text" class="" name="keyword" value="" id="keyword"/>
+					<input type="button" name="search" value="搜索" class="searchBtn" onclick="search()"/>-->
+				</span> <a class="intelBtn addGroupBtn"
+					href="/index.php/manualresponse_manage/add_manualresponse">+
+					常规客服应答</a> <a class="intelBtn addGroupBtn"
+					href="/index.php/manualresponse_manage/add_expertsresponse"
+					style='margin-left: 10px'>+ 专家应答</a>
+				<ul class="intelListWrap"></ul>
+			</div>
+		</div>
+		<{include '../public/left_menu.html'}>
+	</div>
+	<script>
+		$(':input[name=search]').click(function(){
+			var keyword = $.trim($(':input[name=keyword]').val());
+			loadContent('',$('.intelListWrap'),'/index.php/Gaming16/listall/keyword/'+keyword)
+		});
+	</script>
+</body>
+</html>

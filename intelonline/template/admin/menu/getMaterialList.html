@@ -1,0 +1,22 @@
+<div style="width: 100%; height: 10px; overflow: hidden; clear: both;"></div>
+请选择：
+<div style="width: 100%; height: 1px; overflow: hidden; clear: both;"></div>
+<{foreach $list as $k => $material}>
+
+<!--选择框-->
+<input type="radio" name="Sucai" value="<{$material.id}>" />
+
+<!--图片消息-->
+<{if $type == 'image'}>
+<img src="<{$material.filepath}>" />
+<{/if}>
+
+<!--图文消息-->
+<{if $type== 'news'}>
+<img src="<{$material['articles'][0]['thumb']}>" />
+<{if $material.single == 1}> <{$material['articles'][0]['title']}> By
+<{date('Y-m-d',$material.uptime)}> <{/if}> <{if $material.single == 2}>
+<{foreach $material.articles as $k => $new}> <{$new.title}>&nbsp;&nbsp;
+<{/foreach}> By <{date('Y-m-d',$material.uptime)}> <{/if}>
+<div style="width: 100%; height: 1px; overflow: hidden; clear: both;"></div>
+<{/if}> <{/foreach}> <{$pages}>

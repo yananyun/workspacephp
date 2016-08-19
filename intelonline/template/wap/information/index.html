@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="pragma" content="no-cache" />
+<meta id="viewport" name="viewport" content="width=640,user-scalable=no">
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-touch-fullscreen" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+<meta name="MobileOptimized" content="800">
+<meta name="format-detection" content="telephone=no" />
+<title>最新资讯</title>
+<link rel="stylesheet" href="/template/wap/intelonline/css/style.css">
+<link rel="stylesheet" href="/template/wap/intelonline/css/animate.css">
+<link rel="stylesheet" href="/template/wap/intelonline/css/layout.css">
+<script src="/template/wap/intelonline/js/jquery.js"></script>
+<script src="/template/wap/intelonline/js/common.js"></script>
+<script type="text/javascript" src="/js/bindTag.js"></script>
+<script>
+	$(function(){
+		$(".allNews").click(function(){
+			$(".listCon").append($(".proHidden").html());
+			//$(".employbox_c").append($(".employboxlist_appendbox").html());
+			var num = $('.listCon .listNews').size();
+		    var p = Math.ceil(num/6) +1;   
+			  loadList(p);
+		})
+	})
+	function loadList(p){
+	$.post('/index.php/wapInformation/lists/p/'+p,function(data){	
+     // document.getElementById('thelist').append(data);
+     
+		if(p==1){
+			$(".listCon").html(data);
+			loadList(2);
+		}else{
+			$(".proHidden").html(data);
+		}				
+		});
+	}
+ 
+</script>
+</head>
+<body>
+	<div class="loadingbox"></div>
+	<div class="container">
+		<div class="title">最新资讯</div>
+		<div class="listCon"></div>
+		<div class="allNews">加载更多</div>
+	</div>
+	<div class="proHidden"></div>
+	<script>
+loadList(1);
+</script>
+</body>
+</html>

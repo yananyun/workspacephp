@@ -1,0 +1,97 @@
+<!-- <p class="checkAllP"><label class="checkAllLabel"><input type="checkbox" class="check" name="" onclick="checlAll(this,$('.memeberListWrap'))" />全选</label></p> -->
+<script type="text/javascript" src="/js/jquery.js"></script>
+<script>
+	$(function(){
+		$(".lookBtn").click(function(){
+			$(".lookAlert").show();
+			var ticket = $(this).attr('ticket');
+			ticket ="https://mp.weixin.qq.com/cgi-bin/showqrcode?ticket="+ticket;
+			$(".ewmImg").attr('src',ticket);
+		})
+	})
+</script>
+<div class="materialCol leftMaterial"></div>
+<div class="materialCol rightMaterial"></div>
+<{if $type == 'text'}>
+<!-- <li class="picMsgList">
+		<span>序号</span>
+		<span>标题</span>
+		<span>内容简介</span>
+		<span>创建日期</span>
+		<span>操作</span>
+	</li> -->
+<table border="1" cellspacing="0" cellpadding="0">
+	<tr>
+		<td width="10%">序号</td>
+		<td width="10%">标题</td>
+		<td width="50%">内容简介</td>
+		<td>创建日期</td>
+		<td>操作</td>
+	</tr>
+
+	<{/if}> <{foreach $list as $k => $material}>
+	<!--图片消息-->
+	<{if $type == 'image'}>
+	<li class="picMsgList">
+		<div class="materialPicMsgWrap">
+			<img src="<{$material.filepath}>" />
+		</div> <input type="text" class="materialName" readonly
+		value="<{$material.filename}>" />
+		<div class="materialPicMsgBottom">
+			<a href="javascript:void(0);" class="intelBtn editGroupBtn"
+				mid='<{$material.id}>' onclick="fnEditPicMsg(this)">编辑</a> <a
+				href="javascript:void(0);" class="intelBtn delGroupBtn"
+				onclick="delMaterialBtn(<{$material.id}>)">删除</a>
+		</div>
+	</li> <{/if}> <{if $type == 'text'}> <{foreach $material.articles as $text}>
+	<tr>
+		<td><{$baseNum + $k}></td>
+		<td><{$text.title}></td>
+		<td><{$text.content}></td>
+		<td><{$material.ctime|date_format:"%Y-%m-%d"}></td>
+		<td><a href="javascript:void(0);" class="intelBtn editGroupBtn"
+			onclick="editMaterialBtn(<{$material.id}>)" class="">编辑</a> <a
+			href="javascript:void(0);" class="intelBtn delGroupBtn"
+			onclick="delMaterialBtn(<{$material.id}>)">删除</a></td>
+		</td> <{/foreach}> <{/if}>
+
+		<!--图文消息-->
+		<{if $type== 'news'}> <{if $material.single == 1}>
+		<li class="materialPicTxtList oneContent"><input type="button"
+			value="预览" class="lookBtn" ticket="<{$material.ticket}>">
+			<p class="materialPicTxtTtl"><{$material['articles'][0]['title']}></p>
+			<p class="materialPicTxtDate"><{date('Y-m-d',$material.uptime)}></p>
+			<div class="materialPicWrapCover">
+				<img src="<{$material['articles'][0]['thumb']}>" />
+			</div>
+			<p class="materialPicTxtComment"><{$material['articles'][0]['description']}></p>
+			<div class="materialPicTxtBottom">
+				<a href="javascript:void(0);"
+					onclick="editMaterialBtn(<{$material.id}>,1)" class="">编辑</a> <a
+					href="javascript:void(0);"
+					onclick="delMaterialBtn(<{$material.id}>)">删除</a> <i></i>
+			</div></li> <{/if}> <{if $material.single == 2}>
+		<li class="materialPicTxtList multiContent"><input type="button"
+			value="预览" class="lookBtn" ticket="<{$material.ticket}>">
+			<p class="materialPicTxtDate"><{date('Y-m-d',$material.uptime)}></p>
+			<{foreach $material.articles as $k => $new}> <{if $k == 0}>
+			<div class="materialPicWrapCover">
+				<img src="<{$new.thumb}>" />
+				<p class="topCoverTtl">
+					<span class="opacityBg"></span> <a class="ttlTxt" href=""><{$new.title}></a>
+				</p>
+			</div> <{else}>
+			<div class="materialMultiPicWrap">
+				<p><{$new.title}></p>
+				<div class="materialThumb">
+					<img src="<{$new.thumb}>" />
+				</div>
+			</div> <{/if}> <{/foreach}>
+			<div class="materialPicTxtBottom">
+				<a href="javascript:void(0);"
+					onclick="editMaterialBtn(<{$material.id}>,2)" class="">编辑</a> <a
+					href="javascript:void(0);"
+					onclick="delMaterialBtn(<{$material.id}>)">删除</a> <i></i>
+			</div></li> <{/if}> <{/if}> <{/foreach}> <{if $type == 'text'}>
+</table>
+<{/if}> <{$pages}>

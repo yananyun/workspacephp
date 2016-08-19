@@ -1,0 +1,18 @@
+<{include 'public/header.html'}>
+<div class="showMsg">
+	<p class="showMsg-icon">
+		<img src="<{$img_url}>" alt="">
+	</p>
+	<h5><{$msg}></h5>
+	<!-- <div class="content guery"></div> -->
+	<div class="bottom">
+		<{if $url_forward == 'goback' || $url_forward == ''}> <a
+			href="javascript:history.back();">[点这里返回上一页]</a> <{else}> <a
+			href="<{$url_forward}>">如果您的浏览器没有自动跳转，请点击这里</a>
+		<script language="javascript">
+                    setTimeout("window.location.href='<{$url_forward}>'",<{$ms}>*1000)
+                </script>
+		<{/if}>
+	</div>
+</div>
+<{include 'public/footer.html'}>

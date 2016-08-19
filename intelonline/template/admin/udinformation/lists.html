@@ -1,0 +1,25 @@
+<li><span class="listOrder">序号</span> <span class="accountUserName">姓名</span>
+	<span class="accountUserName">证件类型</span> <span class="accountUserName"
+	style="width: 20%">证件号</span> <span class="accountUserName"
+	style="width: 32%">微信ID</span> <span class="accountUserName"
+	style="width: 11%">申请日期</span> <span class="accountUserName">操作</span>
+</li>
+
+<{foreach $list as $k=> $info}>
+<li><span class="listOrder"><i><{$baseNum + $k}></i></span> <span
+	class="accountUserName"><{$info.name}></span> <span
+	class="accountUserName"> <{if $info.idtype eq '1'}>身份证
+		<{else}>护照 <{/if}> </span> <span class="accountUserName" style="width: 20%"><{$info.code}></span>
+	<span class="accountUserName" style="width: 32%"><{$info.openid}></span>
+	<span class="accountUserName" style="width: 11%"><{$info.apply_time|date_format:"%Y-%m-%d"}></span>
+	<span class="accountUserName"> <!-- <{if $info.status eq '0'}>未通过
+		<{else}>通过
+		<{/if}> -->
+</span> <span class="accountUserName style= 'width:10%'> 
+
+		<input type="
+	button" class="intelBtnDel" value="删除" style="margin: 0 auto;" /> <a
+	class="intelBtn editGroupBtn"
+	style="overflow: hidden; margin-right: 30px;" groupid="<{$key.id}>"
+	name="" href="/index.php/udinformation/edit/id/<{$info.id}>">修改</a> </span></li>
+<{/foreach}> <{$pages}>

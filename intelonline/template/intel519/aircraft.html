@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="pragma" content="no-cache" />
+<meta id="viewport" name="viewport" content="width=640,user-scalable=no">
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-touch-fullscreen" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+<meta name="MobileOptimized" content="800">
+<meta name="format-detection" content="telephone=no" />
+<title>飞行器</title>
+<base href="/template/intel519/" />
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/swiper.min.css">
+<link rel="stylesheet" href="css/animate.css">
+<link rel="stylesheet" href="css/layout.css">
+<link rel="stylesheet" href="css/layout3.css">
+<script src="js/swiper.min.js"></script>
+<script src="js/jquery.js"></script>
+
+<script src="js/common.js"></script>
+<script>
+	$(function(){
+		var mySwiper = new Swiper('.swiper-container',{
+			paginationClickable: true,	
+			//mode: 'vertical',
+			speed:800,
+			//direction:'vertical',
+			loop: true,
+			initialSlide:0,
+			noSwiping : true,
+			noSwipingClass : 'stop-swiping',
+			onSlideChangeStart: function(swiper){}
+		})
+	});
+</script>
+</head>
+<body>
+	<input type="hidden" name="" id="openid" value="<{$openid}>">
+	<input type="hidden" style="" value="<{$url}>" id="shareUrl">
+	<!-- <div class="container airBg">
+		<div class="airTitle">
+			<img src="images/airTitle.png" alt=""><br/>
+			飞行器
+		</div>
+		<div class="airPic">
+			<img src="images/air1.png" alt="" class="airImg1">
+			<img src="images/air2.png" alt="" class="airImg2">
+			<p class="airTxt"><em>有了Edison</em><br/>带你玩转飞行器</p>
+		</div>
+		<div class="airBtm">
+			<a href="javascript:window.history.back();"><img src="images/backBtn.png" alt="" class="backBtn"></a>
+			<a href="http://item.jd.com/1494797.html"><img src="images/buyBtn.png" alt="" class="buyBtn"></a>
+		</div>
+	</div> -->
+
+	<div class="loadingbox"></div>
+	<div class="container">
+		<div class="main">
+			<div class="leftArrow"></div>
+			<div class="rightArrow"></div>
+			<div class="swiper-container">
+				<div class="swiper-wrapper">
+					<!-- 飞行器 -->
+					<div class="swiper-slide airBg">
+						<div class="airTitle">
+							<img src="images/airTitle.png" alt=""><br /> 飞行器
+						</div>
+						<div class="airPic">
+							<img src="images/air1.png" alt="" class="airImg1"> <img
+								src="images/air2.png" alt="" class="airImg2">
+							<p class="airTxt">
+								<em>有了Edison</em><br />带你玩转飞行器
+							</p>
+						</div>
+						<div class="airBtm">
+							<a href="/index.php/edison/#slide2"><img
+								src="images/backBtn.png" alt="" class="backBtn"></a> <a
+								href="http://item.jd.com/1494797.html"><img
+								src="images/buyBtn.png" alt="" class="buyBtn"></a>
+						</div>
+					</div>
+					<!-- 机器人 -->
+					<div class="swiper-slide airBg">
+						<div class="airTitle">
+							<img src="images/robotTitle.png" alt=""><br /> 机器人
+						</div>
+						<div class="airPic">
+							<img src="images/rob1.png" alt="" class="airImg1"> <img
+								src="images/rob2.png" alt="" class="airImg2">
+							<p class="airTxt">
+								<em>有了Edison</em><br />摇身一变机器人
+							</p>
+						</div>
+						<div class="airBtm">
+							<a href="/index.php/edison/#slide2"><img
+								src="images/backBtn.png" alt="" class="backBtn"></a> <a
+								href="http://item.jd.com/1494797.html"><img
+								src="images/buyBtn.png" alt="" class="buyBtn"></a>
+						</div>
+					</div>
+					<!-- 智能家居 -->
+					<div class="swiper-slide airBg">
+						<div class="airTitle">
+							<img src="images/shTitle.png" alt=""><br /> 智能家居
+						</div>
+						<div class="homePic">
+							<img src="images/sh1.png" alt="">
+							<p class="airTxt">
+								<em>有了Edison</em><br />跨步智能家居时代
+							</p>
+						</div>
+						<div class="airBtm">
+							<a href="/index.php/edison/#slide2"><img
+								src="images/backBtn.png" alt="" class="backBtn"></a> <a
+								href="http://item.jd.com/1494797.html"><img
+								src="images/buyBtn.png" alt="" class="buyBtn"></a>
+						</div>
+					</div>
+					<!-- 健康检测 -->
+					<div class="swiper-slide airBg">
+						<div class="airTitle">
+							<img src="images/healthTitle.png" alt=""><br /> 健康检测
+						</div>
+						<div class="homePic">
+							<img src="images/health.png" alt="">
+							<p class="airTxt">
+								<em>有了Edison</em><br />轻松实现健康监测
+							</p>
+						</div>
+						<div class="airBtm">
+							<a href="/index.php/edison/#slide2"><img
+								src="images/backBtn.png" alt="" class="backBtn"></a> <a
+								href="http://item.jd.com/1494797.html"><img
+								src="images/buyBtn.png" alt="" class="buyBtn"></a>
+						</div>
+					</div>
+					<div class="swiper-slide airBg">
+						<div class="airTitle">
+							<img src="images/atTitle.png" alt=""><br /> 辅助工具
+						</div>
+						<div class="homePic">
+							<img src="images/at1.png" alt="">
+							<p class="airTxt">
+								<em>有了Edison</em><br />让残疾人生活更容易
+							</p>
+						</div>
+						<div class="airBtm">
+							<a href="/index.php/edison/#slide2"><img
+								src="images/backBtn.png" alt="" class="backBtn"></a> <a
+								href="http://item.jd.com/1494797.html"><img
+								src="images/buyBtn.png" alt="" class="buyBtn"></a>
+						</div>
+					</div>
+					<div class="swiper-slide airBg">
+						<div class="airTitle">
+							<img src="images/wearTitle.png" alt=""><br /> 可穿戴
+						</div>
+						<div class="homePic">
+							<img src="images/wear1.png" alt="">
+							<p class="airTxt">
+								<em>有了Edison</em><br />跨步智能家居时代
+							</p>
+						</div>
+						<div class="airBtm">
+							<a href="/index.php/edison/#slide2"><img
+								src="images/backBtn.png" alt="" class="backBtn"></a> <a
+								href="http://item.jd.com/1494797.html"><img
+								src="images/buyBtn.png" alt="" class="buyBtn"></a>
+						</div>
+
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<script src="js/ga.js"></script>
+	<script>
+	var title = document.title;
+	$(".airBtm").find("a").eq(0).on("click",function(){
+		ga('send', 'event', title, '点击', '返回按钮');
+	})
+	$(".airBtm").find("a").eq(1).on("click",function(){
+		ga('send', 'event', title, '点击', '点击购买');
+	})
+	</script>
+	<script type="text/javascript"
+		src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+	<script src="js/share.js"></script>
+	<script type="text/javascript"
+		src="http://m.zevertech.com/index.php/jssdk?jsonpcallback=jsonpcallback"></script>
+</body>
+</html>

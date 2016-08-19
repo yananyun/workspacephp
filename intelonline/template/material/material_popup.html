@@ -1,0 +1,54 @@
+<{if $type=='news'}>
+<a class="intelBtn addPicTxtBtn" target="_blank"
+	href="/index.php/material/creat_pic_txt">+ 单图文消息</a>
+<a class="intelBtn addPicTxtBtn" target="_blank"
+	href="/index.php/material/creat_pic_txt_multi">+ 多图文消息</a>
+<{else}>
+<label class="imgUpBtnWrap"> <input class="imgUpBtn"
+	id="up_picture" imgWidth="640" imgHeight="960" name="up_picture"
+	type="file" onchange="fnUploadPop(this,$('.picMsgLoading'));" /> 上传
+</label>
+<p class="picMsgLoading">上传中...</p>
+<{/if}>
+<div class="materialPicTxtWrap popupBox">
+	<input type="hidden" name="tickedMaterialId" value="" />
+	<div class="materialCol leftMaterial"></div>
+	<div class="materialCol rightMaterial"></div>
+	<ul class="mWrap">
+		<!--<li class="oneContent" onclick="fnTickMaterial(this,14)">
+			<div class="pickBase"></div>
+			<em class="tick">√</em>
+			<p class="materialPicTxtTtl">新的001撒发生非撒啥</p>
+			<p class="materialPicTxtDate">2014-04-01</p>
+			<div class="materialPicWrapCover">
+				<img src="/images/material/proxy.jpg" />
+			</div>
+			<p class="materialPicTxtComment">发撒啊沙发撒啊沙发撒旦法师法暗示法萨芬仨飞萨芬的撒旦飞洒阿斯顿发生啊沙发撒啊沙发撒飞洒撒旦法斯蒂芬啊沙发</p>
+		</li>
+		
+		<li class="multiContent" onclick="fnTickMaterial(this,14)">
+			<div class="pickBase"></div>
+			<em class="tick">√</em>
+			<p class="materialPicTxtDate">2014-04-01</p>
+			<div class="materialPicWrapCover">
+				<img src="/images/material/proxy.jpg" />
+				<p class="topCoverTtl">
+					<span class="opacityBg"></span>
+					<a class="ttlTxt" href="">发撒啊沙发撒啊沙发撒旦法师法暗示法萨芬</a>
+				</p>
+			</div>
+			<div class="materialMultiPicWrap">
+				<p>发撒啊沙发撒啊沙发撒旦法师法暗示法萨芬仨飞萨芬的撒旦飞</p>
+				<div class="materialThumb">
+					<img src="/images/material/proxy.jpg" />
+				</div>
+			</div>
+		</li>-->
+	</ul>
+</div>
+<script type="text/dialog">
+	$(function(){
+		loadContent('',$('.mWrap'),'/index.php/material/list_material_popup/type/<{$type}>');
+	});
+	fnSplitCol();
+</script>

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>TODO supply a title</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+</head>
+<body>
+	<{include file='member/leftmenu.html'}>
+	<div style='float: left; min-height: 500px; border: 1px solid #666;'>
+		<div>
+			<input type="button" value="返回分组列表"
+				onclick="javascript:location.href = '/index.php/memberGroup/group_list/'">
+		</div>
+		<form name="theform" action="/index.php/memberGroup/group_update/"
+			method="post">
+			<table>
+				<tr>
+					<td align="left" style="color: red; font-weight: bold;">编辑分组</td>
+				</tr>
+				<tr>
+					<td>分组名称：</td>
+					<td><input type="text" value="<{$group.name}>" name="name"></td>
+				</tr>
+				<tr>
+					<td>备注描述：</td>
+					<td><textarea name="remark"><{$group.remark}></textarea></td>
+				</tr>
+				<tr>
+					<td>是否默认分组：</td>
+					<td><input type="radio" name="is_default" value="1"<{if
+						$group.is_moren eq 1}>checked="checked" <{/if}> >是 <input
+						type="radio" name="is_default" value="0"<{if
+						$group.is_moren eq 0}>checked="checked" <{/if}> >否
+						备注：默认分组只能有一个，用来存放新用户和未分组成员数据；</td>
+				</tr>
+				<tr>
+					<td>是否启用：</td>
+					<td><input type="radio" name="status" value="1"<{if
+						$group.status eq 1}>checked="checked" <{/if}> />启用， <input
+						type="radio" name="status" value="2"<{if $group.status eq
+						2}>checked="checked" <{/if}> />禁用</td>
+				</tr>
+				<tr>
+					<td><input type="hidden" name="group_id" value="<{$group.id}>" /><input
+						type="submit" value="提交" /></td>
+				</tr>
+			</table>
+		</form>
+	</div>
+
+
+</body>
+</html>

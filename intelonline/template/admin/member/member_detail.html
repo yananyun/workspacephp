@@ -1,0 +1,31 @@
+<div class="memberDetailBox">
+	<input type="hidden" name="id" value="<{$member['id']}>" id="id" /> <input
+		type="hidden" name="openid" value="<{$member['openid']}>" id="openid" />
+	<input type="hidden" name="did" value="<{$dealerInfo.id}>" id="did" />
+	<div class="infoTop">
+		<div class="memberHead">
+			<img src="<{$member['headimgurl']}>" />
+		</div>
+		<div class="memberInfoWrap">
+			<p>
+				<span class="leftCol">昵称：</span><{$member['nickname']}>
+			</p>
+			<p>
+				<span class="leftCol">性别：</span><{if $member.sex ==
+				1}>男<{else}>女<{/if}>
+			</p>
+			<p>
+				<span class="leftCol">区域：</span><{$member.country}>
+				<{$member.province}> <{$member.city}>
+			</p>
+			<p>
+				<span class="leftCol">类型：</span><{if $member.isapprove ==
+				1}>普通会员<{else if $member.isapprove == 2}>购买会员<{else if
+				$member.isapprove == 3}>经销商<{/if}>
+			</p>
+		</div>
+
+
+	</div>
+
+</div>

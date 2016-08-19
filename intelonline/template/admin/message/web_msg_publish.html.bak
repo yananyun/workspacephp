@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>图片</title>
+<link href="/css/main.css" type="text/css" rel="stylesheet" />
+<link rel="stylesheet" type="text/css" href="/css/skins/blue.css"/>
+<link rel="stylesheet" type="text/css" href="/css/material.css"/>
+<script type="text/javascript" src="/js/jquery.js"></script>
+<script type="text/javascript" src="/js/main.js"></script>
+<script type="text/javascript" src="/js/artDialog.js"></script>
+<script type="text/javascript" src="/js/iframeTools.js"></script>
+<script type="text/javascript" src="/js/ajaxfileupload.js"></script>
+<script type="text/javascript" src="/js/createMaterial.js"></script>
+</head>
+<!-- <body onload="loadContent('',$('.intelListWrap'),'/index.php/membergroup/group_list')"> -->
+<body>
+	<div class="container">
+		<{include 'header.html'}>
+		<div class="main">
+			<div class="mainWrap">
+				<label class="imgUpBtnWrap">
+					<input class="imgUpBtn" id="up_picture" imgWidth="640" imgHeight="960" name="up_picture" type="file" onchange="fnPicMsgUpload(this,$('.picMsgLoading'));" />
+					上传
+				</label>
+				<p class="picMsgLoading">上传中...</p>
+				<ul class="intelListWrap picMsgWrap">
+					<li>
+						<div class="materialPicMsgWrap">
+							<img src="/images/material/proxy.jpg" />
+						</div>
+						<input type="text" class="materialName" readonly value="XXXXXXXXXXXXXXXXX.jpg" />
+						<div class="materialPicMsgBottom">
+							<a href="javascript:void(0);" onclick="fnEditPicMsg(this)">编辑</a>
+							<a href="javascript:void(0);" onclick="delMaterialBtn()">删除</a>
+						</div>
+					</li>
+					<li>
+						<div class="materialPicMsgWrap">
+							<img src="/images/material/proxy.jpg" />
+						</div>
+						<input type="text" class="materialName" readonly value="XXXXXXXXXXXXXXXXX.jpg" />
+						<div class="materialPicMsgBottom">
+							<a href="javascript:void(0);" onclick="fnEditPicMsg(this)">编辑</a>
+							<a href="javascript:void(0);" onclick="delMaterialBtn()">删除</a>
+						</div>
+					</li>
+					<li>
+						<div class="materialPicMsgWrap">
+							<img src="/images/material/proxy.jpg" />
+						</div>
+						<input type="text" class="materialName" readonly value="XXXXXXXXXXXXXXXXX.jpg" />
+						<div class="materialPicMsgBottom">
+							<a href="javascript:void(0);" onclick="fnEditPicMsg(this)">编辑</a>
+							<a href="javascript:void(0);" onclick="delMaterialBtn()">删除</a>
+						</div>
+					</li>
+				</ul>
+			</div>
+		</div>
+		<{include 'left_menu.html'}>
+	</div>
+</body>
+</html>

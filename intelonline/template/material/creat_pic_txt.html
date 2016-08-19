@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>添加图文消息</title>
+<link href="/css/main.css" type="text/css" rel="stylesheet" />
+<link rel="stylesheet" type="text/css" href="/css/skins/blue.css" />
+<link rel="stylesheet" type="text/css" href="/css/material.css" />
+<script type="text/javascript" src="/js/jquery.js"></script>
+<script type="text/javascript" src="/js/main.js"></script>
+<script type="text/javascript" src="/js/artDialog.js"></script>
+<script type="text/javascript" src="/js/iframeTools.js"></script>
+<script type="text/javascript" src="/js/ajaxfileupload.js"></script>
+<script type="text/javascript" src="/js/createMaterial.js"></script>
+<script type="text/javascript" src="/js/ckeditor/ckeditor.js"></script>
+<script type="text/javascript" src="/js/ckeditor/ckfinder.js"></script>
+</head>
+<body>
+	<div class="container">
+		<{include 'header.html'}>
+		<div class="main">
+			<div class="mainWrap">
+				<div class="creatPicTxtCol">
+					<div class="pic_txt_col editOn" id="coverCol">
+						<p class="materialPicTxtTtl">标题</p>
+						<div class="materialPicWrapCover mPreview">
+							<div class="preViewImg">
+								<h1>封面图片</h1>
+							</div>
+						</div>
+						<p class="materialPicTxtComment"></p>
+						<input type="hidden" name="sTitle" /> <input type="hidden"
+							name="sAuthor" /> <input type="hidden" name="uploadPath" /> <input
+							type="hidden" name="coverFlag" value="0" /> <input type="hidden"
+							name="sComment" /> <input type="hidden" name="sUrl" /> <input
+							type="hidden" name="sArticle" /> <input type="hidden"
+							name="sLink" />
+					</div>
+				</div>
+				<div class="materialEditWrap">
+					<i class="arrow arrow_out"></i> <i class="arrow arrow_in"></i>
+					<div class="editBox">
+						<div class="optionCol">
+							<p>
+								标题<span class="inlineTip">（最多64字）</span>
+							</p>
+							<div class="optionField">
+								<input type="text" name="meTitle" />
+							</div>
+						</div>
+						<div class="optionCol">
+							<p>
+								作者<span class="inlineTip">（选填）</span>
+							</p>
+							<div class="optionField">
+								<input type="text" name="meAuthor" />
+							</div>
+						</div>
+						<div class="optionCol topCover">
+							<p>
+								封面<span class="inlineTip right">大图片建议尺寸：360像素 * 200像素</span>
+							</p>
+							<div class="optionField">
+								<label class="imgUpLabel"> <input class="imgUpBtn"
+									id="up_picture" imgWidth="360" imgHeight="200"
+									name="up_picture" type="file"
+									onchange="fnMaterialPicUpload(this,$('.preViewBox'),$('.editOn'),$('.uploadView'));" />
+									上传
+								</label>
+								<div class="preViewBox">
+									<div class="uploadView">
+										<h5>上传中...</h5>
+									</div>
+									<a class="delView" href="javascript:void(0);"
+										onclick="fnDelUpload($('.editOn').find('[name=uploadPath]'),$('.uploadView'),$('.preViewBox'))">删除</a>
+								</div>
+							</div>
+							<p>
+								<label class="inlineTip"><input type="checkbox"
+									name="meCoverFlag" />封面图片显示在正文中</label>
+							</p>
+						</div>
+						<div class="optionCol">
+							<p>
+								摘要<span class="inlineTip">（选填）</span>
+							</p>
+							<div class="optionField">
+								<textarea name="meComment"></textarea>
+							</div>
+						</div>
+						<div class="optionCol">
+							<p>
+								跳转链接<span class="inlineTip">（选填）</span>
+							</p>
+							<div class="optionField">
+								<input type="text" name="meUrl" />
+							</div>
+						</div>
+						<div class="optionCol">
+							<p>
+								正文<span class="inlineTip">（最多2000字）</span>
+							</p>
+							<div class="optionField">
+								<!-- <textarea name="meArticle"></textarea> -->
+								<div id="materialArticle" contenteditable="true"
+									class="materialArticle"></div>
+							</div>
+						</div>
+						<div class="optionCol">
+							<p>
+								原文链接<span class="inlineTip">（选填）</span>
+							</p>
+							<div class="optionField">
+								<input type="text" name="meLink" />
+							</div>
+						</div>
+					</div>
+				</div>
+				<p class="saveMaterialBtnWrap">
+					<a href="" class="intelBtn">保存</a>
+				</p>
+			</div>
+		</div>
+		<{include 'left_menu.html'}>
+	</div>
+</body>
+</html>
+<script type="text/javascript">
+var editor = CKEDITOR.replace( 'materialArticle',{
+    toolbar:[['Bold','Italic','Underline'],['NumberedList','BulletedList'],['Image','Link'],['RemoveFormat']]	
+});
+CKFinder.setupCKEditor(editor, '/js/ckeditor/' ) ;
+
+$(function(){
+	$('.intelBtn').click(function(){
+		var title = $.trim($(':input[name=meTitle]').val());
+		var author = $.trim($(':input[name=meAuthor]').val());
+		var thumb = $.trim($(':input[name=uploadPath]').val());
+		var description = $.trim($(':input[name=meComment]').val());
+		var url = $.trim($(':input[name=meUrl]').val());
+		var coverFlag = $.trim($(':input[name=coverFlag]').val());
+		var content = $.trim(CKEDITOR.instances.materialArticle.getData());
+		var original_url = $.trim($(':input[name=meLink]').val());
+
+var fields = new Array();
+fields = '[';
+fields += '{"title":"'+title+'","author":"'+author+'","content":"'+encodeURI(content)+'","thumb":"'+thumb+'","description":"'+encodeURI(description)+'","url":"'+url+'","original_url":"'+original_url+'","coverFlag":"'+coverFlag+'"}';
+fields += ']';
+
+$.ajax({
+	url:'/index.php/material/creat_pic_txt_save',
+	data:{ "data":  fields},
+	type:'post',	
+	dataType:'json',
+	success:function(data){
+		alert(data.info);
+		if(data.status == 1){
+			location.href = '/index.php/material/pic_txt_msg';
+		}
+		
+	}
+});
+return false;
+		
+	});
+});
+</script>

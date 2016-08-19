@@ -1,0 +1,35 @@
+
+<li><span class="listOrder">序号</span> <span class="accountUserName">名称</span>
+	<span class="accountUserName">人数</span> <span class="accountUserName">描述</span>
+	<span class="accountUserName">创建时间</span> <span class="accountComment">操作</span>
+
+</li>
+<{foreach $list as $k => $tag}>
+<li><span class="listOrder"><i><{$k + 1}></i></span> <span
+	class="accountUserName"><{$tag.name}></span> <span
+	class="accountUserName"><{$tag.num}></span> <span
+	class="accountUserName"><{$tag.desc}></span> <span
+	class="accountUserName"><{$tag.ctime|date_format:'%Y-%m-%d
+		%H:%M'}></span> <span class="accountComment"> <a
+		class="intelBtn addId" tagId="<{$tag.id}>" href="javascript:;">添加openid</a>
+		<!--<a href="javascript:;" class="addId" tagId="<{$tag.id}>">添加openid</a>-->
+		<input type="button" class="intelBtn delGroupBtn" value="删除"
+		tagid="<{$tag.id}>" name="<{$tag.name}>"
+		onclick="fnDelTag(this,<{$tag.id}>)" /> <a
+		class="intelBtn editGroupBtn" groupid="<{$tag.id}>"
+		name="<{$tag.name}>" href="/index.php/tag/edit/id/<{$tag.id}>">修改</a>
+		<a href="javascript:void(0)" onclick="showTagDetail(<{$tag.id}>);"
+		class="intelBtn detailTagBtn">详情</a>
+</span></li>
+<{/foreach}> <{$pages}>
+<script>
+    $(function(){
+        $(".addId").on('click', function(){
+            var tagid   = $(this).attr('tagid');
+            $(".addIDCon").attr('tagid', tagid).show();
+        })
+        $(".closeLable").click(function(){
+            $(".addIDCon").hide();
+        })
+    })
+</script>

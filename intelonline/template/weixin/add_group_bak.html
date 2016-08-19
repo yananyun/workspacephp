@@ -1,0 +1,40 @@
+<div class="addAccountPop">
+	<form name="" method="" action="" onsubmit="">
+		<p>
+			<span class="editTtl">分组名称：</span><input type="text"
+				name="group_name" /><span class="formTip">填写一个分组名称</span>
+		</p>
+
+		<p>
+			<input type="button" class="submit accountPopBtn" value="保存" />
+		</p>
+	</form>
+</div>
+<script type="text/dialog">
+	var api = this;
+	$('.submit').click(function(){
+		var group_name=$getVal($('[name=group_name]'));
+		if(group_name==''){
+			alert('请输入分组名称');
+			return false;
+		}else{
+			process=showloading('loading...');
+			$.ajax({
+				url: '/index.php/weixin/add_group_do/',
+				data:{group_name:group_name},
+				dataType:'json',
+				type:'post',
+				success: function (data){
+					process.close();
+					alert(data.info);
+					if(data.status){
+						alert(data.info);							
+						api.close();
+						location.href = location.href;
+					}
+				},
+				cache: false
+			});	
+		}
+	});
+</script>

@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>微信推送消息</title>
+<link href="/css/main.css" type="text/css" rel="stylesheet" />
+<link rel="stylesheet" type="text/css" href="/css/skins/blue.css" />
+<link rel="stylesheet" type="text/css" href="/css/message.css" />
+<script type="text/javascript" src="/js/jquery.js"></script>
+<script type="text/javascript" src="/js/main.js"></script>
+<script type="text/javascript" src="/js/artDialog.js"></script>
+<script type="text/javascript" src="/js/iframeTools.js"></script>
+<link rel="stylesheet" type="text/css" href="/css/material.css" />
+<script type="text/javascript" src="/js/ajaxfileupload.js"></script>
+</head>
+<body
+	onload="loadContent('',$('.intelListWrap'),'/index.php/groupMessage/groupMsgList')">
+	<div class="container">
+		<{include 'admin/public/header.html'}>
+		<div class="main">
+			<div class="mainWrap">
+				<div class="msgTabWrap">
+					<a class="intelBtn" href="/index.php/groupMessage/add">发布信息</a> <a
+						class="intelBtn" href="/index.php/groupMessage/list_manage">信息列表</a>
+				</div>
+				<ul class="intelListWrap"></ul>
+			</div>
+		</div>
+		<{include 'admin/public/left_menu.html'}>
+	</div>
+</body>
+</html>
+<script type="text/javascript">
+	$(function(){
+		setInterval(function(){
+			var flag=$('#wordMsg').is(':focus');
+			if(flag){
+				fnCheckTxtNum();
+			}
+		},200);
+	});
+	function delete_active(obj){
+		var box=$(obj).parents('li');
+		var foo=confirm('您确定要删除该信息吗？');
+		var id = $(obj).attr('active_id');
+		if(foo){
+			process=showloading('loading...');
+			$.ajax({
+				url: '/index.php/groupMessage/delete/',
+				type:'POST',
+				data:'id='+id,
+				success:function (data){
+					process.close();
+					if(data == 1){
+						alert('删除成功');
+						box.slideUp(1000,function(){
+							$(this).remove();
+						});
+					}else{
+						alert('删除失败');
+					}
+				},
+				cache: false
+			});
+		}
+	}
+	function fnCheckTxtNum(){
+		var area=$('#wordMsg');
+		var txtOverflow=$('[name=txtOverflow]');
+		var numWrap=$('.messageCount');
+		var msg=area.text().replace(/\s/g,'');
+		var len=600-(msg.length);
+		var tip='';
+		if(len<0){
+			tip='已超出<span class="overLength">'+Math.abs(len)+'</span>字';
+			txtOverflow.val(0);
+		}else{
+			tip='还可以输入<span>'+len+'</span>字';
+			txtOverflow.val(1);
+		}
+		numWrap.html(tip);
+	}
+	
+	function fnSwitchTxtMsg(self){
+		var self=$(self);
+		var msgType=$('[name=msgType]');
+		msgType.val(1);
+		$('[name=materialId]').val('');
+		$('.publishBox').removeClass('statu2').removeClass('statu3').addClass('statu1');
+		$('.messageInput').html('').removeClass('materialPicTxtWrap').attr('contenteditable',true);
+	}
+	
+	function fnCallPicTxtMsg(self,box){
+		var picTxtBox=art.dialog({title:'图文素材',id:'picTxtBox',lock:true});
+		$.ajax({
+			url:'/index.php/material/material_popup',
+			success:function(data){
+				picTxtBox.content(data);
+				picTxtBox.button(
+					{
+						name: '确定',
+						callback: function () {
+							var id=$('[name=tickedMaterialId]').val();
+							if(id==''){
+								alert('请选择一个素材');
+								return false;
+							}else{
+								var mg=$('.tickedContent').removeClass('tickedContent');
+								box.html(mg).attr('contenteditable',false);
+								$('.publishBox').removeClass('statu1').removeClass('statu2').addClass('statu3');
+								var msgType=$('[name=msgType]');
+								msgType.val(3);
+								$('[name=materialId]').val(id);
+							}
+						},
+						focus:true
+					},
+					{
+						name:'取消'
+					}
+				);
+			},
+			cache:false
+		});
+	}
+	
+	function fnCallPicMsg(self,box){
+		var picBox=art.dialog({title:'图片素材',id:'picBox',lock:true});
+		$.ajax({
+			url:'/index.php/material/material_popup/type/image',
+			success:function(data){
+				picBox.content(data);
+				picBox.button(
+					{
+						name: '确定',
+						callback: function () {
+							var id=$('[name=tickedMaterialId]').val();
+							if(id==''){
+								alert('请选择一个素材');
+								return false;
+							}else{
+								var pic=$('.tickedContent').find('.materialPicMsgWrap').html();
+								box.html(pic).attr('contenteditable',false);
+								$('.publishBox').removeClass('statu1').removeClass('statu3').addClass('statu2');
+								var msgType=$('[name=msgType]');
+								msgType.val(2);
+								$('[name=materialId]').val(id);
+							}
+						},
+						focus:true
+					},
+					{
+						name:'取消'
+					}
+				);
+			},
+			cache:false
+		});
+	}
+	
+	function fnTickMaterial(self,id){
+		self=$(self);
+		var siblingsBox=self.parents('.materialPicTxtWrap').find('li');
+		siblingsBox.removeClass('tickedContent');
+		self.addClass('tickedContent');
+		var tickedMaterialId=$('[name=tickedMaterialId]');
+		tickedMaterialId.val(id);
+	}
+	
+	function fnUploadPop(self,loading){
+		var file = $(self).val();
+		var width=$(self).attr('imgWidth');
+		var height=$(self).attr('imgHeight');
+		var upId=$(self).attr('id');
+		file = file.toLowerCase();
+		if (!/.(gif|jpg|jpeg|png)$/.test(file)){
+			alert("图片类型必须是.gif,jpeg,jpg,png中的一种");
+		}else{
+			loading.show();
+			$.ajaxFileUpload({
+				url: '/index.php/material/create_pic_msg/w/'+width+'/h/'+height, //服务器端程序
+				secureuri: false,
+				fileElementId: upId,
+				dataType: 'json',
+				success: function(data){
+					if(data.status){
+						$('.picMsgTab').trigger('click');
+					}
+				}
+			});
+		}
+	}
+	
+	function fnSendWxMsg(){
+		var type=$('[name=msgType]').val();
+		if(type==1){
+			var flag=$('[name=txtOverflow]').val();
+			if(flag==0){
+				alert('文字必须为1到600字之间');
+				return false;
+			}else{
+				var msg=$('#wordMsg').html();
+				alert('文字信息: '+msg);
+			}
+		}else if(type==2){
+			var mId=$('[name=materialId]').val();
+			if(mId==''){
+				alert('没有选择素材');
+				return false;
+			}else{
+				alert('图片信息: '+mId);
+			}
+		}else if(type==3){
+			var mId=$('[name=materialId]').val();
+			if(mId==''){
+				alert('没有选择素材');
+				return false;
+			}else{
+				alert('图文信息: '+mId);
+			}
+		}
+	}
+	
+	function fnShowContent(obj1,obj2){
+		obj1.addClass('currentContent');
+		obj2.removeClass('currentContent');
+	}
+</script>

@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="author" content="www.zevertech.com" />
+<meta http-equiv="copyright" content="zevertech 2014" />
+<meta http-equiv="pragma" content="no-cache" />
+<meta name="viewport" id="viewport"
+	content="width=device-width, minimum-scale=1, maximum-scale=1, initial-scale=1.0,user-scalable=no" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-touch-fullscreen" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+<meta name="MobileOptimized" content="800">
+<meta name="format-detection" content="telephone=no" />
+<title>edison入驻京东</title>
+<link rel="stylesheet" href="/template/egg/css/reset.css">
+<link rel="stylesheet" href="/template/egg/css/animate.css">
+<link rel="stylesheet" href="/template/egg/css/layout.css">
+<script src="/template/egg/js/jquery.js"></script>
+<script src="/template/egg/js/common.js?23"></script>
+<script type="text/javascript"
+	src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+</head>
+<body class="container">
+	<div class="loadingbox"></div>
+	<input type="hidden" name="openid" id="openid" value="<{$openid}>">
+	<input type="hidden" name="gid" id="gid" value="<{$gid}>">
+
+	<div class="logo infor_logo">
+		<img src="/template/egg/img/logo.png" />
+	</div>
+	<div class="title">
+		<img src="/template/egg/img/title.png" />
+	</div>
+	<div class="egg">
+		<img src="/template/egg/img/egg1.png" class="gold_egg" /> <img
+			src="/template/egg/img/sui1.png" class="sui"
+			style="position: absolute; left: 126px; top: 640px;" /> <img
+			src="/template/egg/img/sui2.png" class="sui"
+			style="position: absolute; left: 250px; top: 670px;" /> <img
+			src="/template/egg/img/sui3.png" class="sui"
+			style="position: absolute; left: 400px; top: 640px;" />
+	</div>
+	<div class="begin">
+		<img src="/template/egg/img/begin.png" class="start" />
+	</div>
+	<div class="popbox"
+		style="display: block; background: rgba(255, 255, 255, 0.0); z-index: 9">
+		<div class="egg_pop">
+			<p>
+				直接点击金蛋开始砸，需连续点击15次后金蛋打开，<br>奖品出现
+			</p>
+			<img src="/template/egg/img/close.png" class="close" /> <img
+				src="/template/egg/img/stand.png" class="close stand" />
+		</div>
+	</div>
+	<div class="pop_za"></div>
+	<div class="egg_gift">
+		<img src="/template/egg/img/gift1.png" id="lotteryPic" />
+	</div>
+	<script type="text/javascript"
+		src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+	<script>
+function jsonpcallback(data){
+    wx.config({
+        debug: false, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
+        appId: data.appid, // 必填，公众号的唯一标识
+        timestamp:data.timestamp, // 必填，生成签名的时间戳
+        nonceStr: data.noncestr, // 必填，生成签名的随机串
+        signature: data.signature,// 必填，签名，见附录1
+        jsApiList: ['onMenuShareTimeline','onMenuShareAppMessage'] // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
+    });
+
+    wx.ready(function(){
+        // config信息验证后会执行ready方法，所有接口调用都必须在config接口获得结果之后，config是一个客户端的异步操作，所以如果需要在页面加载时就调用相关接口，则须把相关接口放在ready函数中调用来确保正确执行。对于用户触发时才调用的接口，则可以直接调用，不需要放在ready函数中。
+        //分享到朋友圈
+        wx.onMenuShareTimeline({
+              title: 'edison入住京东，晒订单去旅行，500元大奖天天送',
+              link: '',
+              imgUrl:'http://intelonlinetest.buzzopt.com/template/egg/img/share.jpg',
+              success: function (res) {
+                // 用户确认分享后执行的回调函数
+              },
+              cancel: function (res) {
+                // 用户取消分享后执行的回调函数
+              }
+            });
+          
+        wx.onMenuShareAppMessage({
+            title: 'edison入住京东', // 分享标题
+            desc: 'edison入住京东，晒订单去旅行，500元大奖天天送', // 分享描述
+            link: '',
+            imgUrl:'http://intelonlinetest.buzzopt.com/template/egg/img/share.jpg',
+            type: '', // 分享类型,music、video或link，不填默认为link
+            dataUrl: '', // 如果type是music或video，则要提供数据链接，默认为空
+            success: function () {
+                // 用户确认分享后执行的回调函数
+            },
+            cancel: function () {
+                // 用户取消分享后执行的回调函数
+            }
+        });
+    });
+}
+</script>
+	<script>
+window.onload=function(){
+	//	砸金蛋功能实现开始
+	var num=1;
+	var arr=["/template/egg/img/egg2.png","/template/egg/img/egg3.png","/template/egg/img/egg4.png"]
+	var content_egg = document.querySelector(".gold_egg");
+	content_egg.addEventListener("touchend", function(e){
+       e.preventDefault();
+       ga('send', 'event', title, '点击', "浮层消失");
+       switch (num)
+		{
+		case 5:
+		  content_egg.src=arr[0]
+		  break;
+		case 10:
+		    content_egg.src=arr[1]
+		  break;
+		case 15:
+		    content_egg.src=arr[2]
+		    $(".sui").css("display",'block').addClass('piece');
+		    $(".egg_gift").css('display','block').addClass('gift_active');
+		    setTimeout("javascript:location.href='/index.php/GameInfo/info'", 2000);
+
+		    //中奖图片
+		    var lotteryPicIndex	= 1;//(接ajax传过来的随机id 然后-1)
+		    $('#lotteryPic').attr('src', gift_arr[gid_value-1]);
+		  break;
+		  default:
+		}
+       num++;  
+	},false)
+	//礼物出现功能实现
+	var gift_arr=['/template/egg/img/gift3.png','/template/egg/img/gift2.png','/template/egg/img/gift1.png'];
+	var gid_value=$("#gid").val();
+}	
+</script>
+	<script type="text/javascript"
+		src="http://m.zevertech.com/index.php/jssdk?jsonpcallback=jsonpcallback"></script>
+	<script type="text/javascript" src="/template/egg/js/ga.js"></script>
+</body>
+</html>

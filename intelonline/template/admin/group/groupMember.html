@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>微信用户组管理</title>
+<link href="/css/main.css" type="text/css" rel="stylesheet" />
+<link rel="stylesheet" type="text/css" href="/css/skins/blue.css" />
+<link rel="stylesheet" type="text/css" href="/css/style.css" />
+<link rel="stylesheet" type="text/css" href="/css/index.css" />
+<script type="text/javascript" src="/js/jquery.js"></script>
+<script type="text/javascript" src="/js/main.js"></script>
+<script type="text/javascript" src="/js/artDialog.js"></script>
+<script type="text/javascript" src="/js/iframeTools.js"></script>
+</head>
+<body
+	onload="loadContent('',$('.intelListWrap'),'/index.php/group/groupMemberList/groupId/<{$groupId}>')">
+	<div class="container">
+		<{include 'admin/public/header.html'}>
+		<div class="main">
+			<{include 'admin/public/left_menu.html'}>
+			<div class="mainWrap">
+				<!-- <div class="webTitle weixinTitle">
+                	分组下的用户
+                    <span>
+                					<span class="searchBox"><input type="text" class="" name="nickname"><img src="/images/search2.png" id="search"></span>
+                					</span>
+                </div> -->
+				<div class="detailTitle">
+					<p>分组一</p>
+					<span onclick="window.history.back();">关闭</span>
+				</div>
+				<div class="webTitle detailSearch">
+					<span><input type="text" class="searchTxt"></span>
+				</div>
+				<ul class="intelListWrap usergroup"></ul>
+			</div>
+		</div>
+	</div>
+	<script>
+            
+            //删除分组
+            function fnDelGroup(self,openid){
+                var flag=confirm('确定将用户移出该分组么？');
+                if(flag){
+                    $.post('/index.php/group/deleteUserGroup/openid/'+openid,{group_id:openid},function(){
+
+                    },'json');
+                    $(self).parents('tr').slideUp();
+                }
+            }
+		$('#search').click(function(){
+			var nickname = $.trim($(':input[name=nickname]').val());
+			
+			loadContent('',$('.intelListWrap'),'/index.php/group/groupMemberList/nickname/'+nickname+'/groupId/<{$groupId}>');
+		});
+	</script>
+</body>
+</html>

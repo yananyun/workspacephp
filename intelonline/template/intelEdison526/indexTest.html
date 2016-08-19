@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="author" content="www.zevertech.com" />
+<meta http-equiv="copyright" content="zevertech 2014" />
+<meta http-equiv="pragma" content="no-cache" />
+<meta name="viewport" id="viewport"
+	content="width=device-width, minimum-scale=1, maximum-scale=1, initial-scale=1.0,user-scalable=no" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-touch-fullscreen" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+<meta name="MobileOptimized" content="300">
+<meta name="format-detection" content="telephone=no" />
+<title>英特尔中国智造基地会员招募</title>
+<link rel="stylesheet" href="css/reset.css">
+<link rel="stylesheet" href="css/layout.css">
+<link rel="stylesheet" href="css/animate.css">
+<script src="js/jquery.js"></script>
+<script src="js/common.js"></script>
+<script>
+/*答案：adaba  03010*/
+	$(function(){
+		var isOk=0;
+		/*答对多少分*/
+		var isFalse=0;
+		$(".quizOne .options span").click(function(){
+			var indexNum=$(this).index();
+			if(indexNum==0){
+				isOk=isOk+20;
+			}
+			/*alert("答对多少分： "+isOk);
+			alert("答错多少分： "+isFalse);*/
+			$(this).addClass("optionBg2");
+			setTimeout(function () {
+		        $(".quizTwo").show();
+		        $(".quizNumBg").removeClass("Bg1");
+		        $(".quizNumBg").addClass("Bg2");
+		    },300);
+		    setTimeout(function () {
+		        $(".quizOne").hide();
+		    },300);
+			//$(".quizOne").delay(300).hide(0);
+			//$(".quizTwo").show();
+		})
+		$(".quizTwo .options span").click(function(){
+			var indexNum=$(this).index();
+			if(indexNum==3){
+				isOk=isOk+20;
+			}
+			$(this).addClass("optionBg2");
+			setTimeout(function () {
+		        $(".quizThree").show();
+		        $(".quizNumBg").removeClass("Bg2");
+		        $(".quizNumBg").addClass("Bg3");
+		    },300);
+		    setTimeout(function () {
+		        $(".quizTwo").hide();
+		    },300);
+		})
+		$(".quizThree .options span").click(function(){
+			var indexNum=$(this).index();
+			if(indexNum==0){
+				isOk=isOk+20;
+			}
+			$(this).addClass("optionBg2");
+			setTimeout(function () {
+		        $(".quizFour").show();
+		        $(".quizNumBg").removeClass("Bg3");
+		        $(".quizNumBg").addClass("Bg4");
+		    },300);
+		    setTimeout(function () {
+		        $(".quizThree").hide();
+		    },300);
+		})
+		$(".quizFour .options span").click(function(){
+			var indexNum=$(this).index();
+			if(indexNum==1){
+				isOk=isOk+20;
+				localStorage.scoreNum=isOk;
+			}
+			$(this).addClass("optionBg2");
+		    setTimeout(function () {
+		        $(".quizbg1").hide();
+		        /*alert(isOk);*/
+		       /* window.location.href="indexTwo.html";*/
+		    },300);
+		    setTimeout(function () {
+		        $(".quizbg5").show();
+		    },300);
+		})
+		$(".quizFive .options span").click(function(){
+			var indexNum=$(this).index();
+			if(indexNum==0){
+				isOk=isOk+20;
+			}
+			$(this).addClass("optionBg2");
+		})
+		$(".submit").click(function(){
+			$(".alertCon").show();
+			/*alert("不可用");
+			$(".submit").attr({"disabled":"true"});*/
+			//alert(isOk);
+			if(isOk>=80){
+				$(".okBg").show();
+				$(".nopassCon").html("恭喜您！您的考试成绩为"+isOk+",已经顺利通过考试！");
+			}else{
+				$(".passCon").html("很遗憾！您的考试成绩为"+isOk+"，未能通过考试。您可以点击“火热招募”→“视频培训”，观看培训视频。期待您的下次表现，加油哦！");
+				$(".falseBg").show();
+			}
+		})
+		$(".alertBg").click(function(){
+			/*alert(1);*/
+			wx.closeWindow();
+			//$(".alertCon").hide();
+			//$(".alertBg").hide();
+			//window.close();
+		})
+	})
+</script>
+<style>
+.quizbg5 {
+	display: none;
+}
+</style>
+</head>
+<body>
+	<div class="loadingbox"></div>
+	<div class="container">
+		<div class="quizbg quizbg1">
+			<img src="images/logo.png" alt="" class="logoImg">
+			<div class="titleImg">
+				<img src="images/titleImg.png" alt="">
+			</div>
+			<div class="quizs">
+				<!-- 第一题 -->
+				<div class="quizCon quizOne">
+					<div class="quizNumBg Bg1"></div>
+					<div class="issue">
+						<img src="images/issueBg2.png" alt="" class="issueIcon">
+						INTEL Edison里的SoC是几核的？最高主频是多少？
+					</div>
+					<div class="options">
+						<span class="optionList">A. 2核，300MHz</span> <span
+							class="optionList">B. 4核，600MHz</span> <span class="optionList">C.
+							单核，200MHz</span> <span class="optionList">D. 4核，300MHz</span>
+					</div>
+				</div>
+				<!-- 第二题 -->
+				<div class="quizCon quizTwo">
+					<div class="quizNumBg Bg1"></div>
+					<div class="issue">
+						<img src="images/issueBg2.png" alt="" class="issueIcon">
+						INTEL Edison的CPU支持的操作系统是？
+					</div>
+					<div class="options">
+						<span class="optionList">A. Susi Linux</span> <span
+							class="optionList">B. Windows Embedded</span> <span
+							class="optionList">C. Android</span> <span class="optionList">D.
+							Yocto Linux</span>
+					</div>
+				</div>
+				<!-- 第三题 -->
+				<div class="quizCon quizThree">
+					<div class="quizNumBg Bg1"></div>
+					<div class="issue">
+						<img src="images/issueBg2.png" alt="" class="issueIcon">
+						INTEL Edison的外形是具有多少引脚连接器的电路板？
+					</div>
+					<div class="options">
+						<span class="optionList">A. 70</span> <span class="optionList">B.
+							72</span> <span class="optionList">C. 80</span> <span class="optionList">D.
+							108</span>
+					</div>
+				</div>
+				<!-- 第四题 -->
+				<div class="quizCon quizFour">
+					<div class="quizNumBg Bg1"></div>
+					<div class="issue">
+						<img src="images/issueBg2.png" alt="" class="issueIcon">
+						INTEL Edison的外部接口总共有多少个GPIO？
+					</div>
+					<div class="options">
+						<span class="optionList">A. 30</span> <span class="optionList">B.
+							40</span> <span class="optionList">C. 50</span> <span class="optionList">D.
+							60</span>
+					</div>
+				</div>
+			</div>
+			<div class="btm">
+				参与活动的报名者在提交信息时若尚无基于英特尔平台产品，则需通过考试并被审核通过后方为报名成功。</div>
+		</div>
+		<div class="quizbg quizbg5">
+			<img src="images/logo.png" alt="" class="logoImg">
+			<div class="titleImg">
+				<img src="images/titleImg.png" alt="">
+			</div>
+			<div class="quizs">
+				<!-- 第五题 -->
+				<div class="quizFive">
+					<div class="quizNumBg Bg5"></div>
+					<div class="issue">
+						<img src="images/issueBg2.png" alt="" class="issueIcon">
+						INTEL Edison模块本身一共分几种？
+					</div>
+					<div class="options">
+						<span class="optionList">A. 4种</span> <span class="optionList">B.
+							3种</span> <span class="optionList">C. 2种</span> <span class="optionList">D.
+							5种</span>
+					</div>
+				</div>
+			</div>
+			<div class="btm">
+				参与活动的报名者在提交信息时若尚无基于英特尔平台产品，则需通过考试并被审核通过后方为报名成功。</div>
+			<!-- <div class="submit">提交</div> -->
+			<div class="submit">
+				<input type="button" value="提交">
+			</div>
+		</div>
+	</div>
+	<div class="alertCon"></div>
+	<div class="alertBg okBg">
+		<img src="images/close.png" alt="" class="closeImg">
+		<div class="alertTitle">
+			<img src="images/okIcon.png" alt="">
+		</div>
+		<p class="nopassCon">恭喜您！您的考试成绩为…，已经顺利通过考试！</p>
+		<p>获取更多活动咨询，请关注【英特尔中国在线】。</p>
+	</div>
+	<div class="alertBg falseBg">
+		<img src="images/close.png" alt="" class="closeImg">
+		<div class="alertTitle">
+			<img src="images/falseIcon.png" alt="">
+		</div>
+		<p class="passCon">很遗憾！您的考试成绩为…，未能通过考试。您可以点击“火热招募”→“视频培训”，观看培训视频。期待您的下次表现，加油哦！</p>
+		<p>获取更多活动咨询，请关注【英特尔中国在线】。</p>
+	</div>
+	<script src="js/ga.js"></script>
+	<script type="text/javascript"
+		src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+	<script src="js/share.js"></script>
+	<script type="text/javascript"
+		src="http://m.zevertech.com/index.php/jssdk?jsonpcallback=jsonpcallback"></script>
+</body>
+</html>

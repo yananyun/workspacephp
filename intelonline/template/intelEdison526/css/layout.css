@@ -1,0 +1,240 @@
+* {
+	-webkit-tap-highlight-color: rgba(255, 0, 0, 0);
+	-webkit-user-select: none;
+}
+
+html, body {
+	width: 100%;
+	height: 100%;
+}
+
+.loadingbox {
+	position: fixed;
+	z-index: 99;
+	background: #fff url(../images/load.gif) center center no-repeat;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100%;
+}
+
+.container {
+	width: 640px;
+	height: 100%;
+	margin: 0px auto;
+	position: relative;
+}
+/*一到四页*/
+.quizbg {
+	background: url(../images/bg2.jpg) center center no-repeat;
+	width: 100%;
+	min-height: 100%;
+	background-size: cover;
+}
+
+.logoImg {
+	padding: 17px 0 0 40px;
+	display: block;
+}
+
+.titleImg {
+	margin: 0 auto;
+	width: 186px;
+	height: 45px;
+	margin-top: 17px;
+}
+
+.quizNumBg {
+	width: 384px;
+	height: 35px;
+	margin: 0 auto;
+	margin-top: 20px;
+	position: relative;
+}
+
+.Bg1 {
+	background: url(../images/quizNumBg1.png) no-repeat;
+}
+
+.Bg2 {
+	background: url(../images/quizNumBg2.png) no-repeat;
+}
+
+.Bg3 {
+	background: url(../images/quizNumBg3.png) no-repeat;
+}
+
+.Bg4 {
+	background: url(../images/quizNumBg4.png) no-repeat;
+}
+
+.Bg5 {
+	background: url(../images/quizNumBg5.png) no-repeat;
+}
+
+.issue {
+	width: 414px;
+	height: 119px;
+	margin: 0 auto;
+	background: url(../images/issueBg1.png) no-repeat;
+	margin-top: 8px;
+	font: 28px "宋体";
+	position: relative;
+	color: #003750;
+	padding: 30px 25px 0 25px;
+	line-height: 40px;
+}
+
+.issueIcon {
+	position: absolute;
+	top: -26px;
+	left: -26px;
+}
+
+.options {
+	font: 24px "微软雅黑";
+	line-height: 69px;
+	margin-top: 40px;
+	clear: both;
+}
+
+.options span {
+	text-align: center;
+	background: url(../images/optionBg.png) no-repeat;
+	display: block;
+	margin: 0 auto;
+	width: 463px;
+	height: 77px;
+	margin-bottom: 13px;
+	color: #022c3f;
+}
+
+.options .optionBg2 {
+	background: url(../images/optionBg2.png) no-repeat;
+}
+
+.quizOne .options span {
+	text-indent: 135px;
+	text-align: left;
+}
+
+.quizTwo .options span {
+	text-align: left;
+	text-indent: 110px;
+}
+
+.quizCon {
+	display: none;
+}
+
+.quizCon.quizOne {
+	display: block;
+}
+
+.btm {
+	width: 544px;
+	height: 76px;
+	background: rgba(51, 139, 179, 0.5);
+	margin: 0 auto;
+	margin-top: 20px;
+	font: 22px "微软雅黑";
+	color: #fff;
+	line-height: 38px;
+	padding: 15px 20px;
+}
+
+.submit {
+	width: 257px;
+	height: 85px;
+	text-align: center;
+	margin-top: 20px;
+	background: url(../images/submitBtn.png) no-repeat;
+	margin: 0 auto;
+}
+
+.submit input {
+	width: 257px;
+	height: 85px;
+	border: none;
+	background: none;
+	color: #fbf96e;
+	font: 34px "微软雅黑";
+	line-height: 85px;
+}
+
+.alertCon {
+	width: 100%;
+	height: 100%;
+	background: rgba(0, 0, 0, 0.7);
+	position: fixed;
+	top: 0px;
+	left: 0px;
+	display: none;
+}
+
+.alertBg {
+	width: 580px;
+	height: 568px;
+	background: url(../images/alertBg.png) no-repeat;
+	top: 50%;
+	left: 50%;
+	margin-top: -284px;
+	margin-left: -290px;
+	position: absolute;
+	z-index: 33;
+	display: none;
+}
+
+.closeImg {
+	position: absolute;
+	top: 12px;
+	right: 12px;
+}
+
+.alertTitle {
+	margin: 0 auto;
+	width: 71px;
+	height: 50px;
+	margin-top: 68px;
+}
+
+.alertBg p {
+	color: #022c3f;
+	font: 28px "微软雅黑";
+	padding: 0 50px;
+	margin-top: 50px;
+}
+
+.quizbg5 .titleImg {
+	margin-top: -5px;
+}
+
+.quizbg5 .options {
+	margin-top: 15px;
+}
+
+@media only screen and (min-device-width:320px) and (max-device-width:
+	480px) {
+	.titleImg {
+		margin-top: 5px;
+	}
+	.options {
+		margin-top: 20px;
+	}
+	.quizbg5 .titleImg {
+		margin-top: -20px;
+	}
+	.quizbg5 .options {
+		margin-top: 7px;
+	}
+	.quizbg5 .options span {
+		margin-bottom: 6px;
+	}
+	.btm {
+		padding: 7px 20px;
+		margin-top: 8px;
+	}
+	.submit {
+		margin-top: 7px;
+	}
+}

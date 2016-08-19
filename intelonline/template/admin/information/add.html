@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>最新资讯管理——添加资讯</title>
+<link rel="stylesheet" href="/css/index.css">
+<link href="/jquery-ui.css" rel="stylesheet">
+<script src="/js/jquery.min.js"></script>
+<script src="/js/index.js"></script>
+<script src="/js/jquery-ui.js"></script>
+<script type="text/javascript" src="/js/main.js"></script>
+<script type="text/javascript" src="/js/artDialog.js"></script>
+<script type="text/javascript" src="/js/iframeTools.js"></script>
+<script type="text/javascript" src="/js/ajaxfileupload.js"></script>
+<script type="text/javascript" src="/js/ueditor/ueditor.config.js"></script>
+<script type="text/javascript" src="/js/ueditor/ueditor.all.js"></script>
+<style>
+.input-file {
+	display: inline-block;
+	width: 100px;
+	height: 30px;
+	line-height: 30px;
+	text-align: center;
+	overflow: hidden;
+	position: relative;
+	background-color: #ddd;
+	color: #000;
+	text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+	border-radius: 1px;
+} /*自定义外框样式*/
+.input-file:hover {
+	background-color: #0263CC;
+	color: #fff;
+} /*鼠标经过样式*/
+.input-file input {
+	opacity: 0;
+	filter: alpha(opacity = 0);
+	font-size: 100px;
+	position: absolute;
+	top: 0;
+	right: 0
+} /*隐藏默认控件样式*/
+</style>
+<script>
+	$(function(){
+		
+	})
+	</script>
+</head>
+<body>
+	<{include 'admin/public/header.html'}>
+	<div class="con">
+		<{include 'admin/public/left_menu.html'}>
+		<div class="rightDiv weixinDiv">
+			<div class="u_addCon u_addConTwo">
+				<img src="/images/icon1.png" alt=""> <a
+					href="/index.php/information/add">添加资讯</a> <input type="button"
+					class="groupBtn confirmBtn closeBtn"
+					onclick="window.history.back();" value="关闭">
+			</div>
+			<table border="0" cellspacing="0" cellpadding="0"
+				class="uplabelTable">
+				<tr>
+					<td>标题：</td>
+					<td><input type="text" name="title"></td>
+				</tr>
+				<tr>
+					<td>权重排序：</td>
+					<td><input type="text" name="weight">（权重排序：值越大，越靠前，上限为100）</td>
+				</tr>
+				<tr>
+					<td>来源：</td>
+					<td><input type="text" name="source"></td>
+				</tr>
+				<tr>
+					<td>描述：</td>
+					<td><textarea name="descption" id="" cols="85" rows="10"></textarea></td>
+				</tr>
+				<tr>
+					<td>缩略图：</td>
+					<td style="position: relative;">
+						<!-- <input type="file" name="up_picture" id="up_picture" onchange="commonUploadPic(this,1000,1000)"/>
+					<span class="picUp">选择文件</span> --> <label class="input-file">
+							<input title="浏览文件" type="file" name="up_picture"
+							id="up_pictures" onchange="commonUploadPic(this,1000,1000)" />浏览…
+					</label><span>（建议尺寸186*130）</span>
+					</td>
+				</tr>
+				<tr>
+					<td>&nbsp;</td>
+					<td><input type="hidden" value="<{$info.bannerurl}>"
+						class="picURL_hide" name="picURL_hide" /> <img class="preview"
+						src="<{if $info.bannerurl}><{$info.bannerurl}><{else}>/img/defauleimgnewadds.jpg<{/if}>"
+						width="186" height="130" /></td>
+				</tr>
+				<tr>
+					<td>资讯内容：</td>
+					<td>
+						<p class="inline_block" id="news_content"></p>
+					</td>
+				</tr>
+				<tr>
+					<td colspan="2" style="text-align: center;"><input
+						type="button" value="确定" class="confirmBtn saveBtn"
+						onclick="save_information();"> <input type="button"
+						value="取消" onclick="window.history.back();" class="noneBtn">
+					</td>
+				</tr>
+			</table>
+		</div>
+	</div>
+</body>
+<script>
+	var editor = new baidu.editor.ui.Editor({initialFrameHeight:200,initialFrameWidth:600});
+	editor.render("news_content");
+    
+
+function commonUploadPic(f,w,h) {
+	var file = $(f).val();
+	var upId=$(f).attr('id');
+	//转换文件名为小写
+	file = file.toLowerCase();
+	//检测文件类型必须是图片
+	if (!/.(gif|jpg|jpeg|png)$/.test(file)) {
+		alert("图片类型必须是.gif,jpeg,jpg,png中的一种");
+	} else {
+		$.ajaxFileUpload({
+			url: '/index.php/common/upload/w/'+w+'/h/'+h, //服务器端程序
+			secureuri: false,
+			fileElementId: upId, //input框的ID
+			dataType: 'json', //返回数据类型
+			success: function(data) {//上传成功
+				if(data.status){
+					$('input[name=picURL_hide]').val(data.data);
+					$('.preview').attr('src',data.data);
+				}
+			}
+		});
+	}
+}
+function save_information(){
+	var title = $('input[name=title]').val();
+	var weight = $('input[name=weight]').val();
+	var source = $('input[name=source]').val();
+	var descption = $('textarea[name=descption]').val();
+	var picurl = $('input[name=picURL_hide]').val();
+	var content = editor.getContent();
+	$.ajax({
+		url:"/index.php/information/save_information",
+		data:{title:title,weight:weight,source:source,descption:descption,picurl:picurl,content:content},
+		dataType:'json',
+		type:'post',
+		success:function(data){
+			alert(data.info);
+			if(data.status){
+				window.location.href ="/index.php/information/index";
+			}
+		}
+	});
+} 
+</script>
+</html>

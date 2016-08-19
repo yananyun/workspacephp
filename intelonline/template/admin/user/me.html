@@ -1,0 +1,123 @@
+<!DOCTYPE HTML>
+<html lang="zh-cn">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="keywords" content="">
+<meta name="description" content="">
+<title>微信管理平台-个人中心</title>
+<link href="/css/main.css" type="text/css" rel="stylesheet" />
+<link rel="stylesheet" type="text/css" href="/css/skins/blue.css" />
+<link rel="stylesheet" type="text/css" href="/css/message.css" />
+<link rel="stylesheet" type="text/css" href="/css/index.css" />
+<link rel="stylesheet" href="/css/K_admin.css">
+<script type="text/javascript" src="/js/jquery.js"></script>
+<script type="text/javascript" src="/js/main.js"></script>
+<!-- K -->
+<script type="text/javascript" src="/js/K_admin.js"></script>
+<script type="text/javascript" src="/js/artDialog.js"></script>
+<script type="text/javascript" src="/js/iframeTools.js"></script>
+<link rel="stylesheet" type="text/css" href="/css/material.css" />
+<script type="text/javascript" src="/js/ajaxfileupload.js"></script>
+<script type="text/javascript" src="/js/My97DatePicker/WdatePicker.js"></script>
+<link rel="stylesheet" type="text/css"
+	href="/js/My97DatePicker/skin/WdatePicker.css" />
+<style>
+.kaba-info {
+	font-size: 14px;
+}
+
+.kaba-info h3 {
+	font-size: 16px;
+	xborder-bottom: 1px solid rgb(0, 106, 104);
+	padding-top: 20px;
+	padding-bottom: 4px;
+	margin-bottom: 5px;
+	/*color: rgb(0,106,104);*/
+	border-bottom: 1px solid #0263cc;
+}
+
+.kaba-info h3 i {
+	font-size: 16px;
+	margin-right: 5px;
+	margin-left: 6px;
+}
+
+.kaba-info span {
+	xcolor: rgb(0, 106, 104);
+	color: #0263cc;
+}
+
+.kaba-info input[type="password"] {
+	width: 200px;
+	padding-left: 4px;
+}
+
+.kaba-info p {
+	line-height: 36px;
+	margin-left: 20px;
+}
+
+.kaba-info form p {
+	margin-top: 10px;
+}
+
+input[type='submit'] {
+	xbackground-color: rgb(0, 106, 104);
+	background: #0263cc;
+	height: 30px;
+	cursor: pointer;
+}
+
+input[type='submit'], input[type='reset'] {
+	border-radius: 4px;
+	font-size: 14px;
+	border: 0;
+	padding: 4px;
+	color: #fff;
+}
+</style>
+</head>
+<body>
+	<div class="container">
+		<{include 'admin/public/header.html'}>
+		<div class="main">
+			<{include 'admin/public/left_menu.html'}>
+			<div class="mainWrap">
+				<div class="kaba-info">
+					<h3>
+						<i class="fa fa-user"></i>个人信息
+					</h3>
+					<p>
+						昵称:<span><{$info.nickname}></span>
+					</p>
+					<!--<p>性别:<span><{$info.sex}></span></p>-->
+					<p>
+						账户名:<span><{$info.username}></span>
+					</p>
+					<h3>
+						<i class="fa fa-unlock-alt"></i>修改密码
+					</h3>
+					<div>
+						<form action='/index.php/me/updatePassword' method="POST">
+							<p>
+								请输入原密码：<input type="password" name="oldPass" />
+							</p>
+							<p>
+								请输入新密码：<input type="password" name="newPass" />
+							</p>
+							<p>
+								请确认新密码：<input type="password" name="newPass2" />
+							</p>
+							<p>
+								<input type="submit" name="sub" value="修改密码" />
+							</p>
+						</form>
+					</div>
+
+				</div>
+			</div>
+		</div>
+
+	</div>
+</body>
+</html>

@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>添加图文消息</title>
+<link href="/css/main.css" type="text/css" rel="stylesheet" />
+<link rel="stylesheet" type="text/css" href="/css/skins/blue.css" />
+<link rel="stylesheet" type="text/css" href="/css/material.css" />
+<link rel="stylesheet" type="text/css" href="/css/index.css" />
+<script type="text/javascript" src="/js/jquery.js"></script>
+<script type="text/javascript" src="/js/common.js"></script>
+<script type="text/javascript" src="/js/main.js"></script>
+<script type="text/javascript" src="/js/artDialog.js"></script>
+<script type="text/javascript" src="/js/iframeTools.js"></script>
+<script type="text/javascript" src="/js/ajaxfileupload.js"></script>
+<script type="text/javascript" src="/js/createMaterial.js"></script>
+<!--百度在线编辑器-->
+<script type="text/javascript" charset="utf-8"
+	src="/js/ueditor/ueditor.config.js"></script>
+<script type="text/javascript" charset="utf-8"
+	src="/js/ueditor/ueditor.all.js"></script>
+<script type="text/javascript" charset="utf-8"
+	src="/js/ueditor/lang/zh-cn/zh-cn.js"></script>
+</head>
+<body>
+	<div class="container">
+		<{include 'admin/public/header.html'}>
+		<div class="main">
+			<div class="mainWrap">
+				<div class="creatPicTxtCol">
+					<div class="pic_txt_col editOn" id="coverCol">
+						<p class="materialPicTxtTtl"><{$material.title}></p>
+						<div class="materialPicWrapCover mPreview">
+							<div class="preViewImg">
+								<img src="<{$material.thumb}>">
+							</div>
+						</div>
+						<p class="materialPicTxtComment"><{$material.description}></p>
+						<!--<a class="hideEditTrigger" href="javascript:void(0);" onclick="fnEditCurrentCol(this,0)">编辑</a>-->
+						<input type="hidden" name="aid" value="<{$material.id}>" /> <input
+							type="hidden" name="sTitle" value="<{$material.title}>" /> <input
+							type="hidden" name="sAuthor" value="<{$material.author}>" /> <input
+							type="hidden" name="uploadPath" value="<{$material.thumb}>" /> <input
+							type="hidden" name="coverFlag" value="<{$material.coverFlag}>" />
+						<input type="hidden" name="sComment"
+							value="<{$material.description}>" /> <input type="hidden"
+							name="sUrl" value="<{$material.url}>" />
+						<!--<input type="hidden" name="sArticle"  value="<{$material.content}>"/>-->
+						<div class="sArticle" style="display: none;"><{$material.content}></div>
+						<input type="hidden" name="sLink"
+							value="<{$material.original_url}>" />
+					</div>
+				</div>
+				<div class="materialEditWrap">
+					<i class="arrow arrow_out"></i> <i class="arrow arrow_in"></i>
+					<div class="editBox">
+						<form id="editForm">
+							<div class="optionCol">
+								<p>
+									标题<span class="inlineTip">（最多64字）</span>
+								</p>
+								<div class="optionField">
+									<input type="text" name="meTitle" value="<{$material.title}>" />
+								</div>
+							</div>
+							<div class="optionCol">
+								<p>
+									作者<span class="inlineTip">（选填）</span>
+								</p>
+								<div class="optionField">
+									<input type="text" name="meAuthor" value="<{$material.author}>" />
+								</div>
+							</div>
+							<div class="optionCol topCover">
+								<p>
+									封面<span class="inlineTip right">大图片建议尺寸：640像素 * 320像素</span>
+								</p>
+								<div class="optionField">
+									<label class="imgUpLabel"> <input class="imgUpBtn"
+										id="up_picture" imgWidth="360" imgHeight="200"
+										name="up_picture" type="file"
+										onchange="fnMaterialPicUpload(this,$('.preViewBox'),$('.editOn'),$('.uploadView'));" />
+										上传
+									</label>
+									<div class="preViewBox">
+										<div class="uploadView">
+											<h5>上传中...</h5>
+										</div>
+										<a class="delView" href="javascript:void(0);"
+											onclick="fnDelUpload($('.editOn').find('[name=uploadPath]'),$('.uploadView'),$('.preViewBox'))">删除</a>
+									</div>
+								</div>
+								<p>
+									<label class="inlineTip"><input type="checkbox"
+										name="meCoverFlag" />封面图片显示在正文中</label>
+								</p>
+							</div>
+							<div class="optionCol">
+								<p>
+									摘要<span class="inlineTip">（选填）</span>
+								</p>
+								<div class="optionField">
+									<textarea name="meComment"><{$material.description}></textarea>
+								</div>
+							</div>
+							<div class="optionCol">
+								<p>
+									跳转链接<span class="inlineTip">（选填）</span>
+								</p>
+								<div class="optionField">
+									<input type="text" name="meUrl" value="<{$material.url}>" />
+								</div>
+							</div>
+							<div class="optionCol">
+								<p>
+									正文<span class="inlineTip">（最多2000字）</span>
+								</p>
+								<script id="materialArticle" type="text/plain"
+									style="height: 300px;"><{$material.content}></script>
+							</div>
+							<div class="optionCol">
+								<p>
+									原文链接<span class="inlineTip">（选填）</span>
+								</p>
+								<div class="optionField">
+									<input type="text" name="meLink"
+										value="<{$material.original_url}>" />
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>
+				<p class="saveMaterialBtnWrap">
+					<a href="javascript:;" class="btn btn-primary" id='save'>保存</a>
+				</p>
+			</div>
+		</div>
+		<{include 'admin/public/left_menu.html'}>
+	</div>
+	<script type="text/javascript">
+    var editor = UE.getEditor('materialArticle');
+
+$(function(){
+	$('.hideEditTrigger').trigger('click');
+        $('#save').click(function () {
+            var aid = $.trim($(':input[name=aid]').val());
+		var title = $.trim($(':input[name=meTitle]').val());
+		var author = $.trim($(':input[name=meAuthor]').val());
+		var thumb = $.trim($(':input[name=uploadPath]').val());
+		var description = $.trim($(':input[name=meComment]').val());
+		var url = $.trim($(':input[name=meUrl]').val());
+		var coverFlag = $.trim($(':input[name=coverFlag]').val());		
+            var content = $.trim(editor.getContent());
+		var original_url = $.trim($(':input[name=meLink]').val());
+
+var fields = new Array();
+fields = '[';
+fields += '{"title":"'+title+'","author":"'+author+'","content":"'+encodeURI(content)+'","thumb":"'+thumb+'","description":"'+encodeURI(description)+'","url":"'+url+'","original_url":"'+original_url+'","coverFlag":"'+coverFlag+'"}';
+fields += ']';
+$.ajax({
+	url:'/index.php/material/creat_pic_txt_save',
+	data:{ "data":  fields,'mid':<{$mid}>},
+	type:'post',	
+	dataType:'json',
+	success:function(data){
+		alert(data.info);
+		if(data.status == 1){
+			location.href = '/index.php/material/pic_txt_msg';
+		}
+		
+	}
+});
+return false;
+		
+	});
+});
+</script>
+</body>
+</html>

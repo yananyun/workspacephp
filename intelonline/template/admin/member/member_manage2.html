@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>会员管理</title>
+<link href="/css/main.css" type="text/css" rel="stylesheet" />
+<link rel="stylesheet" type="text/css" href="/css/skins/blue.css" />
+<link rel="stylesheet" type="text/css" href="/css/index.css" />
+<script type="text/javascript" src="/js/jquery.js"></script>
+<script type="text/javascript" src="/js/main.js"></script>
+<script type="text/javascript" src="/js/base.js"></script>
+<script type="text/javascript" src="/js/artDialog.js"></script>
+<script type="text/javascript" src="/js/iframeTools.js"></script>
+<script type="text/javascript" src="/js/ajaxfileupload.js"></script>
+
+<link href="/jquery-ui.css" rel="stylesheet">
+<script src="/js/jquery-ui.js"></script>
+<script>
+    $(function(){
+        $( ".datepicker" ).datepicker();
+        $( "#datepicker2" ).datepicker();
+        
+    })
+    </script>
+<style>
+</style>
+</head>
+<body
+	onload="loadContent('',$('.intelListWrap'),'/index.php/member/list_member')">
+	<div class="container">
+		<{include 'admin/public/header.html'}>
+		<div class="main">
+			<div class="mainWrap userWarp">
+				<div class="fansList">
+					<span>粉丝总数<br />
+					<em>20000</em></span> <span>昨日累计增加粉丝数<br />
+					<em>1000</em></span> <span>昨日取消关注粉丝数<br />
+					<em>20000</em></span> <span>已有标签用户数<br />
+					<em>20000</em></span>
+				</div>
+				<!-- <a href="/index.php/group/list_manage">分组</a> -->
+				<p>地&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;区：
+					<{memberRegion()}></p>
+				<p>
+					性&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;别： <input type="radio"
+						name="sex" value="1">男&nbsp;&nbsp;&nbsp;&nbsp; <input
+						type="radio" name="sex" value="2">女
+				</p>
+				<p>
+					交互时间： 开始时间<input type="text" name="interactionStime"
+						class="datepicker">&nbsp;&nbsp;&nbsp;&nbsp; 结束时间<input
+						type="text" name="interactionDtime" class="datepicker">
+				</p>
+				<p>
+					交互次数： <input type="radio" name="interactionNum" value="0">无限&nbsp;&nbsp;&nbsp;&nbsp;
+					<input type="radio" name="interactionNum" value="20">大于20&nbsp;&nbsp;&nbsp;&nbsp;
+					<input type="radio" name="interactionNum" value="50">大于50&nbsp;&nbsp;&nbsp;&nbsp;
+					<input type="radio" name="interactionNum" value="custom">自定义
+					<input type="text" name="min">~ <input type="text"
+						name="max"> <input type="button" name="search" value="搜索"
+						class="searchBtn" />
+				</p>
+				<ul class="intelListWrap memeberListWrap"></ul>
+			</div>
+		</div>
+		<{include 'admin/public/left_menu.html'}>
+	</div>
+	<style>
+.mainWrap .intelListWrap li {
+	background-color: rgb(201, 201, 201);
+	color: #666;
+}
+</style>
+	<script>
+            setCheckStyle('selectBox');
+            $(':input[name=search]').click(function(){
+                var memberProvince      = $('#memberProvince').val();
+                var memberCity          = $('#memberCity').val();
+                var sex                 = $('input[name=sex]:checked').val();
+                var interactionStime    = $.trim($(':input[name=interactionStime]').val());
+                var interactionDtime    = $.trim($(':input[name=interactionDtime]').val());
+                var interactionNum      = $.trim($('input[name=interactionNum]:checked').val());
+                var interactionMin      = $.trim($(':input[name=min]').val());
+                var interactionMax      = $.trim($(':input[name=max]').val());
+                if(typeof(sex) == 'undefined')
+                {
+                    sex = '';
+                }
+                if(typeof(interactionNum) == 'undefined')
+                {
+                    interactionNum = '';
+                }
+                
+                loadContent('',$('.intelListWrap'),'/index.php/member/list_member/provinceId/'+memberProvince+'/cityId/'+memberCity+'/sex/'+sex+'/interactionStime/'+interactionStime+'/interactionDtime/'+interactionDtime+'/interactionNum/'+interactionNum+'/interactionMin/'+interactionMin+'/interactionMax/'+interactionMax);		
+            });
+//            setCheckStyle('selectBox');
+//            $(':input[name=search]').click(function(){
+//                var keyword = $.trim($(':input[name=keyword]').val());
+//                var type=$('#memberType').val();
+//                var memberProvince=$('#memberProvince').val();
+//                var memberCity=$('#memberCity').val();
+//                loadContent('',$('.intelListWrap'),'/index.php/member/list_member/keyword/'+keyword + '/type/'+type+'/provinceId/'+memberProvince+'/cityId/'+memberCity);		
+//            });
+	</script>
+	<!--	<script>
+		setCheckStyle('selectBox');
+		$(':input[name=search]').click(function(){
+			var keyword = $.trim($(':input[name=keyword]').val());
+			var type=$('#memberType').val();
+			var memberProvince=$('#memberProvince').val();
+			var memberCity=$('#memberCity').val();
+			loadContent('',$('.intelListWrap'),'/index.php/member/list_member/keyword/'+keyword + '/type/'+type+'/provinceId/'+memberProvince+'/cityId/'+memberCity);		});
+	</script>-->
+</body>
+</html>

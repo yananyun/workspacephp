@@ -1,0 +1,50 @@
+<ul id="listContainer" class="message_list">
+	<{foreach $list as $t}>
+	<li class="message_item">
+		<div class="message_opr">
+			<!-- data-status="0"  0为未收藏 1 为已收藏-->
+			<{if $t.isstar == '1'}> <a title="取消收藏" data-status="1"
+				onclick="message_collect(this,<{$t.id}>)"
+				class="js_star icon18_common star_orange" href="javascript:;">取消收藏</a>
+			<{else if $t.isstar == '2'}> <a title="收藏消息" data-status="2"
+				onclick="message_collect(this,<{$t.id}>)"
+				class="js_star icon18_common star_gray" href="javascript:;">收藏</a>
+			<{/if}> <{if ($t.createtime + 86400 * 2) > $now}> <a title="快捷回复"
+				class="icon18_common reply_gray js_reply"
+				onclick="message_reply_show(this)" href="javascript:;">快捷回复</a>
+			<{/if}>
+		</div>
+		<div class="message_info">
+			<div class="message_status">
+				<{if $t.isreply == 1}>
+				<!--<em class="tips"><i>●</i>已回复</em>-->
+				<em><i>●</i>已回复</em> <{/if}>
+			</div>
+			<div class="message_time"><{$t.createtime|date_format:'%Y-%m-%d
+				%H:%M:%S'}></div>
+			<div class="user_info">
+				<!--<a onclick="guestMessageList('.searchTab',$('.intelListWrap'),'messageManage/guest_message_list.html')"  href="javascript:;">-->
+				<a href="javascript:void(0);" class="remark_name"
+					onclick="showMemberDetail('<{$t.openid}>')"> <{$t.nickname}> <span
+					class="avatar"> <img src="<{$t.headimgurl}>" alt="" />
+				</span>
+				</a>
+			</div>
+		</div>
+		<div class="message_content text">
+			<div class="wxMsg"><{$t.content}></div>
+		</div>
+		<div class="js_quick_reply_box quick_reply_box">
+			<label class="frm_label">快速回复:</label>
+			<textarea class="reply_area" id='replycontent'></textarea>
+			<p class="quick_reply_box_tool_bar">
+				<span class="btn btn_primary btn_input">
+					<button onclick="message_send(this,'<{$t.id}>','<{$t.openid}>')"
+						class="js_reply_OK">发送</button>
+				</span> <a href="javascript:;" onclick="message_pickup(this)"
+					class="js_reply_pickup btn btn_default pickup">收起</a>
+			</p>
+		</div>
+	</li> <{/foreach}>
+</ul>
+<{$pages}>

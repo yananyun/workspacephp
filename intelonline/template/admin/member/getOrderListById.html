@@ -1,0 +1,45 @@
+<!-- <ul class="intelListWrap likeBox">
+	<div class="listTopTtl">
+		<span class="couponsName">订单号</span>
+		<span class="couponsType">产品名称</span>
+		<span class="couponsStore">产品规格</span>
+		<span class="couponsSeries">订单金额</span>
+		<span class="couponsSeries">订单状态</span>
+		<span class="couponsDate">激活码</span>
+	</div>
+	<{foreach $list as $t}>
+		<li>
+			<span class="couponsName"><i><{$t.numbers}></i></span>
+			<span class="couponsType"><{$t.title}></span>
+			<span class="couponsStore"><{$version_type[$t.version_type]}></span>
+			<span class="couponsSeries"><{if $t.real_price}><{$t.real_price}>元<{/if}></span>
+			<span class="couponsSeries"><{$pay_status[$t.pay_status]}></span>
+			<span class="couponsDate"><{if $t.activekey}><{$t.activekey}><{else}>无<{/if}></span>
+		</li>
+	<{/foreach}>
+</ul> -->
+<table class="order-record">
+	<tr class="listTopTtl">
+		<th class="couponsName">订单号</th>
+		<th class="couponsType">产品名称</th>
+		<th class="couponsStore">产品规格</th>
+		<th class="couponsSeries">订单金额</th>
+		<th class="couponsSeries">订单状态</th>
+		<th class="couponsDate">激活码</th>
+	</tr>
+	<{foreach $list as $t}>
+	<tr>
+		<td class="couponsName"><i><{$t.numbers}></i></td>
+		<td class="couponsType"><{$t.title}></td>
+		<td class="couponsStore"><{$version_type[$t.version_type]}></td>
+		<td class="couponsSeries"><{if
+			$t.real_price}><{$t.real_price}>元<{/if}></td>
+		<td class="couponsSeries"><{$pay_status[$t.pay_status]}></td>
+		<td class="couponsDate"><{if
+			$t.activekey}><{$t.activekey}><{else}>无<{/if}></td>
+	</tr>
+	<{/foreach}>
+</table>
+
+<style>
+</style>

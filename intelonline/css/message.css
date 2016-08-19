@@ -1,0 +1,199 @@
+.publishBox {
+	width: 800px;
+	border: #CCC solid 1px;
+	border-radius: 3px;
+	overflow: hidden;
+	margin-top: 10px;
+}
+
+.messageInput {
+	min-height: 80px;
+	padding: 20px 15px;
+	overflow: hidden;
+}
+
+.publishBoxNavWrap {
+	width: 100%;
+	border-bottom: #CCC solid 1px;
+	background: #EEE;
+	overflow: hidden;
+}
+
+.publishBoxNavWrap a {
+	display: block;
+	float: left;
+	line-height: 30px;
+	padding: 0 20px;
+	color: #666;
+	overflow: hidden;
+}
+
+.publishBoxNavWrap a:hover {
+	color: #000;
+}
+
+.publishBoxBottom {
+	width: 100%;
+	border-top: #CCC solid 1px;
+	height: 40px;
+	background: #EEE;
+	position: relative;
+	display: none;
+	overflow: hidden;
+}
+
+.statu1 .txtMsgTab {
+	background: #CCC;
+	color: #000;
+}
+
+.statu1 .publishBoxBottom {
+	display: block;
+}
+
+.statu2 .picMsgTab {
+	background: #CCC;
+	color: #000;
+}
+
+.statu2 .messageInput img {
+	max-width: 120px;
+	max-height: 120px;
+	display: block;
+}
+
+.statu3 .picTxtMsgTab {
+	background: #CCC;
+	color: #000;
+}
+
+.emotionIcon {
+	width: 28px;
+	height: 28px;
+	display: block;
+	float: left;
+	margin: 6px 0 0 20px;
+	background: url(/images/material/icon28.png) 0 -282px;
+	display: none;
+	overflow: hidden;
+}
+
+.emotionIcon:hover, .emotionIcon:active {
+	background-position: -31px -282px;
+}
+
+.messageCount {
+	position: absolute;
+	line-height: 40px;
+	right: 20px;
+	top: 0;
+	margin: 0;
+}
+
+.messageCount span {
+	padding: 0 5px;
+}
+
+.overLength {
+	color: red;
+}
+
+.msgSendBtn {
+	width: 100px;
+	height: 30px;
+	line-height: 30px;
+	margin: 15px 0;
+	text-align: center;
+}
+
+.mWrap {
+	clear: both;
+	overflow: hidden;
+}
+
+.msgListWrap {
+	padding-bottom: 50px;
+}
+
+.msgListWrap li {
+	padding: 5px 0;
+}
+
+.msgListWrap .msgListContent {
+	xwidth: 300px;
+	width: 25%;
+	text-align: left;
+	text-indent: 1em;
+}
+
+.msgListWrap .msgListOperate {
+	xwidth: 120px;
+	xwidth: 280px;
+	width: 24%;
+	float: left;
+}
+
+.msgListOperate input {
+	width: 50px;
+	height: 22px;
+	cursor: pointer;
+	background: #008DD4;
+	color: #FFF;
+}
+
+.msgListOperate .disabledBtn {
+	background: #CCC;
+}
+
+.ListMsgType {
+	font-size: 12px;
+	color: rgb(85, 85, 85);
+	float: left;
+	margin-right: 10px;
+	overflow: hidden;
+}
+
+.msgListContent em {
+	display: block;
+	font-style: normal;
+	text-indent: 0;
+	overflow: hidden;
+}
+
+.msgListContent em img {
+	max-width: 100px;
+	max-height: 100px;
+	display: block;
+}
+
+.msgTabWrap {
+	width: 100%;
+	margin: 15px 0;
+	overflow: hidden;
+}
+
+.msgTabWrap .intelBtn {
+	float: left;
+	margin-right: 10px;
+	padding: 0 10px;
+}
+
+.msgTabContent {
+	display: none;
+	overflow: hidden;
+}
+
+.currentContent {
+	display: block;
+}
+
+.targetList {
+	max-height: 500px;
+	overflow: hidden;
+	overflow-y: scroll;
+}
+
+.targetList .followersTable {
+	width: 100%;
+	overflow: hidden;
+}

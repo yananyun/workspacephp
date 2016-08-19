@@ -1,0 +1,44 @@
+<!--图片消息-->
+<{if $material.type == 'image'}>
+<li class="picMsgList" onclick="fnTickMaterial(this,<{$material.id}>)">
+	<div class="pickBase"></div> <em class="tick">√</em>
+	<div class="materialPicMsgWrap">
+		<img src="<{$material.filepath}>" />
+	</div>
+	<p class="materialName"><{$material.filename}></p>
+</li>
+<{/if}>
+
+<!--图文消息-->
+<{if $material.type== 'news'}> <{if $material.single == 1}>
+<li class="materialPicTxtList oneContent"
+	onclick="fnTickMaterial(this,<{$material.id}>)">
+	<div class="pickBase"></div> <em class="tick">√</em>
+	<p class="materialPicTxtTtl"><{$material['articles'][0]['title']}></p>
+	<p class="materialPicTxtDate"><{date('Y-m-d',$material.uptime)}></p>
+	<div class="materialPicWrapCover">
+		<img src="<{$material['articles'][0]['picurl']}>" />
+	</div>
+	<p class="materialPicTxtComment"><{$material['articles'][0]['description']}></p>
+</li>
+<{/if}> <{if $material.single == 2}>
+<li class="materialPicTxtList multiContent"
+	onclick="fnTickMaterial(this,<{$material.id}>)">
+	<div class="pickBase"></div> <em class="tick">√</em>
+	<p class="materialPicTxtDate"><{date('Y-m-d',$material.uptime)}></p>
+	<{foreach $material.articles as $k => $new}> <{if $k == 0}>
+	<div class="materialPicWrapCover">
+		<img src="<{$new.picurl}>" />
+		<p class="topCoverTtl">
+			<span class="opacityBg"></span> <a class="ttlTxt" href=""><{$new.title}></a>
+		</p>
+	</div> <{else}>
+	<div class="materialMultiPicWrap">
+		<p><{$new.title}></p>
+		<div class="materialThumb">
+			<img src="<{$new.picurl}>" />
+		</div>
+	</div> <{/if}> <{/foreach}>
+</li>
+<{/if}> <{/if}>
+

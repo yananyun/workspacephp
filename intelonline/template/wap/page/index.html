@@ -1,0 +1,151 @@
+<{include 'wap/head.html'}>
+<script type="text/javascript">
+	$(function () {
+		$(".list ul li").live('click',function () {
+			location.href=$(this).attr("data-href");
+		});
+	});
+	var myScroll;
+	var pullDownEl;
+	var pullDownOffset;
+	var pullUpEl;
+	var pullUpOffset;
+	var count = 0;
+	function pullDownAction() {//上拉事件
+//		setTimeout(function() {
+//			$(".list ul").prepend($(".list_prependbox").html());
+//			//myScroll.refresh(); // 刷新
+//		}, 1000); //1秒
+		//$(".aclist").prepend($(".aclist_prependbox").html());
+		//myScroll.refresh();
+	}
+	function loadList(){
+		var id = $('.list ul li:last').attr('flagId');
+		if(id == undefined){
+			id = 0;
+		}
+		$.post('/index.php/wapPage/lists/dynamic/<{$dynamic}>/id/'+id,function(data){
+				if(id==0){
+					$(".list ul").html(data);
+				}else{
+					//$(".list_appendbox").html(data);
+					$(".list ul").append(data);
+				}
+				
+		});
+	}
+	function pullUpAction() {//下拉事件
+		$("body").scrollTop(800);
+		loadList();
+		//$(".list ul").append($(".list_appendbox").html());
+		myScroll.refresh();
+	}
+	function loaded() {//加载完成
+		pullDownEl = document.getElementById('pullDown');
+		pullDownOffset = pullDownEl.offsetHeight;
+		pullUpEl = document.getElementById('pullUp');
+		pullUpOffset = pullUpEl.offsetHeight;
+		myScroll = new iScroll(
+				'wrapper',
+				{
+					useTransition : true,
+					topOffset : pullDownOffset,
+					onRefresh : function() {
+						if (pullDownEl.className.match('loading')) {
+							pullDownEl.className = '';
+							//pullDownEl.querySelector('.pullDownLabel').innerHTML = '下拉刷新...';
+						} else if (pullUpEl.className.match('loading')) {
+							pullUpEl.className = '';
+							//pullUpEl.querySelector('.pullUpLabel').innerHTML = '显示更多...';
+						}
+					},
+					onScrollMove : function() {
+						if (this.y > 5 && !pullDownEl.className.match('flip')) {
+							pullDownEl.className = 'flip';
+							//pullDownEl.querySelector('.pullDownLabel').innerHTML = '准备刷新...';
+							this.minScrollY = 0;
+						} else if (this.y < 5
+								&& pullDownEl.className.match('flip')) {
+							pullDownEl.className = '';
+							//pullDownEl.querySelector('.pullDownLabel').innerHTML = '准备刷新...';
+							this.minScrollY = -pullDownOffset;
+						} else if (this.y < (this.maxScrollY - 5)
+								&& !pullUpEl.className.match('flip')) {
+							pullUpEl.className = 'flip';
+							//pullUpEl.querySelector('.pullUpLabel').innerHTML = '准备刷新...';
+							this.maxScrollY = this.maxScrollY;
+						} else if (this.y > (this.maxScrollY + 5)
+								&& pullUpEl.className.match('flip')) {
+							pullUpEl.className = '';
+							//pullUpEl.querySelector('.pullUpLabel').innerHTML = '上拉显示更多...';
+							this.maxScrollY = pullUpOffset;
+						}
+					},
+					onScrollEnd : function() {
+						if (pullDownEl.className.match('flip')) {
+							pullDownEl.className = 'loading';
+							//pullDownEl.querySelector('.pullDownLabel').innerHTML = 'Loading...';
+							pullDownAction(); // Execute custom function (ajax call?)
+						} else if (pullUpEl.className.match('flip')) {
+							pullUpEl.className = 'loading';
+							//pullUpEl.querySelector('.pullUpLabel').innerHTML = 'Loading...';
+							//alert(111);
+							
+							//$(".aclist").append($(".aclist_appendbox").html());
+						   pullUpAction(); // Execute custom function (ajax call?)
+						}
+					}
+				});
+ 
+		setTimeout(function() {
+			document.getElementById('wrapper').style.left = '0';
+		}, 800);
+	}
+ 
+	document.addEventListener('touchmove', function(e) {
+		//e.preventDefault();
+	}, false);
+ 
+	document.addEventListener('DOMContentLoaded', function() {
+		setTimeout(loaded, 200);
+	}, false);
+
+</script>
+<body class="bggray">
+	<div class="loadingbox"></div>
+	<div class="container">
+		<div id="wrapper" data-role="content">
+			<div id="scroller">
+				<div id="pullDown">
+					<span class="pullDownLabel">
+						<!--准备刷新...-->
+					</span>
+				</div>
+				<div class="list">
+					<ul>
+						<!-- <li data-href="list_detail.html">
+							<h2>精品职位见下方</h2>
+							<p>威克逊为您提供了近期的热门岗位。</p>
+						</li> -->
+					</ul>
+				</div>
+				<div class="list_appendbox hiddenbox">
+					<!-- <li data-href="list_detail.html">
+						<h2>append精品职位见下方</h2>
+						<p>威克逊为您提供了近期的热门岗位。</p>
+					</li> -->
+				</div>
+				<div id="pullUp">
+					<span class="pullUpLabel">
+						<!--显示更多...-->
+					</span>
+				</div>
+			</div>
+		</div>
+	</div>
+	<{include 'wap/footer.html'}>
+</body>
+<script>
+loadList();
+</script>
+</html>

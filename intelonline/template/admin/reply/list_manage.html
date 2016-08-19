@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>自动回复</title>
+<link href="/css/main.css" type="text/css" rel="stylesheet" />
+<link rel="stylesheet" type="text/css" href="/css/skins/blue.css" />
+<link rel="stylesheet" type="text/css" href="/css/index.css" />
+<script type="text/javascript" src="/js/jquery.js"></script>
+<script type="text/javascript" src="/js/main.js"></script>
+<script type="text/javascript" src="/js/artDialog.js"></script>
+<script type="text/javascript" src="/js/iframeTools.js"></script>
+</head>
+<body
+	onload="loadContent('',$('.intelListWrap'),'/index.php/reply/keywordList/')">
+	<div class="container">
+		<style>
+.intelListWrap li:first-child span:nth-child(5) {
+	xfloat: right;
+}
+</style>
+		<{include 'admin/public/header.html'}>
+		<div class="main">
+			<div class="mainWrap">
+				<a class="intelBtn addGroupBtn"
+					href="/index.php/reply/addKeywordReply">+ 关键词回复</a> <a
+					class="intelBtn addGroupBtn"
+					href="/index.php/reply/addSubscribeReply" style='margin-left: 10px'>+
+					关注回复</a> <a class="intelBtn addGroupBtn"
+					href="/index.php/reply/addAutoReply" style='margin-left: 10px'>+
+					自动回复</a>
+				<ul class="intelListWrap"></ul>
+			</div>
+		</div>
+		<{include 'admin/public/left_menu.html'}>
+	</div>
+	<script>
+		
+	</script>
+</body>
+</html>

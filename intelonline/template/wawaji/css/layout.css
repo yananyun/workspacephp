@@ -1,0 +1,211 @@
+* {
+	-webkit-tap-highlight-color: rgba(255, 0, 0, 0);
+	-webkit-user-select: none;
+}
+
+html, body {
+	width: 100%;
+	height: 100%;
+}
+
+.container {
+	width: 640px;
+	height: 100%;
+	margin: 0px auto;
+	position: relative;
+}
+
+.index_bg {
+	width: 100%;
+	height: 100%;
+	background: url(../images/bg.jpg) no-repeat;
+	background-size: cover;
+	overflow: hidden;
+}
+
+.logo {
+	position: absolute;
+	top: 10px;
+	left: 10px;
+}
+
+.index_1, .index_2 {
+	width: 100%;
+	text-align: center;
+}
+
+.index_2 {
+	margin-top: 10px;
+}
+
+.index_3 {
+	width: 100%;
+	margin-top: 20px;
+}
+
+.index_3 span {
+	float: left;
+	font-size: 28px;
+	color: #fff;
+	margin-left: 26px;
+}
+
+.index_3 span em {
+	font-size: 48px;
+	color: #ebd000;
+	font-style: normal;
+}
+
+.index_3 a {
+	float: right;
+	margin-right: 26px;
+}
+
+.rules_1 {
+	width: 100%;
+	text-align: center;
+}
+
+.rules_2 {
+	width: 100%;
+	text-align: center;
+	margin-top: 50px;
+}
+
+.rules_3 {
+	width: 100%;
+	text-align: center;
+	margin-top: 30px;
+}
+
+.rules_4 {
+	width: 100%;
+	text-align: center;
+	margin-top: 20px;
+}
+/*********************************针对iphone4做的优化********************/
+@media only screen and (min-device-width: 320px) and (max-device-width:
+	480px) and (-webkit-device-pixel-ratio: 2) and (device-aspect-ratio:
+	2/3) {
+	.index_2 {
+		margin-top: 0px;
+	}
+	.index_3 {
+		width: 100%;
+	}
+	.rules_1 {
+		width: 100%;
+		text-align: center;
+		margin-top: 10px;
+	}
+	.rules_2 {
+		width: 100%;
+		text-align: center;
+		margin-top: 10px;
+	}
+	.rules_3 {
+		width: 100%;
+		text-align: center;
+		margin-top: 10px;
+	}
+	.rules_4 {
+		width: 100%;
+		text-align: center;
+		margin-top: 10px;
+	}
+}
+
+.popbox1 {
+	width: 580px;
+	height: 522px;
+	background: url(../images/popbox.png) no-repeat;
+	background-size: cover;
+	z-index: 33;
+	margin: auto;
+	position: absolute;
+	top: 16%;
+	left: 30px;
+}
+
+.popbox2 {
+	width: 100%;
+	height: 750px;
+	background: url(../images/guide_pop.png) no-repeat;
+	background-size: cover;
+}
+
+.close {
+	position: absolute;
+	right: 10px;
+	top: 10px;
+}
+
+.popbox {
+	position: absolute;
+	display: none;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background: rgba(0, 0, 0, 0.5);
+}
+
+.index_icon {
+	width: 486px;
+	margin: auto;
+	overflow: hidden;
+	margin-top: 10px;
+}
+
+.index_icon1 {
+	width: 100%;
+	text-align: center;
+	margin-top: 20px;
+}
+
+.guide {
+	position: absolute;
+	left: 0px;
+	top: 0px;
+	width: 640px;
+	height: 742px;
+	background: url(../images/guide.png) no-repeat;
+	background-size: cover;
+}
+
+.guide a:first-child {
+	position: absolute;
+	top: 326px;
+	left: 80px;
+}
+
+.guide a:last-child {
+	position: absolute;
+	top: 516px;
+	left: 80px;
+}
+
+.guide_b {
+	width: 100%;
+	text-align: center;
+	position: absolute;
+	bottom: 10px;
+}
+
+.popbox_more {
+	background: rgba(0, 0, 0, 0.8);
+}
+
+.last {
+	position: relative;
+	left: 0px;
+	top: 0px;
+	width: 640px;
+	height: 662px;
+	background: url(../images/last.png) no-repeat;
+}
+
+.last_last {
+	width: 100%;
+	text-align: center;
+}

@@ -1,0 +1,86 @@
+<!DOCTYPE HTML>
+<html lang="zh-cn">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="keywords" content="">
+<meta name="description" content="">
+<title>微信管理平台-个人中心</title>
+<link rel="stylesheet" type="text/css" href="/css/main.css">
+<link rel="stylesheet" type="text/css" href="/css/base.css">
+<link rel="stylesheet" type="text/css" href="/css/skins/blue.css">
+<!-- <link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.0/css/bootstrap.min.css"> -->
+<script type="text/javascript" src="/js/jquery.js"></script>
+<script type="text/javascript" src="/js/main.js"></script>
+<script type="text/javascript" src="/js/artDialog.js"></script>
+<!--<script type="text/javascript" src="/js/base.js" ></script>   加上这段之后刷新死循环。。-->
+<script type="text/javascript" src="/js/ueditor/ueditor.config.js"></script>
+<script type="text/javascript" src="/js/ueditor/ueditor.all.js"></script>
+<script type="text/javascript" src="/js/ajaxfileupload.js"></script>
+</head>
+<body>
+	<div class="container">
+		<{include 'admin/public/header.html'}>
+		<div class="main">
+			<div class="mainWrap">
+				<div class="intelListWrap ">
+					<!-- <table class="table "> -->
+					<form action='/index.php/user/doUpdateUser' class="updateUserTable"
+						method="POST">
+						<!-- 								<input type="hidden" name='id' value='<{$info.id}>'/>
+								<tr>
+									<th>姓名</th>
+									<td><input name="nickname" type="text" value="<{$info.nickname}>"/></td>
+								</tr>
+								<tr>
+									<th>账号</th>
+									<td><{$info.username}></td>
+								</tr>
+								<tr>
+									<th>状态</th>
+									<td>
+										<label><input type="radio" name="status" value="1" <{if $info.status == '1'}>checked<{/if}>/>启用</label>
+										<label><input type="radio" name="status" value="2" <{if $info.status == '2'}>checked<{/if}>/>停用</label>
+									</td>
+								</tr>
+								<tr>
+									<th>
+										<input type="submit" name="sub" value="修改"/>
+									</th>
+								</tr>
+								<tr>
+									<th>权限列表</th>
+									<td></td>
+								</tr> -->
+						<p>
+							<input type="hidden" name='id' value='<{$info.id}>' />
+						</p>
+						<p>
+							<span>姓名：</span><input name="nickname" type="text"
+								value="<{$info.nickname}>" />
+						</p>
+						<p>
+							<span>账号：</span><{$info.username}>
+						</p>
+						<p>
+							<span>状态：</span> <label><input type="radio" name="status"
+								value="1"<{if $info.status == '1'}>checked<{/if}>/>启用</label> <label><input
+								type="radio" name="status" value="2"<{if $info.status
+								== '2'}>checked<{/if}>/>停用</label>
+						</p>
+						<p>
+							<input type="submit" name="sub" value="修改" />
+						</p>
+					</form>
+					<!-- </table> -->
+					<{foreach $rankArr as $k=>$r}> <{if $r.status == 1}> <span
+						style="color: green; float: left; margin-left: 30px;"><{$k}></span>
+					<{else if $r.status == 0}> <span
+						style="color: red; float: left; margin-left: 30px;"><{$k}></span>
+					<{/if}> <{/foreach}>
+				</div>
+			</div>
+		</div>
+		<{include 'admin/public/left_menu.html'}>
+	</div>
+</body>
+</html>

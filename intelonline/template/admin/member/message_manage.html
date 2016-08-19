@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>消息管理</title>
+<link href="/css/main.css?<{$flushTimer}>" type="text/css"
+	rel="stylesheet" />
+<link rel="stylesheet" type="text/css" href="/css/skins/blue.css" />
+<script type="text/javascript" src="/js/jquery.js"></script>
+<script type="text/javascript" src="/js/main.js?<{$flushTimer}>"></script>
+<script type="text/javascript" src="/js/artDialog.js"></script>
+<script type="text/javascript" src="/js/iframeTools.js"></script>
+</head>
+<body
+	onload="loadContent('',$('.intelListWrap'),'/index.php/message/list_message')">
+	<div class="container">
+		<{include 'header.html'}>
+		<div class="main">
+			<div class="mainWrap">
+				<span class="searchWrap"> <input type="text" class=""
+					name="keyword" value="" /> <input type="button" name="search"
+					value="搜索" class="searchBtn" />
+				</span> <a href="/index.php/message/web_msg_publish"
+					class="intelBtn addBtn">发布站内消息</a>
+				<ul class="intelListWrap" id="intelListWrap">
+
+				</ul>
+			</div>
+		</div>
+		<{include 'left_menu.html'}>
+	</div>
+	<script>
+		$(':input[name=search]').click(function(){
+			var keyword = $.trim($(':input[name=keyword]').val());
+			loadContent('',$('.intelListWrap'),'/index.php/message/list_message/keyword/'+keyword)
+		});
+	</script>
+</body>
+</html>

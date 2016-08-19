@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html>
+<head>
+<base href="/template/doll/" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="author" content="www.zevertech.com" />
+<meta http-equiv="copyright" content="zevertech 2014" />
+<meta http-equiv="pragma" content="no-cache" />
+<meta name="viewport" id="viewport"
+	content="width=device-width, minimum-scale=1, maximum-scale=1, initial-scale=1.0,user-scalable=no" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-touch-fullscreen" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+<meta name="MobileOptimized" content="800">
+<meta name="format-detection" content="telephone=no" />
+<title>娃娃机</title>
+<link rel="stylesheet" href="css/reset.css">
+<link rel="stylesheet" href="css/layout.css?id=33">
+<style>
+body {
+	text-align: center;
+}
+
+.container {
+	background: url(./images/bg2.jpg);
+	background-size: 100% 100%;
+}
+
+.logo {
+	position: absolute;
+	top: 22px;
+	left: 22px;
+}
+
+h1 {
+	color: #FEE738;
+	font-size: 40px;
+	padding-top: 100px;
+}
+
+h2 {
+	color: #FEE738;
+	font-size: 26px;
+	padding-top: 60px;
+}
+
+p {
+	font-size: 24px;
+	color: #fcfcfc;
+	line-height: 1.6em;
+}
+
+.showImg {
+	padding-top: 10px;
+}
+
+.showImg img {
+	padding: 6px;
+	border-radius: 10px;
+	background-color: #23589A;
+	width: 94%;
+}
+
+.note {
+	color: #FEE738;
+	position: absolute;
+	bottom: 40px;
+	width: 100%;
+	text-align: center;
+	font-size: 30px;
+}
+
+#order {
+	font-size: 35px;
+	color: #fff;
+}
+
+@media only screen and (min-device-width: 320px) and (max-device-width:
+	480px) and (-webkit-device-pixel-ratio: 2) and (device-aspect-ratio:
+	2/3) {
+	.note {
+		bottom: 10px;
+	}
+	h2 {
+		padding-top: 30px;
+	}
+}
+</style>
+</head>
+<body>
+	<div class="loadingbox"></div>
+	<input type="hidden" id="uopenid" value="<{$uopenid}>" />
+	<input type="hidden" id="url" value="<{$url}>" />
+	<div class="container">
+		<div class="logo">
+			<img src="images/logo.png">
+		</div>
+		<h1>掌上娃娃机图文教程</h1>
+		<p class="showImg">
+			<img src="images/show.gif">
+		</p>
+		<div class="content">
+			<h2>动作详解</h2>
+			<p>手机向右-爪子向右移动</p>
+			<p>手机向左-爪子向左移动</p>
+			<p>手机平放-爪子向前移动</p>
+			<p>手机垂直-爪子向后移动</p>
+		</div>
+		<div class="note">
+			当前您的队列为<span id="order"><{$order|default:100}></span>名
+		</div>
+	</div>
+
+	<script src="js/zepto.min.js"></script>
+	<script src="js/common.js"></script>
+	<script src="js/app.js?id=33"></script>
+	<script type="text/javascript">
+		    $(function() {
+			setInterval(function() {
+			    var openid= $("#uopenid").val();
+			    var url = "/index.php/doll/play";
+			    $.ajax({
+				url:url,
+				data:{openid:openid},
+				type:'post',
+				dataType:'json',
+				success:function(data){
+				    if(data.status==1){
+					location.href = data.data;
+				    }else{
+					$('#order').text(data.data);
+				    }
+				}
+			    });
+			}, 3000);
+		    })
+	</script>
+	<script>
+function jsonpcallback(data){
+    wx.config({
+        debug: false, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
+        appId: data.appid, // 必填，公众号的唯一标识
+        timestamp:data.timestamp, // 必填，生成签名的时间戳
+        nonceStr: data.noncestr, // 必填，生成签名的随机串
+        signature: data.signature,// 必填，签名，见附录1
+        jsApiList: ['onMenuShareTimeline','onMenuShareAppMessage'] // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
+    });
+
+    wx.ready(function(){
+        // config信息验证后会执行ready方法，所有接口调用都必须在config接口获得结果之后，config是一个客户端的异步操作，所以如果需要在页面加载时就调用相关接口，则须把相关接口放在ready函数中调用来确保正确执行。对于用户触发时才调用的接口，则可以直接调用，不需要放在ready函数中。
+        //分享到朋友圈
+	var url = $("#url").val();
+        wx.onMenuShareTimeline({
+              title: '玩转掌上娃娃机，边抱大腿边中奖',
+              link: url,
+              imgUrl: 'http://intelonline.buzzopt.com/template/wawaji/images/last4.png',
+              success: function (res) {
+                // 用户确认分享后执行的回调函数
+              },
+              cancel: function (res) {
+                // 用户取消分享后执行的回调函数
+              }
+            });
+          
+        wx.onMenuShareAppMessage({
+            title: '硬享公社', // 分享标题
+            desc: '玩转掌上娃娃机，边抱大腿边中奖', // 分享描述
+            link: url, // 分享链接
+            imgUrl: 'http://intelonline.buzzopt.com/template/wawaji/images/last4.png', // 分享图标
+            type: '', // 分享类型,music、video或link，不填默认为link
+            dataUrl: '', // 如果type是music或video，则要提供数据链接，默认为空
+            success: function () {
+                // 用户确认分享后执行的回调函数
+            },
+            cancel: function () {
+                // 用户取消分享后执行的回调函数
+            }
+        });
+    });
+}
+</script>
+	<script type="text/javascript"
+		src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+	<script type="text/javascript"
+		src="http://m.zevertech.com/index.php/jssdk?jsonpcallback=jsonpcallback"></script>
+	<script type="text/javascript" src="/template/doll/js/ga.js"></script>
+</body>
+</html>

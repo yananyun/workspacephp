@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>数据管理</title>
+<link rel="stylesheet" href="/css/index.css">
+<link href="/jquery-ui.css" rel="stylesheet">
+<script src="/js/jquery.min.js"></script>
+<script src="/js/index.js"></script>
+<script src="/js/jquery-ui.js"></script>
+<script>
+	$(function(){
+		$( ".datepicker" ).datepicker();
+	})
+	</script>
+</head>
+<body>
+	<div class="top">
+		<img src="/images/logo.jpg" alt="" />
+		<p>
+			Intel China Online<br /> <em>微信管理后台</em>
+		</p>
+		<div class="topRight">
+			<ul>
+				<li>admin&nbsp;|</li>
+				<li>帮助&nbsp;|</li>
+				<li><a href="">{退出}</a></li>
+			</ul>
+		</div>
+	</div>
+	<div class="con">
+		<div class="leftDiv">
+			<ul id="navigation">
+				<li><a href="weixinManage.html">微信用户管理</a></li>
+				<li><a href="newInfoManage.html">最新资讯管理</a></li>
+				<li><a href="sendManage.html">主动发送管理</a></li>
+				<li><a href="labelManage.html">标签管理</a></li>
+				<li><a href="serviceManage.html">客服应答</a></li>
+				<li><a href="dateManage.html" class="nowRight">数据管理</a></li>
+				<li><a href="fodderManage.html">素材库</a></li>
+			</ul>
+		</div>
+		<div class="rightDiv webDiv">
+			<div class="webTitle weixinTitle serviceTitle">数据报表</div>
+			<table border="1" cellspacing="0" cellpadding="0" class="dateTable">
+				<tr>
+					<td style="text-align: center;">表格内容</td>
+					<td>时间</td>
+					<td>操作</td>
+				</tr>
+				<tr>
+					<td>用户信息导出：</td>
+					<td>开始时间：<input type="text" class="datepicker">结束时间：<input
+						type="text" class="datepicker"></td>
+					<td><input type="button" class="confirmBtn saveBtn" value="导出"></td>
+				</tr>
+				<tr>
+					<td>粉丝取消关注数据：</td>
+					<td>开始时间：<input type="text" class="datepicker">结束时间：<input
+						type="text" class="datepicker"></td>
+					<td><input type="button" class="confirmBtn saveBtn" value="导出"></td>
+				</tr>
+				<tr>
+					<td>粉丝交互信息图片数据：</td>
+					<td>开始时间：<input type="text" class="datepicker">结束时间：<input
+						type="text" class="datepicker"></td>
+					<td><input type="button" class="confirmBtn saveBtn" value="导出"></td>
+				</tr>
+				<tr>
+					<td>交互信息列表：</td>
+					<td>开始时间：<input type="text" class="datepicker">结束时间：<input
+						type="text" class="datepicker"></td>
+					<td><input type="button" class="confirmBtn saveBtn" value="导出"></td>
+				</tr>
+				<tr>
+					<td>按标签导出：</td>
+					<td>开始时间：<input type="text" class="datepicker">结束时间：<input
+						type="text" class="datepicker"></td>
+					<td><input type="button" class="confirmBtn saveBtn" value="导出"></td>
+				</tr>
+				<tr>
+					<td>48小时交互信息数据：</td>
+					<td>开始时间：<input type="text" class="datepicker">结束时间：<input
+						type="text" class="datepicker"></td>
+					<td><input type="button" class="confirmBtn saveBtn" value="导出"></td>
+				</tr>
+			</table>
+			<div class="page">
+				<span>当前共有6条记录，共1页</span> <a href="">首页</a> <a href="">上一页</a> <a
+					href="">1</a> <a href="">下一页</a> <a href="">末页</a>
+			</div>
+		</div>
+	</div>
+	<div class="addCon clubCon">
+		<p class="">分组名称</p>
+		<div class="group">
+			<input type="checkbox">分组一 <input type="checkbox">分组二
+			<input type="checkbox">分组三
+		</div>
+		<div class="groupBtm">
+			<p>P.s 红色代表已进分组或标签，已进入分组用户将不能进入其它分组</p>
+			<span class="right"> <input type="button" value="确定"
+				class="groupBtn confirmBtn"> <input type="button" value="取消"
+				class="groupBtn cancelBtn">
+			</span>
+		</div>
+		<img src="/images/closeTwo.png" alt="" class="closeImg">
+	</div>
+	<div class="addCon labelCon">
+		<p class="">标签名称</p>
+		<div class="group">
+			<input type="checkbox">cce <input type="checkbox">edison
+			<input type="checkbox">学生
+		</div>
+		<div class="groupBtm">
+			<p>P.s 红色代表已进分组或标签</p>
+			<span class="right"> <input type="button" value="确定"
+				class="groupBtn confirmBtn"> <input type="button" value="取消"
+				class="groupBtn cancelBtn">
+			</span>
+		</div>
+		<img src="/images/closeTwo.png" alt="" class="closeImg">
+	</div>
+</body>
+</html>

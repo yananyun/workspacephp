@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>编辑用户组</title>
+<link href="/css/main.css" type="text/css" rel="stylesheet" />
+<link rel="stylesheet" type="text/css" href="/css/skins/blue.css" />
+<link rel="stylesheet" type="text/css" href="/css/index.css" />
+<script type="text/javascript" src="/js/jquery.js"></script>
+<script type="text/javascript" src="/js/main.js"></script>
+<script type="text/javascript" src="/js/artDialog.js"></script>
+<script type="text/javascript" src="/js/iframeTools.js"></script>
+</head>
+<body>
+	<div class="container">
+		<{include 'admin/public/header.html'}>
+		<div class="main">
+			<{include 'admin/public/left_menu.html'}>
+			<div class="mainWrap">
+				<div class="u_addCon u_addConTwo">
+					<img src="/images/icon1.png" alt=""> <a class="u_addClub">修改分组</a>
+					<input type="button" class="groupBtn confirmBtn closeBtn"
+						onclick="window.history.back();" value="关闭">
+				</div>
+				<form action='/index.php/group/doedit' method='post' id='form1'>
+					<!-- <h3>修改分组</h3> -->
+					<p class="leftPadding80">
+						<span class="leftSpanPos">分组名称：</span><input type="text"
+							name="groupName" placeholder="填写一个分组名称" value="<{$info.name}>" />
+					</p>
+					<p class="leftPadding80">
+						<span class="leftSpanPos">分组说明：</span>
+						<textarea name="groupDes" class="groupDes" placeholder="填写分组说明"><{$info.remark}></textarea>
+					</p>
+
+					<p class="leftPadding80 btnWrap">
+						<input type="button" class="intelBtn addGroupOprateBtn" value="保存"
+							onclick="fnSaveGroup(this)" />
+						<!-- <input type="button" class="intelBtn addGroupOprateBtn" value="取消" onclick="" /> -->
+						<a href="/index.php/group/list_manage"
+							class="intelBtn addGroupOprateBtn">取消</a> <input type='hidden'
+							value='<{$condition.province}>' id='Hprovince'> <input
+							type='hidden' value='<{$condition.city}>' id='Hcity'> <input
+							type='hidden' value='<{$info.id}>' id='group_id' name='id'>
+					</p>
+				</form>
+			</div>
+		</div>
+
+	</div>
+</body>
+</html>
+<script type="text/javascript">
+	$(function(){
+		$('#memberProvince').attr('name','province').attr('class','member_from2');
+		$('#memberCity').attr('name','city').attr('class','member_from2');
+		if($('.member_source1').is(':checked') == true){
+			$('.member_source2').attr('disabled',true);
+		}
+		if($('.member_type1').is(':checked') == true){
+			$('.member_type2').attr('disabled',true);
+		}
+		if($('.member_from1').is(':checked') == true){
+			$('.member_from2').attr('disabled',true);
+		}
+		var city = $('#Hcity').val();
+		var province = $('#Hprovince').val();
+		$('#memberProvince').children('option').each(function(){
+			var val = $(this).html();
+			if(val == province){
+				$(this).attr('selected',true);
+			}
+		});
+		if(city != ''){
+			$.post('/index.php/membergroup/sel_city',{city:city},function(data){
+				$('#memberCity').append("<option value='"+data.id+"' selected>"+data.name+"</option>");
+			},'json')
+		}
+	})
+	function fnSaveGroup(self){
+		var groupName=$getVal($('[name=groupName]'));
+		var groupDes=$getVal($('[name=groupDes]'));
+		if(groupName==''){
+			alert('请输入分组名称');
+			return false;
+		}else if(groupDes==''){
+			alert('请填写分组说明');
+			return false;
+		}
+
+		$('#form1').submit();
+	}
+</script>

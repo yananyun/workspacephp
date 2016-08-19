@@ -1,0 +1,13 @@
+<{foreach $group_list as $group}>
+<li><span class="listOrder"><i><{$group.id}></i></span> <span
+	class="accountUserName"><{$group.group_name}></span> <span
+	class="accountUserNum"><{$group.fans}></span> <span
+	class="accountComment"><em title="<{$group.remark}>"><{$group.remark}></em></span>
+	<span class="listDate"><{$group.ctime}></span> <input type="button"
+	class="intelBtn delGroupBtn" value="删除" groupid="<{$group.id}>"
+	name="<{$group.name}>" onclick="fnDelGroup(this,<{$group.id}>)" /> <!-- <input type="button" class="intelBtn addFansBtn" value="添加粉丝" groupid = "<{$group.id}>" name="<{$group.name}>" onclick="fnCallFansList();" /> -->
+	<!-- <input type="button" class="intelBtn editGroupBtn" value="修改" groupid = "<{$group.id}>" name="<{$group.name}>" onclick="editGroup(this)" /> -->
+	<a class="intelBtn editGroupBtn" groupid="<{$group.id}>"
+	name="<{$group.name}>"
+	href="/index.php/membergroup/edit_group/id/<{$group.id}>">修改</a></li>
+<{/foreach}> <{$pages}>

@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>主动发送管理_详情</title>
+<link rel="stylesheet" href="/css/index.css">
+<link href="/jquery-ui.css" rel="stylesheet">
+<script src="/js/jquery.min.js"></script>
+<script src="/js/index.js"></script>
+<script src="/js/jquery-ui.js"></script>
+<script>
+	$(function(){
+		
+	})
+	</script>
+</head>
+<body>
+	<div class="top">
+		<img src="/images/logo.jpg" alt="" />
+		<p>
+			Intel China Online<br /> <em>微信管理后台</em>
+		</p>
+		<div class="topRight">
+			<ul>
+				<li>admin&nbsp;|</li>
+				<li>帮助&nbsp;|</li>
+				<li><a href="">{退出}</a></li>
+			</ul>
+		</div>
+	</div>
+	<div class="con">
+		<div class="leftDiv">
+			<ul id="navigation">
+				<li><a href="weixinManage.html">微信用户管理</a></li>
+				<li><a href="newInfoManage.html">最新资讯管理</a></li>
+				<li><a href="sendManage.html" class="nowRight">主动发送管理</a></li>
+				<li><a href="labelManage.html">标签管理</a></li>
+				<li><a href="serviceManage.html">客服应答</a></li>
+				<li><a href="dateManage.html">数据管理</a></li>
+				<li><a href="fodderManage.html">素材库</a></li>
+			</ul>
+		</div>
+		<div class="rightDiv weixinDiv">
+			<div class="webTitle labelTitle">
+				<img src="/images/icon1.png" alt=""> <a href="sendInfo.html">发布消息</a>
+				<input type="button" class="groupBtn confirmBtn closeBtn"
+					onclick="window.history.back();" value="返回">
+			</div>
+			<p class="infoTxt">
+				发送对象（共<em>123</em>人）
+			</p>
+			<table border="1" cellspacing="0" cellpadding="0" class="sendTable">
+				<tr>
+					<td>序号</td>
+					<td>昵称</td>
+					<td>性别</td>
+					<td>区域</td>
+					<td>交互量</td>
+					<td>类型</td>
+					<td>状态</td>
+				</tr>
+				<tr>
+					<td>1</td>
+					<td>xiaoxiang</td>
+					<td>男</td>
+					<td>北京</td>
+					<td>97</td>
+					<td>高级群发</td>
+					<td><input type="checkbox"></td>
+				</tr>
+				<tr>
+					<td>2</td>
+					<td>xiaoxiang</td>
+					<td>男</td>
+					<td>北京</td>
+					<td>97</td>
+					<td>高级群发</td>
+					<td><input type="checkbox"></td>
+				</tr>
+				<tr>
+					<td>3</td>
+					<td>xiaoxiang</td>
+					<td>男</td>
+					<td>北京</td>
+					<td>97</td>
+					<td>高级群发</td>
+					<td><input type="checkbox"></td>
+				</tr>
+			</table>
+			<div class="sendTab">
+				<div class="tabT">
+					<ul>
+						<li>文字</li>
+						<li>图文消息</li>
+					</ul>
+				</div>
+				<div class="tabB"></div>
+			</div>
+			<div class="sendUser">
+				用户分组：<input type="radio" name="radio" class="radioOne">48小时交互推送
+				<input type="radio" name="radio" class="radioTwo">高级群发
+				<div class="date1">
+					结束时间：<input type="text" id="datepicker3"><br /> 定时发布：<input
+						type="text" id="datepicker4">-<input type="text"
+						id="datepicker5">
+				</div>
+				<div class="date2">
+					定时发布：<input type="text" id="datepicker6">-<input
+						type="text" id="datepicker7">
+				</div>
+			</div>
+			<div class="detailBtn">
+				<input type="button" value="返回" onclick="window.history.back();"
+					class="confirmBtn noneBtn">
+			</div>
+			<!-- <div class="page">
+				<span>当前共有6条记录，共1页</span>
+				<a href="">首页</a>
+				<a href="">上一页</a>
+				<a href="">1</a>
+				<a href="">下一页</a>
+				<a href="">末页</a>
+			</div> -->
+		</div>
+	</div>
+</body>
+</html>

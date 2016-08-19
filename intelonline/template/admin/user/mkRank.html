@@ -1,0 +1,57 @@
+<!DOCTYPE HTML>
+<html lang="zh-cn">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="keywords" content="">
+<meta name="description" content="">
+<title>微信管理平台-个人中心</title>
+<link rel="stylesheet" type="text/css" href="/css/main.css">
+<link rel="stylesheet" type="text/css" href="/css/base.css">
+<link rel="stylesheet" type="text/css" href="/css/skins/blue.css">
+<!-- <link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.0/css/bootstrap.min.css"> -->
+<script type="text/javascript" src="/js/jquery.js"></script>
+<script type="text/javascript" src="/js/main.js"></script>
+<script type="text/javascript" src="/js/artDialog.js"></script>
+<!--<script type="text/javascript" src="/js/base.js" ></script>   加上这段之后刷新死循环。。-->
+<script type="text/javascript" src="/js/ueditor/ueditor.config.js"></script>
+<script type="text/javascript" src="/js/ueditor/ueditor.all.js"></script>
+<script type="text/javascript" src="/js/ajaxfileupload.js"></script>
+</head>
+<body>
+	<div class="container">
+		<{include 'admin/public/header.html'}>
+		<div class="main">
+			<div class="mainWrap">
+				<div class="intelListWrap ">
+					<table class="table">
+						<tr>
+							<th>姓名</th>
+							<td><{$info.nickname}></td>
+						</tr>
+						<tr>
+							<th>账号</th>
+							<td><{$info.username}></td>
+						</tr>
+						<tr>
+							<th>状态</th>
+							<td><{if $info.status == '1'}>正常<{/if}></td>
+						</tr>
+						<tr>
+							<th>权限列表</th>
+							<td></td>
+						</tr>
+					</table>
+					<form action="/index.php/user/setRank" method="POST">
+						<input type="hidden" name="id" value="<{$info.id}>" /> <{foreach
+						$rankList as $k => $t}> <input type="checkbox" name="rank[<{$k}>]"
+							value="1"<{if $t['is'] == 1}>checked<{/if}> />
+						<{$t.name}> <{/foreach}> <br /> <input type="submit" name="sub"
+							value="确定" />
+					</form>
+				</div>
+			</div>
+		</div>
+		<{include 'admin/public/left_menu.html'}>
+	</div>
+</body>
+</html>

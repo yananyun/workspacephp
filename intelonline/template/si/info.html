@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html>
+<head>
+<base href="/template/si/" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="author" content="www.zevertech.com" />
+<meta http-equiv="copyright" content="zevertech 2014" />
+<meta http-equiv="pragma" content="no-cache" />
+<meta id="viewport" name="viewport" content="width=640,user-scalable=no">
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-touch-fullscreen" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+<meta name="MobileOptimized" content="800">
+<meta name="format-detection" content="telephone=no" />
+<title>英特尔中国智造基地</title>
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/animate.css">
+<link rel="stylesheet" href="css/layout.css">
+<script src="js/jquery.js"></script>
+<script src="js/common.js"></script>
+<script type="text/javascript">
+		function jsonpcallback(data){
+			wx.config({
+				debug: false, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
+				appId: data.appid, // 必填，公众号的唯一标识
+				timestamp:data.timestamp, // 必填，生成签名的时间戳
+				nonceStr: data.noncestr, // 必填，生成签名的随机串
+				signature: data.signature,// 必填，签名，见附录1
+				jsApiList: ['onMenuShareTimeline','onMenuShareAppMessage'] // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
+			});
+
+			wx.ready(function(){
+				// config信息验证后会执行ready方法，所有接口调用都必须在config接口获得结果之后，config是一个客户端的异步操作，所以如果需要在页面加载时就调用相关接口，则须把相关接口放在ready函数中调用来确保正确执行。对于用户触发时才调用的接口，则可以直接调用，不需要放在ready函数中。
+				//分享到朋友圈
+				wx.onMenuShareTimeline({
+					  title: '【路过有礼·参与有奖】英特尔硬享公社系列活动火热招募，等你参加！',
+					  link: '<{$url}>',
+					  imgUrl: 'http://intelonline.buzzopt.com/template/si/images/simg.png',
+					  success: function (res) {
+						// 用户确认分享后执行的回调函数
+					  },
+					  cancel: function (res) {
+						// 用户取消分享后执行的回调函数
+					  }
+					});
+				   
+				wx.onMenuShareAppMessage({
+					title: '', // 分享标题
+					desc: '【路过有礼·参与有奖】英特尔硬享公社系列活动火热招募，等你参加！', // 分享描述
+					link: '<{$url}>', // 分享链接
+					imgUrl: 'http://intelonline.buzzopt.com/template/si/images/simg.png', // 分享图标
+					type: '', // 分享类型,music、video或link，不填默认为link
+					dataUrl: '', // 如果type是music或video，则要提供数据链接，默认为空
+					success: function () { 
+						// 用户确认分享后执行的回调函数
+					},
+					cancel: function () { 
+						// 用户取消分享后执行的回调函数
+					}
+				});
+			});
+		}
+	</script>
+</head>
+<body>
+	<div class="loadingbox"></div>
+	<div class="fixedbg"></div>
+	<div class="container">
+		<div class="main">
+			<div class="logo">
+				<img src="images/logo.png" alt="" />
+			</div>
+			<div class="infobox">
+				<div class="info_top tc">
+					<img src="<{$userinfo.headimgurl}>" alt="" />
+					<div class="post"><{$userinfo.nickname}></div>
+				</div>
+				<div class="info_m">
+					<div class="info_tit tc">
+						<!--					    <{if $info.type == 2 and $info.is_play =='1'}>
+					    <a href='/index.php/si/enterTheGame' ><img src="images/tiyan01.png" width="100" height="50" alt="" title=""></a>
+					    <{else}>
+						<img src="images/tiyan02.png" width="100" height="50" alt="" title="">
+					    <{/if}>-->
+						<em style="margin-right: 130px; float: right; font-style: normal;">基本信息</em>
+					</div>
+					<div class="tc">
+						<img src="images/line.png" alt="" />
+					</div>
+					<div class="infoli">
+						<div class="infoli_span">公司名称：</div>
+						<div class="infoli_c"><{$info.companyname}></div>
+					</div>
+					<div class="infoli">
+						<div class="infoli_span">公司网址：</div>
+						<div class="infoli_c"><{$info.website}></div>
+					</div>
+					<div class="infoli">
+						<div class="infoli_span">公司规模：</div>
+						<div class="infoli_c"><{$info.companysize}></div>
+					</div>
+					<div class="infoli">
+						<div class="infoli_span">公司年营业额：</div>
+						<div class="infoli_c"><{$info.sale}></div>
+					</div>
+					<div class="infoli">
+						<div class="infoli_span">公司行业：</div>
+						<div class="infoli_c"><{$info.industry}></div>
+					</div>
+					<div class="infoli">
+						<div class="infoli_span">研发人数：</div>
+						<div class="infoli_c"><{$info.rdnum}></div>
+					</div>
+					<div class="infoli">
+						<div class="infoli_span">销售人数：</div>
+						<div class="infoli_c"><{$info.salesnum}></div>
+					</div>
+					<div class="infoli">
+						<div class="infoli_span">生产人数：</div>
+						<div class="infoli_c"><{$info.workernum}></div>
+					</div>
+					<div class="infoli">
+						<div class="infoli_span">产品描述：</div>
+						<div class="infoli_c">
+							<p><{$info.productdescription}></p>
+						</div>
+					</div>
+					<div class="infoli infoli_h">
+						<div class="infoli_span">产品图片：</div>
+						<div class="infoli_c">
+							<img src="<{$info.productimg}>" alt=""
+								style="width: 200px; height: 200px;" class="proimg" />
+						</div>
+					</div>
+					<div class="infoli">
+						<div class="infoli_span">预计年销售量：</div>
+						<div class="infoli_c"><{$info.expectedsales}></div>
+					</div>
+					<div class="infoli">
+						<div class="infoli_span">姓&nbsp;&nbsp;&nbsp;名：</div>
+						<div class="infoli_c"><{$info.name}></div>
+					</div>
+					<div class="infoli">
+						<div class="infoli_span">手机号：</div>
+						<div class="infoli_c"><{$info.mobile}></div>
+					</div>
+					<div class="infoli">
+						<div class="infoli_span">公司电话：</div>
+						<div class="infoli_c"><{$info.tel}></div>
+					</div>
+					<div class="infoli">
+						<div class="infoli_span">职&nbsp;&nbsp;&nbsp;位：</div>
+						<div class="infoli_c"><{$info.title}></div>
+					</div>
+					<div class="infoli">
+						<div class="infoli_span">工作邮箱：</div>
+						<div class="infoli_c"><{$info.email}></div>
+					</div>
+					<div class="infoli">
+						<div class="infoli_span">邮寄地址：</div>
+						<div class="infoli_c"><{$info.address}></div>
+					</div>
+					<div class="infoli">
+						<div class="infoli_span">审核状态：</div>
+						<div class="infoli_c"><{if $info.type == '1'}>待审核<{elseif
+							$info.type == '2'}>已通过<{elseif $info.type == '3'}>已驳回<{/if}></div>
+					</div>
+					<div class="infoli">
+						<div class="infoli_span">审核备注：</div>
+						<div class="infoli_c"><{$info.reason}></div>
+					</div>
+					<div class="infoli">
+						<div class="infoli_span">中奖状态：</div>
+						<div class="infoli_c"><{if $lotteryStatus ==
+							1}><{else}><{/if}></div>
+					</div>
+					<{if $lotteryStatus == 1}>
+					<div class="infoli">
+						<div class="infoli_span">奖品类型：</div>
+						<div class="infoli_c"><{$giftName}></div>
+					</div>
+					<{if $giftName == '麦当劳代金券' || $giftName == '星巴克咖啡券' || $giftName ==
+					'好利来蛋糕券'}>
+					<div class="infoli">
+						<div class="infoli_span">是否设置发货地址：</div>
+						<div class="infoli_c"><{if $adStatus ==
+							1}>已设置<{else}>未设置<{/if}></div>
+					</div>
+					<!--							<div class="infoli">
+								<div class="infoli_span">发货状态：</div>
+								<div class="infoli_c">奖品尚未寄送，请耐心等待。</div>
+							</div>-->
+					<{/if}> <{/if}>
+				</div>
+			</div>
+			<div class="shenhebox">
+				<div class="shenheli">
+					<div class="shenheli_tit">最终通过英特尔公司审核并加入到本活动的客户将享有如下权利：</div>
+					<div class="shenheli_c">
+						<p>
+							<img src="images/icon.png" alt="" />借助英特尔全球渠道经销商销售平台拓展海外市场
+						</p>
+						<p>
+							<img src="images/icon.png" alt="" />受邀参加Intel最新产品和技术培训
+						</p>
+						<p>
+							<img src="images/icon.png" alt="" />获得英特尔工程师的直接支持
+						</p>
+					</div>
+				</div>
+				<div class="shenheli">
+					<div class="shenheli_tit">报名成功并成为活动成员的客户还将享有以下特权：</div>
+					<div class="shenheli_c">
+						<p>
+							<img src="images/icon.png" alt="" />成功报名的前200名成员可以得到小米路由器一个
+						</p>
+						<!-- <p><img src="images/icon.png" alt="" />在6月9日前成为活动会员，即可获得3次掌上娃娃机体验机会，有机会赢取50元或100元携程网超值礼包；</p> -->
+						<p>
+							<img src="images/icon.png" alt="" />有机会获得英特尔颁发的“英特尔<sup
+								style="font-size: 12px">&reg;</sup>中国智造基地成员”授权证书
+						</p>
+					</div>
+				</div>
+				<div class="shenheli">
+					<div class="shenheli_tit">报名加入本活动的方式：</div>
+					<div class="shenheli_c">
+						<p>通过微信报名，在微信上点击“现在参与”并按要求填写完整信息后提交</p>
+					</div>
+				</div>
+			</div>
+			<div class="frmsub tc">
+				<a href="/index.php/si/upInfo/"
+					onclick='ga("send", "event", "信息页面","点击","修改项目信息按钮");'><img
+					src="images/frmsub2.png" alt=""></a>
+			</div>
+			<!--<div class="tc"><a href="/index.php/si/huodong/"  onclick='ga("send", "event", "信息页面","点击","回到首页");'><img src="images/return.png" alt="" /></a></div>-->
+		</div>
+	</div>
+	<script type="text/javascript"
+		src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+	<script type="text/javascript"
+		src="http://m.zevertech.com/index.php/jssdk?jsonpcallback=jsonpcallback"></script>
+	<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+ 
+  ga('create', 'UA-59674172-7', 'buzzopt.com');
+  setTimeout(function(){ga('send', 'pageview')}, 500);
+ 
+  var openid = '<{$openid}>';
+  ga('set', 'dimension1', openid);
+</script>
+
+</body>
+</html>

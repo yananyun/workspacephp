@@ -1,0 +1,668 @@
+
+*{margin:0px; padding:0px; border:none; outline:none;}
+body{font-size:14px; background:#f5f5f5; line-height:22px; outline:none;}
+a{text-decoration:none;}
+a:active{background:none;}
+ul li, ol li{list-style:none;}
+p{margin:10px; overflow:hidden;}
+h3{margin:10px; font-size:14px; margin-top:20px;}
+body,select,input,textarea,i,select,option{font-family:"微软雅黑",Arial; color:#555; font-size:14px; font-style:normal;}
+textarea{resize:none; width:300px; height:50px; border:#999999 solid 1px; padding:3px; border-radius:3px;}
+input,select{border:#999999 solid 1px; border-radius:3px; height:22px;}
+[type=radio],[type=checkbox]{height:13px;}
+.inputText{width:200px;}
+.fordate{width:100px;}
+.check{width:13px; height:13px; float:left; margin:5px 5px 0px 0px;}
+.readonly{}
+.header {width:100%; height:50px; background:#008DD4; border-bottom:#FFF solid 1px; position:relative; overflow:hidden;}
+.LeftLogo{height:30px; position:relative; padding-left:45px; margin:12px 0px 0px 30px; overflow:hidden;}
+.currentMember{position:absolute; right:100px; top:15px; color:#FFF;}
+.logout{width:45px; height:20px; display:block; position:absolute; right:10px; top:15px; padding:0px; color:#FFF; overflow:hidden;}
+.logout i{width:15px; height:20px; display:block; background:url(../images/intelBg.png) -17px -107px no-repeat; float:right; overflow:hidden;}
+.leftSpan{display:block; float:left;}
+.leftPadding100{position:relative; padding-left:100px; overflow:hidden;}
+.leftPadding80{position:relative; padding-left:80px; overflow:hidden;}
+.leftSpanPos{position:absolute; left:0; top:0;}
+.btn24{height:24px;}
+.fansGroup{width:500px;}
+
+select{width:auto; text-indent:0px;}
+option{padding:0px 5px; line-height:25px;}
+.submit, .intelBtn{color:#FFF; background:#008dd4; border:none; height:27px; line-height:27px; display:block; cursor:pointer; text-indent:0px; border-radius:3px;}
+.intelBtn:active{background:#0c52b0;}
+.formTip{padding-left:10px; color:#d8d8d8;}
+.viTip{margin:0px; color:red; text-align:center;}
+.intelBtnDel{width:40px; height:20px; line-height:20px; color:#fd0101; background:none; border:none; display:block; float:right; text-indent:0px; cursor:pointer;}
+.disabledDel{cursor:auto; color:#CCC;}
+.addGroupOprateBtn{float:left; margin-right:20px; padding:0 20px; margin-left:5px;}
+
+.groupForm{width:100%; display:block; clear:both; overflow:hidden;}
+.backBtn{width:100px; text-align:center;}
+.addGroupBtn{float:left; padding:0 20px; margin:10px 0;}
+.editBtn,.creatBtn,.detailBtn,.releaseBtn{height:20px; float:right; line-height:20px; margin-right:5px; border:none;}
+.editGroupBtn{float:right; margin:0 5px; padding:0 10px;}
+.delGroupBtn{float:right; background:red; margin:0 5px;}
+.addFansBtn{float:right; margin:0 5px;}
+.saveGroupBtn{padding:0 20px; margin-left:110px; float:left;}
+.addListBtn{float:left; padding:0 20px; margin:0 10px;}
+.disabledBtn{background:#999;}
+.fansOptionWrap label{display:block; float:left; margin-right:20px;}
+.fansOptionWrap label input{margin-top:4px;}
+.rangeNum{display:block; float:left;}
+.rangeNum input, .rangeNum i{display:block; float:left; margin-right:10px;}
+.rangeNum input{width:50px;}
+.groupDes{width:500px;}
+.btnWrap{margin-top:30px;}
+
+.delBatch{height:20px; line-height:20px; background:#666; margin-left:10px; float:left;}
+.hr{width:100%; height:0px; font-size:0px; line-height:0px; display:block; clear:both; border-bottom:#999999 dashed 1px; margin:15px auto; overflow:hidden;}
+.intelHint{color:#d8d8d8;}
+.inputRadio, .inputCheckbox{width:13px; height:13px; border:none; display:block;}
+.intelPopBtn{float:right; width:100px;}
+.noData{width:500px; margin:30px 0px; text-align:center; overflow:hidden;}
+.hideFile,.hideBtn{display:none;}
+label{float:left; overflow:hidden;}
+label input{float:left; margin:6px;}
+.useBtn{background:none; color:#008dd4; width:45px; height:20px; line-height:20px; float:right; margin-right:10px;}
+.disabledBtn{color:#CCC; cursor:auto;}
+
+.subTab{margin:0px 0px 30px 30px; border-bottom:#008dd4 solid 1px; overflow:hidden;}
+.subTab li{display:block; float:left; cursor:pointer; padding:0px 10px;}
+.tabCurrent{color:#FFF; background:#008dd4;}
+
+.logo{width:42px; height:28px; display:block; background:url(../images/intelBg.png) 0px -26px; position:absolute; top:0px; left:0px; overflow:hidden;}
+
+.adminContainer{width:100%; height:302px; position:fixed; top:50%; left:0px; margin-top:-151px; background:#006bbd url(../images/adminBg.gif) repeat-x; overflow:hidden;}
+.adminContent{width:640px; height:100%; margin:0px auto; position:relative; overflow:hidden;}
+.intelLogo{width:42px; height:28px; position:absolute; top:31px; left:0px; overflow:hidden;}
+.intelCMS{font-size:15px; color:#006bbd; position:absolute; top:35px; left:45px; overflow:hidden;}
+.adminBox{width:268px; height:190px; background:#FFF; border-radius:4px; position:absolute; top:31px; left:50%; margin-left:-134px; overflow:hidden;}
+.inputCol{height:27px; position:relative; padding-left:30px; margin:15px 10px; overflow:hidden;}
+.inputCol i{width:22px; height:22px; display:block; position:absolute; top:2px; left:0px; background:url(../images/intelBg.png) no-repeat; overflow:hidden;}
+.inputCol label{color:#c8c8c8; text-indent:5px; line-height:27px; position:absolute;}
+.adminAccount{margin-top:25px;}
+.adminPass i{background-position:-23px 0px;}
+.forgetPass{color:#c8c8c8; padding-left:40px;}
+.forgetPass:hover{text-decoration:underline; color:#008dd4;}
+.loginEmail{margin-top:25px;}
+.loginEmail i{background-position:-46px 0px;}
+.adminVerify input{width:50px;}
+.verifyCode{width:50px; height:25px; background:#CCC; position:absolute; top:1px; left:100px; display:block; overflow:hidden;}
+.changeVerifyCode{color:#c8c8c8; position:absolute; top:5px; left:170px; cursor:pointer; overflow:hidden;}
+.changeVerifyCode:hover{color:#008dd4;}
+.adminTipCol{text-align:center; margin-top:40px; color:#454545;}
+.adminJumpTipCol{text-align:center; margin-top:30px; color:#c8c8c8;}
+#countDown{padding:0px 3px;}
+.changePassAccount{padding-left:30px; position:absolute; top:0px; left:50%; margin-left:-124px; overflow:hidden;}
+.changePassAccount i{width:22px; height:22px; display:block; position:absolute; top:2px; left:0px; background:url(../images/intelBg.png) no-repeat; overflow:hidden;}
+.changePassAccount h4{font-size:14px;}
+.adminPassNew{margin-top:25px;}
+.adminPassNew i{background-position:-23px 0px;}
+
+.container{width:100%; min-width:1200px; overflow:hidden;}
+.main{width:100%; min-height:100%; float:left; padding-bottom:5000px; margin-bottom:-5000px; overflow:hidden;}
+.mainWrap{margin:15px 10px 0px 245px; overflow:hidden;}
+.pageTtl{color:#008dd4; font-size:15px; margin:45px 0px 0px 30px;}
+.pageNavWrapper{width:100%; height:50px; background:url(../images/pageNavBg.png) 0px 15px repeat-x; position:relative; margin:15px 0px; overflow:hidden;}
+.pageCurrentNav{width:70px; height:32px; background:url(../images/pageCurrentBg.png) 0px 15px repeat-x; position:absolute; top:0px; left:0px; overflow:hidden;}
+.pageCurrentNav i{width:32px; height:32px; display:block; float:right; background:url(../images/intelBg.png) no-repeat; overflow:hidden;}
+.pageCurrentNav .accountIcon{background-position:0px -57px;}
+.pageCurrentNav .itemIcon{background-position:-111px -57px;}
+.pageCurrentNav .pcIcon{background-position:-37px -57px;}
+.pageCurrentNav .activeIcon{background-position:-74px -57px;}
+.pageCurrentNav .articleIcon{background-position:-148px -57px;}
+.pageCurrentNav .codeIcon{background-position:-185px -57px;}
+.pageNav{margin-left:70px;}
+.pageNav li{float:left; margin-left:70px; overflow:hidden;}
+.pageNav li i{width:12px; height:12px; display:block; margin:10px auto; background:url(../images/intelBg.png) 0px -94px no-repeat; overflow:hidden;}
+.pageNav li a{color:#999;}
+.pageNav li a:hover{color:#008dd4;}
+.pageNav .currentPage a{color:#008dd4;}
+.pageNav .currentPage i{background-position:-17px -94px;}
+
+.mainLeft{width:235px; min-height:100%; float:left; margin-left:-100%; padding-bottom:5000px; margin-bottom:-5000px; background:#008DD4; overflow:hidden;}
+.cmsDes{color:#FFF; font-size:15px; position:absolute; top:5px; left:45px; overflow:hidden;}
+.leftNav{margin-left:30px; padding-bottom:200px; overflow:hidden;}
+.leftNav p{color:#CCC;}
+.leftNav li{height:20px; position:relative; margin-bottom:10px; overflow:hidden;}
+.leftNav li i{width:10px; height:10px; display:block; background:#CCC; border-radius:10px; position:absolute; top:8px; left:10px; overflow:hidden;}
+.leftNav li a{display:block; color:#b1dcf6; margin:0px 40px 0px 15px; padding-left:25px; overflow:hidden;}
+.leftNav li a:hover{color:#FFF;}
+.leftNav .currentLiAccount i{width:14px; height:14px; top:6px; left:8px; background:#FFF;}
+.leftNav .currentLiAccount a{color:#FFF;}
+
+.passUpdateWrapper{width:100%; overflow:hidden;}
+.passUpdateWrapper p{margin:10px 70px; line-height:25px; overflow:hidden;}
+.editTtl{width:100px; display:block; float:left; text-align:right; margin-right:10px; overflow:hidden;}
+.submitRight{width:100px; margin-left:220px;}
+.itemDisWrap .itemHint{color:#CCC; line-height:15px; margin:0px 0px 15px 50px;}
+
+.contentWrapper{margin-left:30px; position:relative; overflow:hidden;}
+
+.addAccountWrapper{}
+
+.searchWrap{height:27px; line-height:27px; float:right; display:block; margin:0px 0px 15px 0px; overflow:hidden;}
+.searchWrap input{height:23px; /*background:#FFF;*/ line-height:23px; border-radius:0px;}
+.searchWrap .searchBtn{width:40px; padding:0 5px; cursor:pointer;border-radius:3px;}
+.addBtn{width:100px;margin-bottom:15px;float:left;}
+.listTopTtl{width:100%; height:20px; background:#d8d8d8; line-height:20px; padding:5px 0; overflow:hidden;}
+
+.productWrap{}
+.productName{width:20%;}
+.productEquip{width:25%;}
+.productBrand{width:10%;}
+.productPrice{width:10%;}
+.productCate{width:10%;}
+.contactWay{width:10%;}
+.productMeasure{width:30px;}
+.productMeasure2{width:85px;}
+.productMeasure .check{float:none; margin:4px auto 0px auto;}
+.productMeasure .hotPoint{width:5px; height:5px; line-height:0px; display:block; margin:7px auto; background:#ff0000; border:#CCC double 2px; border-radius:10px; overflow:hidden;}
+
+.productBox{width:620px; overflow:hidden;}
+.productInfoWrap{width:100%; overflow:hidden;}
+.proImgWrap{width:250px; float:left; margin-top:10px; overflow:hidden;}
+.proImgWrap img{width:200px; height:150px;}
+.proinfo{width:360px; float:right; overflow:hidden;}
+.leftCol{width:80px; display:block; float:left; text-align:right; color:#999; overflow:hidden;}
+.leftCols{width:110px;}
+.feedBackWrap{width:100%; margin-top:10px; overflow:hidden;}
+.subTabWrap{width:100%; border-bottom:#999999 solid 1px; overflow:hidden;}
+.subTabWrap a{width:80px; height:25px; line-height:25px; display:block; float:left; text-align:center; color:#008DD4; overflow:hidden;}
+.currentTab{background:#D8D8D8;}
+.tabContent{height:200px; overflow:hidden; margin:10px 0px; overflow-y:scroll;}
+.articleBox,.paramBox,.reviewBox{display:none;}
+.paramBox .leftCol{width:auto;}
+.articleBox{display:block;}
+.tabContent li{width:100%; position:relative; overflow:hidden;}
+.tabContent li .listContentTtl{width:400px; height:25px; display:block; line-height:25px; color:#008DD4; overflow:hidden;}
+.tabContent li .listContentTtl:hover{text-decoration:underline;}
+.articleBox li{height:25px; }
+.articleDate{position:absolute; color:#999; top:0px; right:80px; line-height:25px;}
+.articleStatu{position:absolute; top:0px; right:5px; line-height:25px;}
+.off{color:#999;}
+.on{color:#666;}
+.reviewDetail{display:none;}
+.operaBtn{position:absolute; line-height:25px; top:0px; right:5px;}
+.turnOn,.turnOff{right:40px;}
+.delLink{color:#FD0101;}
+.turnOn{color:#007c43;}
+.turnOff{color:#555;}
+.operaBtn:hover{text-decoration:underline;}
+.tabContent li blockquote{margin:5px; color:#999;}
+
+.tabWrap{float:left; overflow:hidden;}
+.tabWrap a{display:block; line-height:30px; float:left; min-width:80px; text-align:center; padding:0 5px; color:#008DD4; background:#FFF; border-radius:5px 5px 0 0; overflow:hidden;}
+.tabWrap .currentTab{background:#008DD4; color:#FFF;}
+
+.operatBox{float:left; overflow:hidden;}
+.memeberListWrap .checkAllP{margin:5px 0;}
+.checkAllLabel{float:left; margin:4px 10px 0px 0px; color:#008DD4; cursor:pointer;}
+.qCodeBtn{width:150px; float:left; margin-right:10px;}
+.memeberListWrap .memberList{width:402px; height:140px; float:left; padding:10px; margin:10px 20px 10px 0px; position:relative; background:#EEE; overflow:hidden;}
+.memberHead, .memberHead img{width:100px; height:100px; overflow:hidden;}
+.memberHead{float:left; margin-right:10px;}
+.memberInfoWrap{float:left; overflow:hidden;}
+.memberInfoWrap p{margin:0px;}
+.memberInfoWrap .leftCol{width:60px; text-align:left;}
+.listOperaBottom{width:100%; height:20px; position:absolute; bottom:10px; left:10px; overflow:hidden;}
+.listOperaBottom a{float:right; margin-right:20px; color:#008DD4; display:block; overflow:hidden;}
+.listOperaBottom a:hover{text-decoration:underline;}
+
+.memberDetailBox{width:800px; overflow:hidden;}
+.infoTop{width:100%; overflow:hidden;}
+.infoRight{float:left; margin-left:15px; overflow:hidden;}
+.qCodeWrap{width:100px; float:left; margin-left:20px; overflow:hidden;}
+.qCodeWrap img{width:80px; height:80px;}
+.qCodeTip{width:130px; display:block; float:left; margin-top:17px; color:#999; overflow:hidden;}
+
+.couponsBox,.likeBox,.rewardsBox,.exchangeBox{display:none;}
+.couponsBox{display:block;}
+.couponsName{width:250px;}
+.couponsType{width:80px;}
+.couponsStore{width:15%;}
+.couponsSeries{width:80px;}
+.couponsDate{width:80px;}
+.couponsDateTime{width:160px;}
+.couponsStatu{width:10%;}
+.couponsSource{width:200px;}
+.couponsPoint{width:80px;}
+.exchangeGift{width:300px;}
+.couponsNum{width:80px;}
+
+.couponsDetailBox{width:500px; overflow:hidden;}
+.couponsCode{width:130px; position:relative; overflow:hidden;}
+.couponsCode img{width:100px; height:100px;}
+.couponsDetailBox .leftCol{text-align:left;}
+
+.storeName{width:30%;}
+.storeType{width:15%;}
+.storeBrande{width:10%;}
+.storeCity{width:15%;}
+.storeBox{width:600px; overflow:hidden;}
+.rspName{width:100px;}
+.rspPhone{width:130px;}
+.rspEmail{width:180px;}
+
+.rspReleaseBox{width:500px; overflow:hidden;}
+.releaseTypeP{margin:10px 0px;}
+.releaseTypeP label{margin-right:15px;}
+.rspArea{width:400px; height:100px;}
+.rspListWrap{width:100%; margin:0px 0px 10px 0px; overflow:hidden;}
+.rspListWrap li{height:20px; display:block; float:left; margin:10px 15px 0px 0px; overflow:hidden;}
+.rspFillter{width:100%; height:25px; margin:20px 0px 0px 0px; overflow:hidden;}
+.courseName{width:40%;}
+.courseType{width:15%;}
+.courseDate{width:10%;}
+
+.apiName{width:30%;}
+.callNum{width:10%;}
+.apiStatus{}
+
+.addCouponsBox{width:800px; position:relative; overflow:hidden;}
+.addTypeBlock{margin:0px; border-bottom:#CCC solid 1px; padding-bottom:5px;}
+.addCouponsBox p label{display:block; margin:0px 10px;}
+.couponsEditBox{width:620px; margin:10px 0px; display:none; overflow:hidden;}
+.storeCoupons{display:block;}
+.couponsImgWrap{width:100%; margin-top:5px; position:relative; overflow:hidden;}
+.couponsImgWrap img{width:auto; max-width:100%; height:auto;}
+.couponsImgWrap .couponsTxt{color:#FFF; width:60px; position:absolute; top:20px; left:58px; margin:0; line-height:15px; overflow:hidden;}
+.couponsInfoBox{width:800px;}
+.couponsEditBox .colorOption  label{margin-right:15px;}
+.imgRightWrap{width:130px; position:absolute; top:40px; right:20px; overflow:hidden;}
+.imgRightWrap p{margin:10px 0; color:#999;}
+
+.awardImgWrap{width:50%; overflow:hidden;}
+.awardImgWrap img{max-width:100%;}
+
+.checkGroup{width:320px; display:block; float:left; overflow:hidden;}
+.checkGroup label{margin:0px 10px 5px 0px;}
+
+.msgBox{width:500px; margin:0px 0px 20px 0px; overflow:hidden;}
+.quoteWrap{margin:0px 10px;}
+.messageQuote{width:380px; float:left; overflow:hidden;}
+.messageArea{width:380px; height:100px; overflow:hidden;}
+
+.fitStore{margin:10px; overflow:hidden;}
+.fitStoreWrap{width:395px; max-height:300px; margin:0px 0 10px 80px; overflow:hidden; overflow-y:scroll;}
+.fitStoreWrap li{overflow:hidden;}
+.fitStoreWrap li span{}
+.fitStoreWrap li a{color:#008DD4; padding-left:10px;}
+.fitStoreWrap li a:hover{text-decoration:underline;}
+.addStore{width:60px; height:20px; float:left; margin-right:10px;}
+.findStoreWrap{width:800px; overflow:hidden;}
+.listLabel{color:#008DD4; float:right; margin-right:10px;}
+.allStore{float:left; margin-bottom:10px;}
+.allStore input{margin:3px;}
+.hideStoreList{display:none;}
+
+.intelListWrap, .intelConflictListWrap, .intelDefaultListWrap{width:100%; border-top:#008dd4 solid 3px; margin-top:0px; overflow:hidden; padding-bottom:10px;}
+.findStoreWrap .intelListWrap{max-height:400px; overflow-y:scroll;}
+.intelListWrap span, .intelConflictListWrap span, .intelDefaultListWrap span{display:block; float:left; text-align:center; overflow:hidden;}
+.intelListWrap .textLeft, .intelConflictListWrap .textLeft, .intelDefaultListWrap .textLeft{text-align:left; text-indent:5px;}
+.intelListWrap li,.intelConflictListWrap li, .intelDefaultListWrap li{width:100%; min-height:20px; padding:10px 0px; overflow:hidden;}
+.intelListWrap li:hover,.intelConflictListWrap li:hover,.intelDefaultListWrap li:hover,.intelListWrap .listCurrent{background:#d9e8f1;}
+.listTopTtl .checkAllWrap label{color:#008DD4;}
+.intelListWrap .accountList{height:auto;}
+.intelConflictListWrap .accountList{height:auto;}
+
+.listOrder{width:40px;}
+.listOrder i{height:18px; line-height:20px; background:#008dd4; color:#FFF; padding:0 4px; border-radius:9px; overflow:hidden;}
+.accountUserName{width:20%;}
+.accountUserTitle{width:20%;}
+.accountComment{width:40%;}
+.accountComment em{display:block; height:20px; margin:0 1em; font-style:normal; overflow:hidden;}
+.accountUserNum{width:60px;}
+.listDate{width:80px;}
+
+.listUserFace{min-width:100px; text-align:center;}
+.listUserFace img{width:50px; margin:0 auto; display:block;}
+.listUserLocation{width:25%; text-align:center;}
+.listUserGender{width:5%; text-align:center;}
+.listDate{width:15%; text-align:center;}
+
+.authUserList li span{line-height:50px;}
+
+.listDisStyle{width:100px;}
+.listDisStyle input{width:13px; height:13px; border:none; margin:0px auto;}
+
+.addAccountPop{width:700px; padding:10px 0px; overflow:hidden;}
+.addAccountPop p{line-height:25px; overflow:hidden;}
+.permissions{margin:15px 10px; overflow:hidden;}
+.permissionListWrap{float:left; overflow:hidden;}
+.permissionList{width:100px; display:block; float:left; margin-right:10px; overflow:hidden;}
+.permissionList input{float:left; margin:3px;}
+.accountPopBtn{float:right; width:100px; margin-right:15px;}
+
+.editAccountPop{width:500px; padding:10px 0px; overflow:hidden;}
+.passSwitch{height:20px; display:block; margin-left:120px; overflow:hidden;}
+.passWrap{width:100%; background:#fdeca1; display:none; overflow:hidden;}
+
+.accountLogWrapper{margin-left:30px; overflow:hidden;}
+.searchForm input{float:left; margin:0px 10px 12px 0px;}
+.dateSelect{width:145px;}
+.midLine{width:20px; height:25px; display:block; float:left; line-height:27px; overflow:hidden;}
+.loginName{width:200px;}
+.listTime{width:20%;}
+.loginIp{width:15%;}
+.operationName{width:25%;}
+.intelListWrap .operationName{text-align:left;}
+
+.articleListWrapper{margin-left:30px; overflow:hidden;}
+
+.returnBack{position:absolute; top:5px; right:100px; text-decoration:underline; color:#008DD4;}
+
+.itemListWrapper{overflow:hidden;}
+.addItemBtn{float:right; margin-right:10px;}
+.addDefaultDisPcBtn{float:right; margin:0px 10px 10px 0px;}
+
+.saveStyleBtn{width:100px; margin:10px 0px;}
+
+.listItemName{width:40%;}
+.listItemType{width:10%}
+.listItemStatu{width:10%;}
+.listItemDisChannel{width:40%;}
+
+.ListLeftTtl{width:100px;}
+.listPortalContent{width:14%;}
+
+.creatItemPop{width:600px; padding:10px 0px; overflow:hidden;}
+.creatItemPop p{line-height:25px; overflow:hidden;}
+.orItemShowWrap p{margin:0px 10px;}
+
+.findItemWrap{width:600px;}
+
+.itemTypeOption{width:100%; margin:10px 0px; line-height:25px; overflow:hidden;}
+.itemTypeOption label{float:left; margin-right:25px; overflow:hidden;}
+.creatStep{font-size:12px; margin:10px 0px;}
+.findBtn{width:100px; float:left;}
+.pcName{width:150px; float:left; margin-right:10px;}
+.type1,.type2{width:100%; position:relative; overflow:hidden;}
+.type2{display:none;}
+
+.itemShowWrap, .orItemShowWrap{padding:10px; overflow:hidden;}
+.itemShowWrap{position:relative; background:#EEE; display:none;}
+.itemShowWrap p,.itemShowWrapNew p{margin:5px 10px;}
+.itemDisWrap{position:relative;}
+.cancelItem{width:100%; display:block; margin:5px 0px; text-align:right; clear:both; color:#008dd4; cursor:pointer; display:none;}
+.cancelItem:hover{text-decoration:underline;}
+.itemThumb{width:100px; height:75px; position:absolute; top:10px; right:0px; overflow:hidden;}
+.itemShowWrap .imgUploadWrap,.orItemShowWrap .imgUploadWrap, .itemShowWrapNew .imgUploadWrap{float:right; width:200px;}
+.itemShowWrap .imgUploadWrap .imgHolder, .orItemShowWrap .imgUploadWrap .imgHolder, .itemShowWrapNew .imgUploadWrap .imgHolder{width:200px; height:150px;}
+.itemShowWrap .imgUploadWrap .imgHolder img, .orItemShowWrap .imgUploadWrap .imgHolder img, .orItemShowWrap .itemShowWrapNew .imgHolder img{width:200px; height:150px;}
+.itemShowWrap .imgWrapTwo .imgHolder, .orItemShowWrap .imgWrapTwo .imgHolder, .itemShowWrapNew .imgWrapTwo .imgHolder{width:200px; height:100px;}
+.itemShowWrap .imgWrapTwo .imgHolder img, .orItemShowWrap .imgWrapTwo .imgHolder img, .itemShowWrapNew .imgWrapTwo .imgHolder img{width:200px; height:100px;}
+.itemThumb img{width:100px;}
+.itemFeatureWrap{width:370px; float:left; margin-left:10px; overflow:hidden;}
+.itemFeatureWrap span{display:block; overflow:hidden;}
+/* .itemSeries, .itemCpu, .itemBonner{width:100%;} */
+.linkWrap{width:100%; overflow:hidden;}
+.linkWrap p{line-height:20px; margin:0px;}
+.linkWrap p span{color:#008dd4;}
+.creatBottom{margin:10px; overflow:hidden;}
+.preView{width:75px; background:none; float:right; margin-left:10px; color:#008dd4; border-radius:0px;}
+.preView2{display:none;}
+
+.listItemPosition{width:50px;}
+
+.creatNewPop{width:600px; padding:10px 0px; position:relative; overflow:hidden;}
+.creatNewPop p{margin-top:20px;}
+.imgUploadWrap{width:160px; float:left; clear:both; margin-bottom:15px; overflow:hidden;}
+.imgUploadWrap .viTip{line-height:18px; margin:0px;}
+.simpleWrap .imgUploadWrap,.simpleWrap .normalPriceWrap,.simpleWrap .disTtlWrap,.simpleWrap .disURLWrap,.simpleWrap .itemHint{display:none;}
+.imgHolder{width:160px; height:120px; background:#DDD; overflow:hidden;}
+.imgHolder img{width:100%; height:100%}
+.upImgBtn{width:100%; margin-top:5px;}
+
+
+
+.dateSelectWrap{float:left; overflow:hidden;}
+.intelDate{width:100px; height:25px; line-height:20px; border:#999999 solid 1px; text-indent:5px; border-radius:3px; margin-top:3px; float:left;}
+.colorTip{display:block; float:left; line-height:27px; position:relative; padding-left:20px; margin-left:25px; overflow:hidden;}
+.colorTip i{width:12px; height:12px; display:block; background:#8dc0e7; position:absolute; top:8px; left:0px;}
+.creatArrangeBtn{width:100px; float:left; margin-left:25px;}
+.calendarTableWrap{width:100%; margin:20px 0px; float:left;  clear:both; position:relative; overflow:hidden;}
+.calendarTableWrap h4{float:left; overflow:hidden;}
+.seeDetail{float:left; margin-left:25px; color:#008dd4; text-decoration:underline;}
+.calendarTable{margin-right:10px; clear:both; overflow:hidden;}
+.calendarTable ul{width:100%; overflow:hidden;}
+.calendarTable ul li{height:20px; width:2.75%; min-width:20px; border-right:#c8c8cb dashed 1px; border-bottom:#c8c8cb dashed 1px; float:left; text-indent:-200px; overflow:hidden;}
+.calendarTable .dateTable{border:none; overflow:hidden;}
+.calendarTable .dateTable li{height:30px; background:#d8d8d8; border-color:transparent; border-top:#008dd4 solid 3px; line-height:30px; text-indent:0px; text-align:center; overflow:hidden;}
+.calendarTable ul .tableHead{width:70px; text-indent:0px; text-align:center;}
+.calendarTable .dateTable .tableHead{background:url(../images/intelBg.png) -73px 0px no-repeat;}
+.calendarTable ul .filled{background:#8dc0e7;}
+.calendarTable ul .startFill{background:#8dc0e7 url(../images/fillBg.png) 0px 0px no-repeat;}
+.calendarTable ul .endFill{background:#8dc0e7 url(../images/fillBg.png) right -25px no-repeat;}
+.calendarTable ul  .weekend,.weekend{color:red;}
+
+.creatArrangePop{width:600px; padding:10px 0px; overflow:hidden;}
+.popChannelWrap{margin:10px; overflow:hidden;}
+.popChannelWrap label{width:95px; height:25px; overflow:hidden;}
+.popChannelWrap .checkAll{width:100%; margin:0px; overflow:hidden;}
+.popChannelWrap .checkAll label{color:#008dd4;}
+.combineLine{float:left; padding:0px 10px; line-height:25px;}
+.listLibItemName{width:70%;}
+.returnLib{color:#008dd4; display:block; position:absolute; right:10px; top:5px;}
+.returnLib:hover{text-decoration:underline;}
+
+.conflictPopWrap{width:600px; padding:10px 0px; overflow:hidden;}
+.conflictChannel{width:80px;}
+.conflictItem{width:350px;}
+.conflictDate{width:150px;}
+.conflictCancel{width:60px; float:right; background:#d8d8d8; color:#008dd4;}
+.conflictCover{width:100px; float:right; margin-right:10px;}
+
+.activeDesCol{display:none;}
+.listLibActiveName{width:500px;}
+
+.expiredArr i{background:#e7e7e7;}
+.normalArr i{background:#9cc6df;}
+.vacancyArr i{background:#edb279;}
+
+.promPreViewWrap{width:100%; overflow:hidden;}
+.preViewUl li{width:90px; height:68px; overflow:hidden; float:left; margin:10px 4px; line-height:68px; text-align:center; background:#DDD; overflow:hidden;}
+.preViewUl li img{width:100%; height:100%;}
+.promPreViewWrap  .preViewMsg{width:100%; clear:both; padding:5px 0px; overflow:hidden;}
+
+
+.checkedP{height:20px; overflow:hidden;}
+.checkedP input, .checkedP span{float:left; margin-right:10px;}
+.checkedP input{margin-top:3px;}
+.inputDisabled{color:#ccc;}
+
+.error404{width:400px; height:440px; position:fixed; top:50%; left:50%; margin:-220px 0px 0px -200px; overflow:hidden;}
+.error404 p{text-align:center;}
+
+.paging{width:100%; height:40px; line-height:20px; margin:10px 0px; clear:both; overflow:hidden;}
+.paging p{float:left; margin:0px; margin-right:25px; color:#454545; overflow:hidden;}
+.padIngNum{float:left;}
+.padIngNum a{display:block; float:left; margin:0px 10px; color:#008dd4;}
+
+.channelBtnWrap{width:100%; margin:0px 0px 10px 0px; overflow:hidden;}
+.channelBtnWrap li{display:block; float:left; border:#CCC solid 1px; padding:0px 10px;  line-height:25px; margin-right:10px; cursor:pointer; overflow:hidden;}
+.channelBtnWrap li:hover{border-color:#999;}
+.channelBtnWrap .currentChannel{border-color:#999; background:#999; color:#FFF;}
+.codeWrap{width:700px; overflow:hidden;}
+.codeArea{width:680px; height:140px; overflow:hidden;}
+.copyBtn{width:150px; float:right; margin:5px 8px 0px 0px;}
+
+.dataChartWrap{width:99%; margin:10px 0px; overflow:hidden;}
+.dataChartWrap h1{font-size:12px;}
+.dataChart{width:100%; height:220px; background:#DDD; overflow:hidden;}
+.dataPick{width:100px; height:20px; margin:10px 0px; line-height:20px;}
+
+.pre-model{font-family:"microsoft yahei";font-size:12px;float:left;width:780px;border-bottom:1px dotted #CCC;padding-bottom:20px;margin-left:200px;}
+.pre-model-image{float:left;width:320px;height:250px;}
+.pre-model-text{float:left;width:420px;margin-left:10px;}
+.pre-model-p{padding:10px;background:#FFF8DC;border:1px solid #ccc;width:420px;}
+.pre-button{background:#008DD4;color:#fff;padding:8px 14px;text-align:center;border:0;font-family:"microsoft yahei";text-decoration:none;float:left;cursor:pointer}
+.pre-model-pic{float:left;}
+
+.pre-btn{background:#008DD4;color:#fff;padding:3px 10px;text-align:center;border:0;font-family:"microsoft yahei"; text-decoration:none;cursor:pointer}
+.pre_form{width:780px}
+.pre_form h3{}
+.pre_form input,.pre_form label{margin:5px;}
+.pre_form label{float:left}
+.pre_form ul{margin:0px;padding:0px;}
+.pre_form li{margin:10px;}
+.pre_form .m260{margin-left:260px}
+.pre_form .m30{margin-left:30px;}
+.pre_form .m470{margin-left:470px;}
+.m375{margin-left:375px;}
+.pre_a{color:#008DD4;}
+.m_right{float:right;display:block;width:180px;margin-right:180px;}
+.m_image_tog{width:180px;margin-right:180px;}
+.pre-list .m250{margin-left:250px;}
+.pre-list{margin-left:200px;}
+.pre-list,.pre-list-delete{width:780px;}
+.pre-list-p1{border-bottom:2px solid #008DD4;float:left;width:780px;}
+.pageIndex{margin-left:260px;}
+.pageIndex,.pre_num{float:left;height:24px;line-height:24px;}
+.pageIndex .p_pre,.p_next{float:left;text-align:center;}
+.pageIndex a{padding:0px 8px;float:left;color:#666; text-decoration:none}
+.pageIndex a:hover{background:#008DD4;display:block;color:#fff;padding:0px 8px;float:left}
+.pageIndex .p_num{float:left;text-align:center;}
+.pageIndex .p_num ul{margin:0px 5px;}
+.pageIndex .p_num ul li{border:1px solid #ccc;margin-right:5px;}
+
+.left,.pre-product li,.pre-product p,.pre-product span{float:left}
+.pre-list-select{width:780px;}
+.pre-list-select span{margin:5px 10px;}
+.pre-product .pre_li{border:1px dotted #008DD4;margin-bottom:10px;}
+.pre_infromation{width:500px;text-align:left;}
+.pre_infromation span{float:left;display:block;}
+.pre_note {width:450px;}
+.pre_note .pre_note_li{padding:3px 10px;width:430px;}
+.pre_note span{margin-top:3px;}
+.pre_lm_type{width:760px;text-align:right;padding-right:20px;color:#008DD4}
+.pre-pro-ul{display:block;float:left;width:780px}
+.pre-model-view{width:300px;height:250px;margin-left:10px;border-left:1px dotted #008DD4;}
+.pre-list-delete-m{padding-top:10px;}
+.pre-list-delete{border-top:2px solid #008DD4;padding-top:10px;}
+.pre_foot{float:left;margin-top:10px;width:780px;height:40px;}
+.pre-list-update{background:url("../images/update.png") no-repeat;width:35px;height:33px;float:left;margin-left:500px;margin-top:3px;cursor:pointer}
+.pre-model-delete{background:url("../images/delete.png") no-repeat;width:35px;height:35px;float:left;margin-left:10px;cursor:pointer}
+.mb10{margin-bottom:10px;}
+.pre-radius{border-radius:0}
+.preSelected{}
+.m680{margin-left:680px;}
+.m_gl{width:400px;height:60px;}
+.pre_form i{color:#F00}
+.LD{width:210px;height:25px;line-height:25px;}
+.LM{width:210px;height:27px;line-height:27px;}
+.none{display:none}
+.h200{height: 200px; display: block;}
+.pre_mar{15px 0 0}
+.pre-list{ margin-left:10px;}
+
+
+.couponsCode{float:left;}
+.gifWramp{overflow:hidden;}
+.giftBox{padding-left:10px;overflow:hidden;}
+.giftInfo{overflow:hidden;}
+.giftInfo li{float:left;width:200px;margin-right:20px;line-height:20px;}
+.giftExplain{margin-left:0;}
+.getRecord{margin-left:0;margin-bottom:5px;}
+
+/*============Rsp管理=============*/
+.screenMenu{float:right;padding-bottom:10px;}
+.screenMenu li{float:left;margin-right:20px;}
+.rspNum{width:90px;}
+.rspName{width:126px;}
+.rspTerritory{width:150px;}
+.rspContact{width:180px;}
+.rspEail{width:158px;}
+.rspWork{width:186px;}
+.rspOperate{width:136px;float:right;}
+.rspinfo span{width:70px;display:block;float:left;}
+
+
+/*------------H5首页后台管理 芯产品添加弹框列表----------------------*/
+.dialog_product_list{ width:730px; }
+.chipListWraper { clear:both;}
+.chipListWraper .chip{ width:400px; height:150px; padding:15px;display:block; float:left;}
+
+
+
+.indexTitle{border-bottom:2px solid #ccc;padding-bottom:10px;}
+.proTitle{overflow:hidden;padding-top:10px;}
+.proTitle span{display:block;float:left;padding-top:2px;}
+.searchBtn{background:#008dd4;color:#fff;padding:3px 5px;border-radius:3px;border:none;}
+.uploadBox{margin:10px; overflow:hidden;}
+.uploadimageBox{float:left;}
+
+
+
+/*=================首页=================================*/
+.proCount{padding:10px 0;margin-left:20px;}
+.proCount span{padding-right:20px;}
+.proCount i{color:#f00;}
+.proTypeBox{margin:0 0 20px 20px;overflow:hidden;border:1px solid #ccc;padding:10px;}
+.proTypeBox h3{padding-bottom:10px;}
+.proTypeBox li{float:left;padding-right:20px;}
+
+
+.rule{margin:10px;}
+.erweimaText{text-align:center;margin:0 10px;padding:5px 0;}
+.useTex{padding:5px 20px;text-align:center;background:#008dd4;color:#fff;border-radius:3px;}
+.m_r_l_menu .intelBtn{line-height:22px;}
+#name{padding:5px;}
+.productInformation{width:20%;}
+
+.intelListBox{border-top:none;}
+.trainBox{margin-left:20px;}
+.trainBox p{padding-left:0;}
+.sonTitle{padding:10px 0;}
+.statisticsBox{border:1px solid #ccc;padding:10px 0 20px 0;margin-botttom:20px;}
+.statisticsTitle{padding:0 10px;}
+.statistics span{margin-right:100px;}
+.gradeWramp{overflow:hidden;}
+.gradeAnalyzeBox{overflow:hidden;}
+.gradeAnalyzeBox span{display:black;width:248px;height:30px;margin-top:84px;}
+.gradeBox{width:566px;height:236px;float:left;}
+.answerBox{width:704px;height:196px;margin-left:162px;}
+.answerBoxs span{float:none;display:block;margin-top:0;}
+
+.trialInfoWrap{width:100%; overflow:hidden;}
+.trialInfoWrap p{margin:10px 0;}
+.trialInfoWrap .trialTip{color:#2b91d9; margin-top:20px;}
+.trialProWrap ul li{padding:3px 0 0 0;}
+
+.topSelectFilter{float:right; overflow:hidden;}
+.topSelectFilter .leftSpan{margin-right:10px;}
+.staffName{width:10%;}
+.weixinName{width:15%;}
+.topicTitle{width:30%;}
+.topicContent{width:30%;}
+
+.topicDetail{min-width:400px; margin:5px; overflow:hidden;}
+.topicDetail img{display:block; margin:5px; max-width:100%;}
+
+.followersTable{width:980px; margin:0 auto; border:#CCC solid 1px; overflow:hidden;}
+.followersTable li{width:100%; height:30px; margin-left:-1px; position:relative; border-top:#CCC solid 1px; overflow:hidden;}
+.followersTable li:hover{background:#EEE;}
+.followersTable .listTopTtl{font-weight:bold; padding:0px;}
+.followersTable .listTopTtl:hover{background:#D8D8D8;}
+.followersTable li span{display:block; float:left; line-height:30px; border-left:#CCC solid 1px; overflow:hidden;}
+.listNickName{width:150px; text-indent:1em;}
+.listGender{width:60px; text-align:center;}
+.listRegion{width:180px; text-indent:1em;}
+.listPoint{width:80px; text-align:center;}
+.listSource{width:80px; text-align:center;}
+.listSelectLabel{height:100%; display:block; position:absolute; top:0; right:5px; line-height:30px; cursor:pointer; overflow:hidden;}
+.listSelectLabel input{width:13px; height:13px; display:block; float:left; margin:9px 5px 0 0;}
+.listStatu{width:80px; text-align:center;}
+.die{color:red;}
+.live{color:green;}
+.banBtn{height:24px; float:right; padding:0 10px; background:red; margin:3px 5px 0;}
+.cancelBanBtn{height:24px; float:right; padding:0 10px; background:green; margin:3px 5px 0;}
+
+.listFilterWrap{width:980px; margin:0 auto; position:relative; padding:5px 0; overflow:hidden;}
+.listFilterWrap p{margin:10px 0;}
+.listFilterWrap select,.listFilterWrap input{display:block; float:left; margin-right:15px;}
+.listFilterWrap select,.listFilterWrap .inputBtn{height:24px;}
+.addSelect{float:right; padding:0 10px;}
+.lisSelected{background:#fdfbe6;}
+.lisSelected span{color:#008DD4;}
+.followersTable .lisSelected:hover{background:#fdfbe6;}

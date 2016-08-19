@@ -1,0 +1,55 @@
+<table>
+	<{foreach $list as $k=>$val}>
+	<!-- 	<li>
+	<span class="listOrder"><i><{$k + 1}></i></span>
+	<span class="msgListContent">
+		<i class="ListMsgType"><{if $val.type eq 'text'}>(文字信息)<{else if $val.type eq 'image'}>(图片信息)<{else if $val.type eq 'news'}>(图文信息)<{/if}></i>
+		<{if $val.type eq 'text'}>
+			<em><{$val.content}></em>
+		<{else}>
+			<em>点击查看</em>
+		<{/if}>
+	</span>
+	<span class="listDate"><{if $val.mode eq 1}>48小时交互推送<{else}>高级群发<{/if}></span>
+	<span class="listStatu"><{if $val.result eq 1}>正在发送<{else if $val.result eq 2}>发送成功<{else if $val.result eq 3}>发送失败<{else if $val.result eq 4}>发送错误<{/if}></span>
+	<span class="msgListOperate">
+		<a class="intelBtn editGroupBtn" active_id="<{$val.id}>" href="" onclick="delete_active(this)">删除</a>
+		<a class="intelBtn editGroupBtn" active_id="<{$val.id}>" href="" onclick="dela()">删除</a>
+		<a class="intelBtn editGroupBtn" href="/index.php/groupMessage/detail/id/<{$val.id}>">详情</a>
+	</span>
+</li> -->
+
+	<tr>
+		<td><{$k + 1}></td>
+		<td><i class="ListMsgType"><{if $val.type eq
+				'text'}>(文字信息)<{else if $val.type eq 'image'}>(图片信息)<{else if
+				$val.type eq 'news'}>(图文信息)<{/if}></i> <{if $val.type eq 'text'}> <em><{$val.content}></em>
+			<{else}> <em>点击查看</em> <{/if}></td>
+		<td><{if $val.mode eq 1}>48小时交互推送<{else}>高级群发<{/if}></td>
+		<td><{if $val.result eq 1}>正在发送<{else if $val.result eq
+			2}>发送成功<{else if $val.result eq 3}>发送失败<{else if $val.result eq
+			4}>发送错误<{/if}></td>
+		<td><a class="intelBtn editGroupBtn" active_id="<{$val.id}>"
+			href="" onclick="delete_active(this)">删除</a> <!--<a class="intelBtn editGroupBtn" active_id="<{$val.id}>" href="" onclick="dela()">删除</a>-->
+			<a class="intelBtn editGroupBtn"
+			href="/index.php/groupMessage/detail/id/<{$val.id}>">详情</a></td>
+	</tr>
+	<{/foreach}>
+</table>
+<{$pages}>
+<script type='text/javascript'>
+	
+	function dela()
+	{
+		alert('23423');
+	}
+</script>
+<style>
+table {
+	width: 100%;
+}
+
+tr {
+	height: 40px;
+}
+</style>

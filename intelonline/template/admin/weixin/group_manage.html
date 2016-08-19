@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>微信用户组管理</title>
+<link href="/css/main.css" type="text/css" rel="stylesheet" />
+<link rel="stylesheet" type="text/css" href="/css/skins/blue.css" />
+<link rel="stylesheet" type="text/css" href="/css/K_admin.css" />
+<link rel="stylesheet" type="text/css" href="/css/style.css" />
+<link rel="stylesheet" type="text/css" href="/css/index.css" />
+<script type="text/javascript" src="/js/jquery.js"></script>
+<script type="text/javascript" src="/js/main.js"></script>
+<script type="text/javascript" src="/js/artDialog.js"></script>
+<script type="text/javascript" src="/js/iframeTools.js"></script>
+</head>
+<body
+	onload="loadContent('',$('.intelListWrap'),'/index.php/membergroup/group_list')">
+	<div class="container">
+		<{include '../public/header.html'}>
+		<div class="main">
+			<div class="mainWrap">
+				<!-- <input type="button" class="intelBtn addBtn" value="+ 添加分组" onclick="addGroup()" /> -->
+				<a class="intelBtn addGroupBtn"
+					href="/index.php/membergroup/add_group">+ 添加分组</a>
+				<ul class="intelListWrap"></ul>
+			</div>
+		</div>
+		<{include '../public/left_menu.html'}>
+	</div>
+	<script>
+		$(':input[name=search]').click(function(){
+			var keyword = $.trim($(':input[name=keyword]').val());
+			loadContent('',$('.intelListWrap'),'/index.php/membergroup/group_manage')
+		});
+		
+		//添加组		
+    function addGroup(){
+        process=showloading('loading...');
+        $.ajax({
+            url: '/index.php/weixin/add_group',
+            success: function (data){
+                process.close();
+                art.dialog({
+                    title: '添加分组',
+                    content:data,
+                    lock:true
+                });
+            },
+            cache: false
+        });
+    }
+	
+	//修改分组		
+    function editGroup(o,id){
+        process=showloading('loading...');
+		var obj = $(o);
+		var id = obj.attr('groupid');
+		var group_name = obj.attr('name');
+        $.ajax({
+            url: '/index.php/membergroup/edit_group/id/'+id,
+			data:{id:id,group_name:group_name},
+			type:'post',
+            success: function (data){
+                process.close();
+                art.dialog({
+                    title: '修改分组',
+                    content:data,
+                    lock:true
+                });
+            },
+            cache: false
+        });
+    }
+	//删除分组
+	function fnDelGroup(self,id){
+		var flag=confirm('确定要删除该分组么？');
+		if(flag){
+			//process=showloading('loading...');
+			$.post('/index.php/membergroup/del_group/id/'+id,{group_id:id},function(){
+
+			},'json');
+			var self=$(self);
+			var li=self.parents('li');
+			li.slideUp();
+		}
+	}
+	</script>
+</body>
+</html>

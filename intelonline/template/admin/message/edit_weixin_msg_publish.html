@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>微信推送消息</title>
+<link href="/css/main.css" type="text/css" rel="stylesheet" />
+<link rel="stylesheet" type="text/css" href="/css/skins/blue.css" />
+<link rel="stylesheet" type="text/css" href="/css/message.css" />
+<link rel="stylesheet" type="text/css" href="/css/style.css" />
+<link rel="stylesheet" type="text/css" href="/css/index.css" />
+<link rel="stylesheet" href="/css/K_admin.css">
+<script type="text/javascript" src="/js/jquery.js"></script>
+<script type="text/javascript" src="/js/main.js"></script>
+<!-- K -->
+<script type="text/javascript" src="/js/K_admin.js"></script>
+<script type="text/javascript" src="/js/artDialog.js"></script>
+<script type="text/javascript" src="/js/iframeTools.js"></script>
+<link rel="stylesheet" type="text/css" href="/css/material.css" />
+<script type="text/javascript" src="/js/ajaxfileupload.js"></script>
+<script type="text/javascript" src="/js/My97DatePicker/WdatePicker.js"></script>
+<link rel="stylesheet" type="text/css"
+	href="/js/My97DatePicker/skin/WdatePicker.css" />
+</head>
+<!-- <body onload="loadContent('',$('.intelListWrap'),'/index.php/membergroup/group_list')"> -->
+<body>
+	<div class="container">
+		<{include '../public/header.html'}>
+		<div class="main">
+			<{include '../public/left_menu.html'}>
+			<div class="mainWrap">
+				<!-- <div class="grid indexTitle">
+					<h4 class="span span-6">发布信息</h4>
+					<div class="span span-6 text-right">
+						<a href="/index.php/activepush/weixin_msg_list" class="btn-primary">关闭</a>
+					</div>
+				</div> -->
+				<div class="u_addCon u_addConTwo">
+					<img src="/images/icon1.png" alt=""> <a class="u_addClub">发布信息</a>
+					<input type="button" class="groupBtn confirmBtn closeBtn"
+						onclick="window.history.back();" value="关闭">
+				</div>
+				<div class="msgTabContent currentContent pad-bottom"
+					id="msgTabContent1">
+					<h3>发送对象</h3>
+					<div class="targetList">
+						<ul class="followersTable j-checkboxAll">
+							<li class="listTopTtl"><span class="listNickName">昵称</span>
+								<span class="listGender">性别</span> <span class="listRegion">区域</span>
+								<!--								<span class="listPoint">交互量</span>
+								<span class="listSource">类型</span>--> <span
+								class="listSelectLabel"><input type="checkbox" checked
+									onclick="allchecked(this)"></span></li>
+							<span id='list'> <{foreach $members as $val}>
+								<li><span class="listNickName"><{if $val.nickname
+										neq ''}><{$val.nickname}><{else}>----<{/if}></span> <span
+									class="listGender"><{if $val.sex eq 1}>男<{else if
+										$val.sex eq 2}>女<{else}>----<{/if}></span> <span class="listRegion"><{if
+										$val.province neq '' || $val.city neq ''}><{$val.province}>
+										<{$val.city}><{else}>----<{/if}></span> <!--									<span class="listPoint"><{$val.interactive}></span>
+									<span class="listSource"><{if $val.type eq 1}>普通<{else if $val.type eq 2}>RSP会员<{else if $val.type eq 3}>至尊地带会员<{else if $val.type eq 4}>未关注<{/if}></span>-->
+									<span class="listSelectLabel"><input type="checkbox"
+										value="<{$val.openid}>" name="openids[]" checked></span></li>
+								<{foreachelse}>
+								<li><span class="listNickName"><font color="#FF6600">暂无信息</font></span>
+									<span class="listGender">----</span> <span class="listRegion">----</span>
+									<span class="listPoint">----</span> <span class="listSource">----</span>
+									<span class="listSelectLabel"><input type="checkbox"></span>
+							</li> <{/foreach}>
+							</span>
+						</ul>
+					</div>
+					<div class="publishBox statu1 gap-top">
+						<div class="publishBoxNavWrap">
+							<a class="txtMsgTab" href="javascript:void(0);"
+								onclick="fnSwitchTxtMsg(this)">文字</a> <a class="picTxtMsgTab"
+								href="javascript:void(0);"
+								onclick="fnCallPicTxtMsg(this,$('#wordMsg'))">图文信息</a>
+						</div>
+						<div class="messageInput" contenteditable="true" id="wordMsg"></div>
+						<input type="hidden" name="active_mid" value="<{$msg.active_mid}>"
+							id='active_mid'> <input type="hidden"
+							name="active_content" value="<{$msg.active_content}>"
+							id="active_content">
+						<div class="publishBoxBottom">
+							<a class="emotionIcon" href="javascript:void(0);" onclick=""></a>
+							<p class="messageCount">
+								还可以输入<span>600</span>字
+							</p>
+							<input type="hidden" name='txtOverflow' value="0" />
+						</div>
+					</div>
+					<p class="leftPadding80 fansOptionWrap">
+						<span class="leftSpanPos">发送类别:</span> <label><input
+							type="radio" name="active_type" value="1"<{if
+							$msg.active_type eq 1}> checked <{/if}> disabled />48小时交互推送</label> <label><input
+							type="radio" name="active_type" value="2"<{if
+							$msg.active_type eq 2}> checked <{/if}> disabled />高级群发</label>
+					</p>
+					<p class="leftPadding80 fansOptionWrap" id="duration">
+						<span class="leftSpanPos">结束时间:</span> <input type="text"
+							placeholder="结束时间" name="active_duration_end"
+							id="active_duration_end" style="width: 80px" readonly
+							value="<{$msg.active_duration_end}>" />
+					</p>
+					<p class="leftPadding80 fansOptionWrap" id="interval">
+						<span class="leftSpanPos">发布间隔:</span> <select
+							name='active_interval'>
+							<option value="0" id="active_interval0">不限</option>
+							<option value="1"<{if $msg.active_interval eq 1}>
+								selected <{/if}> >1秒</option>
+							<option value="2"<{if $msg.active_interval eq 2}>
+								selected <{/if}> >2秒</option>
+							<option value="3"<{if $msg.active_interval eq 3}>
+								selected <{/if}> >3秒</option>
+							<option value="4"<{if $msg.active_interval eq 4}>
+								selected <{/if}> >4秒</option>
+							<option value="5"<{if $msg.active_interval eq 5}>
+								selected <{/if}> >5秒</option>
+						</select>
+					</p>
+					<p class="leftPadding80 fansOptionWrap">
+						<span class="leftSpanPos">定时发布:</span> <input type="text"
+							placeholder="开始时间" name="active_crontab_time"
+							id="active_crontab_time" readonly
+							value="<{$msg.active_crontab_time}>" /> <font color="#FF6600">定时发布时间</font>
+					</p>
+					<a class="btn-primary" href="/index.php/activepush/weixin_msg_list">
+						返 回 </a> <input type="hidden" name="msgType" value="1">
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>
+<script type="text/javascript">
+	$(function(){
+		setInterval(function(){
+			var flag=$('#wordMsg').is(':focus');
+			if(flag){
+				fnCheckTxtNum();
+			}
+		},200);
+		var mid = $("#active_mid").val();
+		var content = $("#active_content").val();
+		if(mid != '' && mid != 0){
+			$('.publishBox').removeClass('statu1').removeClass('statu2').addClass('statu3');
+			$.post('/index.php/autoresponse/sel_material',{mid:mid},function(data){
+				$('#wordMsg').empty().append('<li class="materialPicTxtList oneContent" onclick="fnTickMaterial(this,'+$("#active_mid").val()+')"><div class="pickBase"></div><em class="tick">√</em><p class="materialPicTxtTtl">'+data.title+'</p><p class="materialPicTxtDate">'+data.ctime+'</p><div class="materialPicWrapCover"><img src="'+data.thumb+'"></div><p class="materialPicTxtComment">'+data.content+'</p></li>');
+			},'json');
+		}else if(content != ''){
+			$('.publishBox').removeClass('statu3').removeClass('statu2').addClass('statu1');
+			$('#wordMsg').empty().html(content);
+		}
+	});
+	function allchecked(self){
+		var self = $(self);
+		var check = self.is(':checked');
+		if(check){
+			$('[name^=openid]').attr('checked',true);
+		}else{
+			$('[name^=openid]').attr('checked',false);
+		}
+	}
+	function activegaoji(){
+		$("#active_duration_start").val('');
+		$("#active_duration_end").val('');
+		$("#active_interval0").attr('selected',true);
+		$("#duration").hide();
+		$("#interval").hide();
+	}
+	function active48(){
+		$("#duration").show();
+		$("#interval").show();
+	}
+	function groupFilter(gid){
+		$.post('/index.php/activepush/conformfans',{gid:gid},function(data){
+			$("#list").empty();
+			if(data.length > 0){
+				for(var i = 0 ; i < data.length ; i++){
+					$("#list").append('<li><span class="listNickName">'+data[i].nickname+'</span><span class="listGender">'+data[i].sex+'</span><span class="listRegion">'+data[i].location+'</span><span class="listPoint">'+data[i].interactive+'</span><span class="listSource">'+data[i].type+'</span><span class="listSelectLabel"><input type="checkbox" value="'+data[i].openid+'" name="openids[]" checked ></span></li>');
+				}
+			}else{
+				$("#list").append('<li><span class="listNickName"><font color="#FF6600">暂无信息</font></span><span class="listGender">----</span><span class="listRegion">----</span><span class="listPoint">----</span><span class="listSource">----</span><span class="listSelectLabel"><input type="checkbox"></span></li>');
+			}
+
+		},'json')
+	}
+	function submitform1(){
+		if($("#nickname").val() != ''){
+			$("#form1").submit();
+		}else{
+			alert("搜索昵称不能为空");
+		}
+	}
+	function fnCheckTxtNum(){
+		var area=$('#wordMsg');
+		var txtOverflow=$('[name=txtOverflow]');
+		var numWrap=$('.messageCount');
+		var msg=area.text().replace(/\s/g,'');
+		var len=600-(msg.length);
+		var tip='';
+		if(len<0){
+			tip='已超出<span class="overLength">'+Math.abs(len)+'</span>字';
+			txtOverflow.val(0);
+		}else{
+			tip='还可以输入<span>'+len+'</span>字';
+			txtOverflow.val(1);
+		}
+		numWrap.html(tip);
+	}
+	
+	function fnSwitchTxtMsg(self){
+		$("#active_mid").val('');
+		var self=$(self);
+		var msgType=$('[name=msgType]');
+		msgType.val(1);
+		$('[name=active_mid]').val('');
+		$('.publishBox').removeClass('statu2').removeClass('statu3').addClass('statu1');
+		$('.messageInput').html('').removeClass('materialPicTxtWrap').attr('contenteditable',true);
+	}
+	
+	function fnCallPicTxtMsg(self,box){
+		$("#active_content").val('');
+		var picTxtBox=art.dialog({title:'图文素材',id:'picTxtBox',lock:true});
+		$.ajax({
+			url:'/index.php/material/material_popup',
+			success:function(data){
+				picTxtBox.content(data);
+				picTxtBox.button(
+					{
+						name: '确定',
+						callback: function () {
+							var id=$('[name=tickedMaterialId]').val();
+							if(id==''){
+								alert('请选择一个素材');
+								return false;
+							}else{
+								var mg=$('.tickedContent').removeClass('tickedContent');
+								box.html(mg).attr('contenteditable',false);
+								$('.publishBox').removeClass('statu1').removeClass('statu2').addClass('statu3');
+								var msgType=$('[name=msgType]');
+								msgType.val(3);
+								$('[name=active_mid]').val(id);
+							}
+						},
+						focus:true
+					},
+					{
+						name:'取消'
+					}
+				);
+			},
+			cache:false
+		});
+	}
+	function fnTickMaterial(self,id){
+		self=$(self);
+		var siblingsBox=self.parents('.materialPicTxtWrap').find('li');
+		siblingsBox.removeClass('tickedContent');
+		self.addClass('tickedContent');
+		var tickedMaterialId=$('[name=tickedMaterialId]');
+		tickedMaterialId.val(id);
+	}
+	/* 添加提交 */
+	function fnSendWxMsg(){
+		var type=$('[name=msgType]').val();
+		if(type==1){
+			var flag=$('[name=txtOverflow]').val();
+			if(flag==0){
+				alert('文字必须为1到600字之间');
+				return false;
+			}
+		}else if(type==3){
+			var mId=$('[name=active_mid]').val();
+			if(mId==''){
+				alert('没有选择素材');
+				return false;
+			}
+		}
+		var mid = $("#active_mid").val();
+		if(mid == ''){
+			var content = $("#wordMsg").html();
+			$("#active_content").val(content);
+		}
+		$("#form_active").submit();
+	}
+	
+	function fnShowContent(obj1,obj2){
+		obj1.addClass('currentContent');
+		obj2.removeClass('currentContent');
+	}
+	function fnSetNoneRadios(self){
+	var self=$(self);
+	var bro=self.parents('label').siblings('label').find('[type=radio]');
+	var flag=self.is(':checked');
+	for(i=0;i<bro.size();i++){
+		if(flag){
+			bro.eq(i).attr('checked',false).attr('disabled',true);
+			$("#nickname").attr('disabled',false);
+			$("#nickname_submit").attr('disabled',false);
+		}else{
+			bro.eq(i).attr('disabled',false);
+			$("#nickname").attr('disabled',true);
+			$("#nickname_submit").attr('disabled',true);
+		}
+	}
+}
+</script>

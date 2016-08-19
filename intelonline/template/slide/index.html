@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="author" content="www.zevertech.com" />
+<meta http-equiv="copyright" content="zevertech 2014" />
+<meta http-equiv="pragma" content="no-cache" />
+<meta name="viewport" id="viewport"
+	content="width=device-width, minimum-scale=1, maximum-scale=1, initial-scale=1.0,user-scalable=no" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-touch-fullscreen" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+<meta name="MobileOptimized" content="800">
+<meta name="format-detection" content="telephone=no" />
+<title>英特尔在线业务部招聘</title>
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/swiper.min.css">
+<link rel="stylesheet" href="css/animate.css">
+<link rel="stylesheet" href="css/layout.css">
+<script src="js/jquery.js"></script>
+<script src="js/swiper.min.js"></script>
+<script src="js/common.js"></script>
+<script type="text/javascript">
+$(function(){
+	var mySwiper = new Swiper('.swiper-container',{
+		paginationClickable: true,	
+		mode: 'vertical',
+		speed:800,
+		direction:'vertical',
+		loop: true,
+		initialSlide:0,
+		noSwiping : true,
+		noSwipingClass : 'stop-swiping',
+		onSlideChangeStart: function(swiper){}
+	})
+	$(".popbox .pop_c .return,.popbox .close").click(function () {
+		$(".popbox").fadeOut();
+	});
+	$(".infobox ul li").click(function () {
+		var i = $(this).index();
+		$(".popimgbox"+i).fadeIn();
+	});
+	$(".zpboxlist1 a").click(function () {
+		var i = $(this).index();
+		$(".postpop"+i).fadeIn();
+	});
+	$(".lpage .more").click(function () {
+		$(".post_tj").fadeIn();
+	});
+	$(".zpboxlist2 a").click(function () {
+		$(".postpop4").fadeIn();
+	});
+});
+
+</script>
+<script type="text/javascript">
+	function jsonpcallback(data){
+		wx.config({
+			debug: false, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
+			appId: data.appid, // 必填，公众号的唯一标识
+			timestamp:data.timestamp, // 必填，生成签名的时间戳
+			nonceStr: data.noncestr, // 必填，生成签名的随机串
+			signature: data.signature,// 必填，签名，见附录1
+			jsApiList: ['onMenuShareTimeline','onMenuShareAppMessage'] // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
+		});
+		wx.ready(function(){
+			// config信息验证后会执行ready方法，所有接口调用都必须在config接口获得结果之后，config是一个客户端的异步操作，所以如果需要在页面加载时就调用相关接口，则须把相关接口放在ready函数中调用来确保正确执行。对于用户触发时才调用的接口，则可以直接调用，不需要放在ready函数中。
+			//分享到朋友圈
+			wx.onMenuShareTimeline({
+				  title: '英特尔在线业务部招贤纳士，高才值的客户经理，应用工程师请马上行动！',
+				  link: "",
+				  imgUrl: 'http://intelonlinetest.buzzopt.com/template/slide/images/simg.jpg',
+				  success: function (res) {
+					// 用户确认分享后执行的回调函数
+				  },
+				  cancel: function (res) {
+					// 用户取消分享后执行的回调函数
+				  }
+				});
+			   
+			wx.onMenuShareAppMessage({
+				title: '', // 分享标题
+				desc: '世界那么大，你准备好了吗？我们正在寻找高才值的客户经理和应用工程师。', // 分享描述
+				link: "", // 分享链接
+				imgUrl: 'http://intelonlinetest.buzzopt.com/template/slide/images/simg.jpg', // 分享图标
+				type: '', // 分享类型,music、video或link，不填默认为link
+				dataUrl: '', // 如果type是music或video，则要提供数据链接，默认为空
+				success: function () { 
+					// 用户确认分享后执行的回调函数
+				},
+				cancel: function () { 
+					// 用户取消分享后执行的回调函数
+				}
+			});
+		});
+	}
+</script>
+
+</head>
+<body>
+	<div class="loadingbox"></div>
+	<div class="container">
+		<div class="main">
+			<div class="swiper-container">
+				<div class="swiper-wrapper">
+					<div class="swiper-slide swiper-slide1">
+						<div class="logo">
+							<img src="images/logo.png" alt="" />
+						</div>
+						<div class="txtbox">
+							<img src="images/txtimg11.png" alt="" class="w100 txtimg txtimg1" />
+							<img src="images/txtimg12.png" alt="" class="w100 txtimg txtimg2" />
+						</div>
+					</div>
+					<div class="swiper-slide swiper-slide2">
+						<div class="txtbox">
+							<img src="images/txtimg21.png" alt="" class="w100 txtimg txtimg1" />
+							<img src="images/txtimg22.png" alt="" class="w100 txtimg txtimg2" />
+							<img src="images/txtimg23.png" alt="" class="w100 txtimg txtimg3" />
+						</div>
+					</div>
+					<div class="swiper-slide swiper-slide3">
+						<div class="txtbox">
+							<img src="images/txtimg31.png" alt="" class="w100 txtimg txtimg1" />
+							<img src="images/txtimg32.png" alt="" class="w100 txtimg txtimg2" />
+							<img src="images/txtimg33.png" alt=""
+								class="w100 txtimg txtimgll" />
+						</div>
+					</div>
+					<div class="swiper-slide swiper-slide6">
+						<div class="txtbox">
+							<img src="images/txtimg61.png" alt="" class="w100 txtimg txtimg1" />
+							<img src="images/txtimg62.png" alt=""
+								class="w100 txtimg txtimg11" />
+							<div class="txtbox_zp txtimg111">
+								<div class="zpbox">
+									<div class="zpbox_tit">
+										客户经理 <span>（地点：成都）</span>
+									</div>
+									<div class="zpboxlist zpboxlist1">
+										<a href="javascript:void(0)">物联网</a> <a
+											href="javascript:void(0)">零售渠道</a> <a
+											href="javascript:void(0)">商用渠道、垂直行业</a> <a
+											href="javascript:void(0)">中国计算类产品创新制造企业 CTE</a>
+									</div>
+								</div>
+								<div class="zpbox">
+									<div class="zpbox_tit">
+										应用工程师 <span>（成都）</span>
+									</div>
+									<div class="zpboxlist zpboxlist2">
+										<a href="javascript:void(0)">物联网、智能硬件、CTE</a>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="swiper-slide swiper-slide7">
+						<div class="txtbox">
+							<img src="images/txtimg71.png" alt="" class="w100 txtimg txtimg1" />
+							<img src="images/txtimg72.png" alt=""
+								class="w100 txtimg txtimg11" />
+							<div class="txtimg111">
+								<div class="infobox">
+									<ul>
+										<li><a href="javascript:void(0)"><img
+												src="images/infoimg1.png" alt="" /><span>科技园区</span></a></li>
+										<li><a href="javascript:void(0)"><img
+												src="images/infoimg2.png" alt="" /><span>健身房</span></a></li>
+										<li><a href="javascript:void(0)"><img
+												src="images/infoimg3.png" alt="" /><span>运动场</span></a></li>
+										<li><a href="javascript:void(0)"><img
+												src="images/infoimg4.png" alt="" /><span>互动空间</span></a></li>
+									</ul>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="swiper-slide swiper-slide8">
+						<div class="logo">
+							<img src="images/logo.png" alt="" />
+						</div>
+						<div class="ltxtimg">
+							<img src="images/txtimg81.png" class="w100" alt="" />
+						</div>
+						<div class="txtbox">
+							<div class="lpage txtimg11">
+								<p>查阅详细的岗位介绍(JD)</p>
+								<p>
+									请浏览：<br />
+									<a class="pagelinks" href="https://ccechina.intel.com/hiring/"><img
+										src="images/website.png" alt="" /></a>或发送简历到<br />
+									<a href="mailto:career.china@intel.com">career.china@intel.com</a>
+								</p>
+								<a href="javascript:void(0)" class="link more pagelinks">英特尔员工请点击这里<br />了解如何推荐高才值的朋友
+								</a>
+								<!--
+								<a href="" class="link guanzhu">关 注</a>
+								-->
+								<p>
+									了解更多信息，请到公众账号<br />里搜索“英特尔中国在线”
+								</p>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="bottombox">
+				<div class="topbtn">
+					<img src="images/topbtn.png" alt="" class="arrow" />
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="popbox postpop post_tj">
+		<div class="pop_c">
+			<div class="postbox">
+				<div class="close">
+					<img src="images/close.png" alt="" />
+				</div>
+				<div class="post_c">
+					<p>分享到朋友圈。记得叫你圈子里感兴趣的朋友私信你喔！</p>
+					<p>打开公司电脑，在Circuit上搜索ERP或者Employee Referral Program</p>
+					<p>推荐您觉得很靠谱，高才值的好友</p>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="popbox postpop postpop0">
+		<div class="pop_c">
+			<div class="postbox">
+				<div class="close">
+					<img src="images/close.png" alt="" />
+				</div>
+				<div class="post_tit">
+					客户经理 <span>（物联网）</span>
+				</div>
+				<div class="post_c">
+					<p>物联网（IoT）无容置疑是当今最热门的IT领域，英特尔作为一个全球领先的科技公司在物联网领域具有丰富的产品和解决方案，现诚邀销售潜质和技术功底兼备的您，加入我们一起用最先进的互联网+的客户服务方式在这个领域中一同开疆拓土!
+					</p>
+					<p>您未来需要在客户的产品规划，产品研发，原型试产，批量生产，上市销售等各个阶段与您的客户进行有效沟通并整合英特尔相关资源为客户提供相应的支持服务。
+					</p>
+					<p>P.S. 这是个技术类销售岗位，建议技术小白们慎入。</p>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="popbox postpop postpop1">
+		<div class="pop_c">
+			<div class="postbox">
+				<div class="close">
+					<img src="images/close.png" alt="" />
+				</div>
+				<div class="post_tit">
+					客户经理 <span>（零售渠道）</span>
+				</div>
+				<div class="post_c">
+					<p>透过互联网+销售中心的覆盖模式，你将会管理国内众多零售渠道和店面，从而提升基于英特尔架构的产品的销售量，包括处理器，台式机、笔记本、平板电脑以及智能手机等等。</p>
+					<p>你需要和内部核心产品销售以及市场部合作，并且把渠道反馈、数据等一线信息提供给相关团队，来优化各种市场和销售活动。</p>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="popbox postpop postpop2">
+		<div class="pop_c">
+			<div class="postbox">
+				<div class="close">
+					<img src="images/close.png" alt="" />
+				</div>
+				<div class="post_tit">
+					客户经理 <span>（商用渠道 垂直行业）</span>
+				</div>
+				<div class="post_c">
+					<p>信息化和互联网化的商业场景使国内的商用计算机市场不断的增长，从台式机、笔记本、服务器、到数据中心等种种产品、方案，商用渠道都具有战略意义。</p>
+					<p>基于互联网+销售中心的模式，透过和商用渠道的多元协作，并且和内部核心产品销售以及行业销售团队合作，你将会负责挖掘生意机会、设计并执行渠道专项，以提升我们在商用渠道的业务量。在这个过程中，你会与渠道和合作伙伴建立更好的业务关系。</p>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="popbox postpop postpop3">
+		<div class="pop_c">
+			<div class="postbox">
+				<div class="close">
+					<img src="images/close.png" alt="" />
+				</div>
+				<div class="post_tit">
+					客户经理 <span>（中国计算类产品创新制造企业 CTE）</span>
+				</div>
+				<div class="post_c">
+					<p>中国计算类产品创新制造企业（CTE）经过数年的积累已成为全球该领域的中坚力量，越来越多的计算类产品从中国走向世界，英特尔作为一个全球领先的科技公司在该领域具有丰富的产品和解决方案，现诚邀销售潜质和技术功底兼备的您，加入我们一起用最先进的互联网+的客户服务方式帮助CTE创造出更好的产品来服务全球的消费者！
+					</p>
+					<p>您未来需要联合英特尔在台式机/笔记本/服务器/平板电脑/智能手机领域的IDH/ODM合作伙伴在您客户的产品规划，产品研发，原型试产，批量生产，上市销售等各个阶段与您的客户进行有效沟通并整合英特尔及IDH/ODM合作伙伴们的相关资源为客户提供相应的支持服务。
+					</p>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="popbox postpop postpop4">
+		<div class="pop_c">
+			<div class="postbox">
+				<div class="close">
+					<img src="images/close.png" alt="" />
+				</div>
+				<div class="post_tit">在线应用工程师</div>
+				<div class="post_c">
+					<p>如果你对物联网、智能设备、以及可穿戴技术有极大的热情和专注，并且积极向上，勇于创新，赶紧来一场说走就走的面试吧！</p>
+					<p>在这里，你可以充分利用互联网模式，和客户一起投入到产品设计和方案的交流和支持中，以专业的产品应用方案引导客户，参与到客户的项目设计中,提供产品技术支持，并指导销售，最终使客户与英特尔达成一致的战略目标。</p>
+					<p>不管你是萌妹子，还是小鲜肉，只要你有热情、爱技术、会聊天，并且有一颗渴望用技术改变世界的心，我们都等你！</p>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="popbox popimgbox popimgbox0">
+		<div class="pop_c">
+			<img src="images/simg1.jpg" alt="" class="w100" /> <a
+				href="javascript:void(0)" class="return">返 回</a>
+		</div>
+	</div>
+	<div class="popbox popimgbox popimgbox1">
+		<div class="pop_c">
+			<img src="images/simg2.jpg" alt="" class="w100" /> <a
+				href="javascript:void(0)" class="return">返 回</a>
+		</div>
+	</div>
+	<div class="popbox popimgbox popimgbox2">
+		<div class="pop_c">
+			<img src="images/simg3.jpg" alt="" class="w100" /> <a
+				href="javascript:void(0)" class="return">返 回</a>
+		</div>
+	</div>
+	<div class="popbox popimgbox popimgbox3">
+		<div class="pop_c">
+			<img src="images/simg4.jpg" alt="" class="w100" /> <a
+				href="javascript:void(0)" class="return">返 回</a>
+		</div>
+	</div>
+	<script type="text/javascript"
+		src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+	<script type="text/javascript"
+		src="http://m.zevertech.com/index.php/jssdk?jsonpcallback=jsonpcallback"></script>
+</body>
+</html>

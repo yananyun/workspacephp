@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+<head>
+<title>考试状态</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<script src="/js/jquery.js"></script>
+<style>
+.formbody {
+	overflow: hidden;
+	padding: 10px 18px;
+	margin: auto;
+	width: 60%;
+}
+
+* {
+	border: 0 none;
+	font-size: 12pt;
+	margin: 0;
+	padding: 0;
+}
+
+.formtitle {
+	border-bottom: 1px solid #d0dee5;
+	height: 35px;
+	line-height: 35px;
+	margin-bottom: 10px;
+	position: relative;
+}
+
+.forminfo {
+	padding-left: 23px;
+	padding-bottom: 50px;
+}
+
+ul {
+	display: block;
+	list-style: outside none none;
+	margin: 0;
+	padding: 0;
+}
+
+.forminfo li {
+	clear: both;
+	margin-bottom: 13px;
+}
+
+li {
+	display: block;
+	list-style: outside none none;
+	margin: 0;
+	padding: 0;
+}
+
+.dfinput {
+	background: url("../images/inputbg.gif") repeat-x scroll 0 0
+		rgba(0, 0, 0, 0);
+	border-color: #a7b5bc #ced9df #ced9df #a7b5bc;
+	border-style: solid;
+	border-width: 1px;
+	height: 32px;
+	line-height: 32px;
+	text-indent: 10px;
+	width: 345px;
+}
+
+.textinput {
+	background: url("../images/inputbg.gif") repeat-x scroll 0 0
+		rgba(0, 0, 0, 0);
+	border-color: #a7b5bc #ced9df #ced9df #a7b5bc;
+	border-style: solid;
+	border-width: 1px;
+	height: 135px;
+	line-height: 20px;
+	overflow: hidden;
+	padding: 10px;
+	width: 504px;
+}
+
+.forminfo li label {
+	display: block;
+	float: left;
+	line-height: 34px;
+	width: 86px;
+}
+
+select {
+	height: 32px;
+	width: 100px;
+}
+
+.btn {
+	background: url("/template/audit/btnbg.png") no-repeat scroll 0 0
+		rgba(0, 0, 0, 0);
+	color: #fff;
+	cursor: pointer;
+	font-size: 14px;
+	font-weight: bold;
+	height: 35px;
+	width: 137px;
+}
+
+select {
+	border: 1px solid #ccc;
+}
+
+table {
+	width: 100%;
+	margin: 20px auto;
+}
+
+tr, td {
+	height: 30px;
+	line-height: 30px;
+	border-bottom: 1px dotted #ccc;
+}
+</style>
+<script>
+	    function change_(id, type){
+		if(!type){
+		    return false;
+		}
+		var url = "/index.php/audit/audit/id/" + id + "/type/" + type;
+		$.ajax({
+		url:url,
+			dataType:'json',
+			success:function(data){
+			    if (data.status == true){
+				alert(data.info);
+				location.href = "/index.php/audit/index/type/" + type;
+			    } else{
+				alert(data.info);
+			    }
+			}
+		});
+	    }
+	</script>
+</head>
+<body>
+	<div class="formbody">
+		<div class="formtitle">
+			<h1 style="font-size: 16px;">
+				考试状态<a style="margin-left: 50px;" href="javascript:history.go(-1);">返回</a>
+			</h1>
+		</div>
+		<table>
+			<tr
+				style='background-color: #00aba9; color: #fff; font-size: 14px; font-weight: bold;'>
+				<td style='width: 251px;'>openid</td>
+				<td>昵称</td>
+				<td style="width: 200px;">考试时间</td>
+				<td>分数</td>
+			</tr>
+			<{foreach from = $list item = v key = k}>
+			<tr>
+				<td><{$v.openid}></td>
+				<td><{$v.nickname}></td>
+				<td><{$v.ctime}></td>
+				<td><{$v.score}></td>
+			</tr>
+			<{/foreach}>
+		</table>
+		<!--<input type="hidden" value="1" name="id" />-->
+		<!--<ul class="forminfo">-->
+		<!--	<li><label>公司名称</label><input type="text" class="dfinput" value="<{$info.companyname}>" /><i></i></li>
+	<li><label>公司网址</label><input type="text" class="dfinput" value="<{$info.website}>" /></li>
+	<li><label>公司规模</label><input type="text" class="dfinput" value="<{$info.companysize}>" /></li>
+	<li><label>公司年营业额</label><input type="text" class="dfinput" value="<{$info.sale}>" /></li>
+	<li><label>公司行业</label><input type="text" class="dfinput" value="<{$info.industry}>" /></li>
+	<li><label>研发人数</label><input type="text" class="dfinput" value="<{$info.rdnum}>" /></li>
+	<li><label>销售人数</label><input type="text" class="dfinput" value="<{$info.salesnum}>" /></li>
+	<li><label>生产人数</label><input type="text" class="dfinput" value="<{$info.workernum}>" /></li>
+	<li><label>产品描述</label><textarea class="textinput" rows="" cols="" ><{$info.productdescription}></textarea></li>
+	<li><label>产品图片</label><img src="<{$info.productimg}>" style="max-height: 300px;" /></li>
+	<li><label>预计年销售量</label><input type="text" class="dfinput" value="<{$info.expectedsales}>" /></li>
+	<li><label>姓名</label><input type="text" class="dfinput" value="<{$info.name}>" /></li>
+	<li><label>手机号</label><input type="text" class="dfinput" value="<{$info.mobile}>" /></li>
+	<li><label>职位</label><input type="text" class="dfinput" value="<{$info.title}>" /></li>
+	<li><label>工作邮箱</label><input type="text" class="dfinput" value="<{$info.email}>" /></li>
+	<li><label>邮寄地址</label><input type="text" class="dfinput" value="<{$info.address}>" /></li>-->
+		<!--	<li><label>&nbsp;</label>
+	    <select onchange="change_(<{$info.id}>,this.value)">
+		<option>切换审核</option>
+		<option value="2"> 审核通过 </option>
+		<option value="3">未审核通过</option>
+	    </select>&nbsp;&nbsp;&nbsp;<input type='button' class='btn' onclick='javascript:history.go(-1);' value="返回上一页" />
+	</li>-->
+		<!--</ul>-->
+	</div>
+	<!--		<div style="float:left;margin-left:30px;">
+			<form action="/index.php/audit/doAudit" method="POST">
+				<h3>审核操作：</h3>
+				<div style="float:left;width: 100%;height:20px;"></div>
+				<input type="hidden" name="id" value="<{$info.id}>"/>
+				<input type="radio" name="type" value="2"/>通过
+				<input type="radio" name="type" value="3"/>驳回
+				<div style="float:left;width: 100%;height:20px;"></div>
+				备注：<input type="text" class="dfinput" name="reason" style="width:500px"/>
+				<div style="float:left;width: 100%;height:20px;"></div>
+				<input type="submit" value="OK"/>
+				<div style="float:left;width: 100%;height:80px;"></div>
+			</form>
+		</div>-->
+</body>
+</html>

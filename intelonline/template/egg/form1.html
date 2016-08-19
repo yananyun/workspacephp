@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="author" content="www.zevertech.com" />
+<meta http-equiv="copyright" content="zevertech 2014" />
+<meta http-equiv="pragma" content="no-cache" />
+<meta name="viewport" id="viewport"
+	content="width=device-width, minimum-scale=1, maximum-scale=1, initial-scale=1.0,user-scalable=no" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-touch-fullscreen" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+<meta name="MobileOptimized" content="800">
+<meta name="format-detection" content="telephone=no" />
+<title>edison入驻京东</title>
+<link rel="stylesheet" href="/template/egg/css/reset.css">
+<link rel="stylesheet" href="/template/egg/css/layout.css">
+<script src="/template/egg/js/jquery.js"></script>
+<script src="/template/egg/js/common.js"></script>
+<script type="text/javascript"
+	src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+</head>
+<body class="container">
+	<div class="loadingbox"></div>
+	<input type="hidden" name="openid" id="openid" value="<{$openid}>">
+	<div class="logo infor_logo">
+		<img src="/template/egg/img/logo.png" />
+	</div>
+	<div class="send">
+		<img src="/template/egg/img/send.png" />
+	</div>
+	<div class="sendP">填写下方信息，即可获得惊喜大礼，快快行动吧</div>
+	<!--<div class="bill"><img src="/template/egg/img/Bill.png"/></div>-->
+	<form action="#">
+		<!--readonly-->
+		<div class="infor_in mt32">
+			<span>订单号</span><input type="text" name="gorder" value="<{$gorder}>"
+				readonly />
+		</div>
+		<div class="infor_in mt32">
+			<span>姓&nbsp;&nbsp;&nbsp;名</span><input type="text" name="gname"
+				value="" />
+		</div>
+		<div class="infor_in mt32">
+			<span>手机号</span><input type="text" name="gphone" value="" />
+		</div>
+		<div class="Smash">
+			<a href="javascript:void(0);" class="egg_play" onclick="form1_save()"><img
+				src="/template/egg/img/tijiao.png" class="tijiao" /></a>
+		</div>
+	</form>
+	<div class="popbox" style="background: rgba(80, 80, 80, 0.8);">
+		<div class="tijiaoP">
+			<img src="/template/egg/img/close.png" class="egg_close1" /> <img
+				src="/template/egg/img/guanbi.jpg" class="guanbi" />
+		</div>
+	</div>
+	<script type="text/javascript"
+		src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+	<script>
+	function form1_save(){
+		var gorder = $.trim($('input[name=gorder]').val());
+		var gname = $.trim($('input[name=gname]').val());
+		var gphone = $.trim($('input[name=gphone]').val());
+		
+		$.ajax({
+			url:'/index.php/GameInfo/form1_save',
+			data:{gname:gname,gorder:gorder,gphone:gphone},
+			dataType:'json',
+			type:'post',
+			success:function(data){				
+				if(data.status){
+				 	event.preventDefault();
+				 	$(".popbox").css('display','block');
+				
+				}else{
+					alert(data.info);
+				}
+			}
+		});
+	}
+
+
+
+	</script>
+	<script>
+function jsonpcallback(data){
+    wx.config({
+        debug: false, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
+        appId: data.appid, // 必填，公众号的唯一标识
+        timestamp:data.timestamp, // 必填，生成签名的时间戳
+        nonceStr: data.noncestr, // 必填，生成签名的随机串
+        signature: data.signature,// 必填，签名，见附录1
+        jsApiList: ['hideOptionMenu','closeWindow'] // 必填，需要使用的JS接口列表，所有JS接口列表见附录2、、微信隐藏分享代码
+    });
+
+    wx.ready(function(){
+        // config信息验证后会执行ready方法，所有接口调用都必须在config接口获得结果之后，config是一个客户端的异步操作，所以如果需要在页面加载时就调用相关接口，则须把相关接口放在ready函数中调用来确保正确执行。对于用户触发时才调用的接口，则可以直接调用，不需要放在ready函数中。
+        //分享到朋友圈
+        wx.hideOptionMenu();//微信隐藏分享代码
+        $(".guanbi").on('click',function(){
+            $(".popbox").css('display','none');
+            wx.closeWindow();
+        })
+    });
+}
+</script>
+	<script type="text/javascript"
+		src="http://m.zevertech.com/index.php/jssdk?jsonpcallback=jsonpcallback"></script>
+	<script type="text/javascript" src="/template/egg/js/ga1.js"></script>
+</body>
+</html>

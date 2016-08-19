@@ -1,0 +1,61 @@
+
+<!--box start-->
+<div class="container ">
+	<div class="m_r_msg">
+		<p>
+			<i class="fa fa-lightbulb-o"></i>公众帐号可以在会话界面底部设置自定义菜单，菜单项可按需设定，并可为其设置响应动作。用户可以通过点击菜单项，收到你设定的消息。
+		</p>
+	</div>
+	<div class="clr"></div>
+	<div class="m_r_title">编辑自定义菜单</div>
+	<div class="clr"></div>
+	<div class="m_r_p">你可以创建最多 3 个一级菜单，每个一级菜单下可以创建最多 5
+		个二级菜单。编辑中的菜单不会马上被用户看到，可以放心调试。</div>
+	<div class="clr"></div>
+	<div class="m_r_content">
+		<div class="m_r_leftMenu m_mu">
+			<div class="m_r_l_menu">
+				<span>菜单管理<{$a}></span> <input type="button" onclick="addMenu()"
+					class="intelBtn" value="添加菜单" />
+			</div>
+			<div class="m_r_uls">
+				<ul class="m_ul">
+					<{foreach $getMenuList as $vo}>
+					<li class="m_ml">
+						<!--<span class="m_text_span" onclick="showContent({$cvo.id})"></span>-->
+						<input type="text" class="m_text" id="text_<{$vo.id}>"
+						onclick="showContent(<{$vo.id}>)" value="<{$vo.name}>"
+						readonly="readonly"> <span class="m_menu_l"> <a
+							onclick="addChildMenu(this,<{$vo.id}>)" href="javascript:void(0)">添加子菜单</a>
+							<a onclick="updateMenu(this,<{$vo.id}>)"
+							href="javascript:void(0)">编辑</a> <a
+							onclick="deleteMenu(this,<{$vo.id}>)" href="javascript:void(0)">删除</a>
+					</span>
+
+						<ul id="childMenu">
+							<{if $vo.child != ''}> <{foreach $vo['child'] as $cvo}>
+							<li style="height: 20px; position: relative"><input
+								type="text" onclick="showContent(<{$cvo.id}>)" class="m_text_li"
+								value="<{$cvo.name}>" id="text_<{$cvo.id}>"> <span
+								class="m_menu_l"> <a
+									onclick="updateMenu(this,<{$cvo.id}>)"
+									href="javascript:void(0)">编辑</a> <a
+									onclick="deleteChildMenu(this,<{$cvo.id}>)"
+									href="javascript:void(0)">删除</a>
+							</span></li> <{/foreach}> <{/if}>
+						</ul>
+					</li> <{/foreach}>
+				</ul>
+			</div>
+		</div>
+		<div class="m_r_rightContent"></div>
+	</div>
+	<div class="clr"></div>
+	<div class="m_r_title">发布自定义菜单</div>
+	<div class="m_r_p">编辑中的菜单不能直接在用户手机上生效，你需要进行发布，发布后24小时内所有的用户都将更新到新的菜单。</div>
+	<div class="m_clr"></div>
+	<div>
+		<input type="button" value="发布" class="intelBtn publishBtn" id='send'
+			onclick="releaseMenu()" />
+	</div>
+</div>

@@ -1,0 +1,70 @@
+<!DOCTYPE HTML>
+<html lang="zh-cn">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="keywords" content="">
+<meta name="description" content="">
+<title>微信管理平台-消息管理</title>
+<link rel="stylesheet" type="text/css" href="/css/main.css">
+<link rel="stylesheet" type="text/css" href="/css/base.css">
+<link rel="stylesheet" type="text/css" href="/css/skins/blue.css">
+<link rel="stylesheet" type="text/css" href="/css/page_message.css">
+<script type="text/javascript" src="/js/jquery.js"></script>
+<script type="text/javascript" src="/js/artDialog.js"></script>
+<script type="text/javascript" src="/js/main.js"></script>
+<script type="text/javascript" src="/js/base.js"></script>
+<script type="text/javascript" src="/js/message_manage.js"></script>
+<script type="text/javascript" src="/js/ueditor/ueditor.config.js"></script>
+<script type="text/javascript" src="/js/ueditor/ueditor.all.js"></script>
+<script type="text/javascript" src="/js/ajaxfileupload.js"></script>
+</head>
+<body
+	onload="loadContent('',$('.intelListWrap'),'/index.php/message/msglist/timeType/0')">
+	<{include 'admin/public/header.html'}>
+	<div class="container">
+		<div class="main">
+			<{include 'admin/public/left_menu.html'}>
+			<div class="mainWrap">
+				<div class="tabWrap mt20">
+					<a id="first" class="currentTab"
+						onclick="tabsChange(this,$('.intelListWrap'),'/index.php/message/msglist/timeType/0')"
+						href="javascript:;">全部消息</a> <a
+						onclick="tabsChange(this,$('.intelListWrap'),'/index.php/message/msglist/timeType/1')"
+						href="javascript:;">今天</a> <a
+						onclick="tabsChange(this,$('.intelListWrap'),'/index.php/message/msglist/timeType/2')"
+						href="javascript:;">昨天</a> <a
+						onclick="tabsChange(this,$('.intelListWrap'),'/index.php/message/msglist/timeType/3')"
+						href="javascript:;">前天</a> <a
+						onclick="tabsChange(this,$('.intelListWrap'),'/index.php/message/msglist/timeType/4')"
+						href="javascript:;">更早</a>
+					<!--<a onclick="tabsChange(this,$('.intelListWrap'),'/index.php/message/msglist/timeType/0')" href="javascript:;">星标消息</a>-->
+					<!--<a class="visibility searchTab"  href="javascript:;">搜索结果</a>-->
+					<span class="frm_input_box search append"> <a
+						class="frm_input_append" href="javascript:void(0);"
+						onclick="msgSearch('.msgSearchTab',$('.intelListWrap'))"
+						style="border-radius: 0px;"> <i
+							class="icon16_common search_gray">搜索</i>&nbsp;
+					</a> <input type="text" class="frm_input" value="" placeholder="消息内容"
+						id="msgSearchInput">
+					</span>
+				</div>
+				<div class="intelListWrap"></div>
+			</div>
+		</div>
+
+	</div>
+	<script type="text/javascript">
+//		// 演示脚本 套用模板时需删除
+//			jQuery(function($){
+//				$.ajax({
+//					url:"../html/messageManage/message_list.html",
+//					dataType:"html",
+//					success:function(data){
+//						$(".intelListWrap").html(data);
+//					}
+//				});
+//			});
+//		// 演示脚本 end
+		</script>
+</body>
+</html>

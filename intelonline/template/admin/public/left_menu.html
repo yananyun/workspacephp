@@ -1,0 +1,41 @@
+<!--<div class="mainLeft">
+	<ul class="leftNav">
+            <p><a href="/index.php/statistical/index">首页</a></p>
+		<p>基础功能</p>
+			<li><i></i><a href="/index.php/reply/list_manage">自动回复</a></li>
+			<li><i></i><a href="/index.php/menu/menu_manage">自定义菜单</a></li>
+			<li><i></i><a href="/index.php/groupMessage/list_manage">消息发布</a></li>
+			<li><i></i><a href="/index.php/message/list_manage">消息管理</a></li>
+			<li><i></i><a href="/index.php/group/list_manage">用户组管理</a></li>
+		<p>素材管理</p>
+			<li><i></i><a href="/index.php/material/pic_txt_msg">图文素材</a></li>
+			<li><i></i><a href="/index.php/material/pic_msg">图片管理</a></li>
+		<p><a href="/index.php/member/member_manage">微信用户管理</a></p>
+		<p><a href="/index.php/user/index">成员管理</a></p>					
+		<p><a href="/index.php/me/index">个人中心</a></p>
+
+	</ul>
+</div>-->
+<div class="leftDiv">
+	<ul id="navigation">
+		<li><a href="/index.php/member/member_manage"<{if
+				$module=='member' || $module=='group'}> class="nowRight"<{/if}>
+				>微信用户管理</a></li>
+		<!-- <li><a href="/index.php/group/list_manage">微信用户分组管理</a></li> -->
+		<li><a href="/index.php/tag/list_manage"<{if
+				$module=='tag'}> class="nowRight"<{/if}> >标签管理</a></li>
+		<li><a href="/index.php/information/index"<{if
+				$module=='information'}> class="nowRight"<{/if}>>最新资讯管理</a></li>
+		<li><a href="/index.php/activepush/weixin_msg_list"<{if
+				$module=='activepush'}> class="nowRight"<{/if}>>主动发送管理</a></li>
+		<!--<li><a href="/index.php/reply/list_manage" <{if $module=='reply'}> class="nowRight"<{/if}>>客服应答</a></li>-->
+		<li><a href="/index.php/autoresponse/autoresponse_manage"<{if
+				$module=='autoresponse'}> class="nowRight"<{/if}>>客服应答</a></li>
+		<li><a href="/index.php/datamanage/index"<{if
+				$module=='datamanage'}> class="nowRight"<{/if}>>数据管理</a></li>
+		<!-- <li><a href="/index.php/material/pic_txt_msg"  <{if $module=='material' && ($action=='pic_txt_msg' || $action=='creat_pic_txt' || $action=='creat_pic_txt_multi')}> class="nowRight"<{/if}>>图文素材</a></li> -->
+		<li><a href="/index.php/material/txt_msg"<{if
+				$module=='material'}> class="nowRight"<{/if}>>素材库</a></li>
+		<!-- <li><a href="/index.php/material/pic_msg">图片管理</a></li> -->
+	</ul>
+</div>

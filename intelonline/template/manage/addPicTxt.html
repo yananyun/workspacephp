@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>添加多图文消息</title>
+<link rel="stylesheet" href="/css/index.css">
+<link href="/jquery-ui.css" rel="stylesheet">
+<script src="/js/jquery.min.js"></script>
+<script src="/js/index.js"></script>
+<script src="/js/jquery-ui.js"></script>
+
+<link href="/css/main.css" type="text/css" rel="stylesheet" />
+<link href="/css/K_admin.css" type="text/css" rel="stylesheet" />
+<link rel="stylesheet" type="text/css" href="/css/skins/blue.css" />
+<link rel="stylesheet" type="text/css" href="/css/material.css" />
+<script type="text/javascript" src="/js/jquery.js"></script>
+<script type="text/javascript" src="/js/main.js"></script>
+<script type="text/javascript" src="/js/artDialog.js"></script>
+<script type="text/javascript" src="/js/iframeTools.js"></script>
+<script type="text/javascript" src="/js/ajaxfileupload.js"></script>
+<script type="text/javascript" src="/js/createMaterial.js"></script>
+<!--百度在线编辑器-->
+<script type="text/javascript" charset="utf-8"
+	src="/js/ueditor/ueditor.config.js"></script>
+<script type="text/javascript" charset="utf-8"
+	src="/js/ueditor/ueditor.all.min.js"> </script>
+<script type="text/javascript" charset="utf-8"
+	src="/js/ueditor/lang/zh-cn/zh-cn.js"></script>
+</head>
+<body>
+	<div class="top">
+		<img src="/images/logo.jpg" alt="" />
+		<p>
+			Intel China Online<br /> <em>微信管理后台</em>
+		</p>
+		<div class="topRight">
+			<ul>
+				<li>admin&nbsp;|</li>
+				<li>帮助&nbsp;|</li>
+				<li><a href="">{退出}</a></li>
+			</ul>
+		</div>
+	</div>
+	<div class="con">
+		<div class="leftDiv">
+			<ul id="navigation">
+				<li><a href="weixinManage.html">微信用户管理</a></li>
+				<li><a href="newInfoManage.html">最新资讯管理</a></li>
+				<li><a href="sendManage.html">主动发送管理</a></li>
+				<li><a href="labelManage.html">标签管理</a></li>
+				<li><a href="serviceManage.html">客服应答</a></li>
+				<li><a href="dateManage.html">数据管理</a></li>
+				<li><a href="fodderManage.html" class="nowRight">素材库</a></li>
+			</ul>
+		</div>
+		<div class="rightDiv weixinDiv">
+			<div class="webTitle labelTitle">
+				<img src="/images/icon1.png" alt=""> <a href="addLabel.html">添加单图文</a>
+				<input type="button" class="groupBtn cancleBtn closeBtn"
+					onclick="window.history.back();" value="关闭">
+			</div>
+			<div class="mainCon">
+				<div class="creatPicTxtCol">
+					<div class="pic_txt_col editOn" id="coverCol">
+						<p class="materialPicTxtTtl">标题</p>
+						<div class="materialPicWrapCover mPreview">
+							<div class="preViewImg">
+								<h1>封面图片</h1>
+							</div>
+						</div>
+						<p class="materialPicTxtComment"></p>
+						<input type="hidden" name="sTitle" /> <input type="hidden"
+							name="sAuthor" /> <input type="hidden" name="uploadPath" /> <input
+							type="hidden" name="coverFlag" value="0" /> <input type="hidden"
+							name="sComment" /> <input type="hidden" name="sUrl" />
+						<div class="sArticle" style="display: none;"></div>
+						<input type="hidden" name="sLink" /> <input type="hidden"
+							name="sTags" />
+					</div>
+				</div>
+				<div class="materialEditWrap">
+					<i class="arrow arrow_out"></i> <i class="arrow arrow_in"></i>
+					<div class="editBox">
+						<div class="optionCol">
+							<p>
+								标题<span class="inlineTip">（最多64字）</span>
+							</p>
+							<div class="optionField">
+								<input type="text" name="meTitle" />
+							</div>
+						</div>
+						<div class="optionCol">
+							<p>
+								作者<span class="inlineTip">（选填）</span>
+							</p>
+							<div class="optionField">
+								<input type="text" name="meAuthor" />
+							</div>
+						</div>
+						<div class="optionCol topCover">
+							<p>
+								封面<span class="inlineTip right">大图片建议尺寸：640像素 * 320像素</span>
+							</p>
+							<div class="uploadField">
+								<label class="imgUpLabel"> <input class="imgUpBtn"
+									id="up_picture" imgWidth="640" imgHeight="320"
+									name="up_picture" type="file"
+									onchange="fnMaterialPicUpload(this,$('.preViewBox'),$('.editOn'),$('.uploadView'));" />
+									上传
+								</label> <label class="imgUpLabel"> <input class="imgUpBtn"
+									imgWidth="640" imgHeight="320" id="up_picture"
+									name="up_picture" type="file"
+									onchange="fnMaterialPicUpload(this,$('.preViewBox'),$('.editOn'),$('.uploadView'));" />
+									从图片库选择
+								</label>
+								<div class="preViewBox">
+									<div class="uploadView">
+										<h5>上传中.</h5>
+									</div>
+									<a class="delView" href="javascript:void(0);"
+										onclick="fnDelUpload($('.editOn').find('[name=uploadPath]'),$('.uploadView'),$('.preViewBox'))">删除</a>
+								</div>
+							</div>
+							<p>
+								<label class="inlineTip"><input type="checkbox"
+									name="meCoverFlag" />封面图片显示在正文中</label>
+							</p>
+						</div>
+						<div class="optionCol">
+							<p>
+								摘要<span class="inlineTip">（选填）</span>
+							</p>
+							<div class="optionField">
+								<textarea name="meComment"></textarea>
+							</div>
+						</div>
+						<div class="optionCol">
+							<p>
+								正文<span class="inlineTip">（最多2000字）</span>
+							</p>
+
+							<script id="materialArticle" type="text/plain"
+								style="height: 300px;"></script>
+						</div>
+						<div class="optionCol">
+							<p>
+								原文链接<span class="inlineTip">（选填）</span>
+							</p>
+							<div class="optionField">
+								<input type="text" name="meLink" />
+							</div>
+						</div>
+					</div>
+				</div>
+				<p class="saveMaterialBtnWrap">
+					<a href="" class="intelBtn">保存</a>
+				</p>
+			</div>
+		</div>
+	</div>
+</body>
+</html>
+
+<script type="text/javascript">
+	var editor = UE.getEditor('materialArticle');
+	$(function(){
+		$('.intelBtn').click(function(){
+			var coverCol = $('#coverCol');
+			var title = $.trim(coverCol.find(':input[name=sTitle]').val());
+			var author = $.trim(coverCol.find(':input[name=sAuthor]').val());
+			var thumb = $.trim(coverCol.find(':input[name=uploadPath]').val());
+			var url = $.trim(coverCol.find(':input[name=sUrl]').val());
+			var coverFlag = $.trim(coverCol.find(':input[name=coverFlag]').val());
+			var content = $.trim(coverCol.find('.sArticle').html());
+			var original_url = $.trim(coverCol.find(':input[name=sLink]').val());
+			var tags = $.trim(coverCol.find(':input[name=sTags]').val());
+			
+			var fields = new Array();
+			fields = '[';
+			fields += '{"title":"'+title+'","author":"'+author+'","content":"'+encodeURI(content)+'","thumb":"'+thumb+'","url":"'+url+'","original_url":"'+original_url+'","coverFlag":"'+coverFlag+'","tags":"'+tags+'"}';
+			$('.appendColWrap .pic_txt_col').each(function(){
+				var coverCol = $(this);
+				var title = $.trim(coverCol.find(':input[name=sTitle]').val());
+				var author = $.trim(coverCol.find(':input[name=sAuthor]').val());
+				var thumb = $.trim(coverCol.find(':input[name=uploadPath]').val());
+				var url = $.trim(coverCol.find(':input[name=sUrl]').val());
+				var coverFlag = $.trim(coverCol.find(':input[name=coverFlag]').val());
+				var content = $.trim(coverCol.find('.sArticle').html());
+				var original_url = $.trim(coverCol.find(':input[name=sLink]').val());
+				var tags = $.trim(coverCol.find(':input[name=sTags]').val());
+				
+				fields += ',{"title":"'+title+'","author":"'+author+'","content":"'+encodeURI(content)+'","thumb":"'+thumb+'","url":"'+url+'","original_url":"'+original_url+'","coverFlag":"'+coverFlag+'","tags":"'+tags+'"}';
+			});
+			fields += ']';
+			$.ajax({
+				url:'/index.php/material/creat_pic_txt_save',
+				data:{ "data":  fields},
+				type:'post',	
+				dataType:'json',
+				success:function(data){
+					alert(data.info);
+					if(data.status == 1){
+						location.href = '/index.php/material/pic_txt_msg';
+					}
+					
+				}
+			});
+			return false;	
+		});
+	});
+
+</script>

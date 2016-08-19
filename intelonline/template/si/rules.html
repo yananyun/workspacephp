@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html>
+<head>
+<base href="/template/si/" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="author" content="www.zevertech.com" />
+<meta http-equiv="copyright" content="zevertech 2014" />
+<meta http-equiv="pragma" content="no-cache" />
+<meta id="viewport" name="viewport" content="width=640,user-scalable=no">
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-touch-fullscreen" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+<meta name="MobileOptimized" content="800">
+<meta name="format-detection" content="telephone=no" />
+<title>英特尔中国智造基地</title>
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/animate.css">
+<link rel="stylesheet" href="css/layout.css">
+<script src="js/jquery.js"></script>
+<script src="js/common.js"></script>
+<script type="text/javascript">
+		function jsonpcallback(data){
+			wx.config({
+				debug: false, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
+				appId: data.appid, // 必填，公众号的唯一标识
+				timestamp:data.timestamp, // 必填，生成签名的时间戳
+				nonceStr: data.noncestr, // 必填，生成签名的随机串
+				signature: data.signature,// 必填，签名，见附录1
+				jsApiList: ['onMenuShareTimeline','onMenuShareAppMessage'] // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
+			});
+
+			wx.ready(function(){
+				// config信息验证后会执行ready方法，所有接口调用都必须在config接口获得结果之后，config是一个客户端的异步操作，所以如果需要在页面加载时就调用相关接口，则须把相关接口放在ready函数中调用来确保正确执行。对于用户触发时才调用的接口，则可以直接调用，不需要放在ready函数中。
+				//分享到朋友圈
+				wx.onMenuShareTimeline({
+					  title: '【路过有礼·参与有奖】英特尔硬享公社系列活动火热招募，等你参加！',
+					  link: '<{$url}>',
+					  imgUrl: 'http://intelonline.buzzopt.com/template/si/images/simg.png',
+					  success: function (res) {
+						// 用户确认分享后执行的回调函数
+					  },
+					  cancel: function (res) {
+						// 用户取消分享后执行的回调函数
+					  }
+					});
+				   
+				wx.onMenuShareAppMessage({
+					title: '', // 分享标题
+					desc: '【路过有礼·参与有奖】英特尔硬享公社系列活动火热招募，等你参加！', // 分享描述
+					link: '<{$url}>', // 分享链接
+					imgUrl: 'http://intelonline.buzzopt.com/template/si/images/simg.png', // 分享图标
+					type: '', // 分享类型,music、video或link，不填默认为link
+					dataUrl: '', // 如果type是music或video，则要提供数据链接，默认为空
+					success: function () { 
+						// 用户确认分享后执行的回调函数
+					},
+					cancel: function () { 
+						// 用户取消分享后执行的回调函数
+					}
+				});
+			});
+		}
+	</script>
+</head>
+<body>
+	<div class="loadingbox"></div>
+	<div class="fixedbg"></div>
+	<div class="container">
+		<div class="main">
+			<div class="logo">
+				<img src="images/logo.png" alt="" />
+			</div>
+			<div class="rulesbox mt0">
+				<h2 class="l y tc">活动规则</h2>
+				<p>
+					<span class="y m">活动时间：</span>2015年5月29日-6月29日
+				</p>
+				<p>
+					<span class="y m">项目报名：</span>
+				</p>
+				<p>1.关注【英特尔中国在线】微信公众号；</p>
+				<p>2.点击"现在参与"并按照要求填写完整信息后提交。</p>
+				<p>
+					<span class="y m">参与福利：</span>
+				</p>
+				<p>• 借助英特尔全球渠道经销商销售平台拓展海外市场</p>
+				<p>• 受邀参加英特尔最新的产品&技术培训</p>
+				<p>• 获得英特尔工程师的直接支持</p>
+				<p>• 有机会获得英特尔颁发的“英特尔中国智造基地成员” 授权证书</p>
+				<p>• 有机会免费获得样片支持</p>
+				<p>• 报名成功的前200名活动成员可以得到小米路由器一个</p>
+				<!--  <p>•	在6月7日前成为活动会员，即可获得3次掌上娃娃机体验机会，有机会获得50元或100元携程网超值礼包</p> -->
+				<p>
+					<span class="y m">参与抽奖：</span>
+				</p>
+				<p>1.路过有奖，打开抽奖页面，您将获得第一次抽奖机会。</p>
+				<p>2.转发的页面每被点击打开10次，您将额外获得一次抽奖机会。</p>
+				<p>
+					<span class="y m">抽奖奖品设置：</span>
+				</p>
+				<p>星巴克咖啡券、麦当劳代金券、时光网电影票、物美超市电子券 、好利来蛋糕券</p>
+				<!-- <p><span class="y m">掌上娃娃机奖品设置：</span></p>
+				<p>50元、100元携程网超值礼包</p> -->
+				<p>
+					<span class="y m">活动声明：</span>
+				</p>
+				<p>1.
+					参与者尚无基于英特尔平台产品的，需在“英特尔中国在线”微信平台中参与考试，点击“智造基地”→“参与考试”，提交人通过考试并资料审核通过后即可报名成功。</p>
+				<!-- <p>2. 掌上娃娃机体验项目截止日期为6月7日，且需完成报名并审核通过。</p> -->
+				<p>2.
+					中奖结果公布后，获奖用户请按照规定提供个人相关信息，以确保奖品的精确发放；因个人信息不全或错误造成主办方无法发放奖品，将视为用户放弃领奖。</p>
+				<p>3. 若活动主办方因故无法提供原定奖品，活动主办方有权以价值相仿的奖品替代，所有奖品不得兑换现金。</p>
+				<p>4.
+					所有奖品按原样授予，活动主办方不对该等奖品做出任何担保、陈述或保证，包括但不限于有关质量、条件、适销性或适用于特定用途的保证。</p>
+				<p>5. 获奖用户应独立负责缴纳奖品相关税项。</p>
+				<p>6.在法律允许范围内，活动主办方对本次活动拥有最终解释权。如遇不可抗力因素，活动主办方拥有取消本次活动的权利。</p>
+				<p>
+					7. 活动参与者向英特尔提交的个人信息或者材料均受英特尔 <a href="javascript:void(0)"
+						style="color: #fff; text-decoration: underline;">隐私条款</a>
+					的保护。英特尔会将您的个人信息或资料用于与之相关的目的。除非事先经过您的批准，否则我们不会将这些信息用于其他目的
+				</p>
+			</div>
+			<div class="tc">
+				<a href="/index.php/si/huodong/"
+					onclick='ga("send", "event", "活动规则页面","点击","回到首页");'><img
+					src="images/return.png" alt="" /></a>
+			</div>
+		</div>
+	</div>
+	<script type="text/javascript"
+		src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+	<!--<script type="text/javascript" src="js/weixin.js"></script>-->
+	<script type="text/javascript"
+		src="http://m.zevertech.com/index.php/jssdk?jsonpcallback=jsonpcallback"></script>
+	<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+ 
+  ga('create', 'UA-59674172-7', 'buzzopt.com');
+  setTimeout(function(){ga('send', 'pageview')}, 500);
+ 
+  var openid = '<{$openid}>';
+  ga('set', 'dimension1', openid);
+</script>
+
+</body>
+</html>

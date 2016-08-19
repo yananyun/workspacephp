@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>最新资讯管理</title>
+<link rel="stylesheet" href="/css/index.css">
+<link href="/jquery-ui.css" rel="stylesheet">
+<script src="/js/jquery.min.js"></script>
+<script src="/js/index.js"></script>
+<script src="/js/jquery-ui.js"></script>
+<script type="text/javascript" src="/js/main.js"></script>
+<script type="text/javascript" src="/js/artDialog.js"></script>
+<script type="text/javascript" src="/js/iframeTools.js"></script>
+<script>
+	$(function(){
+		/*关闭弹框*/
+		$(".closeLable").click(function(){
+			$(this).parent().parent().hide();
+		})
+		//$(".cancelBtn").live('click',(function(){
+		$(".cancelBtn").click(function(){
+			$(this).parent().parent().hide();
+		})
+		/*添加到分组弹框*/
+		$(".issue").live('click',(function(){
+			var inforid = $(this).attr('inforid');
+			$(".issueNews").attr('inforid', inforid).show();
+		}))
+		
+		$(".qxissue").live('click',(function(){
+			var inforid = $(this).attr('inforid');
+			$(".issueNews1").attr('inforid', inforid).show();
+		}))
+	})
+	</script>
+</head>
+<body>
+	<{include 'admin/public/header.html'}>
+	<div class="con">
+		<{include 'admin/public/left_menu.html'}>
+		<div class="rightDiv weixinDiv">
+			<div class="labelTitle">
+				<img src="/images/icon1.png" alt=""> <a
+					href="/index.php/information/add">添加资讯</a> <span class="searchBox"><input
+					type="text" class="" name="title"><img
+					src="/images/search2.png" alt="" onclick="search();"></span>
+			</div>
+			<div class="WrapLists"></div>
+		</div>
+	</div>
+	<div class="issueNews">
+		<div class="detailTitle">
+			<p>温馨提示</p>
+			<img src="/images/closeLabel.png" alt="" class="closeLable">
+		</div>
+		<p>确定发布此文章？</p>
+		<p>发布后，此文章将从进入文章列表</p>
+		<span class="right"> <input type="button" value="确定"
+			class="groupBtn confirmBtn" onclick="check_status(1,this);">
+			<input type="button" value="取消" class="groupBtn cancelBtn">
+		</span>
+	</div>
+	<div class="issueNews1">
+		<div class="detailTitle">
+			<p>温馨提示</p>
+			<img src="/images/closeLabel.png" alt="" class="closeLable">
+		</div>
+		<p>确定从文章列表中取消此文章内容发布？</p>
+		<p>取消发布后，该文章将从文章列表中取消</p>
+		<span class="right"> <input type="button" value="确定"
+			class="groupBtn confirmBtn" onclick="check_status(0,this);">
+			<input type="button" value="取消" class="groupBtn cancelBtn">
+		</span>
+	</div>
+</body>
+<script>
+loadContent('',$('.WrapLists'),'/index.php/information/lists');
+function search(){
+	var title = $('input[name=title]').val();
+	loadContent('',$('.WrapLists'),'/index.php/information/lists/title/'+title);
+}
+function check_status(status,obj){
+	var id	= $(obj).parent().parent().attr('inforid');
+	$.ajax({
+		url:"/index.php/information/check_status",
+		data:{id:id,status:status},
+		dataType:"json",
+		type:"post",
+		success:function(data){
+			alert(data.info);
+			$(obj).parent().parent().hide(); 
+			if(data.status){
+				location.href='/index.php/information/index';
+			}
+		}
+	});
+}
+function del(id){
+	var flag=confirm('确定要删除该资讯么？');
+	if(flag){
+		$.ajax({
+			url:"/index.php/information/del",
+			data:{id:id},
+			dataType:"json",
+			type:"post",
+			success:function(data){
+				alert(data.info);
+				if(data.status){
+					location.href='/index.php/information/index';
+				}
+			}
+		});
+	}
+}
+function check_weight(weight,id){
+	$.ajax({
+		url:"/index.php/information/check_weight",
+		data:{id:id,weight:weight},
+		dataType:"json",
+		type:"post",
+		success:function(data){
+			alert(data.info);
+			if(data.status){
+				location.href='/index.php/information/index';
+			}
+		}
+	});
+}
+</script>
+</html>

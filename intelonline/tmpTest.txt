@@ -1,0 +1,1 @@
+select openid from sys_member where 1 and province = '北京' and openid IN ('oil0zt1ouPClviV6PAFluob-4rXs','oil0zt8T8ktyeufuSDKtGZs9XChU')[{"openid":"oil0zt1ouPClviV6PAFluob-4rXs"},{"openid":"oil0zt8T8ktyeufuSDKtGZs9XChU"}]

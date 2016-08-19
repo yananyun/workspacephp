@@ -1,0 +1,92 @@
+<table border="1" cellspacing="0" cellpadding="0">
+	<tr>
+		<td>序号</td>
+		<td>组名称</td>
+		<td>人数</td>
+		<td>创建人</td>
+		<td>创建日期</td>
+		<td>操作</td>
+	</tr>
+	<{foreach $list as $k => $group}>
+	<tr>
+		<td class="listOrder"><i><{$k + 1}></i></td>
+		<td><{$group.name}></td>
+		<td><{$group.memberNum}></td>
+		<td><{$group.username}></td>
+		<td><{$group.ctime|date_format:'%Y-%m-%d %H:%M'}></td>
+		<td><a href="javascript:void(0)"
+			onclick="showGroupDetail(<{$group.id}>);"
+			class="intelBtn detailGroupBtn">详情</a> <a
+			href="/index.php/group/edit/id/<{$group.id}>"
+			class="intelBtn editGroupBtn">修改</a> <a href=""
+			class="intelBtn delGroupBtn" groupid="<{$group.id}>"
+			name="<{$group.name}>" onclick="fnDelGroup(this,<{$group.id}>)">删除</a>
+		</td>
+		</li> <{/foreach}>
+</table>
+<{$pages}>
+
+
+
+
+<!--<{foreach $list as  $k => $group}>			
+	<li>
+		<span class="listOrder"><i><{$k + 1}></i></span>
+		<span class="accountUserName"><{$group.name}></span>
+		<span class="accountComment"><em title="<{$group.remark}>"><{$group.remark}></em></span>
+		<span class="listDate"><{$group.ctime|date_format:'%Y-%m-%d %H:%M'}></span>
+		
+		<input type="button" class="intelBtn delGroupBtn" value="删除" groupid = "<{$group.id}>" name="<{$group.name}>" onclick="fnDelGroup(this,<{$group.id}>)" />
+		<a class="intelBtn editGroupBtn" groupid = "<{$group.id}>" name="<{$group.name}>" href="">修改</a>
+	</li>
+<{/foreach}>
+<{$pages}>-->
+
+
+
+<!-- <table border="1" cellspacing="0" cellpadding="0">
+	<tr>
+		<td>序号</td>
+		<td>组名称</td>
+		<td>人数</td>
+		<td>创建人</td>
+		<td>创建日期</td>
+		<td>操作</td>
+	</tr>
+	<tr>
+		<td><i><{$k + 1}></i></td>
+		<td><{$group.name}></td>
+		<td>10000</td>
+		<td><em title="<{$group.remark}>"><{$group.remark}></em></td>
+		<td><{$group.ctime|date_format:'%Y-%m-%d %H:%M'}></td>
+		<td>
+			<a href="detailwxu.html">详情</a>
+			<a href="/index.php/group/edit/id/<{$group.id}>" class="intelBtn editGroupBtn">修改</a>
+			<a href="" class="intelBtn delGroupBtn"  groupid = "<{$group.id}>" name="<{$group.name}>" onclick="fnDelGroup(this,<{$group.id}>)">删除</a>
+		</td>
+	</tr>
+	<tr>
+		<td>2</td>
+		<td>默认组</td>
+		<td>1000</td>
+		<td>admin</td>
+		<td>2015/4/20</td>
+		<td>
+			<a href="detailwxu.html">详情</a>
+			<a href="">修改</a>
+			<a href="">删除</a>
+		</td>
+	</tr>
+	<tr>
+		<td>3</td>
+		<td>分组一</td>
+		<td>3000</td>
+		<td>admin</td>
+		<td>2015/4/20</td>
+		<td>
+			<a href="detailwxu.html">详情</a>
+			<a href="">修改</a>
+			<a href="">删除</a>
+		</td>
+	</tr>
+</table> -->

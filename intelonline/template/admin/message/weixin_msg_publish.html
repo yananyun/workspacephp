@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>微信推送消息</title>
+<link href="/css/main.css" type="text/css" rel="stylesheet" />
+<link rel="stylesheet" type="text/css" href="/css/skins/blue.css" />
+<link rel="stylesheet" type="text/css" href="/css/message.css" />
+<link rel="stylesheet" type="text/css" href="/css/style.css" />
+<link rel="stylesheet" type="text/css" href="/css/index.css" />
+<link rel="stylesheet" href="/css/K_admin.css">
+<script type="text/javascript" src="/js/jquery.js"></script>
+<script type="text/javascript" src="/js/main.js"></script>
+<!-- K -->
+<script type="text/javascript" src="/js/K_admin.js"></script>
+<script type="text/javascript" src="/js/artDialog.js"></script>
+<script type="text/javascript" src="/js/iframeTools.js"></script>
+<link rel="stylesheet" type="text/css" href="/css/material.css" />
+<script type="text/javascript" src="/js/ajaxfileupload.js"></script>
+<script type="text/javascript" src="/js/My97DatePicker/WdatePicker.js"></script>
+<link rel="stylesheet" type="text/css"
+	href="/js/My97DatePicker/skin/WdatePicker.css" />
+</head>
+<body>
+	<div class="container">
+		<{include '../public/header.html'}>
+		<div class="main">
+			<{include '../public/left_menu.html'}>
+			<div class="mainWrap">
+				<!-- <div class="grid indexTitle">
+					<h4 class="span span-6">发布信息</h4>
+					<div class="span span-6 text-right">
+						<a href="/index.php/activepush/weixin_msg_list" class="btn btn-primary">关闭</a>
+					</div>
+				</div> -->
+				<div class="u_addCon u_addConTwo">
+					<img src="/images/icon1.png" alt=""> <a class="u_addClub">发布信息</a>
+					<input type="button" class="groupBtn confirmBtn closeBtn"
+						onclick="window.history.back();" value="关闭">
+				</div>
+				<div class="msgTabContent currentContent pad-bottom"
+					id="msgTabContent1">
+					<form action='/index.php/activepush/according_nickname'
+						method='post' id='form1'>
+						<h3>发送对象</h3>
+						<p class="leftPadding80">
+							<span class="leftSpanPos">微信昵称：</span> <input type="text"
+								name="nickname" placeholder="按微信昵称搜索" value="<{$msg.nickname}>"
+								id="nickname" /> <input type="button" onclick="submitform1()"
+								value="搜索" class="btn-primary" id="nickname_submit" /> <font
+								color="#FF6600"> 筛选条件“昵称”和“分组”只能选择一个！ </font>
+						</p>
+					</form>
+					<form action="/index.php/activepush/add_activepush" method="post"
+						id="form_active">
+						<p class="leftPadding80 fansOptionWrap j_allcheck">
+							<span class="leftSpanPos">用户分组：</span> <label><input
+								type="checkbox" name="response_groupid" value="0"
+								onclick="fnSetNoneRadios(this)" checked />不使用</label> <{foreach $group
+							as $v}> <label><input type="radio"
+								name="response_groupid" value="<{$v.id}>" disabled
+								onclick="groupFilter(<{$v.id}>)" /><{$v.name}></label> <{/foreach}>
+						</p>
+
+						<p class="leftPadding80 fansOptionWrap">
+							<span class="leftSpanPos">用户标签：</span> <label><input
+								type="checkbox" name="tid[]" value="0"
+								onclick="fnSetNoneOption(this);tagsFilter()" checked />不限</label>
+							<{foreach $tagsArr as $val}> <label><input
+								type="checkbox" name="tid[]" value="<{$val.id}>" disabled
+								onclick="tagsFilter()" /><{if $val.id eq
+								0}>无<{else}><{$val.name}><{/if}></label> <{/foreach}>
+						</p>
+
+						<!--					<p class="leftPadding80 fansOptionWrap">
+						<span class="leftSpanPos">设置反向：</span>
+						<label><input type="checkbox" name="fan" id="fan" value="fan" onclick="fanx()"/>是 (设置以上[用户分组]和[用户标签]的反向选择)</label>
+						
+					</p>-->
+						<div class="targetList">
+							<ul class="followersTable _j-checkboxAll intelListWrap">
+							</ul>
+						</div>
+						<div class="publishBox statu1 gap-top">
+							<div class="publishBoxNavWrap">
+								<a class="txtMsgTab" href="javascript:void(0);"
+									onclick="fnSwitchTxtMsg(this,$('#wordMsg'))">文字</a> <a
+									class="picTxtMsgTab" href="javascript:void(0);"
+									onclick="fnCallPicTxtMsg(this,$('#wordMsg'))">图文信息</a>
+							</div>
+							<div class="messageInput" contenteditable="true" id="wordMsg"></div>
+							<input type="hidden" name="active_mid" value="" id='active_mid'>
+							<input type="hidden" name="active_content" value=""
+								id="active_content">
+							<div class="publishBoxBottom">
+								<a class="emotionIcon" href="javascript:void(0);" onclick=""></a>
+								<p class="messageCount">
+									还可以输入<span>600</span>字
+								</p>
+								<input type="hidden" name='txtOverflow' value="0" />
+							</div>
+						</div>
+						<p class="leftPadding80 fansOptionWrap">
+							<span class="leftSpanPos">发送类别:</span> <label><input
+								type="radio" name="active_type" value="1" checked
+								onclick="active48()" />48小时交互推送</label> <label><input
+								type="radio" name="active_type" value="2"
+								onclick="activegaoji()" />高级群发</label>
+						</p>
+						<p class="leftPadding80 fansOptionWrap" id="duration">
+							<span class="leftSpanPos">结束时间:</span> <input type="text"
+								placeholder="结束时间"
+								onclick="WdatePicker({minDate:'%y-%M-%d',el:'active_duration_end'})"
+								name="active_duration_end" id="active_duration_end"
+								style="width: 80px" readonly />
+						</p>
+						<p class="leftPadding80 fansOptionWrap" id="interval">
+							<span class="leftSpanPos">发布间隔:</span> <select
+								name='active_interval'>
+								<option value="0" id="active_interval0">不限</option>
+								<option value="1">1秒</option>
+								<option value="2">2秒</option>
+								<option value="3">3秒</option>
+								<option value="4">4秒</option>
+								<option value="5">5秒</option>
+							</select>
+						</p>
+						<p class="leftPadding80 fansOptionWrap">
+							<span class="leftSpanPos">定时发布:</span> <input type="text"
+								placeholder="开始时间"
+								onclick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss',el:'active_crontab_time'})"
+								name="active_crontab_time" id="active_crontab_time" readonly />
+							<font color="#FF6600">定时发布时间</font>
+						</p>
+						<input type="hidden" value='' id="exclude_openids"
+							name="exclude_openids"> <input type="hidden"
+							name="search" id="search" value="">
+					</form>
+					<div style="margin-top: 10px;">
+						<a class="btn-primary" href="javascript:void(0);"
+							onclick="fnSendWxMsg()">发送</a> <a class="btn-primary"
+							href="/index.php/activepush/weixin_msg_list">取消</a> <input
+							type="hidden" name="msgType" value="1">
+					</div>
+
+				</div>
+			</div>
+		</div>
+
+	</div>
+</body>
+</html>
+<script type="text/javascript">
+	$(function(){
+		setInterval(function(){
+			var flag=$('#wordMsg').is(':focus');
+			if(flag){
+				fnCheckTxtNum();
+			}
+		},200);
+
+
+		// 微信回车搜索
+		// $('input[name="groupName"]').on('keydown', function(ev){
+		// 		alert(1);
+		// 	// if(ev.keyCode ==13){
+		// 	// 	$('#form1').submit();
+		// 	// }
+		// })
+		$('input[name="nickname"]').on('keydown', function(event) {
+			if(event.keyCode ==13){
+				// alert(1);
+				$('#nickname_submit').trigger('click');
+				// submitform1();
+				return false;
+			}
+		});
+
+	});
+	function allchecked(self){
+		var self = $(self);
+		var check = self.is(':checked');
+		if(check){
+			$('[name^=openid]').attr('checked',true);
+		}else{
+			$('[name^=openid]').attr('checked',false);
+		}
+	}
+	function activegaoji(){
+		$("#active_duration_start").val('');
+		$("#active_duration_end").val('');
+		$("#active_interval0").attr('selected',true);
+		$("#duration").hide();
+		$("#interval").hide();
+	}
+	function active48(){
+		$("#duration").show();
+		$("#interval").show();
+	}
+	function groupFilter(gid){
+		$("#search").val('');
+		$("#fan").attr("checked",false);
+
+		 var obj=document.getElementsByName('tag');  //选择所有name="'test'"的对象，返回数组    
+		  //取到对象数组后，我们来循环检测它是不是被选中    
+		  var s='';    
+		  for(var i=0; i<obj.length; i++){    
+		    if(obj[i].checked) s+=obj[i].value+',';  //如果选中，将value添加到变量s中    
+		  }    
+		loadContent('',$('.intelListWrap'),'/index.php/activepush/conformfans/gid/'+gid+'/tid/'+s);
+	}
+	function tagsFilter(){
+		$("#search").val('');
+		$("#fan").attr("checked",false);
+
+		var gid = $("input[name='response_groupid']:checked").val();
+		
+		 var obj=document.getElementsByName('tid[]');  //选择所有name="'test'"的对象，返回数组    
+		  //取到对象数组后，我们来循环检测它是不是被选中    
+		  
+		  var s='';    
+		  for(var i=0; i<obj.length; i++){    
+		    if(obj[i].checked) s+=obj[i].value+','; 
+		    //如果选中，将value添加到变量s中    
+		  }  
+		loadContent('',$('.intelListWrap'),'/index.php/activepush/conformfans/tid/'+s+'/gid/'+gid);
+	}
+
+	function fanx(){
+		$("#search").val('');
+		var fan = $("input[name='fan']:checked").val();
+		var gid = $("input[name='response_groupid']:checked").val();
+		 var obj=document.getElementsByName('tid[]');  //选择所有name="'test'"的对象，返回数组    
+		  //取到对象数组后，我们来循环检测它是不是被选中    
+		  var s='';    
+		  for(var i=0; i<obj.length; i++){    
+		    if(obj[i].checked) s+=obj[i].value+',';  //如果选中，将value添加到变量s中    
+		  }    
+		if(fan=="fan"){
+			if(gid!=0 ||  s!=''){
+				loadContent('',$('.intelListWrap'),'/index.php/activepush/conformfans/fan/'+fan+'/tid/'+s+'/gid/'+gid);
+			}else{
+				alert("请先选择[用户分组]或着[用户标签]");
+			}
+		}
+		
+	}
+	function submitform1(){
+		var nickname = $("#nickname").val();
+		$("#search").val(nickname);
+		if(nickname != ''){
+			loadCheck();
+			loadContent('',$('.intelListWrap'),'/index.php/activepush/conformfans/nickname/'+nickname);
+
+		}else{
+			alert("搜索昵称不能为空");
+		}
+	}
+	function fnCheckTxtNum(){
+		var area=$('#wordMsg');
+		var txtOverflow=$('[name=txtOverflow]');
+		var numWrap=$('.messageCount');
+		var msg=area.text().replace(/\s/g,'');
+		var len=600-(msg.length);
+		var tip='';
+		if(len<0){
+			tip='已超出<span class="overLength">'+Math.abs(len)+'</span>字';
+			txtOverflow.val(0);
+		}else{
+			tip='还可以输入<span>'+len+'</span>字';
+			txtOverflow.val(1);
+		}
+		numWrap.html(tip);
+	}
+	function fnSwitchTxtMsg(self,box){
+		/* $("#active_mid").val('');
+		var self=$(self);
+		var msgType=$('[name=msgType]');
+		msgType.val(1);
+		$('[name=active_mid]').val('');
+		$('.publishBox').removeClass('statu2').removeClass('statu3').addClass('statu1');
+		$('.messageInput').html('').removeClass('materialPicTxtWrap').attr('contenteditable',true); */
+		$("#active_content").val('');
+		var picTxtBox=art.dialog({title:'文本素材',id:'picTxtBox',lock:true});
+		$.ajax({
+			url:'/index.php/material/material_popup/type/text',
+			success:function(data){
+				picTxtBox.content(data);
+				picTxtBox.button(
+					{
+						name: '确定',
+						callback: function () {
+							var id=$('[name=tickedMaterialId]').val();
+							if(id==''){
+								alert('请选择一个素材');
+								return false;
+							}else{
+								var c = $('input[name=xe]:checked').val();
+								box.html(c).attr('contenteditable',false);
+								$('.publishBox').removeClass('statu2').removeClass('statu3').addClass('statu1');
+								var msgType=$('[name=msgType]');
+								fnCheckTxtNum();
+								msgType.val(1);
+								$('[name=active_mid]').val(id);
+								$('[name=active_content]').val(c);
+							}
+						},
+						focus:true
+					},
+					{
+						name:'取消'
+					}
+				);
+			},
+			cache:false
+		});
+	}
+	function fnCallPicTxtMsg(self,box){
+		$("#active_content").val('');
+		var picTxtBox=art.dialog({title:'图文素材',id:'picTxtBox',lock:true});
+		$.ajax({
+			url:'/index.php/material/material_popup',
+			success:function(data){
+				picTxtBox.content(data);
+				picTxtBox.button(
+					{
+						name: '确定',
+						callback: function () {
+							var id=$('[name=tickedMaterialId]').val();
+							if(id==''){
+								alert('请选择一个素材');
+								return false;
+							}else{
+								var mg=$('.tickedContent').removeClass('tickedContent');
+								box.html(mg).attr('contenteditable',false);
+								$('.publishBox').removeClass('statu1').removeClass('statu2').addClass('statu3');
+								var msgType=$('[name=msgType]');
+								msgType.val(3);
+								$('[name=active_mid]').val(id);
+							}
+						},
+						focus:true
+					},
+					{
+						name:'取消'
+					}
+				);
+			},
+			cache:false
+		});
+	}
+	function fnTickMaterial(self,id){
+		self=$(self);
+		var siblingsBox=self.parents('.materialPicTxtWrap').find('li');
+		siblingsBox.removeClass('tickedContent');
+		self.addClass('tickedContent');
+		var tickedMaterialId=$('[name=tickedMaterialId]');
+		tickedMaterialId.val(id);
+	}
+	/* 添加提交 */
+	function fnSendWxMsg(){
+		
+		var type=$('[name=msgType]').val();
+		if(type==1){
+			var flag=$('[name=txtOverflow]').val();
+			if(flag==0){
+				alert('文字必须为1到600字之间');
+				return false;
+			}
+		}else if(type==3){
+			var mId=$('[name=active_mid]').val();
+			if(mId==''){
+				alert('没有选择素材');
+				return false;
+			}
+		}
+		var mid = $("#active_mid").val();
+		if(mid == ''){
+			var content = $("#wordMsg").html();
+			$("#active_content").val(content);
+		}
+		$("#form_active").submit();
+	}
+	function fnShowContent(obj1,obj2){
+		obj1.addClass('currentContent');
+		obj2.removeClass('currentContent');
+	}
+	function fnSetNoneRadios(self){
+	var self=$(self);
+	var bro=self.parents('label').siblings('label').find('[type=radio]');
+	var flag=self.is(':checked');
+	for(i=0;i<bro.size();i++){
+		if(flag){
+			bro.eq(i).attr('checked',false).attr('disabled',true);
+			$("#nickname").attr('disabled',false);
+			$("#nickname_submit").attr('disabled',false);
+		}else{
+			bro.eq(i).attr('disabled',false);
+			$("#nickname").attr('disabled',true);
+			$("#nickname_submit").attr('disabled',true);
+		}
+	}
+
+
+	$('.j_allcheck').find('label').on('click', function(){
+		loadCheck();
+	})
+}
+
+function loadCheck(){
+		var arrCheck=[];
+		$('#list').find('input[type="checkbox"]').live('click', function(){
+			if(!$(this).attr('checked')){
+				arrCheck.push($(this).val());
+			}else{
+				if(arrCheck.indexOf($(this).val())!=-1){
+					arrCheck.splice(arrCheck.indexOf($(this).val()), 1);
+				}
+			}
+			// alert(arrCheck.join(','));
+			$("#exclude_openids").val(arrCheck.join(','));
+		})
+		$('.padIngNum').find('a').live('click', function(){
+			var timer=setTimeout(function(){
+				$('#list').find('input[type="checkbox"]').each(function(index, el) {
+					if(arrCheck.indexOf($(this).val())!=-1){
+						$(this).attr("checked",false);
+					}
+				});
+				clearTimeout(timer);
+			},200)
+		})
+	}
+</script>

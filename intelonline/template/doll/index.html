@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="author" content="www.zevertech.com" />
+<meta http-equiv="copyright" content="zevertech 2014" />
+<meta http-equiv="pragma" content="no-cache" />
+<meta name="viewport" id="viewport"
+	content="width=device-width, minimum-scale=1, maximum-scale=1, initial-scale=1.0,user-scalable=no" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-touch-fullscreen" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+<meta name="MobileOptimized" content="800">
+<meta name="format-detection" content="telephone=no" />
+<title>娃娃机</title>
+<link rel="stylesheet" href="css/reset.css">
+<link rel="stylesheet" href="css/layout.css?id=33">
+</head>
+<body>
+	<div class="loadingbox"></div>
+	<div class="container">
+		<div class="logo">
+			<div class="time">
+				<div class="timeicon">
+					<img src="images/timeicon.png" alt="" />
+				</div>
+				<div class="timeline">
+					<span></span>
+				</div>
+				<div class="timenum">
+					<span>25</span>s
+				</div>
+			</div>
+			<img src="images/logo.png" alt="" />
+		</div>
+		<div class="videobox">
+			<div class="videoimg">
+				<img src="images/videoimg.jpg" alt="" />
+			</div>
+			<div class="video_op">
+				<!--开始按钮-->
+				<a href="javascript:void(0)" class="start"><img
+					src="images/start1.png" alt="" /></a>
+			</div>
+		</div>
+		<div class="opbox">
+			<div class="opbox_l">
+				<!--向上按钮-->
+				<a class="changeActive arrow arrow_up"> <img
+					data-src="images/arrow_up2.png" src="images/arrow_up.png" alt="" />
+				</a>
+				<!--向下按钮-->
+				<a class="changeActive arrow arrow_down"> <img
+					data-src="images/arrow_down2.png" src="images/arrow_down.png"
+					alt="" />
+				</a>
+				<!--向左按钮-->
+				<a class="changeActive arrow arrow_left"> <img
+					data-src="images/arrow_left2.png" src="images/arrow_left.png"
+					alt="" />
+				</a>
+				<!--向右按钮-->
+				<a class="changeActive arrow arrow_right"> <img
+					data-src="images/arrow_right2.png" src="images/arrow_right.png"
+					alt="" />
+				</a>
+			</div>
+			<div class="opbox_r">
+				<!--抓取按钮-->
+				<a href="javascript:void(0)" class="changeActive grab"><img
+					data-src="images/grab2.png" src="images/grab.png" alt="" /></a>
+				<!--开始体感控制按钮-->
+				<a href="javascript:void(0)" class="changeActive bodyctr"><img
+					data-src="images/start4.png" src="images/start2.png" alt="" /></a>
+			</div>
+		</div>
+		<div class="prompt">
+			<div class="shadow"></div>
+			<div class="main overchance">
+				<span class="emoticon smile"></span>
+				<div class="content">
+					<p>
+						亲，您的机会已用尽，<br /> 感谢您的关注~
+					</p>
+					<p>
+						<a href="javascript:">关闭</a>
+					</p>
+				</div>
+			</div>
+
+			<div class="main overtime">
+				<span class="emoticon cry"></span>
+				<div class="content">
+					<p>
+						亲，您本次时间已用完，<br />下次继续努力哦~
+					</p>
+					<p>
+						<a href="javascript:">继续</a>
+					</p>
+				</div>
+			</div>
+
+		</div>
+	</div>
+	<script src="js/zepto.min.js"></script>
+	<script src="js/common.js"></script>
+	<script src="js/app.js?id=33"></script>
+</body>
+</html>

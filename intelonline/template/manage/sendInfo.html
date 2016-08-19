@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>主动发送管理-发布消息</title>
+<link rel="stylesheet" href="/css/index.css">
+<link href="/jquery-ui.css" rel="stylesheet">
+<script src="/js/jquery.min.js"></script>
+<script src="/js/index.js"></script>
+<script src="/js/jquery-ui.js"></script>
+<script>
+		$(function(){
+			$( "#datepicker3" ).datepicker();
+			$( "#datepicker4" ).datepicker();
+			$( "#datepicker5" ).datepicker();
+			$( "#datepicker6" ).datepicker();
+			$( "#datepicker7" ).datepicker();
+			$(".radioOne").click(function(){
+				$(".date1").show();
+				$(".date2").hide();
+			})
+			$(".radioTwo").click(function(){
+				$(".date2").show();
+				$(".date1").hide();
+			})
+		})
+	</script>
+</head>
+<body>
+	<div class="top">
+		<img src="/images/logo.jpg" alt="" />
+		<p>
+			Intel China Online<br /> <em>微信管理后台</em>
+		</p>
+		<div class="topRight">
+			<ul>
+				<li>admin&nbsp;|</li>
+				<li>帮助&nbsp;|</li>
+				<li><a href="">{退出}</a></li>
+			</ul>
+		</div>
+	</div>
+	<div class="con">
+		<div class="leftDiv">
+			<ul id="navigation">
+				<li><a href="weixinManage.html">微信用户管理</a></li>
+				<li><a href="newInfoManage.html">最新资讯管理</a></li>
+				<li><a href="sendManage.html" class="nowRight">主动发送管理</a></li>
+				<li><a href="labelManage.html">标签管理</a></li>
+				<li><a href="serviceManage.html">客服应答</a></li>
+				<li><a href="dateManage.html">数据管理</a></li>
+				<li><a href="fodderManage.html">素材库</a></li>
+			</ul>
+		</div>
+		<div class="rightDiv weixinDiv">
+			<div class="u_addCon u_addConTwo">
+				<img src="/images/icon1.png" alt=""> <a href="addwxuClub.html"
+					class="u_addClub">发布消息</a> <input type="button"
+					class="groupBtn confirmBtn closeBtn"
+					onclick="window.history.back();" value="返回">
+			</div>
+			<p class="sendTxt">发送对象</p>
+			<div class="fansCon sendCon">
+				<div class="fansRow">
+					<span class="left">微信昵称：</span> <span class="right"> <select
+						name="" id="" name="sltCity">
+							<option value="">城市</option>
+					</select> <select name="" id="" name="sltArea" class="sltArea">
+							<option value="">地区</option>
+					</select>
+					</span>
+				</div>
+				<div class="fansRow">
+					<span class="left">用户分组：</span> <span class="right"> <input
+						type="radio">不限 <input type="radio">CCE <input
+						type="radio">Test <input type="radio">Edison <input
+						type="radio">人人 <input type="radio">OEM
+					</span>
+				</div>
+				<div class="fansRow">
+					<span class="left">选择标签：</span> <span class="right"> <input
+						type="radio">不限 <input type="radio">音乐 <input
+						type="radio">农民工 <input type="radio">普通会员 <input
+						type="radio">厂商
+					</span>
+				</div>
+			</div>
+			<table border="0" cellspacing="0" cellpadding="0" class="sendTable">
+				<tr>
+					<td>昵称</td>
+					<td>性别</td>
+					<td>区域</td>
+					<td>交互量</td>
+					<td>标签</td>
+					<td>分组名</td>
+				</tr>
+				<tr>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+				</tr>
+				<tr>
+					<td colspan="6" style="text-align: left; text-indent: 30px;">当前共有结果0条</td>
+				</tr>
+			</table>
+			<div class="sendTab">
+				<div class="tabT">
+					<ul>
+						<li>文字</li>
+						<li>图文消息</li>
+					</ul>
+				</div>
+				<div class="tabB"></div>
+			</div>
+			<div class="sendUser">
+				用户分组：<input type="radio" name="radio" class="radioOne">48小时交互推送
+				<input type="radio" name="radio" class="radioTwo">高级群发
+				<div class="date1">
+					结束时间：<input type="text" id="datepicker3"><br /> 定时发布：<input
+						type="text" id="datepicker4">-<input type="text"
+						id="datepicker5">
+				</div>
+				<div class="date2">
+					定时发布：<input type="text" id="datepicker6">-<input
+						type="text" id="datepicker7">
+				</div>
+			</div>
+			<div class="detailBtn">
+				<input type="button" value="发送" class="confirmBtn saveBtn">
+				<input type="button" value="取消" onclick="window.history.back();"
+					class="noneBtn">
+			</div>
+		</div>
+	</div>
+</body>
+</html>

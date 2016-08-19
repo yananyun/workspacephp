@@ -1,0 +1,26 @@
+<{include 'admin/public/head.html'}>
+<link rel="stylesheet" type="text/css" href="/css/index.css" />
+<script type="text/javascript" src="/js/highcharts.js"></script>
+<script type="text/javascript">
+    function AjaxDataChart(obj,type,action) {
+        $.ajax({
+            "url":'/index.php/statistical/' + action+'/type/'+type+'/obj/'+obj,
+            "success":function(data){
+                $("#"+obj).html(data);
+            }
+        })
+    }
+</script>
+<body>
+	<div class="container">
+		<{include 'admin/public/header.html'}>
+		<div class="main">
+			<{include 'admin/public/left_menu.html'}>
+			<div class="mainWrap statisWrap"></div>
+		</div>
+
+
+	</div>
+
+</body>
+</html>

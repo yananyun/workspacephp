@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>TODO supply a title</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<style>
+td {
+	border-bottom: 1px solid #ccffcc;
+}
+
+.title td {
+	width: 120px;
+	height: 30px;
+	background: #ccffcc;
+}
+</style>
+<script type="text/javascript">
+            function del(id){
+            if (confirm('您确定要删除该条数据')){
+            window.location.href = "/index.php/memberGroup/group_delete/id/" + id;
+            }
+            }
+        </script>
+</head>
+<body>
+	<{include file='member/leftmenu.html'}>
+
+	<div
+		style='float: left; height: 500px; min-height: 500px; width: 80%; border: 1px solid #666;'>
+		<input type="button" value="添加分组"
+			onclick="javascript:location.href = '/index.php/memberGroup/group_add/'">
+		<table width="100%">
+			<tr class="title">
+				<td>编号ID</td>
+				<td>组名</td>
+				<td>用户数量</td>
+				<td>分组备注</td>
+				<td>创建时间</td>
+				<td>操作</td>
+			</tr>
+			<{foreach from=$group_list item=group}>
+			<tr style=''>
+				<td><{$group.id}></td>
+				<td><{$group.name}></td>
+				<td><{$group.member_count}></td>
+				<td><{$group.remark}></td>
+				<td><{$group.ctime}></td>
+				<td><a href="/index.php/memberGroup/index/gid/<{$group.id}>">查看改组用户</a>
+					<a href="/index.php/memberGroup/group_edit/id/<{$group.id}>">编辑</a>
+					<{if $group.is_moren eq 0}> <a href='javascript:void();'
+					onclick="del( < {$group.id} > )">删除</a> <{/if}></td>
+			</tr>
+			<{/foreach}>
+		</table>
+	</div>
+
+
+
+</body>
+</html>

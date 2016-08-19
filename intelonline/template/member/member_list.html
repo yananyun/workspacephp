@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>TODO supply a title</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<style>
+td {
+	border-bottom: 1px solid #ccffcc;
+	padding: 2px 5px;
+}
+
+.title td {
+	width: 120px;
+	height: 30px;
+	background: #ccffcc;
+}
+</style>
+<script type="text/javascript">
+            function selectAll(obj, chk)
+            {
+                if (chk == null)
+                {
+                    chk = 'checkboxes';
+                }
+
+                var elems = obj.form.getElementsByTagName("INPUT");
+                var ok = 0;
+                for (var i = 0; i < elems.length; i++)
+                {
+                    if (elems[i].name == chk || elems[i].name == chk + "[]")
+                    {
+                        elems[i].checked = obj.checked;
+                    }
+
+                }
+            }
+
+            function checkForm() {
+                var checkboxes = document.getElementsByName('checkboxes[]');
+                var group_ids = document.getElementsByName('group_ids[]');
+//                alert(aInput.length);return false;
+                var ok = false;
+                var ok2 = false;
+                for (var i = 0; i < checkboxes.length; i++) {
+                    if (checkboxes[i].checked) {
+                        ok = true;
+                        break;
+                    }
+
+                }
+
+                for (var i = 0; i < group_ids.length; i++) {
+                    if (checkboxes[i].checked) {
+                        ok2 = true;
+                        break;
+                    }
+                }
+
+                if (!ok) {
+                    alert('请选择要移动的用户');
+                    return false;
+                }
+                if (!ok2) {
+                    alert('请选择分组');
+                    return false;
+                }
+                if (ok && ok2) {
+                    return true;
+                } else {
+                    return false;
+                }
+
+
+            }
+
+        </script>
+</head>
+<body>
+	<{include file='member/leftmenu.html'}>
+
+	<div
+		style='float: left; min-height: 500px; width: 80%; border: 1px solid #666;'>
+		<form name='theform' method='POST'
+			action="/index.php/memberGroup/group_move/"
+			onsubmit='return checkForm();'>
+			<table width="100%">
+				<tr class="title">
+					<td><input onclick='selectAll(this, "checkboxes")'
+						type="checkbox" />编号</td>
+					<td>用户openid</td>
+					<td>昵称</td>
+					<td>性别</td>
+					<td>所在地</td>
+					<td>订阅状态</td>
+					<td>订阅时间（以最后关注为准）</td>
+					<td>所属分组</td>
+				</tr>
+				<{foreach from=$member_list item=member}>
+				<tr>
+					<td><input name="checkboxes[]" type="checkbox"
+						value="<{$member.openid}>" /><{$member.id}></td>
+					<td><{$member.openid}></td>
+					<td><img
+						src="http://wx.qlogo.cn/mmopen/Q3auHgzwzM7ZibgO2pQr7sQn92xXw2dJFwJyLWFGCia52SnFVrrpbyicb18jF9hvVoMyeUkRdTw907YqXtO34ZMPg/46" /><{$member.nickname}></td>
+					<td><{$member.sex}></td>
+					<td><{$member.country}>&nbsp;<{$member.province}>&nbsp;<{$member.city}></td>
+					<td><{$member.is_subscribe}></td>
+					<td><{$member.subscribe_time}></td>
+					<td><{foreach from=$member.group_names item=gname key=gid}>
+						<{$gname}>, <{/foreach}></td>
+				</tr>
+				<{/foreach}>
+				<tr>
+					<td>选择分组：</td>
+
+					<td colspan='8'><{foreach from=$group_list item=group}> <input
+						type='checkbox' name="group_ids[]" value='<{$group.id}>' />
+						<{$group.name}> <{/foreach}> <input type="submit"
+						id='submit_button' value='确定' />
+					</td>
+
+
+				</tr>
+				<tr>
+					<td colspan="10" align='right'><{$pages}></td>
+				</tr>
+			</table>
+		</form>
+	</div>
+
+
+
+</body>
+</html>

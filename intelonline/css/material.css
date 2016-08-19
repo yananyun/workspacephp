@@ -1,0 +1,742 @@
+.addPicTxtBtn {
+	float: left;
+	padding: 0 10px;
+	margin: 10px 20px 10px 0;
+}
+
+.materialPicTxtWrap {
+	overflow: hidden;
+}
+
+.materialPicTxtWrap * {
+	box-sizing: content-box;
+}
+
+.intelListWrap .materialPicTxtList {
+	width: 300px;
+	padding: 15px 15px 55px 15px;
+}
+
+.materialPicTxtList p {
+	margin: 0;
+}
+
+.materialPicTxtList {
+	width: 300px;
+	padding: 15px;
+	padding-bottom: 55px;
+	border: #B8B8B8 solid 1px;
+	border-radius: 5px;
+	position: relative;
+	margin-bottom: 15px;
+	overflow: hidden;
+	position: relative;
+}
+
+.materialPicTxtList .materialPicTxtTtl, .materialPicTxtList .materialPicTxtTtl a
+	{
+	font-size: 14px;
+	font-weight: bold;
+	color: #555;
+}
+
+.materialPicTxtTtl {
+	text-align: left;
+	width: 80%;
+}
+
+.materialPicTxtTtl a:hover {
+	text-decoration: underline;
+}
+
+.lookBtn {
+	position: absolute;
+	top: 10px;
+	right: 15px;
+	padding: 0 10px;
+	cursor: pointer;
+}
+
+.materialPicTxtList .materialPicTxtDate {
+	font-size: 12px;
+}
+
+.materialPicTxtList .materialPicTxtComment {
+	font-size: 14px;
+}
+
+.materialPicWrapCover {
+	width: 320px;
+	height: 180px;
+	margin: 10px 0;
+	position: relative;
+	overflow: hidden;
+}
+
+.materialPicWrapCover img {
+	width: 320px;
+	height: 180px;
+}
+
+.topCoverTtl {
+	width: 100%;
+	position: absolute;
+	left: 0;
+	bottom: 0;
+	display: block;
+	overflow: hidden;
+	z-index: 100;
+}
+
+.materialPicWrapCover .opacityBg {
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	left: 0;
+	bottom: 0;
+	background: #000;
+	opacity: 0.5;
+	display: block;
+	overflow: hidden;
+	z-index: 0;
+}
+
+.materialPicWrapCover .ttlTxt {
+	max-height: 44px;
+	display: block;
+	position: relative;
+	padding: 5px;
+	color: #FFF;
+	overflow: hidden;
+	z-index: 100;
+}
+
+.materialPicWrapCover a:hover {
+	text-decoration: underline;
+}
+
+.preViewImg {
+	width: 100%;
+	height: 100%;
+	overflow: hidden;
+}
+
+.materialPicWrapCover img {
+	width: 100%;
+	max-width: 300px;
+	display: block;
+}
+
+.materialPicTxtBottom {
+	width: 100%;
+	height: 44px;
+	background: #D3D3D3;
+	border-top: #B8B8B8 solid 1px;
+	position: absolute;
+	bottom: 0;
+	left: 0;
+}
+
+.materialPicTxtBottom a {
+	width: 50%;
+	height: 100%;
+	float: left;
+	display: block;
+	text-align: center;
+	line-height: 44px;
+	color: #666;
+	overflow: hidden;
+}
+
+.materialPicTxtBottom a:hover {
+	color: #000;
+}
+
+.materialPicTxtBottom i {
+	width: 1px;
+	height: 20px;
+	display: block;
+	background: #666;
+	position: absolute;
+	top: 12px;
+	left: 50%;
+}
+
+.materialMultiPicWrap {
+	width: 100%;
+	height: 80px;
+	padding-top: 10px;
+	margin-top: 10px;
+	position: relative;
+	border-top: #B8B8B8 solid 1px;
+	overflow: hidden;
+}
+
+.materialThumb {
+	width: 80px;
+	height: 80px;
+	float: right;
+	overflow: hidden;
+}
+
+.materialThumb img {
+	width: 100%;
+	height: 100%;
+	display: block;
+	overflow: hidden;
+}
+
+.materialMultiPicWrap p {
+	width: 200px;
+	float: left;
+	margin-top: 20px;
+	overflow: hidden;
+}
+
+.materialMultiPicWrap p a {
+	color: #555;
+}
+
+.materialMultiPicWrap p a:hover {
+	text-decoration: underline;
+}
+
+.materialCol {
+	float: left;
+	xmargin: 20px 20px 0 0;
+	margin: 0 20px 0px 0;
+	overflow: hidden;
+}
+
+.creatPicTxtCol {
+	width: 330px;
+	border: #B8B8B8 solid 1px;
+	border-radius: 5px;
+	position: relative;
+	float: left;
+	margin-right: 10px;
+	overflow: hidden;
+}
+
+.pic_txt_col {
+	position: relative;
+	margin: 15px;
+	overflow: hidden;
+}
+
+.creatPicTxtCol p {
+	margin: 0;
+	padding: 0;
+}
+
+.materialPicWrapCover h1 {
+	width: 100%;
+	line-height: 167px;
+	font-size: 100%;
+	background: #EEE;
+	text-align: center;
+	position: relative;
+	z-index: 0;
+	color: #CCC;
+	overflow: hidden;
+}
+
+.editBase {
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	top: 0;
+	left: 0;
+	background: #CCC;
+	opacity: 0.8;
+	z-index: 1000;
+	overflow: hidden;
+	display: none;
+}
+
+.editBase p {
+	width: 100px;
+	height: 30px;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	margin: -15px 0 0 -50px;
+	text-align: center;
+	line-height: 30px;
+	overflow: hidden;
+}
+
+.editBase p a {
+	text-align: center;
+	line-height: 30px;
+	padding: 0 5px;
+	color: #525252;
+}
+
+.editBase p a:hover {
+	text-decoration: underline;
+}
+
+.pic_txt_col:hover .editBase {
+	display: block;
+}
+
+.appendColWrap .pic_txt_col {
+	border-top: #B8B8B8 solid 1px;
+	margin: 0px;
+}
+
+.appendColWrap .materialPicTxtTtl {
+	width: 200px;
+	float: left;
+	margin: 32px 0 15px 15px;
+	max-height: 44px;
+	overflow: hidden;
+}
+
+.appendColWrap .materialThumb {
+	margin: 15px 15px 15px 0;
+}
+
+.materialThumb h1 {
+	width: 100%;
+	line-height: 80px;
+	font-size: 100%;
+	background: #EEE;
+	text-align: center;
+	position: relative;
+	z-index: 0;
+	color: #CCC;
+	overflow: hidden;
+}
+
+.appendColBtnWrap {
+	width: 100%;
+	border-top: #B8B8B8 solid 1px;
+	overflow: hidden;
+}
+
+.appendColBtnWrap a {
+	width: 300px;
+	border: #CCC dashed 3px;
+	display: block;
+	line-height: 80px;
+	text-align: center;
+	font-size: 30px;
+	font-weight: bold;
+	margin: 15px;
+	border-radius: 5px;
+	color: #CCC;
+	overflow: hidden;
+}
+
+.appendColBtnWrap a:hover {
+	color: #666;
+}
+
+.materialEditWrap {
+	width: 450px;
+	float: left;
+	position: relative;
+	overflow: hidden;
+}
+
+.materialEditWrap * {
+	box-sizing: content-box;
+}
+
+.materialEditWrap p {
+	margin: 0;
+	padding: 0;
+}
+
+.editBox {
+	width: 400px;
+	float: right;
+	background: #EEE;
+	border: #B8B8B8 solid 1px;
+	border-radius: 5px;
+	padding: 15px;
+	overflow: hidden;
+}
+
+.arrow {
+	width: 0;
+	height: 0;
+	border: transparent solid 12px;
+	display: block;
+	position: absolute;
+	top: 150px;
+	left: -6px;
+}
+
+.arrow_out {
+	border-right-color: #B8B8B8;
+}
+
+.optionCol {
+	margin: 10px;
+	overflow: hidden;
+}
+
+.arrow_in {
+	border-right-color: #EEE;
+	margin-left: 1px;
+}
+
+.inlineTip {
+	color: #999;
+}
+
+.miniTip {
+	display: none;
+}
+
+.miniCover .maxTip {
+	display: none;
+}
+
+.miniCover .miniTip {
+	display: block;
+}
+
+.right {
+	float: right;
+}
+
+.optionField {
+	border: #B8B8B8 solid 1px;
+	border-radius: 3px;
+	background: #FFF;
+	overflow: hidden;
+}
+
+.optionField input {
+	width: 100%;
+	border: none;
+	background: #none;
+	height: 26px;
+	line-height: 26px;
+	display: block;
+	text-indent: 1em;
+}
+
+.optionField textarea {
+	width: 96%;
+	height: 78px;
+	border: none;
+	background: none;
+	line-height: 20px;
+	margin: 0 3%;
+	display: block;
+}
+/*添加的代码*/
+.uploadField {
+	overflow: hidden;
+}
+
+.imgUpLabel {
+	padding: 0 10px;
+	cursor: pointer;
+	xwidth: 100px;
+	height: 28px;
+	xdisplay: block;
+	float: left;
+	xbackground: url(/images/material/uploadIcon.png) 5px 5px no-repeat;
+	text-align: center;
+	line-height: 28px;
+	xclear: both;
+	margin-left: 10px;
+	overflow: hidden;
+	background: #fff;
+	border: 1px solid #B8B8B8;
+	border-radius: 5px;
+	margin-top: 5px;
+}
+
+.imgUpLabel:first-child {
+	margin-left: 0px;
+}
+
+.imgUpLabel:hover {
+	text-decoration: underline;
+}
+
+.imgUpLabel input {
+	display: none;
+}
+
+.uploadBtn {
+	line-height: 26px;
+	display: block;
+	float: left;
+	margin: 0 10px;
+	color: #525252;
+}
+
+.preViewBox {
+	width: 100%;
+	margin: 10px 0;
+	overflow: hidden;
+	display: none;
+}
+
+.uploadView {
+	width: 180px;
+	height: 100px;
+	float: left;
+	margin: 0 10px;
+	overflow: hidden;
+}
+
+.uploadView img {
+	width: 100%;
+	display: block;
+}
+
+.miniCover .uploadView {
+	width: 100px;
+}
+
+.miniCover .uploadView img {
+	width: 100px;
+	height: 100px;
+}
+
+.uploadView h5 {
+	width: 100%;
+	height: 100px;
+	line-height: 100px;
+	background: #EEE;
+	text-align: center;
+}
+
+.delView {
+	display: block;
+	float: left;
+	color: #6699CC;
+	margin: 80px 0px 0px 10px;
+}
+
+.delView:hover {
+	text-decoration: underline;
+}
+
+.saveMaterialBtnWrap {
+	width: 100%;
+	xborder-top: #B8B8B8 solid 1px;
+	padding-top: 20px;
+	margin: 0;
+	margin-top: 20px;
+	float: left;
+	clear: both;
+}
+
+.saveMaterialBtnWrap .intelBtn {
+	width: 100px;
+	margin: 0 auto;
+	text-align: center;
+}
+
+.materialArticle {
+	width: 98%;
+	height: 78px;
+	line-height: 20px;
+	margin: 0 2%;
+	overflow: hidden;
+	overflow-y: scroll;
+}
+
+.imgUpBtnWrap {
+	width: 100px;
+	height: 30px;
+	line-height: 30px;
+	background: #008DD4;
+	color: #FFF;
+	text-align: center;
+	cursor: pointer;
+	margin: 10px 0;
+	border-radius: 3px;
+	display: block;
+	overflow: hidden;
+}
+
+.imgUpBtnWrap input {
+	display: none;
+}
+
+.picMsgWrap {
+	width: 100%;
+	overflow: hidden;
+}
+
+.picMsgList {
+	width: 100%;
+	position: relative;
+}
+
+.materialPicMsgWrap {
+	width: 100px;
+	float: left;
+	overflow: hidden;
+}
+
+.materialPicMsgWrap img {
+	display: block;
+	max-width: 100px;
+	max-height: 100px;
+}
+
+.materialName {
+	width: 300px;
+	float: left;
+	z-index: 0;
+	margin-left: 10px;
+	border: none;
+	background: none;
+}
+
+.materialPicMsgBottom {
+	position: absolute;
+	bottom: 10px;
+	left: 110px;
+	display: none;
+}
+
+.materialPicMsgBottom a {
+	color: #525252;
+	padding: 0 10px 0 0;
+}
+
+.materialPicMsgBottom a:hover {
+	text-decoration: underline;
+}
+
+.picMsgList:hover .materialPicMsgBottom {
+	display: block;
+}
+
+.picMsgLoading {
+	float: left;
+	line-height: 30px;
+	margin-left: 10px;
+	display: none;
+}
+
+.inputOn {
+	border: #999 solid 1px;
+	background: #FFF;
+}
+
+.hideEditTrigger {
+	display: none;
+}
+
+.popupBox {
+	width: 750px;
+	height: 500px;
+	margin-bottom: 20px;
+	overflow: hidden;
+	overflow-y: scroll;
+}
+
+.popupBox li {
+	padding-bottom: 15px;
+	overflow: hidden;
+}
+
+.popupBox .picMsgList {
+	margin: 5px 0;
+	padding: 0;
+}
+
+.popupBox li .pickBase {
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	top: 0;
+	left: 0;
+	background: #000;
+	opacity: 0.6;
+	z-index: 180;
+	display: none;
+}
+
+.popupBox li .tick {
+	font-weight: bold;
+	font-size: 50px;
+	width: 50px;
+	height: 50px;
+	display: block;
+	font-style: normal;
+	color: #FFF;
+	line-height: 50px;
+	text-align: center;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	margin: -25px 0 0 -25px;
+	z-index: 200;
+	display: none;
+}
+
+.popupBox li:hover .pickBase {
+	display: block;
+}
+
+.popupBox .tickedContent .pickBase, .popupBox .tickedContent .tick {
+	display: block;
+}
+
+#wordMsg li {
+	padding-bottom: 15px;
+}
+
+#wordMsg .pickBase, #wordMsg .tick {
+	display: none;
+}
+
+.materialDetailWrap {
+	width: 640px;
+	margin: 0 auto;
+	border: #CCC solid 1px;
+	padding: 10px;
+	overflow: hidden;
+}
+
+.materialDetailWrap .materialPicTxtTtl {
+	font-size: 16px;
+	color: #000;
+	font-weight: bold;
+	border-bottom: #CCC dotted 1px;
+	padding-bottom: 10px;
+}
+
+.materialDetailWrap .aterialPicTxtDate {
+	font-size: 12px;
+	color: #CCC;
+}
+
+.materialDetailWrap .author {
+	padding-left: 30px;
+}
+
+.materialDetailWrap .materialPicWrapCover {
+	width: 100%;
+	height: auto;
+}
+
+.materialDetailWrap .materialPicWrapCover img {
+	max-width: auto;
+	height: auto;
+	display: block;
+	margin: 0 10px;
+}
+
+.materialTags ul li span {
+	background: #abacab;
+}
+
+.materialTags ul li a.active {
+	background: #d7c8be
+}

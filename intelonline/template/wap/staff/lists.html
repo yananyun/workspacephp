@@ -1,0 +1,31 @@
+<{include 'wap/head.html'}>
+<script type="text/javascript">
+	$(function () {
+		$(".list ul li").click(function () {
+			location.href=$(this).attr("data-href");
+		});
+	});
+</script>
+
+<body class="bggray">
+	<div class="loadingbox"></div>
+	<div class="container">
+		<{if $list}>
+		<div class="resultbox">
+			<div class="arrow"></div>
+			<div class="resline"></div>
+			<div class="result_c">
+				<ul>
+					<{foreach $list as $key =>$info}>
+					<li><a href="/index.php/wapStaff/staff_info/id/<{$info.id}>"><{$info.year}>/<{$info.month}><{$info.title}></a></li>
+					<{/foreach}>
+				</ul>
+			</div>
+		</div>
+		<{else}>
+		<div class="list_no" style="text-align: center">暂无信息</div>
+		<{/if}>
+	</div>
+	<{include 'wap/footer.html'}>
+</body>
+</html>

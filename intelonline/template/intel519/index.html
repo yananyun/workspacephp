@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Edison入驻京东商城送好礼</title>
+<base href="/template/intel519/" />
+<meta http-equiv="pragma" content="no-cache" />
+<meta id="viewport" name="viewport" content="width=640,user-scalable=no">
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-touch-fullscreen" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+<meta name="MobileOptimized" content="800">
+<meta name="format-detection" content="telephone=no" />
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/animate.css">
+<link rel="stylesheet" href="css/swiper.min.css">
+<link rel="stylesheet" href="css/layout.css">
+<link rel="stylesheet" href="css/layout2.css">
+<link rel="stylesheet" href="css/style2.css">
+<script src="js/jquery.js"></script>
+<script src="js/swiper.jquery.js"></script>
+<script src="js/common.js"></script>
+<style>
+html, body {
+	height: 100%;
+	width: 100%;
+}
+
+.swiper-container {
+	width: 100%;
+	height: 100%;
+	position: absolute;
+}
+
+.swiper-slide {
+	height: 100%;
+	width: 100%;
+	text-align: center;
+}
+</style>
+<script>
+	$(document).ready(function () {
+	   //initialize swiper when document ready  
+	   var mySwiper = new Swiper ('.swiperCon1', {
+	     direction: 'vertical',
+	     hashnav: true,
+	     onSlideChangeEnd:function(swiper){
+	     	var iSlide = swiper.activeIndex;
+	     	var title = document.title;
+	     	ga('send', 'event', title, '滑动', '第'+iSlide+"屏");
+	     }
+	   })        
+
+	   var swiper = new Swiper('.swiperCon2', {
+	       pagination: '.swiper-pagination',
+	       effect:'cude',
+	       grabCursor: true,
+	       centeredSlides: true,
+	       slidesPerView: 'auto',
+	       loop:true,
+	       loopedSlides :6,
+	       autoplay :3000,
+	       autoplayDisableOnInteraction:false,
+	        prevButton:'.swiper-button-prev',
+	       nextButton:'.swiper-button-next',
+	       coverflow: {
+	           rotate: 50,
+	           stretch: 0,
+	           depth: 100,
+	           modifier: 1,
+	           slideShadows : true
+	       },
+	   });
+
+
+	   $(".swiperCon2 ").find(".swiper-slide a").on("click",function(){
+	   	var title = document.title;
+	   	var item = $(this).parent().data("item");
+	   	ga('send', 'event', title, '点击', item);
+	   })
+	   // 点击购买
+	   $(".buyBtns").find("a").eq(0).on("click",function(){
+	   	var title = document.title;
+	   	ga('send', 'event', title, '滑动', '点击购买');
+	   })
+
+	   $(".buyBtns").find("a").eq(1).on("click",function(){
+	   	var title = document.title;
+	   	mySwiper.slideNext();
+	   	ga('send', 'event', title, '滑动', '路过抽奖，惊喜连连');
+	   })
+	 });
+	</script>
+</head>
+<body>
+	<input type="hidden" name="" id="openid" value="<{$openid}>">
+	<input type="hidden" style="" value="<{$url}>" id="shareUrl">
+	<div class="container">
+		<div class="swiper-container swiperCon1">
+			<div class="swiper-wrapper">
+				<!-- 第一屏 -->
+				<div class="swiper-slide slide1" data-hash="slide1">
+					<div class="top">
+						<span class="iconTop icon_left"></span> <span
+							class="iconTop icon_right"></span> <span class="lineTop"></span>
+						<img src="images/titleImg.png" alt="" class="titleImg">
+					</div>
+					<div class="picList">
+						<img src="images/img1.png" alt=""> <img
+							src="images/img2.png" alt=""> <img src="images/img3.png"
+							alt=""> <img src="images/img4.png" alt="">
+					</div>
+					<div class="btm">
+						<div class="btmTitle">
+							现在参与即有机会获得多重好礼<img src="images/line_btm.png" alt="">
+						</div>
+						<div class="btmList">
+							<ul>
+								<li><img src="images/btm1.png" alt=""><br />京东优惠券</li>
+								<li><img src="images/btm2.png" alt=""><br />电影票</li>
+								<li><img src="images/btm3.png" alt=""><br />智能手环</li>
+								<li><img src="images/btm4.png" alt=""><br />星巴克咖啡</li>
+								<li><img src="images/btm5.png" alt=""><br />携程旅游券</li>
+							</ul>
+						</div>
+					</div>
+					<img src="images/iconArrow.png" alt="" class="iconArrow">
+				</div>
+				<!-- 第二屏 -->
+				<div class="swiper-slide" data-hash="slide2">
+					<div class="top2">
+						<span class="iconTop icon_left"></span> <span
+							class="iconTop icon_right"></span> <img
+							src="images/titleImg2.png" alt="" class="titleImg2">
+					</div>
+					<img src="images/topBg.png" alt="" class="topBg">
+					<div class="intelTxt">
+						<img src="images/txtImg.png" alt="">
+					</div>
+					<div class="scrollPic">
+						<div class="swiper-container swiperCon2">
+							<div class="swiper-wrapper">
+								<div class="swiper-slide slideImg"
+									style="background-image: url(images/1.png)" data-item="飞行器">
+									<a href="/index.php/edison/aircraft"><div class="picBg">飞行器</div></a>
+								</div>
+								<div class="swiper-slide slideImg"
+									style="background-image: url(images/2.png)" data-item="机器人">
+									<a href="/index.php/edison/robot"><div class="picBg">机器人</div></a>
+								</div>
+								<div class="swiper-slide slideImg"
+									style="background-image: url(images/3.png)" data-item="智能家居">
+									<a href="/index.php/edison/sHome"><div class="picBg">智能家居</div></a>
+								</div>
+								<div class="swiper-slide slideImg"
+									style="background-image: url(images/4.png)" data-item="健康检测">
+									<a href="/index.php/edison/health"><div class="picBg">健康检测</div></a>
+								</div>
+								<div class="swiper-slide slideImg"
+									style="background-image: url(images/5.png)" data-item="辅助工具">
+									<a href="/index.php/edison/atools"><div class="picBg">辅助工具</div></a>
+								</div>
+								<div class="swiper-slide slideImg"
+									style="background-image: url(images/6.png)" data-item="可穿戴">
+									<a href="/index.php/edison/wearable"><div class="picBg">可穿戴</div></a>
+								</div>
+							</div>
+							<div class="swiper-pagination"></div>
+							<div class="swiperBtn">
+								<div class="swiper-button-prev prevBtn">
+									<img src="images/left.png" alt="">
+								</div>
+								<p class="swiperTxt">点击图片,了解更多</p>
+								<div class="swiper-button-next nextBtn">
+									<img src="images/right.png" alt="">
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="buyBtns">
+						<a href="http://item.jd.com/1494797.html"><img
+							src="images/buyBtn.png" alt=""></a> <a href="javascript:"><img
+							src="images/buyBtn2.png" alt=""></a>
+					</div>
+					<img src="images/iconArrow.png" alt="" class="iconArrow">
+				</div>
+
+				<!-- 第三屏 -->
+				<div class="swiper-slide" data-hash="slide3">
+					<div class="fixedbg"></div>
+					<div class="container">
+						<div class="main">
+							<img src="images/zhuanpan_banner.png" alt="" class="title" />
+							<div class="zpbox">
+								<a class="pointbox" href="javascript:"></a>
+							</div>
+							<p class="tips">
+								您还有<span><{$count}></span>次机会，快去召集更多小伙伴们~
+							</p>
+							<div class="prize w100">
+								<img src="images/prize.png">
+								<p>为了礼品能送到您手中，请您先关注我们的官方帐号</p>
+							</div>
+							<a href="/index.php/edison/active" class="btn-detail"></a>
+						</div>
+					</div>
+					<div class="popbox popbox_alert_pop">
+						<div class="pop_c">
+							<div class="pop_tit"></div>
+							<div class="pop_txt">错误信息</div>
+							<button class="pop_ok">确定</button>
+						</div>
+					</div>
+					<div class="popbox popbox_cj popbox_cj_fail">
+						<div class="popcj_c">
+							<div class="popcj_c_t">
+								<div class="popcj_c_tit">很遗憾</div>
+								<div class="pop_txt">
+									<p>很遗憾，你可以将本页面发送给更多小伙伴，获取更多抽奖机会，继续加油哦！</p>
+								</div>
+							</div>
+							<button class="pop_ok">返回</button>
+						</div>
+					</div>
+					<div class="popbox popbox_cj popbox_cj_fail_nochance">
+						<div class="popcj_c">
+							<div class="popcj_c_t">
+								<div class="popcj_c_tit">很遗憾</div>
+								<div class="pop_txt">
+									<p>很遗憾，你可以将本页面发送给更多小伙伴，获取更多抽奖机会，继续加油哦！</p>
+								</div>
+							</div>
+							<a class="pop_ok" href="thanks.html">确定</a>
+						</div>
+					</div>
+					<div class="popbox popbox_cj popbox_cj_success">
+						<div class="popcj_c">
+							<div class="popcj_c_t">
+								<div class="popcj_c_tit">恭喜您</div>
+								<div class="pop_txt">
+									<p>恭喜您，您已抽中……，电子码为……。您还可以从【英特尔中国在线】公众号我的SI菜单点击查看获奖详情。单点击查看获奖详情。</p>
+								</div>
+							</div>
+							<button class="pop_ok">返回</button>
+						</div>
+					</div>
+					<div class="popbox popbox_cj popbox_cj_success_nochance">
+						<div class="popcj_c">
+							<div class="popcj_c_t">
+								<div class="popcj_c_tit">恭喜您</div>
+								<div class="pop_txt">
+									<p>恭喜您，您已抽中……，电子码为……。您还可以从【英特尔中国在线】公众号我的SI菜单点击查看获奖详情。单点击查看获奖详情。</p>
+								</div>
+							</div>
+							<a class="pop_ok" href="/index.php/si/thanks">确定</a>
+						</div>
+					</div>
+					<div class="popbox popup_zp_suc p1">
+						<div class="popup_zp_suc_c">
+							<div class="popup_zp_suc_c_img">
+								<img src="images/giftpop.png" alt="" />
+							</div>
+							<div class="popup_zp_suc_memo">
+								恭喜您，您已获得 <span></span> 一张。为保证奖品发放顺利，请填写以下信息，我们将在活动结束后统一寄送奖品。
+							</div>
+							<div class="popup_zp_suc_frm">
+								<div class="popup_zp_suc_frmli">
+									<div class="popup_zp_suc_frmli_span">姓名：</div>
+									<input type="text" class="popup_zp_suc_frmli_ipt name"
+										name="name" />
+								</div>
+								<div class="popup_zp_suc_frmli">
+									<div class="popup_zp_suc_frmli_span">电话：</div>
+									<input type="tel" class="popup_zp_suc_frmli_ipt tel"
+										name="mobile" />
+								</div>
+								<div class="popup_zp_suc_frmli">
+									<div class="popup_zp_suc_frmli_span">地址：</div>
+									<input type="text" class="popup_zp_suc_frmli_ipt addresss"
+										name="address" />
+								</div>
+								<a href="javascript:void(0)" class="zp_suc_frm_subbtn"><img
+									src="images/dzpbtn.jpg" alt="" /></a>
+							</div>
+						</div>
+					</div>
+					<div class="popbox popup_zp_suc p2">
+						<div class="popup_zp_suc_c">
+							<div class="popup_zp_suc_c_img">
+								<img src="images/giftpop.png" alt="" />
+							</div>
+							<div class="popup_zp_suc_memo"></div>
+							<a href="javascript:void(0)" class="zp_suc_frm_subbtn2"><img
+								src="images/dzpbtn2.jpg" alt="" /></a>
+						</div>
+					</div>
+					<div class="popbox popup_zp_suc p3">
+						<div class="popup_zp_suc_c">
+							<div class="popup_zp_suc_c_img">
+								<img src="images/giftpop.png" alt="" />
+							</div>
+							<div class="popup_zp_suc_memo">SORRY 您当前没有可用的抽奖机会</div>
+							<a href="javascript:void(0)" class="zp_suc_frm_subbtn3"><img
+								src="images/dzpbtn2.jpg" alt="" /></a>
+						</div>
+					</div>
+					<div class="popbox popup_zp_suc p4">
+						<div class="popup_zp_suc_c">
+							<div class="popup_zp_suc_c_img">
+								<img src="images/giftpop.png" alt="" />
+							</div>
+							<div class="popup_zp_suc_memo">恭喜您获得一张时光网电影卷，兑换信息将在24小时内以微信消息推送方式发送到您的手机上，请注意查收。如未收到，您可在微信号中输入“电影券兑换”，我们将尽快将兑换码发送给您。</div>
+							<a href="javascript:void(0)" class="zp_suc_frm_subbtn4"><img
+								src="images/dzpbtn2.jpg" alt="" /></a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<script src="js/ga.js"></script>
+	<script src="js/jquery.easing.min.js"></script>
+	<script src="js/jQueryRotate.2.2.js"></script>
+	<script type="text/javascript"
+		src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+	<script src="js/share.js"></script>
+	<script type="text/javascript"
+		src="http://m.zevertech.com/index.php/jssdk?jsonpcallback=jsonpcallback"></script>
+	<script src="js/app2.js"></script>
+	<style>
+.p2 {
+	min-height: 140px;
+	padding-top: 160px;
+	font-size: 30px;
+}
+
+.p2 .popup_zp_suc_memo {
+	min-height: 80px;
+}
+
+.p3 {
+	min-height: 180px;
+	padding-top: 180px;
+	font-size: 30px;
+}
+
+.p3 .popup_zp_suc_memo {
+	min-height: 120px;
+	margin-top: 20px;
+}
+
+.zp_suc_frm_subbtn3 {
+	padding-bottom: 40px;
+	display: inline-block;
+}
+
+.zp_suc_frm_subbtn2 {
+	padding-bottom: 40px;
+}
+
+.popup_zp_suc_c {
+	border-bottom-left-radius: 20px;
+	border-bottom-right-radius: 20px;
+}
+
+.popup_zp_suc_frmli_ipt {
+	font-size: 30px;
+}
+
+.p4 {
+	min-height: 140px;
+	padding-top: 160px;
+	font-size: 30px;
+}
+
+.p4 .popup_zp_suc_memo {
+	min-height: 80px;
+	padding-bottom: 40px;
+	`
+}
+
+.p4 .zp_suc_frm_subbtn4 {
+	padding-bottom: 40px;
+	display: inline-block;
+}
+</style>
+</body>
+</html>

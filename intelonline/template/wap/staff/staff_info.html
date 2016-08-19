@@ -1,0 +1,32 @@
+<{include 'wap/head.html'}>
+<script type="text/javascript">
+	$(function () {
+		$(".list ul li").click(function () {
+			location.href=$(this).attr("data-href");
+		});
+	});
+</script>
+
+<body class="bggray">
+	<div class="loadingbox"></div>
+	<div class="container">
+		<{if $staff_info}>
+		<div class="resultdbox">
+			<div class="resultdbox_tit"><{$title}></div>
+			<div class="resultdbox_c">
+				<{foreach $staff_info as $key => $info}>
+				<p>
+					<{$key}>: <span>
+						<!-- ¥  --><{$info}>
+					</span>
+				</p>
+				<{/foreach}>
+			</div>
+		</div>
+		<{else}>
+		<div class="list_no" style="text-align: center">暂无信息</div>
+		<{/if}>
+	</div>
+	<{include 'wap/footer.html'}>
+</body>
+</html>

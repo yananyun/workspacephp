@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>粉丝列表</title>
+<link href="/css/main.css" type="text/css" rel="stylesheet" />
+<link rel="stylesheet" type="text/css" href="/css/style.css" />
+<link rel="stylesheet" type="text/css" href="/css/index.css" />
+<script type="text/javascript" src="/js/jquery.js"></script>
+</head>
+<body>
+	<div class="listFilterWrap">
+		<p>
+		<form
+			action='/index.php/membergroup/filtrate_list/group_id/<{$group_id}>'
+			method='post' id='form1'>
+			<span class="leftSpan">状态：</span> <select name="shield" id='shield'>
+				<option value="1"<{if $shield eq 1}>selected<{/if}> >未屏蔽</option>
+				<option value="2"<{if $shield eq 2}>selected<{/if}> >已屏蔽</option>
+			</select> <input type="text" name="nickname" placeholder="请输入昵称" id='nickname'
+				value='<{$nickname}>' onfocus="clean_nickname(this.id)" /> <input
+				type="button" value="查找" class="inputBtn" onclick="checkform()" />
+		</form>
+		</p>
+	</div>
+	<ul class="followersTable">
+		<li class="listTopTtl"><span class="listNickName">昵称</span> <span
+			class="listGender">性别</span> <span class="listRegion">区域</span> <span
+			class="listPoint">交互量</span> <span class="listSource">来源/类型</span> <span
+			class="listStatu">属性</span></li> <{foreach $list as $val}>
+		<li><span class="listNickName"><{$val.nickname}></span> <span
+			class="listGender"><{$val.sex}></span> <span class="listRegion"><{$val.location}></span>
+			<span class="listPoint"><{$val.interactive}></span> <span
+			class="listSource"><{$val.type}></span> <{if $val.shield eq 2}> <span
+			class="listStatu die">已屏蔽</span> <input type="button"
+			class="intelBtn cancelBanBtn" value="解除屏蔽"
+			onclick="shield(<{$group_id}>,'<{$val.openid}>',2)" /> <{else}> <span
+			class="listStatu live">未屏蔽</span> <input type="button"
+			class="intelBtn banBtn" style="width: 74px" value="屏  蔽"
+			onclick="shield(<{$group_id}>,'<{$val.openid}>',1)" /> <{/if}></li>
+		<{/foreach}>
+		<!--<input type="button" class="intelBtn cancelBanBtn" value="解除屏蔽" onclick="cancelBan()" />-->
+	</ul>
+</body>
+</html>
+<script type="text/javascript">
+
+	function checkform(){
+		$('#form1').submit();
+	}
+	function clean_nickname(id){
+		$('#'+id).val('');
+	}
+	function shield(group_id,openid,type){
+		$.post('/index.php/membergroup/shield',{group_id:group_id,openid:openid,type:type},function(data){
+			if(data){
+				location.href=location.href;
+			}else{
+				return false;
+			}
+		},'json')
+	}
+</script>

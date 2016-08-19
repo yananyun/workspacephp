@@ -1,0 +1,68 @@
+<{if $type == 'text'}>
+<!-- <li class="picMsgList">
+		<span>序号</span>
+		<span>标题</span>
+		<span>内容简介</span>
+		<span>创建日期</span>
+		<span>选择</span>
+	</li> -->
+<table border="1" cellspacing="0" cellpadding="0">
+	<tr>
+		<td>序号</td>
+		<td>标题</td>
+		<td>内容简介</td>
+		<td>创建日期</td>
+		<td>选择</td>
+	</tr>
+	<{/if}> <{foreach $list as $k => $material}>
+	<!--图片消息-->
+	<{if $type == 'image'}>
+	<li class="picMsgList" onclick="fnTickMaterial(this,<{$material.id}>)">
+		<div class="pickBase"></div> <em class="tick">√</em>
+		<div class="materialPicMsgWrap">
+			<img src="<{$material.filepath}>" />
+		</div>
+		<p class="materialName"><{$material.filename}></p>
+	</li> <{/if}> <{if $type == 'text'}> <{foreach $material.articles as $text}>
+	<tr class="picMsgList" onclick="fnTickMaterial(this,<{$material.id}>)">
+		<td><{$k + $bNum}></td>
+		<td><{$text.title}></td>
+		<td><{$text.content}></td>
+		<td><{$material.ctime|date_format:"%Y-%m-%d"}></td>
+		<td><input type="radio" name="xe" value="<{$text.content}>"></td>
+	</tr>
+
+	<{/foreach}> <{/if}>
+
+	<!--图文消息-->
+	<{if $type== 'news'}> <{if $material.single == 1}>
+	<li class="materialPicTxtList oneContent"
+		onclick="fnTickMaterial(this,<{$material.id}>)">
+		<div class="pickBase"></div> <em class="tick">√</em>
+		<p class="materialPicTxtTtl"><{$material['articles'][0]['title']}></p>
+		<p class="materialPicTxtDate"><{date('Y-m-d',$material.uptime)}></p>
+		<div class="materialPicWrapCover">
+			<img src="<{$material['articles'][0]['thumb']}>" />
+		</div>
+		<p class="materialPicTxtComment"><{$material['articles'][0]['description']}></p>
+	</li> <{/if}> <{if $material.single == 2}>
+	<li class="materialPicTxtList multiContent"
+		onclick="fnTickMaterial(this,<{$material.id}>)">
+		<div class="pickBase"></div> <em class="tick">√</em>
+		<p class="materialPicTxtDate"><{date('Y-m-d',$material.uptime)}></p>
+		<{foreach $material.articles as $k => $new}> <{if $k == 0}>
+		<div class="materialPicWrapCover">
+			<img src="<{$new.thumb}>" />
+			<p class="topCoverTtl">
+				<span class="opacityBg"></span> <a class="ttlTxt" href=""><{$new.title}></a>
+			</p>
+		</div> <{else}>
+		<div class="materialMultiPicWrap">
+			<p><{$new.title}></p>
+			<div class="materialThumb">
+				<img src="<{$new.thumb}>" />
+			</div>
+		</div> <{/if}> <{/foreach}>
+	</li> <{/if}> <{/if}> <{/foreach}> <{if $type == 'text'}>
+</table>
+<{/if}> <{$pages}>

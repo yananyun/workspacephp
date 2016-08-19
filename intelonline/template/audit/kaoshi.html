@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+<head>
+<title><{$title}></title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+* {
+	border: 0 none;
+	font-size: 9pt;
+	margin: 0;
+	padding: 0;
+}
+
+a {
+	text-decoration: none;
+}
+
+body {
+	margin-top: 30px;
+}
+
+li {
+	list-style: none;
+}
+
+.tablelist {
+	border: 1px solid #cbcbcb;
+	clear: both;
+	width: 80%;
+	padding-top: 30px;
+	margin: auto;
+}
+
+#header {
+	width: 80%;
+	padding-top: 30px;
+	margin: auto;
+}
+
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+	width: 80%;
+}
+
+.tablelist th {
+	background: url("/template/audit/th.gif") repeat-x scroll 0 0
+		rgba(0, 0, 0, 0);
+	border-bottom: 1px solid #b6cad2;
+	height: 34px;
+	line-height: 34px;
+	text-align: center;
+	text-indent: 11px;
+}
+
+.tablelist tbody tr.odd {
+	background: none repeat scroll 0 0 #f5f8fa;
+}
+
+.tablelist td {
+	border-right: 1px dotted #c7c7c7;
+	line-height: 35px;
+	text-indent: 11px;
+	text-align: center;
+}
+
+.order_tag .active {
+	background-color: #f98f00;
+	color: #fff;
+	cursor: pointer;
+	float: left;
+	height: 30px;
+	line-height: 30px;
+	margin-left: 5px;
+	text-align: center;
+	width: 150px;
+}
+
+.order_tag li {
+	background-color: #eae9e9;
+	color: #4c4c4c;
+	cursor: pointer;
+	float: left;
+	height: 30px;
+	line-height: 30px;
+	margin-left: 5px;
+	text-align: center;
+	width: 150px;
+}
+
+.page {
+	width: 80%;
+	margin: auto;
+	margin-top: 20px;
+	font-size: 14px;
+}
+
+.page b {
+	font-size: 14px;
+}
+
+input, select {
+	border: 1px solid #ccc;
+}
+
+.page a {
+	background-color: #2176cb;
+	color: #fff;
+	display: inline-block;
+	font-size: 14px;
+	min-width: 20px;
+	padding: 5px;
+	text-align: center;
+}
+
+.page input[type="text"] {
+	text-align: center;
+	height: 25px;
+}
+
+.page input[type="button"] {
+	text-align: center;
+	height: 27px;
+	width: 40px;
+	background-color: #2176cb;
+	color: #fff;
+	cursor: pointer;
+}
+
+td {
+	border-bottom: 1px dotted #c7c7c7
+}
+</style>
+<script src="/js/jquery.js"></script>
+<script>
+	function change_(id, type){
+//		var id = $(this).parents('tr').find('.id').val();
+//		var type = $(this).val();
+	var url = "/index.php/audit/audit/id/" + id + "/type/" + type;
+		$.ajax({
+		url:url,
+			dataType:'json',
+			success:function(data){
+			if (data.status == true){
+			alert(data.info);
+				var type = $('#type').val();
+				location.href = "/index.php/audit/index/type/" + type;
+			} else{
+			alert(data.info);
+			}
+			}
+		});
+	}
+	function showpage(url) {
+	    $.ajax({
+		url: url,
+		success: function(data) {
+		    $("body").html(data);
+		}
+	    });
+	}
+	    </script>
+</head>
+<body>
+	<input type="hidden" id="type" value="<{$type}>" />
+	<div id="header">
+		<ul class="order_tag">
+			<a href='/index.php/audit/index/type/1'><li<{if $type eq
+					'1'}>class="active"<{/if}>>未审核</li></a>
+			<a href='/index.php/audit/index/type/2'><li<{if $type eq
+					'2'}>class="active"<{/if}>>审核通过</li></a>
+			<a href='/index.php/audit/index/type/3'><li<{if $type eq
+					'3'}>class="active"<{/if}>>未审核通过</li></a>
+			<a href='/index.php/audit/kaoshi'><li class="active">考试状态</li></a>
+		</ul>
+	</div>
+	<table class="tablelist">
+		<thead>
+			<tr>
+				<th>id</th>
+				<th>姓名</th>
+				<th style="width: 130px;">手机</th>
+				<th>职位</th>
+				<th>邮箱</th>
+				<th>公司名称</th>
+				<th>审核状态</th>
+				<th>昵称</th>
+				<th>考试状态</th>
+				<th>考试分数</th>
+				<!--<th>审核操作</th>-->
+				<th style="width: 60px;">操作</th>
+			</tr>
+		</thead>
+		<tbody>
+			<{foreach $list as $k => $v}>
+			<tr class="tr1">
+				<input type='hidden' class="id" value="<{$v.id}>" />
+				<td><{$v.id}></td>
+				<td><{$v.name}></td>
+				<td><{$v.mobile}></td>
+				<td><{$v.title}></td>
+				<td><{$v.email}></td>
+				<td><{$v.companyname}></td>
+				<td><{if $v['type'] eq '2'}>审核通过<{elseif $v['type'] eq
+					'3'}>未审核通过<{elseif $v['type'] eq '1'}>未审核<{/if}></td>
+				<!--		<td>
+		    <select onchange="change_(<{$v.id}>,this.value)">
+			<option>切换审核状态</option>
+			<option value="1">&nbsp;审核通过&nbsp;</option>
+			<option value="2">未审核通过</option>
+		    </select>
+		</td>-->
+				<{if $v.ctime gt 0}>
+				<td><{$v.nickname}></td>
+				<td>√</td>
+				<td><{$v.score}></td> <{else}>
+				<td></td>
+				<td>×</td>
+				<td></td> <{/if}>
+				<td><a class="tablelink"
+					href="/index.php/audit/showkaoshi/openid/<{$v.openid}>">详情</a></td>
+			</tr>
+			<{/foreach}>
+		</tbody>
+		<tr>
+			<td style='text-align: left;' colspan='11'><{$page_list}></td>
+		</tr>
+		<tr>
+			<td style='text-align: left;' colspan='11'><a
+				href="/index.php/audit/export/type/4">导出数据</a></td>
+		</tr>
+	</table>
+</body>
+</html>

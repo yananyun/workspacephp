@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>添加自动应答</title>
+<link href="/css/main.css" type="text/css" rel="stylesheet" />
+<link rel="stylesheet" type="text/css" href="/css/skins/blue.css" />
+<link rel="stylesheet" type="text/css" href="/css/material.css" />
+<link rel="stylesheet" type="text/css" href="/css/message.css" />
+<link rel="stylesheet" type="text/css" href="/css/style.css" />
+<link rel="stylesheet" type="text/css" href="/css/index.css" />
+<script type="text/javascript" src="/js/jquery.js"></script>
+<script type="text/javascript" src="/js/main.js"></script>
+<script type="text/javascript" src="/js/artDialog.js"></script>
+<script type="text/javascript" src="/js/iframeTools.js"></script>
+<script type="text/javascript" src="/js/My97DatePicker/WdatePicker.js"></script>
+<link rel="stylesheet" type="text/css"
+	href="/js/My97DatePicker/skin/WdatePicker.css" />
+</head>
+<body>
+	<div class="container">
+		<{include '../public/header.html'}>
+		<div class="main">
+			<div class="mainWrap">
+				<form action='/index.php/autoresponse/add_subscriberesponse'
+					method='post' id='form1'>
+					<h3>添加常规关注应答</h3>
+
+					<p class="leftPadding80 fansOptionWrap">
+					<div class="publishBox statu1">
+						<div class="publishBoxNavWrap">
+							<a class="txtMsgTab" href="javascript:void(0);"
+								onclick="fnSwitchTxtMsg(this)">文字</a> <a class="picTxtMsgTab"
+								href="javascript:void(0);"
+								onclick="fnCallPicTxtMsg(this,$('#wordMsg'))">图文信息</a>
+						</div>
+						<div class="messageInput" contenteditable="true" id="wordMsg"></div>
+						<input type="hidden" name="response_mid" value=""
+							id='response_mid'> <input type="hidden"
+							name="response_content" value="" id="response_content">
+						<div class="publishBoxBottom">
+							<a class="emotionIcon" href="javascript:void(0);" onclick=""></a>
+							<p class="messageCount">
+								还可以输入<span>600</span>字
+							</p>
+							<input type="hidden" name="txtOverflow" value="1">
+						</div>
+					</div>
+
+
+
+					</p>
+					<p>
+						<font color='#FF6600'>应答方式“文本”和“图文”只能选择一项！</font>
+					</p>
+					<p class="leftPadding80 btnWrap">
+						<input type="button" class="intelBtn addGroupOprateBtn" value="保存"
+							onclick="fnSaveGroup(this)" /> <a
+							href="/index.php/autoresponse/autoresponse_manage"
+							class="intelBtn addGroupOprateBtn">取消</a>
+					</p>
+				</form>
+			</div>
+		</div>
+		<{include '../public/left_menu.html'}>
+	</div>
+</body>
+</html>
+<script type="text/javascript">
+	$(function(){
+		setInterval(function(){
+			var flag=$('#wordMsg').is(':focus');
+			if(flag){
+				fnCheckTxtNum();
+			}
+		},200);
+	})
+
+	function fnSaveGroup(self){
+		var mid = $("#response_mid").val();
+		if(mid == '' || mid == 0){
+			var content = $("#wordMsg").text();
+			$("#response_content").val(content);
+		}
+		$('#form1').submit();
+	}
+	
+	function fnSwitchTxtMsg(self){
+		$("#response_mid").val('');
+		var self=$(self);
+		var msgType=$('[name=msgType]');
+		msgType.val(1);
+		$('[name=response_mid]').val('');
+		$('.publishBox').removeClass('statu2').removeClass('statu3').addClass('statu1');
+		$('.messageInput').html('').removeClass('materialPicTxtWrap').attr('contenteditable',true);
+	}
+	
+	function fnCallPicTxtMsg(self,box){
+		$("#response_content").val('');
+		var picTxtBox=art.dialog({title:'图文素材',id:'picTxtBox',lock:true});
+		$.ajax({
+			url:'/index.php/material/material_popup',
+			success:function(data){
+				picTxtBox.content(data);
+				picTxtBox.button(
+					{
+						name: '确定',
+						callback: function () {
+							var id=$('[name=tickedMaterialId]').val();
+							if(id==''){
+								alert('请选择一个素材');
+								return false;
+							}else{
+								var mg=$('.tickedContent').removeClass('tickedContent');
+								box.html(mg).attr('contenteditable',false);
+								$('.publishBox').removeClass('statu1').removeClass('statu2').addClass('statu3');
+								var msgType=$('[name=msgType]');
+								msgType.val(3);
+								$('[name=response_mid]').val(id);
+							}
+						},
+						focus:true
+					},
+					{
+						name:'取消'
+					}
+				);
+			},
+			cache:false
+		});
+	}
+	
+	function fnCheckTxtNum(){
+		var area=$('#wordMsg');
+		var txtOverflow=$('[name=txtOverflow]');
+		var numWrap=$('.messageCount');
+		var msg=area.text().replace(/\s/g,'');
+		var len=600-(msg.length);
+		var tip='';
+		if(len<0){
+			tip='已超出<span class="overLength">'+Math.abs(len)+'</span>字';
+			txtOverflow.val(0);
+		}else{
+			tip='还可以输入<span>'+len+'</span>字';
+			txtOverflow.val(1);
+		}
+		numWrap.html(tip);
+	}
+
+	function fnTickMaterial(self,id){
+		self=$(self);
+		var siblingsBox=self.parents('.materialPicTxtWrap').find('li');
+		siblingsBox.removeClass('tickedContent');
+		self.addClass('tickedContent');
+		var tickedMaterialId=$('[name=tickedMaterialId]');
+		tickedMaterialId.val(id);
+	}
+
+</script>

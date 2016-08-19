@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="author" content="www.zevertech.com" />
+<meta http-equiv="copyright" content="zevertech 2014" />
+<meta http-equiv="pragma" content="no-cache" />
+<meta id="viewport" name="viewport" content="width=640,user-scalable=no">
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-touch-fullscreen" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+<meta name="MobileOptimized" content="800">
+<meta name="format-detection" content="telephone=no" />
+<title></title>
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/animate.css">
+<link rel="stylesheet" href="css/layout.css">
+<script src="js/jquery.js"></script>
+<script src="js/common.js"></script>
+<script type="text/javascript" src="js/jQueryRotate.2.2.js"></script>
+<script type="text/javascript" src="js/jquery.easing.min.js"></script>
+<script type="text/javascript">
+$(function () {
+	function alert_pop(str) {
+		$(".popbox_alert .pop_txt").html(str);
+		$(".popbox_alert").fadeIn();
+	}
+	$(".popbox_alert .pop_ok").click(function () {
+		location.href="thanks.html";
+	});
+	var chancenum = parseInt($(".zp_memo .chancenum").html());
+	$(".popbox_cj .pop_ok").click(function () {
+		$(".popbox_cj").fadeOut();
+	});
+	$(".pointbox").click(function(){
+		//ga("send", "event", "大转盘","点击","开始抽奖");
+		if(chancenum>0){
+			chancenum--;
+			var chancenum_str = chancenum;
+			$(".zp_memo .chancenum").html(chancenum_str);
+			var a = Math.floor(Math.random()*5)*60 + 30;
+			var a = Math.floor(Math.random()*5)*60 + 30;
+			$(".pointbox").rotate({
+				duration:3000,
+				angle: 0, 
+				animateTo:1440+a,
+				easing: $.easing.easeOutSine,
+				callback: function(){
+					var num = (a-30)/60;
+					//var num=1;
+					var str="";
+					if(num==1){
+						if(chancenum>0){
+							$(".popbox_cj_fail").fadeIn();
+						}else{
+							$(".popbox_cj_fail_nochance").fadeIn();
+						}
+					}else{
+						if(num==0){
+							str = "团购抵用券";
+						}else if(num==2){
+							str = "星巴克咖啡券";
+						}else if(num==3){
+							str = "加油卡";
+						}else if(num==4){
+							str = "超市电子券";
+						}else{
+							str = "超市电影票";
+						}
+						var popstr ="恭喜您，您已抽中"+str+"，电子码为……。您还可以从【英特尔中国在线】公众号我的SI菜单点击查看获奖详情。单点击查看获奖详情。";
+						if(chancenum>0){
+							$(".popbox_cj_success .pop_txt p").html(popstr);
+							$(".popbox_cj_success").fadeIn();
+						}else{
+							$(".popbox_cj_success_nochance .pop_txt p").html(popstr);
+							$(".popbox_cj_success_nochance").fadeIn();
+						}
+					}
+				}
+			 });
+		}
+	});
+});
+</script>
+</head>
+<body>
+	<div class="loadingbox"></div>
+	<div class="fixedbg"></div>
+	<div class="container">
+		<div class="main">
+			<img src="images/zhuanpan_banner.png" alt="" class="w100" />
+			<div class="zpbox">
+				<div class="pointbox"></div>
+			</div>
+			<div class="zp_memo">
+				<p>
+					您现在还有<b class="num chancenum">2</b>次抽奖机会
+				</p>
+				<p>
+					离你下一次抽奖机会， 还差<b class="num">15</b>次朋友支持
+				</p>
+				<p>
+					还有<span class="giftnum">18</span>个奖品， 没有被领走...
+				</p>
+			</div>
+			<img src="images/zhuanpanimg.png" alt="" class="w100 mt20" />
+			<div class="tc">
+				<a href="index.html"><img src="images/return.png" alt="" /></a>
+			</div>
+		</div>
+	</div>
+	<div class="popbox popbox_cj popbox_cj_fail">
+		<div class="popcj_c">
+			<div class="popcj_c_t">
+				<div class="popcj_c_tit">很遗憾</div>
+				<div class="pop_txt">
+					<p>“很遗憾，你可以转发本页面吸引更多小伙伴，获取更多抽奖机会。”</p>
+					<p class="tr">继续加油哦！</p>
+				</div>
+			</div>
+			<button class="pop_ok">返回</button>
+		</div>
+	</div>
+	<div class="popbox popbox_cj popbox_cj_fail_nochance">
+		<div class="popcj_c">
+			<div class="popcj_c_t">
+				<div class="popcj_c_tit">很遗憾</div>
+				<div class="pop_txt">
+					<p>“很遗憾，你可以转发本页面吸引更多小伙伴，获取更多抽奖机会。”</p>
+					<p class="tr">继续加油哦！</p>
+				</div>
+			</div>
+			<a class="pop_ok" href="thanks.html">确定</a>
+		</div>
+	</div>
+	<div class="popbox popbox_cj popbox_cj_success">
+		<div class="popcj_c">
+			<div class="popcj_c_t">
+				<div class="popcj_c_tit">恭喜您</div>
+				<div class="pop_txt">
+					<p>恭喜您，您已抽中……，电子码为……。您还可以从【英特尔中国在线】公众号我的SI菜单点击查看获奖详情。单点击查看获奖详情。</p>
+				</div>
+			</div>
+			<button class="pop_ok">返回</button>
+		</div>
+	</div>
+	<div class="popbox popbox_cj popbox_cj_success_nochance">
+		<div class="popcj_c">
+			<div class="popcj_c_t">
+				<div class="popcj_c_tit">恭喜您</div>
+				<div class="pop_txt">
+					<p>恭喜您，您已抽中……，电子码为……。您还可以从【英特尔中国在线】公众号我的SI菜单点击查看获奖详情。单点击查看获奖详情。</p>
+				</div>
+			</div>
+			<a class="pop_ok" href="thanks.html">确定</a>
+		</div>
+	</div>
+	<script type="text/javascript"
+		src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+	<script type="text/javascript" src="js/weixin.js"></script>
+	<script type="text/javascript"
+		src="http://m.zevertech.com/index.php/jssdk?jsonpcallback=jsonpcallback"></script>
+</body>
+</html>

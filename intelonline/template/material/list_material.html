@@ -1,0 +1,64 @@
+<!-- <p class="checkAllP"><label class="checkAllLabel"><input type="checkbox" class="check" name="" onclick="checlAll(this,$('.memeberListWrap'))" />全选</label></p> -->
+<div class="materialCol leftMaterial"></div>
+<div class="materialCol rightMaterial"></div>
+<{foreach $list as $k => $material}>
+<!--图片消息-->
+<{if $type == 'image'}>
+<li class="picMsgList">
+	<div class="materialPicMsgWrap">
+		<img src="<{$material.filepath}>" />
+	</div> <input type="text" class="materialName" readonly
+	value="<{$material.filename}>" />
+	<div class="materialPicMsgBottom">
+		<a href="javascript:void(0);" mid='<{$material.id}>'
+			onclick="fnEditPicMsg(this)">编辑</a> <a href="javascript:void(0);"
+			onclick="delMaterialBtn(<{$material.id}>)">删除</a>
+	</div>
+</li>
+<{/if}>
+
+<!--图文消息-->
+<{if $type== 'news'}> <{if $material.single == 1}>
+<li class="materialPicTxtList oneContent">
+	<p class="materialPicTxtTtl">
+		<a href="/index.php/material/detail"><{$material['articles'][0]['title']}></a>
+	</p>
+	<p class="materialPicTxtDate"><{date('Y-m-d',$material.uptime)}></p>
+	<div class="materialPicWrapCover">
+		<img src="<{$material['articles'][0]['thumb']}>" />
+	</div>
+	<p class="materialPicTxtComment"><{$material['articles'][0]['description']}></p>
+	<div class="materialPicTxtBottom">
+		<a href="javascript:void(0);"
+			onclick="editMaterialBtn(<{$material.id}>,1)" class="">编辑</a> <a
+			href="javascript:void(0);" onclick="delMaterialBtn(<{$material.id}>)">删除</a>
+		<i></i>
+	</div>
+</li>
+<{/if}> <{if $material.single == 2}>
+<li class="materialPicTxtList multiContent">
+	<p class="materialPicTxtDate"><{date('Y-m-d',$material.uptime)}></p>
+	<{foreach $material.articles as $k => $new}> <{if $k == 0}>
+	<div class="materialPicWrapCover">
+		<img src="<{$new.thumb}>" />
+		<p class="topCoverTtl">
+			<span class="opacityBg"></span> <a class="ttlTxt"
+				href="/index.php/material/detail"><{$new.title}></a>
+		</p>
+	</div> <{else}>
+	<div class="materialMultiPicWrap">
+		<p>
+			<a class="ttlTxt" href="/index.php/material/detail"><{$new.title}></a>
+		</p>
+		<div class="materialThumb">
+			<img src="<{$new.thumb}>" />
+		</div>
+	</div> <{/if}> <{/foreach}>
+	<div class="materialPicTxtBottom">
+		<a href="javascript:void(0);"
+			onclick="editMaterialBtn(<{$material.id}>,2)" class="">编辑</a> <a
+			href="javascript:void(0);" onclick="delMaterialBtn(<{$material.id}>)">删除</a>
+		<i></i>
+	</div>
+</li>
+<{/if}> <{/if}> <{/foreach}> <{$pages}>

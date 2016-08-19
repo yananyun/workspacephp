@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="pragma" content="no-cache" />
+<meta id="viewport" name="viewport" content="width=640,user-scalable=no">
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-touch-fullscreen" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+<meta name="MobileOptimized" content="800">
+<meta name="format-detection" content="telephone=no" />
+<title>最新资讯</title>
+<link rel="stylesheet" href="/template/wap/intelonline/css/style.css">
+<link rel="stylesheet" href="/template/wap/intelonline/css/animate.css">
+<link rel="stylesheet" href="/template/wap/intelonline/css/layout.css">
+<script src="/template/wap/intelonline/js/jquery.js"></script>
+<script src="/template/wap/intelonline/js/common.js"></script>
+<script type="text/javascript" src="/js/bindTag.js"></script>
+<script>
+	$(function(){
+		$(".allNews").click(function(){
+			$(".listCon").before($(".proHidden").html());
+		})
+	})
+</script>
+</head>
+<body>
+	<div class="loadingbox"></div>
+	<div class="container detailCon">
+		<p class="detailTitle"><{$info.title}></p>
+		<p class="detailDate"><{$info.ctime|date_format:"%Y-%m-%d
+			%H:%M:%S"}></p>
+		<p><{$info.content}></p>
+	</div>
+</body>
+</html>

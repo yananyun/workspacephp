@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="author" content="www.zevertech.com" />
+<meta http-equiv="copyright" content="zevertech 2014" />
+<meta http-equiv="pragma" content="no-cache" />
+<meta name="viewport" id="viewport"
+	content="width=device-width, minimum-scale=1, maximum-scale=1, initial-scale=1.0,user-scalable=no" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-touch-fullscreen" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+<meta name="MobileOptimized" content="800">
+<meta name="format-detection" content="telephone=no" />
+<title>edison入驻京东</title>
+<link rel="stylesheet" href="/template/egg/css/reset.css">
+<link rel="stylesheet" href="/template/egg/css/layout.css">
+<script src="/template/egg/js/jquery.js"></script>
+<script src="/template/egg/js/common.js"></script>
+<script type="text/javascript"
+	src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+</head>
+<body class="container">
+	<div class="loadingbox"></div>
+	<input type="hidden" name="openid" id="openid" value="<{$openid}>">
+	<div class="logo infor_logo">
+		<img src="/template/egg/img/logo.png" />
+	</div>
+	<div class="send">
+		<img src="/template/egg/img/send.png" />
+	</div>
+	<div class="sendP">凭京东订单号即可获得砸蛋机会一次，多单多得，</div>
+	<div class="bill">
+		<img src="/template/egg/img/Bill.png" />
+	</div>
+
+	<form action="/index.php/GameInfo/addgame/" method='post'>
+
+		<div class="infor_in mt32">
+			<span>订单号</span><input type="text" name="userorder" value="" />
+		</div>
+
+		<div class="infor_in mt32">
+			<span>姓&nbsp;&nbsp;&nbsp;名</span><input type="text" name="gname"
+				value="" />
+		</div>
+
+		<div class="infor_in mt32">
+			<span>手机号</span><input type="text" name="gphone" value="" />
+		</div>
+
+		<div class="Smash">
+			<a href="javascript:;" class="egg_play"><img
+				src="/template/egg/img/Smash.png" /></a>
+		</div>
+
+
+	</form>
+
+	<div class="popbox">
+		<div class="egg_zero">
+			<img src="/template/egg/img/close.png" class="egg_close1" />
+			<p>
+				中奖信息将在7.30日后进行审核，<br>如订单号有误，将错过本次机会
+			</p>
+			<a href="/index.php/GameInfo/egg" clas="go_zero"><img
+				src="/template/egg/img/go.png" /></a>
+		</div>
+	</div>
+	<script type="text/javascript"
+		src="http://m.zevertech.com/index.php/jssdk?jsonpcallback=jsonpcallback"></script>
+	<script type="text/javascript" src="/template/egg/js/ga.js"></script>
+	<script>
+		//验证表单
+    $('.egg_play').on('click', function(event){
+    	ga('send', 'event', title, '点击', "开始玩");
+ 		var userorder = $('input[name="userorder"]').val();
+ 		if(!$.trim(userorder) || isNaN(userorder) || (userorder.length!=10 && userorder.length!=13))
+ 		{
+ 			alert('订单号必须10位或13位全数字');
+ 			$('input[name="userorder"]').focus();
+ 			return false;
+ 		}
+
+ 		var gname = $('input[name="gname"]').val();
+ 		if(!$.trim(gname))
+ 		{
+ 			alert('姓名不能为空');
+ 			$('input[name="gname"]').focus();
+ 			return false;
+ 		}
+
+		var gphone	= $('input[name="gphone"]').val();
+		var reg = /^0?1[3|4|5|7|8][0-9]\d{8}$/;
+ 		if (!$.trim(gphone) || !reg.test(gphone)) {
+ 			alert('请输入正确的手机号');
+ 			$('input[name="gphone"]').focus();
+ 			return false;
+ 		}
+ 		$.post('/index.php/GameInfo/addgame', {userorder: userorder, gname: gname, gphone: gphone}, function(data){
+ 			var data = $.parseJSON(data);
+ 			
+ 			if(data.status == 1)
+ 			{     
+                // alert(111)
+                
+					 event.preventDefault();
+					  $(".popbox").css('display','block');
+					
+ 			}else{
+                $(".popbox").css('display','none');
+                alert(data.msg);
+            }
+ 		});
+		// $('form').submit();
+	});
+
+
+</script>
+
+	<script>
+function jsonpcallback(data){
+    wx.config({
+        debug: false, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
+        appId: data.appid, // 必填，公众号的唯一标识
+        timestamp:data.timestamp, // 必填，生成签名的时间戳
+        nonceStr: data.noncestr, // 必填，生成签名的随机串
+        signature: data.signature,// 必填，签名，见附录1
+        jsApiList: ['onMenuShareTimeline','onMenuShareAppMessage'] // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
+    });
+
+    wx.ready(function(){
+        // config信息验证后会执行ready方法，所有接口调用都必须在config接口获得结果之后，config是一个客户端的异步操作，所以如果需要在页面加载时就调用相关接口，则须把相关接口放在ready函数中调用来确保正确执行。对于用户触发时才调用的接口，则可以直接调用，不需要放在ready函数中。
+        //分享到朋友圈
+        wx.onMenuShareTimeline({
+              title: 'edison入住京东，晒订单去旅行，500元大奖天天送',
+              link: '',
+              imgUrl:'http://intelonlinetest.buzzopt.com/template/egg/img/share.jpg',
+              success: function (res) {
+                // 用户确认分享后执行的回调函数
+              },
+              cancel: function (res) {
+                // 用户取消分享后执行的回调函数
+              }
+            });
+          
+        wx.onMenuShareAppMessage({
+            title: 'edison入住京东', // 分享标题
+            desc: 'edison入住京东，晒订单去旅行，500元大奖天天送', // 分享描述
+            link: '',
+            imgUrl:'http://intelonlinetest.buzzopt.com/template/egg/img/share.jpg',
+            type: '', // 分享类型,music、video或link，不填默认为link
+            dataUrl: '', // 如果type是music或video，则要提供数据链接，默认为空
+            success: function () {
+                // 用户确认分享后执行的回调函数
+            },
+            cancel: function () {
+                // 用户取消分享后执行的回调函数
+            }
+        });
+    });
+}
+</script>
+	<script type="text/javascript"
+		src="http://m.zevertech.com/index.php/jssdk?jsonpcallback=jsonpcallback"></script>
+	<script type="text/javascript" src="/template/egg/js/ga.js"></script>
+</body>
+</html>

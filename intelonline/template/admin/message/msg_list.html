@@ -1,0 +1,21 @@
+<li><span class="listOrder">序号</span> <span class="msgListContent"><i>内容详图</i></span>
+	<span class="listDate"><i>标题</i></span> <span class="listDate"><i>发送类型</i></span>
+	<span class="listStatu">状态</span> <span class="msgListOperate"><i>操作</i></span>
+</li>
+<{foreach $list as $k=>$val}>
+<li><span class="listOrder"><i><{$k + $baseNum}></i></span> <span
+	class="msgListContent"> <i class="ListMsgType"><{if
+			$val.active_mode eq 1}>(文字信息)<{else}>(图片信息)<{/if}></i> <{if
+		$val.active_mode eq 1}> <em><{$val.active_content}></em> <{else}> <em><img
+			src="<{$val.active_content}>" /></em> <{/if}>
+</span> <span class="listDate"><{if
+		$val.title!=''}><{$val.title}><{else}> <{/if}></span> <span class="listDate"><{if
+		$val.active_type eq 1}>48小时交互推送<{else}>高级群发<{/if}></span> <span
+	class="listStatu"><{if $val.active_state eq 1}>未发送<{else if
+		$val.active_state eq 2}>发送中<{else if $val.active_state eq
+		3}>已完成<{/if}></span> <span class="msgListOperate"> <!--<input type="button" onclick="" name="" value="详情" />-->
+		<a class="intelBtn editGroupBtn" active_id="<{$val.id}>" href=""
+		onclick="del_active(this)">删除</a> <a class="intelBtn editGroupBtn"
+		href="/index.php/activepush/edit_active/id/<{$val.id}>">详情</a> <!-- <a class="intelBtn editGroupBtn" href="/index.php/activepush/edit_active_test/id/<{$val.id}>">新详情(未测试)</a> -->
+</span></li>
+<{/foreach}> <{$pages}>

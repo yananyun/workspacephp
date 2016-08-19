@@ -1,0 +1,14 @@
+<{if $list}> <{foreach $list as $info}>
+<div class="employboxli" flagId="<{$info.id}>"
+	data-url="/index.php/wapRecruitment/detail/id/<{$info.cid}>">
+	<div class="logo">
+		<img src="<{$info.pictrue}>" alt="" />
+	</div>
+	<div class="employboxli_c">
+		<h2><{$info.company}></h2>
+		<p><{$info.title}></p>
+	</div>
+</div>
+<{/foreach}> <{else}>
+<div class="list_no" style="text-align: center">暂无信息</div>
+<{/if}>

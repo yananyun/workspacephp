@@ -1,0 +1,24 @@
+<li class="listTopTtl"><span class="listNickName">昵称</span> <span
+	class="listGender">性别</span> <span class="listRegion">区域</span> <span
+	class="listPoint">交互量</span> <span class="listSource">类型</span> <span
+	class="listSelectLabel"></span></li>
+<div id='list'>
+	<{foreach $members as $val}>
+	<li style="padding: 0"><span class="listNickName"><{if
+			$val.nickname neq ''}><{$val.nickname}><{else}>----<{/if}></span> <span
+		class="listGender"><{if $val.sex eq 1}>男<{else if $val.sex eq
+			2}>女<{else}>----<{/if}></span> <span class="listRegion"><{if
+			$val.province neq '' || $val.city neq ''}><{$val.province}>
+			<{$val.city}><{else}>----<{/if}></span> <span class="listPoint"><{$val.jh}></span>
+		<span class="listSource"><{if $val.isapprove == 1}>普通会员<{else
+			if $val.isapprove == 2}>购买会员<{else if $val.isapprove == 3}>经销商<{/if}></span>
+		<span class="listSelectLabel"><input type="checkbox"
+			value="<{$val.openid}>" name="openids[]" checked></span></li>
+	<{foreachelse}>
+	<li style="padding: 0"><span class="listNickName"><font
+			color="#FF6600">暂无信息</font></span> <span class="listGender">----</span> <span
+		class="listRegion">----</span> <span class="listPoint">----</span> <span
+		class="listSource">----</span> <span class="listSelectLabel"><input
+			type="checkbox"></span></li> <{/foreach}>
+</div>
+<{$pages}>

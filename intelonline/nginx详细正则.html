@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>@ 表示为一个location进行命名， 即自定义一个location，这个location不能被外界所访问，
+	只能用于Nginx产生的子请求， 主要为error_page和try_files。 nginx 中的正则表达式: ~ 为区分大小写匹配 ~*
+	为不区分大小写匹配 !~和!~*分别为区分大小写不匹配及不区分大小写不匹配 文件及目录匹配，其中： -f和!-f用来判断是否存在文件
+	-d和!-d用来判断是否存在目录 -e和!-e用来判断是否存在文件或目录 -x和!-x用来判断文件是否可执行 flag标记有： last
+	相当于Apache里的[L]标记，表示完成rewrite break 终止匹配, 不再匹配后面的规则 redirect 返回302临时重定向
+	地址栏会显示跳转后的地址 permanent 返回301永久重定向 地址栏会显示跳转后的地址 nginx 中的 环境变量： $args,
+	请求中的参数; $content_length, HTTP请求信息里的"Content-Length"; $content_type,
+	请求信息里的"Content-Type"; $document_root, 针对当前请求的根路径设置值; $document_uri,
+	与$uri相同; $host, 请求信息中的"Host"，如果请求中没有Host行，则等于设置的服务器名; $limit_rate,
+	对连接速率的限制; $request_method, 请求的方法，比如"GET"、"POST"等; $remote_addr, 客户端地址;
+	$remote_port, 客户端端口号; $remote_user, 客户端用户名，认证用; $request_filename,
+	当前请求的文件路径名 $request_body_file $request_uri, 请求的URI，带查询字符串;
+	$query_string, 与$args相同; $scheme, 所用的协议，比如http或者是https，比如rewrite ^(.+)$
+	$scheme://example.com$1 redirect; $server_protocol,
+	请求的协议版本，"HTTP/1.0"或"HTTP/1.1"; $server_addr,
+	服务器地址，如果没有用listen指明服务器地址，使用这个变量将发起一次系统调用以取得地址(造成资源浪费); $server_name,
+	请求到达的服务器名; $server_port, 请求到达的服务器端口号; $uri,
+	请求的URI，可能和最初的值有不同，比如经过重定向之类的
+</body>
+</html>

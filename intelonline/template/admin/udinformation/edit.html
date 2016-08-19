@@ -1,0 +1,127 @@
+<{include 'admin/public/head.html'}>
+<script type="text/javascript" src="/js/company.js"></script>
+<script type="text/javascript" src="/js/ueditor/ueditor.config.js"></script>
+<script type="text/javascript" src="/js/ueditor/ueditor.all.js"></script>
+<script type="text/javascript" src="/js/ajaxfileupload.js"></script>
+<body
+	onload="loadContent('',$('.intelListWrap'),'/index.php/company/lists/')">
+
+	<div class="container">
+		<{include 'admin/public/header.html'}>
+		<style>
+h2 {
+	font-weight: bold;
+	font-size: 16px;
+	color: #333;
+}
+
+label {
+	width: 85px;
+	text-align: right;
+}
+
+input[type="text"] {
+	padding: 2px;
+	width: 200px;
+}
+
+p {
+	margin: 10px 0;
+}
+</style>
+		<div class="main">
+			<div class="mainWrap">
+				<h2>修改信息</h2>
+				<form>
+					<div>
+						<p>
+							<label for="news_title">姓名：</label> <input type="text"
+								name="name" id="news_title" value="<{$info.name}>">
+						</p>
+						<p>
+							<label for="news_title">证件类型：</label> <select name="idtype">
+								<option value="1"<{if $info.idtype == '1'}>
+									selected="selected"<{/if}>>身份证</option>
+								<option value="2"<{if $info.idtype == '2'}>
+									selected="selected"<{/if}>>护照</option>
+							</select>
+						</p>
+						<p>
+							<label for="news_title">证件号码：</label> <input type="text"
+								name="code" id="news_title" value="<{$info.code}>">
+						</p>
+
+					</div>
+					<div>
+						<p class="leftPadding80">
+							<input type="button" onclick="edit_do(<{$info.id}>);" value="保存"
+								class="intelBtn addGroupOprateBtn">
+
+						</p>
+					</div>
+				</form>
+
+			</div>
+		</div>
+		<{include 'admin/public/left_menu.html'}>
+	</div>
+	<script>
+	function commonUploadPic(f,w,h) {
+		var file = $(f).val();
+		var upId=$(f).attr('id');
+		var img=$(f).parents('.proImgWrap').find('.preview');
+		//转换文件名为小写
+		file = file.toLowerCase();
+		//检测文件类型必须是图片
+		if (!/.(gif|jpg|jpeg|png)$/.test(file)) {
+			alert("图片类型必须是.gif,jpeg,jpg,png中的一种");
+		} else {
+			$.ajaxFileUpload({
+				url: '/index.php/common/upload/w/'+w+'/h/'+h, //服务器端程序
+				secureuri: false,
+				fileElementId: upId, //input框的ID
+				dataType: 'json', //返回数据类型
+				success: function(data) {//上传成功
+					if(data.status){
+						$('input[name=picURL_hide]').val(data.data);
+						img.attr('src',data.data);
+					}
+				}
+			});
+		}
+	}
+	
+	function edit_do(id){
+		
+		var name = $('input[name=name]').val();
+		if(name == ''){
+			alert('姓名不能为空');
+			return false;
+		}
+		var idtype = $('select[name=idtype]').val();
+		var code = $('input[name=code]').val();
+		if(code == ''){
+			alert('证件号码不能为空');
+			return false;
+		}
+		$.ajax({
+			url:"/index.php/udinformation/edit_do",
+			data:{id:id,name:name,idtype:idtype,code:code},
+			dataType:'json',
+			type:'post',
+			success:function(data){
+				alert(data.info);
+				if(data.status){
+					window.location.href ="/index.php/udinformation/index";
+				}
+			}
+		});
+	}
+	var editor = new baidu.editor.ui.Editor({initialFrameHeight:200,initialFrameWidth:530});
+	editor.render("news_content");
+	editor.addListener("ready", function () { 
+		editor.setContent('<{$info.content|html_entity_decode}>');
+	});	
+	</script>
+</body>
+</html>

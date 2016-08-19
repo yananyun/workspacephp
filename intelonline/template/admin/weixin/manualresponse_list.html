@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<title>人工应答列表</title>
+<!-- Le style -->
+<link href="../../css/main.css" rel="stylesheet">
+<link href="../../css/K_admin.css" rel="stylesheet">
+<link rel="stylesheet" type="text/css" href="../../css/style.css" />
+<link rel="stylesheet" type="text/css" href="../../css/index.css" />
+<!-- Le script -->
+<script src="../../js/jquery.js"></script>
+</head>
+<body>
+	<div class="container">
+		<div class="nav-tabs clearfix gap-bottom">
+			<a href="" class="active">全部消息</a> <a href="">今天</a> <a href="">昨天</a>
+			<a href="">前天</a> <a href="">星标</a>
+			<div class="pull-right">
+				<span class="btn">高级筛选</span> <input type="text">
+			</div>
+		</div>
+		<div class="form-h">
+			<h4>高级筛选</h4>
+			<div class="form-group grid">
+				<label for="" class="control-label span span-1">性别：</label>
+				<div class="control-form span span-11">
+					<label><input name="response_sex" value="0" checked=""
+						type="radio">不限</label> <label><input name="response_sex"
+						value="1" type="radio">男</label> <label><input
+						name="response_sex" value="2" type="radio">女</label>
+				</div>
+			</div>
+			<div class="form-group grid">
+				<label for="" class="control-label span span-1">用户分组：</label>
+				<div class="control-form span span-11">
+					<label><input name="response_groupid" value="0"
+						onclick="fnSetNoneRadio(this)" checked="" type="checkbox">不使用</label>
+					<label><input disabled="disabled" name="response_groupid"
+						value="1" type="radio">全部</label> <label><input
+						disabled="disabled" name="response_groupid" value="2" type="radio">男士组</label>
+					<label><input disabled="disabled" name="response_groupid"
+						value="3" type="radio">女士组</label> <label><input
+						disabled="disabled" name="response_groupid" value="4" type="radio">北京组</label>
+					<label><input disabled="disabled" name="response_groupid"
+						value="5" type="radio">北京东城组</label> <label><input
+						disabled="disabled" name="response_groupid" value="6" type="radio">北京西城组</label>
+					<label><input disabled="disabled" name="response_groupid"
+						value="21" type="radio">111</label> <label><input
+						disabled="disabled" name="response_groupid" value="15"
+						type="radio">测试分组~男东城101555，20</label> <label><input
+						disabled="disabled" name="response_groupid" value="17"
+						type="radio">交互50分组</label> <label><input
+						disabled="disabled" name="response_groupid" value="18"
+						type="radio">新加组</label>
+					<!--<label><input type="checkbox" name="fansSource" value="2" disabled />998二维码</label>-->
+				</div>
+			</div>
+			<div class="form-group grid">
+				<label for="" class="control-label span span-1">用户来源：</label>
+				<div class="control-form span span-11">
+					<label><input name="response_source[]" value="0"
+						onclick="fnSetNoneOption(this)" checked="" type="checkbox">不限</label>
+					<label><input name="response_source[]" value="101"
+						disabled="" type="checkbox">101二维码</label> <label><input
+						name="response_source[]" value="555" disabled="" type="checkbox">555二维码</label>
+					<label><input name="response_source[]" value="500"
+						disabled="" type="checkbox">500二维码</label> <label><input
+						name="response_source[]" value="200" disabled="" type="checkbox">200二维码</label>
+					<label><input name="response_source[]" value="960"
+						disabled="" type="checkbox">960二维码</label> <label><input
+						name="response_source[]" value="950" disabled="" type="checkbox">950二维码</label>
+					<label><input name="response_source[]" value="982"
+						disabled="" type="checkbox">982二维码</label> <label><input
+						name="response_source[]" value="102" disabled="" type="checkbox">102二维码</label>
+					<label><input name="response_source[]" value="985"
+						disabled="" type="checkbox">985二维码</label> <label><input
+						name="response_source[]" value="864" disabled="" type="checkbox">864二维码</label>
+					<label><input name="response_source[]" value="947"
+						disabled="" type="checkbox">947二维码</label> <label><input
+						name="response_source[]" value="997" disabled="" type="checkbox">997二维码</label>
+					<label><input name="response_source[]" value="463"
+						disabled="" type="checkbox">463二维码</label> <label><input
+						name="response_source[]" value="378" disabled="" type="checkbox">378二维码</label>
+					<label><input name="response_source[]" value="228"
+						disabled="" type="checkbox">228二维码</label>
+					<!--<label><input type="checkbox" name="fansSource" value="2" disabled />998二维码</label>-->
+				</div>
+			</div>
+			<div class="form-group grid">
+				<label for="" class="control-label span span-1">用户类型：</label>
+				<div class="control-form span span-11">
+					<label><input name="response_type[]" value="0"
+						onclick="fnSetNoneOption(this)" checked="" type="checkbox">不限</label>
+					<label><input name="response_type[]" value="1" disabled=""
+						type="checkbox">普通粉丝</label> <label><input
+						name="response_type[]" value="2" disabled="" type="checkbox">RSP会员</label>
+					<label><input name="response_type[]" value="3" disabled=""
+						type="checkbox">至尊地带会员</label>
+				</div>
+			</div>
+			<div class="form-group grid">
+				<label for="" class="control-label span span-1">用户地域：</label>
+				<div class="control-form span span-11">
+					<label><input checked="checked" name="fansRegion" value="0"
+						class="member_from1" onclick="fnSetNoneSelect(this)"
+						type="checkbox">不限</label> <select disabled="disabled"
+						class="member_from2" name="response_province" id="memberProvince"
+						onchange="loadmemberCity()"><option value="0">全部</option>
+						<option value="1">上海</option>
+						<option value="2">云南</option>
+						<option value="3">内蒙古</option>
+						<option value="4">北京</option>
+						<option value="5">台湾</option>
+						<option value="6">吉林</option>
+						<option value="7">四川</option>
+						<option value="8">天津</option>
+						<option value="9">宁夏</option>
+						<option value="10">安徽</option>
+						<option value="11">山东</option>
+						<option value="12">山西</option>
+						<option value="13">广东</option>
+						<option value="14">广西</option>
+						<option value="15">新疆</option>
+						<option value="16">江苏</option>
+						<option value="17">江西</option>
+						<option value="18">河北</option>
+						<option value="19">河南</option>
+						<option value="20">浙江</option>
+						<option value="21">海南</option>
+						<option value="22">湖北</option>
+						<option value="23">湖南</option>
+						<option value="24">澳门</option>
+						<option value="25">甘肃</option>
+						<option value="26">福建</option>
+						<option value="27">西藏</option>
+						<option value="28">贵州</option>
+						<option value="29">辽宁</option>
+						<option value="30">重庆</option>
+						<option value="31">陕西</option>
+						<option value="32">青海</option>
+						<option value="33">香港</option>
+						<option value="34">黑龙江</option></select><select disabled="disabled"
+						class="member_from2" name="response_city" id="memberCity"
+						onchange="countMemberNum()"><option value="0">全部</option></select>
+				</div>
+			</div>
+			<div class="form-group grid">
+				<label for="" class="control-label span span-1">交互次数：</label>
+				<div class="control-form span span-11">
+					<label><input name="response_cross" value="0" checked=""
+						type="radio">不限</label> <label><input
+						name="response_cross" value="20" type="radio">大于20次</label> <label><input
+						name="response_cross" value="50" type="radio">大于50次</label> <label><input
+						name="response_cross" value="1" type="radio">自定义</label> <span
+						class="rangeNum"> <input name="response_cross_min"
+						type="text"><i> ~ </i><input name="response_cross_max"
+						type="text">
+					</span>
+				</div>
+			</div>
+			<div class="form-group grid text-right">
+				<span class="pad-right"><a href="" class="btn btn-mini">收起</a></span><a
+					href="" class="btn btn-primary">搜索</a><a href="" class="btn">重置</a>
+			</div>
+		</div>
+		<hr>
+		<ul>
+			<li class="grid">
+				<div class="span span-10">
+					<a href="" class="pull-left"><img src="../../images/man.png"
+						height="50" alt="" class="gap-right"></a>
+					<div class="">
+						<h5 class="media-heading">
+							昵称：肖木晓 <a href="" class="btn btn-mini">修改</a>
+						</h5>
+						<p>内容：想一想，我要我这个我怎么没中奖？</p>
+					</div>
+				</div>
+				<div class="span span-2">昨天：14：:15</div>
+			</li>
+			<hr>
+			<li class="grid">
+				<div class="span span-10">
+					<a href="" class="pull-left"><img src="../../images/man.png"
+						height="50" alt="" class="gap-right"></a>
+					<div class="">
+						<h5 class="media-heading">
+							昵称：肖木晓 <a href="" class="btn btn-mini">修改</a>
+						</h5>
+						<p>内容：想一想，我要我这个我怎么没中奖？</p>
+					</div>
+				</div>
+				<div class="span span-2">昨天：14：:15</div>
+			</li>
+			<hr>
+		</ul>
+		<div class="pagination text-right">
+			<ul>
+				<li><a href="">首页</a></li>
+				<li><a href="">1</a></li>
+				<li><a href="">2</a></li>
+				<li><a href="">3</a></li>
+				<li><a href="">4</a></li>
+				<li><a href="">5</a></li>
+				<li><a href="">下一页</a></li>
+			</ul>
+		</div>
+	</div>
+</body>
+</html>

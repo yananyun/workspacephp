@@ -1,0 +1,294 @@
+* {
+	-webkit-tap-highlight-color: rgba(255, 0, 0, 0);
+	-webkit-user-select: none;
+}
+
+img {
+	pointer-events: none;
+}
+
+html, body {
+	width: 100%;
+	height: 100%;
+}
+
+.start {
+	display: inline-block;
+}
+
+.loadingbox {
+	position: fixed;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	z-index: 9999;
+	background: #fff url(../images/load.gif) center center no-repeat;
+}
+
+.container {
+	width: 640px;
+	height: 100%;
+	margin: 0px auto;
+	position: relative;
+}
+
+body {
+	background: url(../images/bg.jpg);
+	background-size: cover;
+}
+
+.logo {
+	padding: 10px 10px 16px;
+	height: 54px;
+}
+
+.logo .time {
+	float: right;
+	padding-top: 6px;
+}
+
+.logo .time .timeicon {
+	line-height: 42px;
+	height: 42px;
+	float: left;
+	margin-right: 16px;
+}
+
+.logo .time .timeline {
+	float: left;
+	margin-top: 12px;
+	margin-right: 16px;
+	line-height: 16px;
+	height: 16px;
+	width: 180px;
+	border: 2px solid #d1d20e;
+	border-radius: 12px;
+}
+
+.logo .time .timeline span {
+	display: block;
+	width: 180px;
+	height: 16px;
+	line-height: 16px;
+	background: #d1d20e;
+	border-radius: 10px;
+}
+
+@
+-webkit-keyframes timeanim { 0%{
+	width: 180px;
+}
+
+100%{
+width
+:
+ 
+0
+px
+;
+
+	
+}
+}
+.logo .time .timeline.active span {
+	-webkit-animation: timeanim 26s linear 0s both;
+}
+
+.logo .time .timenum {
+	float: left;
+	line-height: 42px;
+	height: 42px;
+	width: 90px;
+	color: #d1d20e;
+}
+
+.logo .time .timenum span {
+	display: inline-block;
+	text-align: right;
+	width: 60px;
+	font-size: 30px;
+	color: #d1d20e;
+}
+
+.videobox {
+	padding: 13px 17px 7px;
+	width: 606px;
+	height: 545px;
+	background: url(../images/videobg.png) no-repeat;
+}
+
+.videobox .videoimg, .videobox .videoimg img {
+	width: 606px;
+	height: 438px;
+	display: block;
+	overflow: hidden;
+}
+
+.videobox .video_op {
+	text-align: center;
+	padding-top: 12px;
+}
+
+.opbox {
+	height: 300px;
+	width: 540px;
+	padding: 30px 50px;
+	position: relative;
+}
+
+.opbox .opbox_l {
+	width: 350px;
+	height: 300px;
+	position: relative;
+}
+
+.opbox .opbox_l a {
+	display: block;
+	position: absolute;
+}
+
+.opbox .opbox_l a.arrow_up {
+	left: 116px;
+	top: 0;
+}
+
+.opbox .opbox_l a.arrow_down {
+	left: 116px;
+	top: 182px;
+}
+
+.opbox .opbox_l a.arrow_left {
+	left: 0px;
+	top: 91px;
+}
+
+.opbox .opbox_l a.arrow_right {
+	right: 0px;
+	top: 91px;
+}
+
+.opbox .grab {
+	position: absolute;
+	right: 60px;
+	top: 74px;
+}
+
+.opbox .bodyctr {
+	position: absolute;
+	right: 20px;
+	bottom: 50px;
+}
+
+/*弹窗*/
+.prompt {
+	display: none;
+}
+
+.prompt .shadow {
+	position: fixed;
+	top: 0;
+	bottom: 0;
+	width: 100%;
+	background-color: rgba(0, 0, 0, .7);
+}
+
+.prompt .main {
+	width: 590px;
+	height: 570px;
+	background: url(../images/prompt_bg.png) no-repeat;
+	background-size: 100% 100%;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	margin-left: -295px;
+	margin-top: -285px;
+	display: none
+}
+
+.prompt .main .emoticon {
+	position: absolute;
+	left: 50%;
+	margin-left: -40px;
+	top: 50px;
+}
+
+.prompt .main .content {
+	width: 100%;
+	text-align: center;
+	position: absolute;
+	top: 200px;
+}
+
+.prompt .main .content p {
+	color: #040819;
+	font-size: 32px;
+	line-height: 1.6em;
+}
+
+.prompt .main .content p:nth-last-of-type(1) {
+	margin-top: 100px;
+}
+
+.prompt .main .content p:nth-last-of-type(1) a {
+	display: inline-block;
+	font-size: 32px;
+	background: #376091;
+	width: 290px;
+	height: 80px;
+	line-height: 80px;
+	text-align: center;
+	color: white;
+	border-radius: 5px;
+}
+
+.smile {
+	width: 80px;
+	height: 80px;
+	background: url(../images/smile.png) no-repeat;
+}
+
+.cry {
+	width: 80px;
+	height: 70px;
+	background: url(../images/cry.png) no-repeat;
+}
+
+/*.arrow{
+	width: 60px;
+	height: 60px;
+	display: inline-block;	
+}
+
+.arrow_up{
+	background: url(../images/arrow_up.png) no-repeat;
+	background-size: 100% 100%;
+}
+.arrow_up.active{
+	background: url(../images/arrow_up2.png) no-repeat;
+	background-size: 100% 100%;
+}
+.arrow_down{
+	background: url(../images/arrow_down.png) no-repeat;
+	background-size: 100% 100%;
+}
+.arrow_down.active{
+	background: url(../images/arrow_down2.png) no-repeat;
+	background-size: 100% 100%;
+}
+.arrow_left{
+	background: url(../images/arrow_left.png) no-repeat;
+	background-size: 100% 100%;
+}
+.arrow_left.active{
+	background: url(../images/arrow_left2.png) no-repeat;
+	background-size: 100% 100%;
+}
+.arrow_right{
+	background: url(../images/arrow_right.png) no-repeat;
+	background-size: 100% 100%;
+}
+.arrow_right.active{
+	background: url(../images/arrow_right2.png) no-repeat;
+	background-size: 100% 100%;
+}*/

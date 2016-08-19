@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>微信用户组管理</title>
+<link href="/css/main.css" type="text/css" rel="stylesheet" />
+<link rel="stylesheet" type="text/css" href="/css/skins/blue.css" />
+<link rel="stylesheet" type="text/css" href="/css/style.css" />
+<link rel="stylesheet" type="text/css" href="/css/index.css" />
+<script type="text/javascript" src="/js/jquery.js"></script>
+<script type="text/javascript" src="/js/main.js"></script>
+<script type="text/javascript" src="/js/artDialog.js"></script>
+<script type="text/javascript" src="/js/iframeTools.js"></script>
+</head>
+<body
+	onload="loadContent('',$('.intelListWrap'),'/index.php/tag/tagMemberList/tagId/<{$tagId}>')">
+	<div class="container">
+		<{include 'admin/public/header.html'}>
+		<div class="main">
+			<div class="mainWrap">
+
+				<div class="webTitle weixinTitle">
+					标签下的用户 <span> <span class="searchBox"><input
+							type="text" class="" name="nickname"><img
+							src="/images/search2.png" id="search"></span>
+					</span>
+				</div>
+
+				<ul class="intelListWrap usertag"></ul>
+			</div>
+		</div>
+		<{include 'admin/public/left_menu.html'}>
+	</div>
+	<script>
+            
+            //删除标签
+            function fnDelTag(self,rid){
+                var flag=confirm('确定将用户移出该标签么？');
+                if(flag){
+                    $.post('/index.php/tag/deleteUserTag/id/'+rid,{rid:rid},function(){
+
+                    },'json');
+                    $(self).parents('tr').slideUp();
+                }
+            }
+		$('#search').click(function(){
+			var nickname = $.trim($(':input[name=nickname]').val());
+			
+			loadContent('',$('.intelListWrap'),'/index.php/tag/tagMemberList/nickname/'+nickname+'/tagId/<{$tagId}>');
+		});
+	</script>
+</body>
+</html>

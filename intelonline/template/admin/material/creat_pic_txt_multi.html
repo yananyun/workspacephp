@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>添加图文消息</title>
+<link href="/css/main.css" type="text/css" rel="stylesheet" />
+<link rel="stylesheet" type="text/css" href="/css/skins/blue.css" />
+<link rel="stylesheet" type="text/css" href="/css/material.css" />
+<link rel="stylesheet" type="text/css" href="/css/index.css" />
+<script type="text/javascript" src="/js/jquery.js"></script>
+<script type="text/javascript" src="/js/main.js"></script>
+<script type="text/javascript" src="/js/artDialog.js"></script>
+<script type="text/javascript" src="/js/iframeTools.js"></script>
+<script type="text/javascript" src="/js/ajaxfileupload.js"></script>
+<script type="text/javascript" src="/js/createMaterial.js"></script>
+<!--百度在线编辑器-->
+<script type="text/javascript" charset="utf-8"
+	src="/js/ueditor/ueditor.config.js"></script>
+<script type="text/javascript" charset="utf-8"
+	src="/js/ueditor/ueditor.all.js"></script>
+<script type="text/javascript" charset="utf-8"
+	src="/js/ueditor/lang/zh-cn/zh-cn.js"></script>
+</head>
+<body>
+	<div class="container">
+		<{include 'admin/public/header.html'}>
+		<div class="main">
+			<{include 'admin/public/left_menu.html'}>
+			<div class="mainWrap">
+				<div class="creatPicTxtCol">
+					<div class="pic_txt_col editOn" id="coverCol">
+						<div class="materialPicWrapCover mPreview">
+							<div class="preViewImg">
+								<h1>封面图片</h1>
+							</div>
+							<p class="topCoverTtl">
+								<span class="opacityBg"></span> <span
+									class="materialPicTxtTtl ttlTxt">标题</a>
+							</p>
+							<div class="editBase">
+								<p>
+									<a href="javascript:void(0);"
+										onclick="fnEditCurrentCol(this,0)">编辑</a>
+								</p>
+							</div>
+						</div>
+						<input type="hidden" name="sTitle" /> <input type="hidden"
+							name="sAuthor" /> <input type="hidden" name="uploadPath" /> <input
+							type="hidden" name="coverFlag" value="0" />
+						<div class="sArticle" style="display: none;"></div>
+						<input type="hidden" name="sUrl" /> <input type="hidden"
+							name="sLink" />
+					</div>
+					<div class="appendColWrap"></div>
+					<div class="appendColBtnWrap">
+						<a href="javascript:void(0);"
+							onclick="fnAppendCol($('.appendColWrap'))">+</a>
+					</div>
+				</div>
+				<div class="materialEditWrap">
+					<i class="arrow arrow_out"></i> <i class="arrow arrow_in"></i>
+					<div class="editBox">
+						<form id="editForm">
+							<div class="optionCol">
+								<p>
+									标题<span class="inlineTip">（最多64字）</span>
+								</p>
+								<div class="optionField">
+									<input type="text" name="meTitle" value="" />
+								</div>
+							</div>
+							<div class="optionCol">
+								<p>
+									作者<span class="inlineTip">（选填）</span>
+								</p>
+								<div class="optionField">
+									<input type="text" name="meAuthor" />
+								</div>
+							</div>
+							<div class="optionCol">
+								<p>
+									封面<span class="inlineTip right maxTip">大图片建议尺寸：640像素 *
+										320像素</span><span class="inlineTip right miniTip">小图片建议尺寸：200像素
+										* 200像素</span>
+								</p>
+								<div class="optionField">
+									<label class="imgUpLabel"> <input class="imgUpBtn"
+										imgWidth="360" imgHeight="200" id="up_picture"
+										name="up_picture" type="file"
+										onchange="fnMaterialPicUpload(this,$('.preViewBox'),$('.editOn'),$('.uploadView'));" />
+										上传
+									</label>
+									<div class="preViewBox">
+										<div class="uploadView">
+											<h5>上传中...</h5>
+										</div>
+										<a class="delView" href="javascript:void(0);"
+											onclick="fnDelUpload($('.editOn').find('[name=uploadPath]'),$('.uploadView'),$('.preViewBox'))">删除</a>
+									</div>
+								</div>
+								<p>
+									<label class="inlineTip"><input type="checkbox"
+										name="meCoverFlag" />封面图片显示在正文中</label>
+								</p>
+							</div>
+							<div class="optionCol">
+								<p>
+									跳转链接<span class="inlineTip">（选填）</span>
+								</p>
+								<div class="optionField">
+									<input type="text" name="meUrl" />
+								</div>
+							</div>
+							<div class="optionCol">
+								<p>
+									正文<span class="inlineTip">（最多2000字）</span>
+								</p>
+								<script id="materialArticle" type="text/plain"
+									style="height: 300px;"></script>
+							</div>
+							<div class="optionCol">
+								<p>
+									原文链接<span class="inlineTip">（选填）</span>
+								</p>
+								<div class="optionField">
+									<input type="text" name="meLink" />
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>
+				<p class="saveMaterialBtnWrap">
+					<a href="javascript:;" class="btn btn-primary" id='save'>保存</a>
+				</p>
+			</div>
+		</div>
+	</div>
+	<script type="text/javascript">
+var editor = UE.getEditor('materialArticle');
+$(function(){
+	$('#save').click(function(){
+	var coverCol = $('#coverCol');
+		var title = $.trim(coverCol.find(':input[name=sTitle]').val());
+		var author = $.trim(coverCol.find(':input[name=sAuthor]').val());
+		var thumb = $.trim(coverCol.find(':input[name=uploadPath]').val());
+		var url = $.trim(coverCol.find(':input[name=sUrl]').val());
+		var coverFlag = $.trim(coverCol.find(':input[name=coverFlag]').val());
+        var content = $.trim(coverCol.find('.sArticle').html());
+		var original_url = $.trim(coverCol.find(':input[name=sLink]').val());
+        if (!title) {
+            alert("保存失败，标题不能为空");  
+            bb=$(".editBase:eq(0)");  
+            fnEditCurrentCol(bb,0);     
+            return false;
+        }
+        if (!thumb) {
+            alert("保存失败，请上传封面图片");  
+            bb=$(".editBase:eq(0)");  
+            fnEditCurrentCol(bb,0);     
+            return false;
+        }
+        if (!content) {
+            alert("保存失败，正文内容不能为空");
+            bb=$(".editBase:eq(0)");  
+            fnEditCurrentCol(bb,0);      
+            return false;
+        }
+var fields = new Array();
+fields = '[';
+fields += '{"title":"'+title+'","author":"'+author+'","content":"'+encodeURI(content)+'","thumb":"'+thumb+'","url":"'+url+'","original_url":"'+original_url+'","coverFlag":"'+coverFlag+'"}';
+        var error = '';
+        var indexNum=0;
+        $('.appendColWrap .pic_txt_col').each(function(i){    
+	var coverCol = $(this);
+	var title = $.trim(coverCol.find(':input[name=sTitle]').val());
+	var author = $.trim(coverCol.find(':input[name=sAuthor]').val());
+	var thumb = $.trim(coverCol.find(':input[name=uploadPath]').val());
+	var url = $.trim(coverCol.find(':input[name=sUrl]').val());
+	var coverFlag = $.trim(coverCol.find(':input[name=coverFlag]').val());
+        	var content = $.trim(coverCol.find('.sArticle').html());
+	var original_url = $.trim(coverCol.find(':input[name=sLink]').val());
+                if(!title){
+                    error ="保存失败，标题不能为空";
+                   indexNum=i;
+                    return false;
+                }
+                if(!thumb){
+                    error ="保存失败，请上传封面图片";
+                    indexNum=i;
+                    return false;
+                }
+                if(!content){
+                    error ="保存失败，正文内容不能为空";
+                    indexNum=i;
+                    return false;
+                }
+       
+	fields += ',{"title":"'+title+'","author":"'+author+'","content":"'+encodeURI(content)+'","thumb":"'+thumb+'","url":"'+url+'","original_url":"'+original_url+'","coverFlag":"'+coverFlag+'"}';
+});
+fields += ']';
+        
+        if(error){  
+            var aa;
+            var mt=(indexNum+1)*111;
+            if(indexNum==0){
+                aa=$(".editBase:eq(1)");
+            }else if(indexNum==1){
+                aa=$(".editBase:eq(2)");
+            }
+            fnEditCurrentCol(aa,indexNum+1);
+            alert(error); 
+            return false;
+        }    
+        
+$.ajax({
+	url:'/index.php/material/creat_pic_txt_save',
+	data:{ "data":  fields},
+	type:'post',	
+	dataType:'json',
+	success:function(data){
+		alert(data.info);
+		if(data.status == 1){
+			location.href = '/index.php/material/pic_txt_msg';
+		}
+		
+	}
+});
+return false;
+		
+	});
+});
+
+</script>
+
+</body>
+</html>

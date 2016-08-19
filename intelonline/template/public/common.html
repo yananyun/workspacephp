@@ -1,0 +1,21 @@
+<!-- 搜索输入框开始 -->
+<!--<form class="searchBox">
+    <input type="search">
+</form>-->
+<!-- 搜索输入框结束 -->
+<div class="user-info">
+	<div class="user-location">
+		<i class="icon location"></i><span><{$memberInfo.city}></span>
+	</div>
+	<div class="user-avator">
+		<p class="user-avator-wrapper">
+			<!-- <span class="user-wrapper"></span> -->
+			<a href="/index.php/personalCenter/index"><img
+				src="<{$memberInfo.headimgurl}>" alt=""></a>
+		</p>
+		<p>
+			<span><{$memberInfo.nickname}><i
+				class="<{if $memberInfo.sex eq 2}>female<{else}>male<{/if}> icon"></i></span>
+		</p>
+	</div>
+</div>

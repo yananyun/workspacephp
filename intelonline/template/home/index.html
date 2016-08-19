@@ -1,0 +1,182 @@
+<{include 'public/header.html'}>
+<style>
+.index-nav {
+	overflow: hidden;
+}
+
+.index-nav a {
+	width: 50%;
+	height: 90px;
+	background-color: rgb(43, 84, 88);
+	position: relative;
+	text-decoration: none;
+	float: left;
+}
+
+.index-nav a span {
+	display: inline-block;
+	width: 110px;
+	height: 50px;
+	position: absolute;
+	margin-top: -25px;
+	margin-left: -55px;
+	position: absolute;
+	left: 50%;
+	top: 50%;
+}
+
+.index-nav a span em {
+	font-size: 12px;
+	color: white;
+	font-style: normal;
+	display: inline-block;
+	position: absolute;
+	top: 10px;
+	left: 50px;
+	line-height: 14px;
+}
+
+.index-nav .icon {
+	display: inline-block;
+	height: 45px;
+	width: 45px;
+	background-size: 100% 100%;
+}
+
+.icon-product {
+	background: url(/img/01.png) no-repeat;
+}
+
+.icon-activity {
+	background: url(/img/02.png) no-repeat;
+}
+
+.icon-discusss {
+	background: url(/img/03.png) no-repeat;
+}
+
+.icon-info {
+	background: url(/img/04.png) no-repeat;
+}
+
+.icon-my {
+	background: url(/img/05.png) no-repeat;
+}
+
+.icon-cooperation {
+	background: url(/img/06.png) no-repeat;
+}
+
+.index-nav a:nth-of-type(1) {
+	background-color: rgb(43, 84, 88);
+}
+
+.index-nav a:nth-of-type(2) {
+	background-color: rgb(239, 106, 97);
+}
+
+.index-nav a:nth-of-type(3) {
+	background-color: rgb(105, 198, 208);
+}
+
+.index-nav a:nth-of-type(4) {
+	background-color: rgb(234, 211, 143);
+}
+
+.index-nav a:nth-of-type(5) {
+	background-color: rgb(194, 214, 37);
+}
+
+.index-nav a:nth-of-type(6) {
+	background-color: rgb(245, 138, 42);
+}
+
+.banner {
+	
+}
+
+.banner a {
+	display: inline-block;
+}
+
+.banner img {
+	width: 100%;
+}
+</style>
+<div id="wrapper">
+	<div id="scroller">
+		<div class="index">
+			<div class="main">
+				<!-- 搜索输入框开始 -->
+				<!--        <form class="searchBox">
+                    <input type="search">
+                </form>-->
+				<!-- 搜索输入框结束 -->
+
+				<!-- 幻灯片开始 -->
+				<!--   <div class="swiper-container">
+                    <div class="swiper-wrapper">
+                        <div class="swiper-slide"> 
+                            <a href="#"><img src="/mobile/img/slide.jpg" alt=""></a>
+                        </div>
+                        <div class="swiper-slide">
+                            <a href="#"><img src="/mobile/img/slide.jpg" alt=""></a>
+                        </div>
+                        <div class="swiper-slide"> 
+                            <a href="#"><img src="/mobile/img/slide.jpg" alt=""></a>
+                        </div>
+                    </div>
+                    <div class="pagination">
+                    </div>
+                </div>   -->
+				<!-- 幻灯片结束 -->
+
+				<div class="banner">
+					<a href="#"><img src="/mobile/img/slide.jpg" alt=""></a>
+				</div>
+
+				<!-- <div class="nav-menu">
+                    <ul>
+                        <li><a href="/index.php/productCenter/index"></a></li>
+                        <li><a href="/index.php/articleCenter/huodong/"></a></li>
+                        <li><a href="/index.php/discussCenter/index"></a></li>
+                        <li><a href="/index.php/articleCenter/index/"></a></li>
+                        <li><a href="/index.php/personalCenter/index"></a></li>
+                        <li><a href="/index.php/dealerCenter/approve"></a></li>
+                    </ul>
+                </div>  -->
+
+				<nav class="index-nav">
+					<a href="/index.php/productCenter/index"> <span> <i
+							class="icon icon-product"></i> <em> 产品<br />Products
+						</em>
+					</span>
+					</a> <a href="/index.php/articleCenter/huodong/"> <span> <i
+							class="icon icon-activity"></i> <em> 活动<br />Activities
+						</em>
+					</span>
+					</a> <a href="/index.php/discussCenter/index"> <span> <i
+							class="icon icon-discusss"></i> <em> 讨论<br />Discussion
+						</em>
+					</span>
+					</a> <a href="/index.php/articleCenter/index/"> <span> <i
+							class="icon icon-info"></i> <em> 资讯<br />Information
+						</em>
+					</span>
+					</a> <a href="/index.php/personalCenter/index"> <span> <i
+							class="icon icon-my"></i> <em> 我的<br />My
+						</em>
+					</span>
+					</a> <a href="/index.php/dealerCenter/approve"> <span> <i
+							class="icon icon-cooperation"></i> <em> 合作<br />Cooperation
+						</em>
+					</span>
+					</a>
+				</nav>
+
+
+			</div>
+		</div>
+	</div>
+</div>
+<{include 'public/footer.html'}>

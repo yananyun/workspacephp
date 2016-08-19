@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>编辑用户组</title>
+<link href="/css/main.css" type="text/css" rel="stylesheet" />
+<link rel="stylesheet" type="text/css" href="/css/skins/blue.css" />
+<link rel="stylesheet" type="text/css" href="/css/material.css" />
+<link rel="stylesheet" type="text/css" href="/css/message.css" />
+<link rel="stylesheet" type="text/css" href="/css/style.css" />
+<link rel="stylesheet" type="text/css" href="/css/index.css" />
+<script type="text/javascript" src="/js/jquery.js"></script>
+<script type="text/javascript" src="/js/main.js"></script>
+<script type="text/javascript" src="/js/artDialog.js"></script>
+<script type="text/javascript" src="/js/iframeTools.js"></script>
+<script type="text/javascript" src="/js/My97DatePicker/WdatePicker.js"></script>
+<link rel="stylesheet" type="text/css"
+	href="/js/My97DatePicker/skin/WdatePicker.css" />
+<script type="text/javascript">
+	$(function(){
+		// 添加分组
+		(function(){
+			$('.j-hide').show();
+			$('input[name="response_groupid"]').eq(0).on('click',function(){
+				if($(this).attr('checked')){
+					$('.j-hide').show();
+				}else{
+					$('.j-hide').hide();
+				}
+			})
+		})();
+	})
+</script>
+</head>
+<body>
+	<div class="container">
+		<{include '../public/header.html'}>
+		<div class="main">
+			<div class="mainWrap">
+				<form action='/index.php/autoresponse/edit_response_do'
+					method='post' id='form1'>
+					<p class="leftPadding80">
+						<span class="leftSpanPos">关键词：</span><input type="text"
+							style="float: left;" name="response_keyword"
+							placeholder="填写一个关键词" value="<{$msg.response_keyword}>" /> <label><input
+							type="radio" name="response_keytype" value='1'<{if
+							$msg.response_keytype eq 1}> checked <{/if}> >等同</label> <label><input
+							type="radio" name="response_keytype" value='2'<{if
+							$msg.response_keytype eq 2}> checked <{/if}> >包含</label>
+					</p>
+					<h3>分组粉丝条件</h3>
+					<p class="leftPadding80 fansOptionWrap">
+						<span class="leftSpanPos">用户分组：</span> <label><input
+							type="checkbox" name="response_groupid" value="0"
+							onclick="fnSetNoneRadio(this)" id="ungroupid"<{if
+							$msg.response_groupid eq 0}> checked <{/if}> />不使用</label> <{foreach
+						$group as $v}> <label><input type="radio"
+							name="response_groupid" value="<{$v.id}>"<{if
+							$msg.response_groupid eq $v.id}> checked <{/if}> /><{$v.name}></label>
+						<{/foreach}>
+						<!--<label><input type="checkbox" name="fansSource" value="2" disabled />998二维码</label>-->
+					</p>
+					<div class="j-hide">
+						<p class="leftPadding80 fansOptionWrap">
+							<span class="leftSpanPos">性别：</span> <label><input
+								type="radio" name="response_sex" value="0"<{if
+								$msg.response_sex eq 0}> checked <{/if}> />不限</label> <label><input
+								type="radio" name="response_sex" value="1"<{if
+								$msg.response_sex eq 1}> checked <{/if}> />男</label> <label><input
+								type="radio" name="response_sex" value="2"<{if
+								$msg.response_sex eq 2}> checked <{/if}> />女</label>
+						</p>
+						<p class="leftPadding80 fansOptionWrap">
+							<span class="leftSpanPos">用户地域：</span> <label><input
+								type="checkbox" name="fansRegion" value="0"
+								onclick="fnSetNoneSelect(this)" class='member_from1'<{if
+								$msg.response_province eq ''}> checked <{/if}> />不限</label>
+							<{memberRegion()}>
+						</p>
+						<p class="leftPadding80 fansOptionWrap">
+							<span class="leftSpanPos">交互次数：</span> <label><input
+								type="radio" name="response_cross" value="0"<{if
+								($msg.response_cross_min eq 0) and ($msg.response_cross_max eq
+								0) }> checked <{/if}> />不限</label> <label><input type="radio"
+								name="response_cross" value="20"<{if
+								($msg.response_cross_min eq 20) and ($msg.response_cross_max eq
+								0) }> checked <{/if}> />大于20次</label> <label><input type="radio"
+								name="response_cross" value="50"<{if
+								($msg.response_cross_min eq 50) and ($msg.response_cross_max eq
+								0) }> checked <{/if}> />大于50次</label> <label><input type="radio"
+								name="response_cross" value="1"<{if
+								$msg.response_cross_max neq 0}> checked <{/if}> />自定义</label> <span
+								class="rangeNum"> <input type="text"
+								name="response_cross_min" value="<{$msg.response_cross_min}>" /><i>
+									~ </i><input type="text" name="response_cross_max"
+								value="<{$msg.response_cross_max}>" />
+							</span>
+						</p>
+					</div>
+					<p class="leftPadding80 fansOptionWrap">
+					<div class="publishBox statu1">
+						<div class="publishBoxNavWrap">
+							<a class="txtMsgTab" href="javascript:void(0);"
+								onclick="fnSwitchTxtMsg(this)">文字</a> <a class="picTxtMsgTab"
+								href="javascript:void(0);"
+								onclick="fnCallPicTxtMsg(this,$('#wordMsg'))">图文信息</a>
+						</div>
+						<div class="messageInput" contenteditable="true" id="wordMsg"></div>
+						<input type="hidden" name="response_mid"
+							value="<{$msg.response_mid}>" id='response_mid'> <input
+							type="hidden" name="response_content"
+							value="<{$msg.response_content}>" id="response_content">
+						<div class="publishBoxBottom">
+							<a class="emotionIcon" href="javascript:void(0);" onclick=""></a>
+							<p class="messageCount">
+								还可以输入<span>600</span>字
+							</p>
+							<input type="hidden" name="txtOverflow" value="1">
+						</div>
+					</div>
+					</p>
+					<p class="leftPadding80 btnWrap">
+						<input type="button" class="intelBtn addGroupOprateBtn" value="保存"
+							onclick="fnSaveGroup(this)" />
+						<!-- <input type="button" class="intelBtn addGroupOprateBtn" value="取消" onclick="" /> -->
+						<a href="/index.php/autoresponse/autoresponse_manage"
+							class="intelBtn addGroupOprateBtn">取消</a> <input type='hidden'
+							value='<{$msg.response_province}>' id='Hprovince'> <input
+							type='hidden' value='<{$msg.response_city}>' id='Hcity'>
+						<input type='hidden' value='<{$msg.id}>' id='response_id'
+							name='response_id'>
+					</p>
+				</form>
+
+			</div>
+		</div>
+		<{include '../public/left_menu.html'}>
+	</div>
+</body>
+</html>
+<script type="text/javascript">
+	$(function(){
+		$('#memberProvince').attr('name','response_province').attr('class','member_from2');
+		$('#memberCity').attr('name','response_city').attr('class','member_from2');
+		if($('.member_source1').is(':checked') == true){
+			$('.member_source2').attr('disabled',true);
+		}
+		if($('.member_type1').is(':checked') == true){
+			$('.member_type2').attr('disabled',true);
+		}
+		if($('.member_from1').is(':checked') == true){
+			$('.member_from2').attr('disabled',true);
+		}
+		var city = $('#Hcity').val();
+		var province = $('#Hprovince').val();
+		$('#memberProvince').children('option').each(function(){
+			var val = $(this).html();
+			if(val == province){
+				$(this).attr('selected',true);
+			}
+		});
+		if(city != ''){
+			$.post('/index.php/memberGroup/sel_city',{city:city},function(data){
+				$('#memberCity').append("<option value='"+data.id+"' selected>"+data.name+"</option>");
+			},'json')
+		}
+		setInterval(function(){
+			var flag=$('#wordMsg').is(':focus');
+			if(flag){
+				fnCheckTxtNum();
+			}
+		},200);
+		var mid = $("#response_mid").val();
+		var content = $("#response_content").val();
+		if(mid != '' && mid != 0){
+			$('.publishBox').removeClass('statu1').removeClass('statu2').addClass('statu3');
+			$.post('/index.php/autoresponse/sel_material',{mid:mid},function(data){
+				$('#wordMsg').empty().append('<li class="materialPicTxtList oneContent" onclick="fnTickMaterial(this,'+$("#response_mid").val()+')"><div class="pickBase"></div><em class="tick">√</em><p class="materialPicTxtTtl">'+data.title+'</p><p class="materialPicTxtDate">'+data.ctime+'</p><div class="materialPicWrapCover"><img src="'+data.thumb+'"></div><p class="materialPicTxtComment">'+data.content+'</p></li>');
+			},'json');
+		}else if(content != ''){
+			$('.publishBox').removeClass('statu3').removeClass('statu2').addClass('statu1');
+			$('#wordMsg').empty().html(content);
+		}
+		if($('#ungroupid').is(':checked') == true){
+			$('.j-hide').show();
+		}else{
+		$('.j-hide').hide();
+		}
+	})
+	function fnSaveGroup(self){
+		var response_keyword=$getVal($('[name=response_keyword]'));
+		if(response_keyword==''){
+			alert('请输入关键字');
+			return false;
+		}
+		var mid = $("#response_mid").val();
+		if(mid == '' || mid == 0){
+			var content = $("#wordMsg").text();
+			$("#response_content").val(content);
+		}
+		$('#form1').submit();
+	}
+	function fnSwitchTxtMsg(self){
+		$("#response_mid").val('');
+		var self=$(self);
+		var msgType=$('[name=msgType]');
+		msgType.val(1);
+		$('[name=response_mid]').val('');
+		$('.publishBox').removeClass('statu2').removeClass('statu3').addClass('statu1');
+		$('.messageInput').html('').removeClass('materialPicTxtWrap').attr('contenteditable',true);
+	}
+	
+	function fnCallPicTxtMsg(self,box){
+		$("#response_content").val('');
+		var picTxtBox=art.dialog({title:'图文素材',id:'picTxtBox',lock:true});
+		$.ajax({
+			url:'/index.php/material/material_popup',
+			success:function(data){
+				picTxtBox.content(data);
+				picTxtBox.button(
+					{
+						name: '确定',
+						callback: function () {
+							var id=$('[name=tickedMaterialId]').val();
+							if(id==''){
+								alert('请选择一个素材');
+								return false;
+							}else{
+								var mg=$('.tickedContent').removeClass('tickedContent');
+								box.html(mg).attr('contenteditable',false);
+								$('.publishBox').removeClass('statu1').removeClass('statu2').addClass('statu3');//选中左中右
+								var msgType=$('[name=msgType]');
+								msgType.val(3);
+								$('[name=response_mid]').val(id);
+							}
+						},
+						focus:true
+					},
+					{
+						name:'取消'
+					}
+				);
+			},
+			cache:false
+		});
+	}
+	
+	function fnCheckTxtNum(){
+		var area=$('#wordMsg');
+		var txtOverflow=$('[name=txtOverflow]');
+		var numWrap=$('.messageCount');
+		var msg=area.text().replace(/\s/g,'');
+		var len=600-(msg.length);
+		var tip='';
+		if(len<0){
+			tip='已超出<span class="overLength">'+Math.abs(len)+'</span>字';
+			txtOverflow.val(0);
+		}else{
+			tip='还可以输入<span>'+len+'</span>字';
+			txtOverflow.val(1);
+		}
+		numWrap.html(tip);
+	}
+
+	function fnTickMaterial(self,id){
+		self=$(self);
+		var siblingsBox=self.parents('.materialPicTxtWrap').find('li');
+		siblingsBox.removeClass('tickedContent');
+		self.addClass('tickedContent');
+		var tickedMaterialId=$('[name=tickedMaterialId]');
+		tickedMaterialId.val(id);
+	}
+</script>

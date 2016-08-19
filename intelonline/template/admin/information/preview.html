@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>预览</title>
+<link rel="stylesheet" href="/css/index.css">
+<link href="/jquery-ui.css" rel="stylesheet">
+<script src="/js/jquery.min.js"></script>
+<script>
+	$(function(){
+		$(".sendPhone").click(function(){
+			$(".alertCon").show();
+		})
+		$(".quiteBtn").click(function(){
+			$(".alertCon").hide();
+		})
+	})
+	</script>
+</head>
+<body>
+	<{include 'admin/public/header.html'}>
+	<div class="con">
+		<{include 'admin/public/left_menu.html'}>
+		<div class="rightDiv webDiv">
+			<div class="webTitle labelTitle">
+				<!-- <p class="sendPhone">发送到我的手机</p> -->
+				<input type="button" class="groupBtn cancleBtn closeBtn"
+					onclick="window.history.back();" value="返回">
+			</div>
+			<!-- <img src="/images/previewImg.png" alt="" style="margin-top:10px;"> -->
+			<div class="previewBox">
+				<p class="preTitle"><{$info.title}></p>
+				<p class="preDate">
+					<{$info.ctime|date_format:"%Y-%m-%d"}><span class="preName">英特尔中国在线</span>
+				</p>
+				<p><{$info.content}></p>
+			</div>
+		</div>
+	</div>
+	<div class="alertCon">
+		<div class="alertDiv">
+			输入openid <input type="text" class="idTxt">
+			<div class="alertBtn">
+				<input type="button" value="发送" class="confirmBtn saveBtn">
+				<input type="button" value="取消" class="confirmBtn saveBtn quiteBtn">
+			</div>
+		</div>
+	</div>
+</body>
+</html>

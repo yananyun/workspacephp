@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>微信用户组管理</title>
+<link href="/css/main.css" type="text/css" rel="stylesheet" />
+<link rel="stylesheet" type="text/css" href="/css/skins/blue.css" />
+<link rel="stylesheet" href="/css/index.css">
+<script type="text/javascript" src="/js/jquery.js"></script>
+<script type="text/javascript" src="/js/main.js"></script>
+<script type="text/javascript" src="/js/artDialog.js"></script>
+<script type="text/javascript" src="/js/iframeTools.js"></script>
+</head>
+<body
+	onload="loadContent('',$('.intelListWrap'),'/index.php/tag/tagList')">
+	<div class="container">
+		<{include 'admin/public/header.html'}>
+		<div class="main">
+			<{include 'admin/public/left_menu.html'}>
+			<div class="mainWrap">
+				<a class="intelBtn addGroupBtn" href="/index.php/tag/add">+ 添加标签</a>
+				<ul class="intelListWrap usergroup"></ul>
+			</div>
+		</div>
+	</div>
+	<div class="addIDCon">
+		<div class="detailTitle">
+			<p>编辑标签</p>
+			<img src="/images/closeLabel.png" alt="" class="closeLable">
+		</div>
+		<p>openid</p>
+		<textarea name="openid" id="" cols="50" rows="12"
+			placeholder="添加openid,单次最多20个,每个openid之间用“,”分割"></textarea>
+		<input type="button" class="confirmBtn openIDBtn" value="确定">
+	</div>
+	<script>
+    $(function(){
+        $(".openIDBtn").on('click', function(){
+            var tagid   = $('.addIDCon').attr('tagid');
+            var openid  = $('textarea[name="openid"]').val();
+            if(!$.trim(openid))
+            {
+                alert('请填写openid!');
+                return false;
+            }
+            var tagId   = [];
+            tagId.push(tagid);
+            $.post('/index.php/tag/addMemTag', {tagId:tagId, openid:openid}, function(){
+                $(".addIDCon").hide();
+            });
+        })
+    })
+    $(':input[name=search]').click(function(){
+        var keyword = $.trim($(':input[name=keyword]').val());
+        loadContent('',$('.intelListWrap'),'/index.php/tag/tagList/keyword/'+keyword)
+    });
+
+    //添加组		
+    function addTag(){
+        process=showloading('loading...');
+        $.ajax({
+            url: '/index.php/weixin/add_tag',
+            success: function (data){
+                process.close();
+                art.dialog({
+                    title: '添加标签',
+                    content:data,
+                    lock:true
+                });
+            },
+            cache: false
+        });
+    }
+
+    //修改标签		
+    function editTag(o,id){
+        process=showloading('loading...');
+                var obj = $(o);
+                var id = obj.attr('tagid');
+                var tag_name = obj.attr('name');
+        $.ajax({
+            url: '/index.php/membertag/edit_tag/id/'+id,
+                        data:{id:id,tag_name:tag_name},
+                        type:'post',
+            success: function (data){
+                process.close();
+                art.dialog({
+                    title: '修改标签',
+                    content:data,
+                    lock:true
+                });
+            },
+            cache: false
+        });
+    }
+    //删除标签
+    function fnDelTag(self,id){
+        var flag=confirm('确定要删除该标签么？');
+        if(flag){
+            //process=showloading('loading...');
+            $.post('/index.php/tag/deleteUserTag/id/'+id,{tag_id:id},function(){
+
+            },'json');
+            var self=$(self);
+            var li=self.parents('li');
+            li.slideUp();
+        }
+    }
+    
+	
+	function showTagDetail(id){
+		location.href="/index.php/tag/tagMember/tagId/"+id;
+	}
+</script>
+</body>
+</html>

@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>编辑用户组</title>
+<link href="/css/main.css" type="text/css" rel="stylesheet" />
+<link rel="stylesheet" type="text/css" href="/css/skins/blue.css" />
+<link rel="stylesheet" type="text/css" href="/css/K_admin.css" />
+<script type="text/javascript" src="/js/jquery.js"></script>
+<script type="text/javascript" src="/js/main.js"></script>
+<script type="text/javascript" src="/js/artDialog.js"></script>
+<script type="text/javascript" src="/js/iframeTools.js"></script>
+</head>
+<body>
+	<div class="container">
+		<{include 'header.html'}>
+		<div class="main">
+			<div class="mainWrap">
+				<form action='/index.php/membergroup/edit_group_do' method='post'
+					id='form1'>
+					<h3>修改分组</h3>
+					<p class="leftPadding80">
+						<span class="leftSpanPos">分组名称：</span><input type="text"
+							name="groupName" placeholder="填写一个分组名称"
+							value="<{$msg.group_name}>" />
+					</p>
+					<p class="leftPadding80">
+						<span class="leftSpanPos">分组说明：</span>
+						<textarea name="groupDes" class="groupDes" placeholder="填写分组说明"><{$msg.remark}></textarea>
+					</p>
+					<h3>修改分组条件 - 粉丝管理</h3>
+					<p class="leftPadding80 fansOptionWrap">
+						<span class="leftSpanPos">性别：</span> <label><input
+							type="radio" name="sex" value="0"<{if $msg.condition_sex
+							eq 0}> checked <{/if}> />不限</label> <label><input type="radio"
+							name="sex" value="1"<{if $msg.condition_sex eq 1}>
+							checked <{/if}> />男</label> <label><input type="radio" name="sex"
+							value="2"<{if $msg.condition_sex eq 2}> checked <{/if}>
+							/>女</label>
+					</p>
+					<p class="leftPadding80 fansOptionWrap">
+						<span class="leftSpanPos">用户来源：</span> <label><input
+							type="checkbox" name="sid[]" value="0" class='member_source1'
+							onclick="fnSetNoneOption(this)"<{if
+							$msg.condition_source == ''}> checked <{/if}> />不限</label> <{foreach $sid
+						as $val}> <label><input type="checkbox" name="sid[]"
+							value="<{$val.sid}>" class='member_source2'<{if
+							strpos($msg.condition_source,$val.sid) !== false}> checked
+							<{/if}> /><{$val.sid}>二维码</label> <{/foreach}>
+					</p>
+					<p class="leftPadding80 fansOptionWrap">
+						<span class="leftSpanPos">用户类型：</span> <label><input
+							type="checkbox" name="type[]" class='member_type1' value="0"
+							onclick="fnSetNoneOption(this)"<{if $msg.condition_type
+							== '0'}> checked <{/if}> />不限</label> <label><input
+							type="checkbox" name="type[]" class='member_type2' value="1"<{if
+							strpos($msg.condition_type,'1') !== false}> checked <{/if}>
+							/>普通粉丝</label> <label><input type="checkbox" name="type[]"
+							class='member_type2' value="2"<{if
+							strpos($msg.condition_type,'2') !== false}> checked
+							<{/if}>/>RSP会员</label> <label><input type="checkbox"
+							name="type[]" class='member_type2' value="3"<{if
+							strpos($msg.condition_type,'3') !== false}> checked
+							<{/if}>/>至尊地带会员</label>
+					</p>
+					<p class="leftPadding80 fansOptionWrap">
+						<span class="leftSpanPos">用户地域：</span> <label><input
+							type="checkbox" name="fansRegion" value="0"
+							onclick="fnSetNoneSelect(this)" class='member_from1'<{if
+							$msg.condition_province eq ''}> checked <{/if}> />不限</label>
+						<{memberRegion()}>
+					</p>
+					<!--<p class="leftPadding80 fansOptionWrap">
+						<span class="leftSpanPos">用户等级：</span>
+						<label><input type="checkbox" name="fansLvl" value="0" onclick="fnSetNoneOption(this)" />不限</label>
+						<label><input type="checkbox" name="fansLvl" value="1" checked />五星</label>
+					</p>-->
+					<p class="leftPadding80 fansOptionWrap">
+						<span class="leftSpanPos">交互次数：</span> <label><input
+							type="radio" name="condition_cross" value="0"<{if
+							($msg.condition_cross_min eq 0) and ($msg.condition_cross_max eq
+							0) }> checked <{/if}> />不限</label> <label><input type="radio"
+							name="condition_cross" value="20"<{if
+							($msg.condition_cross_min eq 20) and ($msg.condition_cross_max eq
+							0) }> checked <{/if}> />大于20次</label> <label><input type="radio"
+							name="condition_cross" value="50"<{if
+							($msg.condition_cross_min eq 50) and ($msg.condition_cross_max eq
+							0) }> checked <{/if}> />大于50次</label> <label><input type="radio"
+							name="condition_cross" value="1"<{if
+							$msg.condition_cross_max neq 0}> checked <{/if}> />自定义</label> <span
+							class="rangeNum"> <input type="text"
+							name="condition_cross_min" value="<{$msg.condition_cross_min}>" /><i>
+								~ </i><input type="text" name="condition_cross_max"
+							value="<{$msg.condition_cross_max}>" />
+						</span>
+					</p>
+					<p class="leftPadding80 btnWrap">
+						<input type="button" class="intelBtn addGroupOprateBtn" value="保存"
+							onclick="fnSaveGroup(this)" />
+						<!-- <input type="button" class="intelBtn addGroupOprateBtn" value="取消" onclick="" /> -->
+						<a href="/index.php/weixin/group_manage"
+							class="intelBtn addGroupOprateBtn">取消</a> <input type="button"
+							class="intelBtn addGroupOprateBtn" value="管理粉丝"
+							onclick="fnCallFansList(<{$msg.id}>)" /> <input type='hidden'
+							value='<{$msg.condition_province}>' id='Hprovince'> <input
+							type='hidden' value='<{$msg.condition_city}>' id='Hcity'>
+						<input type='hidden' value='<{$msg.id}>' id='group_id'
+							name='group_id'>
+					</p>
+				</form>
+			</div>
+		</div>
+		<{include 'left_menu.html'}>
+	</div>
+</body>
+</html>
+<script type="text/javascript">
+	$(function(){
+		$('#memberProvince').attr('name','province').attr('class','member_from2');
+		$('#memberCity').attr('name','city').attr('class','member_from2');
+		if($('.member_source1').is(':checked') == true){
+			$('.member_source2').attr('disabled',true);
+		}
+		if($('.member_type1').is(':checked') == true){
+			$('.member_type2').attr('disabled',true);
+		}
+		if($('.member_from1').is(':checked') == true){
+			$('.member_from2').attr('disabled',true);
+		}
+		var city = $('#Hcity').val();
+		var province = $('#Hprovince').val();
+		$('#memberProvince').children('option').each(function(){
+			var val = $(this).html();
+			if(val == province){
+				$(this).attr('selected',true);
+			}
+		});
+		if(city != ''){
+			$.post('/index.php/membergroup/sel_city',{city:city},function(data){
+				$('#memberCity').append("<option value='"+data.id+"' selected>"+data.name+"</option>");
+			},'json')
+		}
+	})
+	function fnSaveGroup(self){
+		var groupName=$getVal($('[name=groupName]'));
+		var groupDes=$getVal($('[name=groupDes]'));
+		if(groupName==''){
+			alert('请输入分组名称');
+			return false;
+		}else if(groupDes==''){
+			alert('请填写分组说明');
+			return false;
+		}
+
+		$('#form1').submit();
+	}
+</script>

@@ -1,0 +1,25 @@
+<{include 'wap/head.html'}>
+<script type="text/javascript">
+	$(function () {
+		$(".totopbtn").click(function () {
+			 $('body,html').animate({scrollTop:0},1000);
+		});
+	});
+</script>
+<body class="bggray">
+	<div class="loadingbox"></div>
+	<div class="container">
+		<div class="listdbox">
+			<h2><{$info.name}></h2>
+			<div class="date"><{date('Y-m-d H:i:s')}></div>
+			<!-- <div class="banner"><img src="images/banner.jpg" alt="" /></div -->
+			<div class="listdbox_c"><{$info.content}></div>
+			<a href="javascript:window.history.back();" class="more">更多精彩内容</a>
+			<div class="totopbtn">
+				<img src="/template/wap/images/arrow.png" alt="" /> 返回顶部
+			</div>
+		</div>
+	</div>
+	<{include 'wap/footer.html'}>
+</body>
+</html>

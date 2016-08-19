@@ -1,0 +1,204 @@
+<{include 'wap/head.html'}>
+<script type="text/javascript">
+	$(function () {
+		$(".radiogroup .radioli").click(function () {
+			$(".radiogroup .radioli").removeClass("active").find(".radioli_ipt").attr({"checked":false});
+			$(this).addClass("active").find(".radioli_ipt").attr({"checked":true});
+		});
+	});
+</script>
+<body class="bggray">
+	<div class="loadingbox"></div>
+	<div class="container">
+		<div class="employdbox">
+			<div class="employdbox_top">
+				<{if $info.banner != ''}> <img src="<{$info.banner}>" alt=""
+					style="width: 100%" /> <{/if}>
+			</div>
+			<div class="employdbox_c">
+				<div class="employdbox_li">
+					<div class="employdbox_li_tit"><{$info.name}></div>
+					<div class="employdbox_li_c"><{$info.content}></div>
+				</div>
+				<{if $info.id == 1}>
+				<div class="employdbox_li">
+					<div class="employdbox_li_tit">填写信息</div>
+					<div class="info_frm">
+						<div class="info_frmli">
+							<div class="info_frmli_span">姓名：</div>
+							<div class="info_frmli_c">
+								<input type="text" class="info_frmli_ipt" name="u_name" />
+							</div>
+						</div>
+						<div class="info_frmli">
+							<div class="info_frmli_span">性别：</div>
+							<div class="info_frmli_c radiogroup">
+								<div class="radioli active">
+									<span class="radioliicon"></span> 男<input type="radio"
+										value="1" class="radioli_ipt" checked name="u_sex" />
+								</div>
+								<div class="radioli">
+									<span class="radioliicon"></span> 女<input type="radio"
+										value="2" class="radioli_ipt" name="u_sex" />
+								</div>
+							</div>
+						</div>
+						<div class="info_frmli">
+							<div class="info_frmli_span">手机：</div>
+							<div class="info_frmli_c">
+								<input type="text" class="info_frmli_ipt" name="u_tel" />
+							</div>
+						</div>
+						<div class="info_frmli">
+							<div class="info_frmli_span">院校：</div>
+							<div class="info_frmli_c">
+								<input type="text" class="info_frmli_ipt" name="u_school" />
+							</div>
+						</div>
+						<div class="info_frmli">
+							<div class="info_frmli_span">实习经历：</div>
+							<div class="info_frmli_c">
+								<input type="text" class="info_frmli_ipt" name="u_experience" />
+							</div>
+						</div>
+						<div class="info_frmli">
+							<div class="info_frmli_span">专业：</div>
+							<div class="info_frmli_c">
+								<input type="text" class="info_frmli_ipt" name="u_discipline" />
+							</div>
+						</div>
+						<div class="info_frmli">
+							<div class="info_frmli_span">求职意向：</div>
+							<div class="info_frmli_c">
+								<input type="text" class="info_frmli_ipt" name="u_intention" />
+							</div>
+						</div>
+						<button class="info_sub" onclick="submit()">提交信息</button>
+					</div>
+				</div>
+				<script>
+				function submit(){
+					var rid = 0;
+					var name = $.trim($('input[name=u_name]').val());
+					var sex = $.trim($('input[name=u_sex]:checked').val());
+					var tel = $.trim($('input[name=u_tel]').val());
+					var school = $.trim($('input[name=u_school]').val());
+					var experience = $.trim($('input[name=u_experience]').val());
+					var discipline = $.trim($('input[name=u_discipline]').val());
+					var intention = $.trim($('input[name=u_intention]').val());
+					
+					$.ajax({
+						url:'/index.php/wapRecruitment/save_resume',
+						data:{type:2,rid:rid,name:name,sex:sex,tel:tel,school:school,experience:experience,discipline:discipline,intention:intention},
+						dataType:'json',
+						type:'post',
+						success:function(data){
+							alert(data.info);
+							if(data.status){
+								window.location.href ="/index.php/wapRecruitment/other/id/1";
+							}
+						}
+					});
+				}
+				</script>
+				<{else}>
+				<div class="employdbox_li">
+					<div class="employdbox_li_tit">填写信息</div>
+					<div class="info_frm">
+						<div class="info_frmli">
+							<div class="info_frmli_span">姓名：</div>
+							<div class="info_frmli_c">
+								<input type="text" class="info_frmli_ipt" name="u_name" />
+							</div>
+						</div>
+						<div class="info_frmli">
+							<div class="info_frmli_span">性别：</div>
+							<div class="info_frmli_c radiogroup">
+								<div class="radioli active">
+									<span class="radioliicon"></span> 男<input type="radio"
+										value="1" class="radioli_ipt" checked name="u_sex" />
+								</div>
+								<div class="radioli">
+									<span class="radioliicon"></span> 女<input type="radio"
+										value="2" class="radioli_ipt" name="u_sex" />
+								</div>
+							</div>
+						</div>
+						<div class="info_frmli">
+							<div class="info_frmli_span">手机：</div>
+							<div class="info_frmli_c">
+								<input type="text" class="info_frmli_ipt" name="u_tel" />
+							</div>
+						</div>
+						<div class="info_frmli">
+							<div class="info_frmli_span">工作年限：</div>
+							<div class="info_frmli_c">
+								<select name="u_workage" id=""
+									class="info_frmli_ipt info_frmli_ipt_sel">
+									<option value="一年及以下">一年及以下</option>
+									<option value="一年及三年">一年及三年</option>
+									<option value="三年及五年">三年及五年</option>
+									<option value="五年及以上">五年及以上</option>
+								</select>
+							</div>
+						</div>
+						<div class="info_frmli">
+							<div class="info_frmli_span">院校：</div>
+							<div class="info_frmli_c">
+								<input type="text" class="info_frmli_ipt" name="u_school" />
+							</div>
+						</div>
+						<div class="info_frmli">
+							<div class="info_frmli_span">学历：</div>
+							<div class="info_frmli_c">
+								<select name="u_education" id=""
+									class="info_frmli_ipt info_frmli_ipt_sel">
+									<option value="初中以下">初中以下</option>
+									<option value="中专、技校">中专、技校</option>
+									<option value="高职、大专">高职、大专</option>
+									<option value="本科">本科</option>
+									<option value="研究生以上">研究生以上</option>
+								</select>
+							</div>
+						</div>
+						<div class="info_frmli">
+							<div class="info_frmli_span">邮箱：</div>
+							<div class="info_frmli_c">
+								<input type="text" class="info_frmli_ipt" name="u_email" />
+							</div>
+						</div>
+						<button class="info_sub" onclick="submit()">提交信息</button>
+					</div>
+				</div>
+				<script>
+				function submit(){
+					var rid = 0;
+					var name = $.trim($('input[name=u_name]').val());
+					var sex = $.trim($('input[name=u_sex]:checked').val());
+					var tel = $.trim($('input[name=u_tel]').val());
+					var workage = $.trim($('select[name=u_workage]').val());
+					var education = $.trim($('select[name=u_education]').val());
+					var school = $.trim($('input[name=u_school]').val());
+					var email = $.trim($('input[name=u_email]').val());
+					
+					$.ajax({
+						url:'/index.php/wapRecruitment/save_resume',
+						data:{type:3,rid:rid,name:name,sex:sex,tel:tel,workage:workage,education:education,school:school,email:email},
+						dataType:'json',
+						type:'post',
+						success:function(data){
+							alert(data.info);
+							if(data.status){
+								window.location.href ="/index.php/wapRecruitment/other/id/2";
+							}
+						}
+					});
+				}
+				</script>
+				<{/if}>
+			</div>
+		</div>
+	</div>
+	<{include 'wap/footer.html'}>
+</body>
+</html>

@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html>
+<head>
+<base href="/template/si/">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="author" content="www.zevertech.com" />
+<meta http-equiv="copyright" content="zevertech 2014" />
+<meta http-equiv="pragma" content="no-cache" />
+<meta id="viewport" name="viewport" content="width=640,user-scalable=no">
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-touch-fullscreen" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+<meta name="MobileOptimized" content="800">
+<meta name="format-detection" content="telephone=no" />
+<title>英特尔中国智造基地</title>
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/animate.css">
+<link rel="stylesheet" href="css/layout.css">
+<script src="js/jquery.js"></script>
+<script src="js/common.js"></script>
+<script type="text/javascript" src="js/jQueryRotate.2.2.js"></script>
+<script type="text/javascript" src="js/jquery.easing.min.js"></script>
+<script type="text/javascript">
+	$(function () {
+		function alert_pop(str) {
+			$(".popbox_alert_pop .pop_txt").html(str);
+			$(".popbox_alert_pop").fadeIn();
+		}
+		$(".popbox_alert_pop .pop_ok").click(function () {
+			$(".popbox_alert_pop").fadeOut();
+		});
+		var chancenum = parseInt($(".zp_memo .chancenum").html());
+		$(".popbox_cj .pop_ok").click(function () {
+			$(".popbox_cj").fadeOut();
+			$(".pop_share").fadeIn();
+		});
+		$(".pop_share").click(function () {
+			$(".pop_share").fadeOut();
+		});
+		var flag = true;
+		$(".pointbox").click(function(){
+			//ga("send", "event", "大转盘","点击","开始抽奖");
+			if(chancenum == 0){
+				$(".nochance").fadeIn();
+			}
+			if(chancenum>0 && flag){
+				chancenum--;
+				flag = false;
+				var chancenum_str = chancenum;
+				$(".zp_memo .chancenum").html(chancenum_str);
+				$.ajax({
+					url:'/index.php/si/getLottery/',
+					type:'GET',
+					dataType:'json',
+					success:function(data){
+						var info = data.info;//提示信息
+						var status = data.status;//中奖状态
+						var location = data.data;//指针停留区块
+						var dushu = location * 60 + 30;//指针停留度数
+						$(".pointbox").rotate({
+							duration:3000,
+							angle: 0, 
+							animateTo:1440+dushu,
+							easing: $.easing.easeOutSine,
+							callback: function(){
+								var num = location;
+								var str="";
+								flag = true;
+								if(num==4){
+									if(chancenum>0){
+										$(".popbox_cj_fail").fadeIn();
+									}else{
+										$(".popbox_cj_fail_nochance").fadeIn();
+									}
+								}else{
+									//获取对应奖品名称
+									if(num==0){
+										str = "麦当劳代金券";
+									}else if(num==1){
+										str = "物美超市电子券";
+									}else if(num==2){
+										str = "星巴克咖啡券";
+									}else if(num==3){
+										str = "好利来蛋糕券";
+									}else if(num==5){
+										str = "时光网电影票";
+									}else{
+										str = "未中奖";
+									}
+									
+									//0麦当劳 1物美 2星巴克 3好利来 4谢谢参与 5时光网
+									//电子券
+									if(num == 1 || num == 5){
+										var popstr
+										if(num == 1){
+											popstr ="恭喜您获得一张物美超市电子券。如未收到，您可在微信号中输入“中奖查询”，我们将尽快将兑换码发送给您。";
+										}else{
+											popstr ="恭喜您获得一张时光网电影卷。如未收到，您可在微信号中输入“中奖查询”，我们将尽快将兑换码发送给您。";
+										}
+										if(chancenum>0){
+											$(".popbox_cj_success .pop_txt p").html(popstr);
+											$(".popbox_cj_success").fadeIn();
+											flag = true;
+										}else{
+											$(".popbox_cj_success_nochance .pop_txt p").html(popstr);
+											$(".popbox_cj_success_nochance").fadeIn();
+											flag = true;
+										}
+									}else if(num==0 || num==2 || num==3 ){//实体券，填表单
+										$("#gid").attr('value',info);
+										$(".popup_zp_suc .popup_zp_suc_memo span").html(str);//弹提示语
+										$(".popup_zp_suc").fadeIn();//弹表单
+									}
+								}
+							}
+						 });
+					}
+				});
+				return false;
+			}
+		});
+		$(".zp_suc_frm_subbtn").click(function () {
+			var name = $(".name").val();
+			if(name=="" ){
+				alert_pop("请填写姓名");
+				return false;
+			}
+			var tel = $(".tel").val();
+			if(!(/^1\d{10}$/.test(tel))){
+				alert_pop("请正确填写您的手机号");
+				return false;
+			}
+			var addresss = $(".addresss").val();
+			if(addresss=="" ){
+				alert_pop("请填写地址");
+				return false;
+			}
+			$(".popup_zp_suc").fadeOut();
+			$(".pop_share").fadeIn();
+			$.ajax({
+				url:'/index.php/si/upAddress/',
+				type:'POST',
+				dataType:'json',
+				data:{name:name,mobile:tel,address:addresss},
+				success:function(data){
+//					alert_pop('信息提交成功');
+				}
+			});
+		});
+	});
+
+	</script>
+<script type="text/javascript">
+		function jsonpcallback(data){
+			wx.config({
+				debug: false, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
+				appId: data.appid, // 必填，公众号的唯一标识
+				timestamp:data.timestamp, // 必填，生成签名的时间戳
+				nonceStr: data.noncestr, // 必填，生成签名的随机串
+				signature: data.signature,// 必填，签名，见附录1
+				jsApiList: ['onMenuShareTimeline','onMenuShareAppMessage'] // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
+			});
+
+			wx.ready(function(){
+				// config信息验证后会执行ready方法，所有接口调用都必须在config接口获得结果之后，config是一个客户端的异步操作，所以如果需要在页面加载时就调用相关接口，则须把相关接口放在ready函数中调用来确保正确执行。对于用户触发时才调用的接口，则可以直接调用，不需要放在ready函数中。
+				//分享到朋友圈
+				wx.onMenuShareTimeline({
+					  title: '【路过有礼·参与有奖】英特尔硬享公社系列活动火热招募，等你参加！',
+					  link: '<{$url}>',
+					  imgUrl: 'http://intelonline.buzzopt.com/template/si/images/simg.png',
+					  success: function (res) {
+						// 用户确认分享后执行的回调函数
+					  },
+					  cancel: function (res) {
+						// 用户取消分享后执行的回调函数
+					  }
+					});
+				   
+				wx.onMenuShareAppMessage({
+					title: '', // 分享标题
+					desc: '【路过有礼·参与有奖】英特尔硬享公社系列活动火热招募，等你参加！', // 分享描述
+					link: '<{$url}>', // 分享链接
+					imgUrl: 'http://intelonline.buzzopt.com/template/si/images/simg.png', // 分享图标
+					type: '', // 分享类型,music、video或link，不填默认为link
+					dataUrl: '', // 如果type是music或video，则要提供数据链接，默认为空
+					success: function () { 
+						// 用户确认分享后执行的回调函数
+					},
+					cancel: function () { 
+						// 用户取消分享后执行的回调函数
+					}
+				});
+			});
+		}
+	</script>
+<style>
+.zhuanpan-title {
+	pointer-events: none;
+	-webkit-touch-callout: none;
+}
+
+img {
+	-webkit-touch-callout: none;
+	pointer-events: none;
+}
+
+.zpbox {
+	-webkit-touch-callout: none; /*pointer-events: none;*/
+}
+</style>
+</head>
+<body>
+	<div class="loadingbox"></div>
+	<div class="fixedbg"></div>
+	<div class="container">
+		<div class="main">
+			<img src="images/zhuanpan_banner.png" alt=""
+				class="w100 zhuanpan-title" />
+			<div class="zpbox">
+				<div class="pointbox"
+					onclick='ga("send", "event", "抽奖页面","点击","开始抽奖按钮");'></div>
+			</div>
+			<div class="zp_memo">
+				<p>
+					您现在还有<b class="num chancenum"><{$userinfo.lastlotterytimes}></b>次抽奖机会
+				</p>
+				<p>
+					离你下一次抽奖机会， 还差<b class="num"><{$lastRepostTimes}></b>次朋友支持
+				</p>
+				<p>
+					还有<span class="giftnum"><{$lastGiftTotal}></span>个奖品， 没有被领走...
+				</p>
+			</div>
+			<img src="images/zhuanpanimg.png" alt="" class="w100 mt20" />
+			<div class="tc">
+				<a href="/index.php/si/huodong/"
+					onclick='ga("send", "event", "抽奖页面","点击","回到首页");'><img
+					src="images/return.png" alt="" /></a>
+			</div>
+		</div>
+	</div>
+	<div class="popbox popbox_alert_pop">
+		<div class="pop_c">
+			<div class="pop_tit"></div>
+			<div class="pop_txt">错误信息</div>
+			<!--
+			<a class="pop_ok" href="/index.php/si/index/">确定</a>
+			-->
+			<button class="pop_ok">确定</button>
+		</div>
+	</div>
+	<div class="popbox popbox_cj popbox_cj_fail">
+		<div class="popcj_c">
+			<div class="popcj_c_t">
+				<div class="popcj_c_tit">很遗憾</div>
+				<div class="pop_txt">
+					<p>很遗憾，你可以将本页面发送给更多小伙伴，获取更多抽奖机会，继续加油哦！</p>
+				</div>
+			</div>
+			<!--
+			<a class="pop_ok" href="/index.php/si/index/">确定</a>
+			-->
+			<button class="pop_ok">确定</button>
+		</div>
+	</div>
+	<div class="popbox popbox_cj popbox_cj_fail_nochance">
+		<div class="popcj_c">
+			<div class="popcj_c_t">
+				<div class="popcj_c_tit">很遗憾</div>
+				<div class="pop_txt">
+					<p>很遗憾，你可以将本页面发送给更多小伙伴，获取更多抽奖机会，继续加油哦！</p>
+				</div>
+			</div>
+			<!--
+			<a class="pop_ok" href="/index.php/si/index/">确定</a>
+			-->
+			<button class="pop_ok">确定</button>
+		</div>
+	</div>
+	<div class="popbox popbox_cj popbox_cj_success">
+		<div class="popcj_c">
+			<div class="popcj_c_t">
+				<div class="popcj_c_tit">恭喜您</div>
+				<div class="pop_txt">
+					<p>恭喜您，您已抽中……，电子码为……。您还可以从【英特尔中国在线】公众号我的SI菜单点击查看获奖详情。单点击查看获奖详情。</p>
+				</div>
+			</div>
+			<!--
+			<a class="pop_ok" href="/index.php/si/index/">确定</a>
+			-->
+			<button class="pop_ok">确定</button>
+		</div>
+	</div>
+	<div class="popbox popbox_cj popbox_cj_success_nochance">
+		<div class="popcj_c">
+			<div class="popcj_c_t">
+				<div class="popcj_c_tit">恭喜您</div>
+				<div class="pop_txt">
+					<p>恭喜您，您已抽中……，电子码为……。您还可以从【英特尔中国在线】公众号我的SI菜单点击查看获奖详情。单点击查看获奖详情。</p>
+				</div>
+			</div>
+			<!--
+			<a class="pop_ok" href="/index.php/si/index/">确定</a>
+			-->
+			<button class="pop_ok">确定</button>
+		</div>
+	</div>
+	<div class="popbox popbox_cj nochance">
+		<div class="popcj_c">
+			<!-- <div class="popcj_c_t">
+				<div class="popcj_c_tit"></div>
+				<div class="pop_txt">
+					<p>没有机会啦！快去邀请更多好友获得更多抽奖机会，快快行动把</p>
+				</div>
+			</div> -->
+			<!--
+			<a class="pop_ok" href="/index.php/si/index/">确定</a>
+			-->
+
+
+			<div class="popcj_c_t">
+				<div class="popcj_c_tit">温馨提示</div>
+				<div class="pop_txt">
+					<p>没有机会啦！快去邀请更多好友获得更多抽奖机会，快快行动吧！</p>
+				</div>
+			</div>
+			<button class="pop_ok">确定</button>
+		</div>
+	</div>
+	<div class="popbox popup_zp_suc">
+		<div class="popup_zp_suc_c">
+			<div class="popup_zp_suc_c_img">
+				<img src="images/giftpop.png" alt="" />
+			</div>
+			<div class="popup_zp_suc_memo">
+				恭喜您，您已获得 <span>星巴克咖啡券一张/麦当劳代金券</span>
+				一张。为保证奖品发放顺利，请填写以下信息，我们将在活动结束后统一寄送奖品。
+			</div>
+			<div class="popup_zp_suc_frm">
+				<div class="popup_zp_suc_frmli">
+					<div class="popup_zp_suc_frmli_span">姓名：</div>
+					<input type="text" class="popup_zp_suc_frmli_ipt name" />
+				</div>
+				<div class="popup_zp_suc_frmli">
+					<div class="popup_zp_suc_frmli_span">电话：</div>
+					<input type="tel" class="popup_zp_suc_frmli_ipt tel" />
+				</div>
+				<div class="popup_zp_suc_frmli">
+					<div class="popup_zp_suc_frmli_span">地址：</div>
+					<input type="text" class="popup_zp_suc_frmli_ipt addresss" />
+				</div>
+				<a href="javascript:void(0)" class="zp_suc_frm_subbtn"><img
+					src="images/dzpbtn.jpg" alt="" /></a>
+			</div>
+			<div class="popup_zp_suc_memo_s">
+				<!-- <p>点击提交后您可通过微信菜单“SI Program”—“我的SI”查看中奖情况及地址提交、礼品发放等信息。<br />如未能在活动截止日期前（4月21日）成功提交邮寄信息，将被视为自动放弃。</p> -->
+				<p>
+					点击提交后您可通过微信菜单“火热招募”—“我的主页”查看中奖信息。<br />如未能在活动截止日期前（6月29日）前成功提交邮寄信息，将被视为自动放弃。
+				</p>
+			</div>
+		</div>
+	</div>
+	<div class="popbox pop_share">
+		<img src="images/shareimg2.png" alt="" />
+	</div>
+
+	<script type="text/javascript"
+		src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+	<!--<script type="text/javascript" src="js/weixin.js"></script>-->
+	<script type="text/javascript"
+		src="http://m.zevertech.com/index.php/jssdk?jsonpcallback=jsonpcallback"></script>
+	<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+ 
+  ga('create', 'UA-59674172-7', 'buzzopt.com');
+  setTimeout(function(){ga('send', 'pageview')}, 500);
+ 
+  var openid = '<{$openid}>';
+  ga('set', 'dimension1', openid);
+</script>
+
+</body>
+</html>

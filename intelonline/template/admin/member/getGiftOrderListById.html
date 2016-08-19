@@ -1,0 +1,37 @@
+<!-- <ul class="intelListWrap likeBox">
+	<div class="listTopTtl">
+		<span class="couponsType">订单号</span>
+		<span class="couponsName">产品名称</span>
+		<span class="couponsType">预订数量</span>
+		<span class="couponsStore">订单金额</span>
+		<span class="couponsSeries">状态</span>
+	</div>
+	<{foreach $list as $k => $t}>
+		<li>
+			<span class="couponsType"><{$t.id}></span>
+			<span class="couponsName"><{$t.gtitle}></span>
+			<span class="couponsType"><{$t.total}></span>
+			<span class="couponsStore"><{$t.totalamount}></span>
+			<span class="couponsSeries"><{if $t.status == 1}>待审核<{else if $t.status == 2}>被驳回<{else if $t.status == 3}>取消预订<{else if $t.status == 4}>已删除<{else if $t.status ==5}>已通过<{/if}></span>
+		</li>
+	<{/foreach}>
+</ul>
+ -->
+<table class="order-record likeBox">
+	<tr class="listTopTtl">
+		<th class="couponsType">订单号</th>
+		<th class="couponsStore">订单金额</th>
+		<th class="couponsSeries">状态</span>
+	</tr>
+	<{foreach $list as $k => $t}>
+	<tr>
+		<td class="couponsType"><{$t.id}></td>
+		<td class="couponsStore"><{$t.totalamount}></td>
+		<td class="couponsSeries"><{if $t.status == 1}>待审核<{else if
+			$t.status == 2}>被驳回<{else if $t.status == 3}>取消预订<{else if $t.status
+			== 4}>已删除<{else if $t.status ==5}>已通过<{/if}></td>
+	</tr>
+	<{/foreach}>
+</table>
+
+<{$pages}>

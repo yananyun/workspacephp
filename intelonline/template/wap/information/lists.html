@@ -1,0 +1,25 @@
+<{foreach $list as $info}>
+<a href="/index.php/wapInformation/detail/id/<{$info.id}>">
+	<div class="listNews">
+		<img src="<{$info.picurl}>" alt="">
+		<div class="list">
+			<!-- /index.php/wapInformation/detail/id/<{$info.id}> -->
+			<p class="newsTitle"><{$info.title}></p>
+			<p class="newsCon"><{$info.descption}></p>
+			<!-- <p class="newsCon"><a href="/index.php/wapInformation/detail/id/<{$info.id}>">更多</a></p> -->
+		</div>
+	</div>
+</a>
+<{/foreach}>
+<!--<{foreach $list as $info}>
+<div class="listNews">
+	<a href="<{$info.source}>"><img src="<{$info.picurl}>" alt=""></a>
+	<div class="list">
+	 /index.php/wapInformation/detail/id/<{$info.id}> 
+	<p class="newsTitle"><a href="<{$info.source}>"><{$info.title}></a></p>
+	<p class="newsCon"><{$info.descption}></p>
+	<p class="newsCon"><a href="/index.php/wapInformation/detail/id/<{$info.id}>">更多</a></p>
+	</div>
+</div>
+<{/foreach}>-->
+

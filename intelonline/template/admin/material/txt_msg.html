@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>文本消息</title>
+<link href="/css/main.css" type="text/css" rel="stylesheet" />
+<link rel="stylesheet" type="text/css" href="/css/skins/blue.css" />
+<link rel="stylesheet" type="text/css" href="/css/material.css" />
+<link rel="stylesheet" type="text/css" href="/css/index.css" />
+<script type="text/javascript" src="/js/jquery.js"></script>
+<script type="text/javascript" src="/js/main.js"></script>
+<script type="text/javascript" src="/js/artDialog.js"></script>
+<script type="text/javascript" src="/js/iframeTools.js"></script>
+</head>
+<body
+	onload="loadContent('',$('.materialPicTxtWrap'),'/index.php/material/list_material/type/text')">
+	<div class="container">
+		<{include 'admin/public/header.html'}>
+		<div class="main">
+			<{include 'admin/public/left_menu.html'}>
+			<div class="mainWrap">
+				<div class="webTitle weixinTitle">
+					<a href="/index.php/material/txt_msg" class="nowTitle">文本素材</a> <a
+						href="/index.php/material/pic_txt_msg">图文素材</a> <span
+						class="searchBox"><input type="text" class="" name="title"><img
+						src="/images/search2.png" alt="" onclick="search();"></span>
+				</div>
+				<a class="intelBtn addPicTxtBtn"
+					href="/index.php/material/creat_txt">+ 添加文本素材</a>
+				<ul class="intelListWrap materialPicTxtWrap">
+
+
+				</ul>
+			</div>
+		</div>
+
+	</div>
+</body>
+
+<script type="text/javascript">
+function search(){
+	var title = $('input[name=title]').val();
+	loadContent('',$('.materialPicTxtWrap'),'/index.php/material/list_material/type/text/title/'+title);
+}
+	//修改文本素材	
+	function editMaterialBtn(id){
+		var url = '/index.php/material/edit_txt/mid/'+id;
+		
+		var foo =  confirm("您确定要编辑该素材吗？");
+		if(foo){
+			location.href = url;
+		}
+	}
+	//移除素材
+	function delMaterialBtn(id){
+		var foo =  confirm("您确定要移除该素材吗？");
+		if(foo){
+			$.ajax({
+				url:'/index.php/material/deleteMaterial',
+				data:{mid:id},
+				dataType:'json',
+				type:'post',
+				success:function(data){
+					alert(data.info);
+					if(data.status == 1){
+						location.href = "/index.php/material/txt_msg";
+					}
+				}
+			});
+		}
+	}
+</script>
+</html>

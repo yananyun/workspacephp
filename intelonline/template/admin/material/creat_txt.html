@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>添加图文消息</title>
+<link href="/css/main.css" type="text/css" rel="stylesheet" />
+<link rel="stylesheet" type="text/css" href="/css/skins/blue.css" />
+<link rel="stylesheet" type="text/css" href="/css/material.css" />
+<link rel="stylesheet" type="text/css" href="/css/style.css" />
+<link rel="stylesheet" type="text/css" href="/css/index.css" />
+<link rel="stylesheet" type="text/css" href="/css/message.css" />
+<script type="text/javascript" src="/js/jquery.js"></script>
+<script type="text/javascript" src="/js/main.js"></script>
+<script type="text/javascript" src="/js/artDialog.js"></script>
+<script type="text/javascript" src="/js/iframeTools.js"></script>
+<script type="text/javascript" src="/js/ajaxfileupload.js"></script>
+<script type="text/javascript" src="/js/createMaterial.js"></script>
+
+
+
+</head>
+<body>
+	<div class="container">
+		<{include 'admin/public/header.html'}>
+		<div class="main">
+			<{include 'admin/public/left_menu.html'}>
+			<div class="mainWrap">
+				<div class="webTitle labelTitle">
+					<img src="/images/icon1.png" alt=""> <a href="addLabel.html">添加文本素材</a>
+					<input type="button" class="groupBtn cancleBtn closeBtn"
+						onclick="window.history.back();" value="关闭">
+				</div>
+				<table border="0" cellspacing="0" cellpadding="0"
+					class="uplabelTable">
+					<tr>
+						<td>添加标题：</td>
+						<td><input type="text" name="title"></td>
+					</tr>
+					<tr>
+						<td>添加文本内容：</td>
+						<td>
+							<!-- <textarea name="" id="" cols="85" rows="10"></textarea> -->
+							<div class="publishBox statu1 gap-top">
+								<div class="publishBoxNavWrap">
+									<a class="txtMsgTab" href="javascript:void(0);">添加文本素材</a>
+								</div>
+								<div class="messageInput" contenteditable="true" id="wordMsg"></div>
+								<input type="hidden" name="active_mid" value="" id='active_mid'>
+								<input type="hidden" name="active_content" value=""
+									id="active_content">
+								<div class="publishBoxBottom">
+									<a class="emotionIcon" href="javascript:void(0);" onclick=""></a>
+									<p class="messageCount">
+										还可以输入<span>300</span>字
+									</p>
+									<input type="hidden" name='txtOverflow' value="0" />
+								</div>
+							</div>
+						</td>
+					</tr>
+					<tr>
+						<td colspan="2" style="text-align: center;"><input
+							type="button" value="确定" onclick="creat_txt_save();"
+							class="confirmBtn saveBtn"> <input type="button"
+							value="取消" onclick="window.history.back();" class="noneBtn">
+						</td>
+					</tr>
+				</table>
+
+				<!-- 标题：<input type="text" name="title">
+				<div class="publishBox statu1 gap-top">
+					<div class="publishBoxNavWrap">
+						<a class="txtMsgTab" href="javascript:void(0);">添加文本素材</a>
+					</div>
+					<div class="messageInput" contenteditable="true" id="wordMsg"></div>
+					<input type="hidden" name="active_mid" value="" id='active_mid'>
+					<input type="hidden" name="active_content" value="" id="active_content">
+					<div class="publishBoxBottom">
+						<a class="emotionIcon" href="javascript:void(0);" onclick=""></a>
+						<p class="messageCount">还可以输入<span>300</span>字</p>
+						<input type="hidden" name='txtOverflow' value="0" />
+					</div>
+				</div> -->
+				<!-- <p class="saveMaterialBtnWrap"> <a href="javascript:;" onclick="creat_txt_save();" class="btn-primary" id='save'>保存</a></p> -->
+			</div>
+		</div>
+	</div>
+	<script type="text/javascript">
+$(function(){
+	setInterval(function(){
+		var flag=$('#wordMsg').is(':focus');
+		if(flag){
+			fnCheckTxtNum();
+		}
+	},200);
+});
+function fnCheckTxtNum(){
+	var area=$('#wordMsg');
+	var txtOverflow=$('[name=txtOverflow]');
+	var numWrap=$('.messageCount');
+	var msg=area.text().replace(/\s/g,'');
+	var len=300-(msg.length);
+	var tip='';
+	if(len<0){
+		tip='已超出<span class="overLength">'+Math.abs(len)+'</span>字';
+		txtOverflow.val(0);
+	}else{
+		tip='还可以输入<span>'+len+'</span>字';
+		txtOverflow.val(1);
+	}
+	numWrap.html(tip);
+}
+
+function creat_txt_save(){
+	var title = $('input[name=title]').val();
+	var content = $('#wordMsg').text();
+		$.ajax({
+			url:"/index.php/material/creat_txt_save",
+			type:"post",
+			dataType:"json",
+			data:{title:title,content:content},
+			success:function(data){
+				alert(data.info);
+				if(data.status == 1){
+					location.href = "/index.php/material/txt_msg";
+				}
+			}
+		});
+	}
+</script>
+</body>
+</html>

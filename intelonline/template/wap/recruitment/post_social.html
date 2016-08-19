@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="author" content="www.zevertech.com" />
+<meta http-equiv="copyright" content="zevertech 2014" />
+<meta http-equiv="pragma" content="no-cache" />
+<meta id="viewport" name="viewport" content="width=640,user-scalable=no">
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-touch-fullscreen" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+<meta name="MobileOptimized" content="800">
+<meta name="format-detection" content="telephone=no" />
+<title>zerver Tech</title>
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/animate.css">
+<link rel="stylesheet" href="css/layout.css">
+<script src="js/jquery.js"></script>
+<script src="js/common.js"></script>
+<script type="text/javascript">
+	$(function () {
+		$(".radiogroup .radioli").click(function () {
+			$(".radiogroup .radioli").removeClass("active").find(".radioli_ipt").attr({"checked":false});
+			$(this).addClass("active").find(".radioli_ipt").attr({"checked":true});
+		});
+	});
+</script>
+</head>
+<body class="bggray">
+	<div class="loadingbox"></div>
+	<div class="container">
+		<div class="employdbox">
+			<div class="employdbox_top">
+				<img src="images/logo.png" alt="" />
+				<h2>北京小米科技有限责任公司</h2>
+			</div>
+			<div class="employdbox_c">
+				<div class="employdbox_li">
+					<div class="employdbox_li_tit">社会求职</div>
+					<div class="employdbox_li_c">
+						<p>小米公司正式成立于2010年4月，是一家专注于智能产品自主研发的移动互联网公司。“为发烧而生”是小米的产品理念。小米公司首创了用互联网模式开发手机操作系统、发烧友参与开发改进的模式。</p>
+						<p>2014年双十一活动中，小米在天猫平台上销售手机116万台，销售额15.6亿元，约占天猫当天总额的3%，成功卫冕单店第一。</p>
+					</div>
+				</div>
+				<div class="employdbox_li">
+					<div class="employdbox_li_tit">填写信息</div>
+					<div class="info_frm">
+						<div class="info_frmli">
+							<div class="info_frmli_span">姓名：</div>
+							<div class="info_frmli_c">
+								<input type="" class="info_frmli_ipt" />
+							</div>
+						</div>
+						<div class="info_frmli">
+							<div class="info_frmli_span">性别：</div>
+							<div class="info_frmli_c radiogroup">
+								<div class="radioli active">
+									<span class="radioliicon"></span> 男<input type="radio"
+										class="radioli_ipt" checked />
+								</div>
+								<div class="radioli">
+									<span class="radioliicon"></span> 女<input type="radio"
+										class="radioli_ipt" />
+								</div>
+							</div>
+						</div>
+						<div class="info_frmli">
+							<div class="info_frmli_span">手机：</div>
+							<div class="info_frmli_c">
+								<input type="" class="info_frmli_ipt" />
+							</div>
+						</div>
+						<div class="info_frmli">
+							<div class="info_frmli_span">工作年限：</div>
+							<div class="info_frmli_c">
+								<select name="" id="" class="info_frmli_ipt info_frmli_ipt_sel">
+									<option value="">请选择</option>
+									<option value="">请选择</option>
+									<option value="">请选择</option>
+									<option value="">请选择</option>
+									<option value="">请选择</option>
+									<option value="">请选择</option>
+								</select>
+							</div>
+						</div>
+						<div class="info_frmli">
+							<div class="info_frmli_span">院校：</div>
+							<div class="info_frmli_c">
+								<input type="" class="info_frmli_ipt" />
+							</div>
+						</div>
+						<div class="info_frmli">
+							<div class="info_frmli_span">学历：</div>
+							<div class="info_frmli_c">
+								<select name="" id="" class="info_frmli_ipt info_frmli_ipt_sel">
+									<option value="">请选择</option>
+									<option value="">请选择</option>
+									<option value="">请选择</option>
+									<option value="">请选择</option>
+									<option value="">请选择</option>
+									<option value="">请选择</option>
+								</select>
+							</div>
+						</div>
+						<div class="info_frmli">
+							<div class="info_frmli_span">邮箱：</div>
+							<div class="info_frmli_c">
+								<input type="" class="info_frmli_ipt" />
+							</div>
+						</div>
+						<button class="info_sub">提交信息</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="homebtn">
+		<a href="index.html"><img src="images/home.png" alt="" /></a>
+	</div>
+</body>
+</html>

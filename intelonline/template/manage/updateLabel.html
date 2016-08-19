@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>标签管理_修改</title>
+<link rel="stylesheet" href="/css/index.css">
+<link href="/jquery-ui.css" rel="stylesheet">
+<script src="/js/jquery.min.js"></script>
+<script src="/js/index.js"></script>
+<script src="/js/jquery-ui.js"></script>
+<script>
+	$(function(){
+		
+	})
+	</script>
+</head>
+<body>
+	<div class="top">
+		<img src="/images/logo.jpg" alt="" />
+		<p>
+			Intel China Online<br /> <em>微信管理后台</em>
+		</p>
+		<div class="topRight">
+			<ul>
+				<li>admin&nbsp;|</li>
+				<li>帮助&nbsp;|</li>
+				<li><a href="">{退出}</a></li>
+			</ul>
+		</div>
+	</div>
+	<div class="con">
+		<div class="leftDiv">
+			<ul id="navigation">
+				<li><a href="weixinManage.html">微信用户管理</a></li>
+				<li><a href="newInfoManage.html">最新资讯管理</a></li>
+				<li><a href="sendManage.html">主动发送管理</a></li>
+				<li><a href="labelManage.html" class="nowRight">标签管理</a></li>
+				<li><a href="serviceManage.html">客服应答</a></li>
+				<li><a href="dateManage.html">数据管理</a></li>
+				<li><a href="fodderManage.html">素材库</a></li>
+			</ul>
+		</div>
+		<div class="rightDiv weixinDiv">
+			<div class="webTitle labelTitle">
+				<!-- <img src="/images/icon1.png" alt=""> -->
+				<a href="addLabel.html">修改标签</a> <input type="button"
+					class="groupBtn confirmBtn closeBtn"
+					onclick="window.history.back();" value="关闭">
+			</div>
+			<table border="0" cellspacing="0" cellpadding="0"
+				class="uplabelTable">
+				<tr>
+					<td>标签名称：</td>
+					<td><input type="text" placeholder="10个字符以内"></td>
+				</tr>
+				<tr>
+					<td style="vertical-align: text-top;">标签说明：</td>
+					<td><textarea name="" id="" cols="50" rows="8"></textarea></td>
+				</tr>
+				<tr>
+					<td style="vertical-align: text-top;">修改标签条件：</td>
+					<td>
+						<div class="fansRow">
+							<span class="left">性别：</span> <span class="right"> <input
+								type="radio">不限 <input type="radio">男 <input
+								type="radio">女
+							</span>
+						</div>
+						<div class="fansRow">
+							<span class="left">用户标签：</span> <span class="right"> <input
+								type="radio">不限 <input type="radio">CCE <input
+								type="radio">Edison
+							</span>
+						</div>
+						<div class="fansRow">
+							<span class="left">交互次数：</span> <span class="right"> <input
+								type="radio">不限 <input type="radio">大于20 <input
+								type="radio">大于50 <span
+								style="margin-left: 15px; display: inline-block;">自定义<input
+									type="text">-<input type="text"></span>
+							</span>
+						</div>
+						<div class="fansRow">
+							<span class="left">用户地域：</span> <span class="right"> <input
+								type="radio">不限 <select name="" id="" name="sltCity">
+									<option value="">城市</option>
+							</select> <select name="" id="" name="sltArea" class="sltArea">
+									<option value="">地区</option>
+							</select>
+							</span>
+						</div>
+					</td>
+				</tr>
+				<tr>
+					<td colspan="2" style="text-align: center;"><input
+						type="button" value="确定" class="confirmBtn saveBtn"> <input
+						type="button" value="取消" onclick="window.history.back();"
+						class="noneBtn"></td>
+				</tr>
+			</table>
+			<!-- <div class="page">
+				<span>当前共有6条记录，共1页</span>
+				<a href="">首页</a>
+				<a href="">上一页</a>
+				<a href="">1</a>
+				<a href="">下一页</a>
+				<a href="">末页</a>
+			</div> -->
+		</div>
+	</div>
+</body>
+</html>

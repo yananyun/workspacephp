@@ -1,0 +1,917 @@
+<?php
+
+/**
+ * 数据库访问层,表抽象类
+ * 2012/10/10 GX创建
+ *
+ */
+
+/**
+ * 示例：
+ * NEW 类 $db = new Mysql($db_rw,$db_ro,'bz_audit');//主数据库、从数据库（可为空[为空时使用主数据库]）、表名（可为空）
+ * 直接执行SQL语句 $db->query('select * from bz_audit');//直接运行SQL语句 已做读写分离
+ * 查询一行数据 $db->first($where);//条件 array('id'=>'1','time >3600')'id = 1 and time>3600'
+ * 计算条数 $db->count($where);//条件array('id'=>'1','time >3600')
+ * 查询一个记录集 $db->select(array('id','name','birthday'),array('sex'=>1),array('id','name')|'id,name',array('id'=>'desc','time'=>'asc')|'id,desc',array(500,20));//查询的字段，条件，gorop by ,order by，limit
+ * 插入数据 $db->insert(array('name'=>'GX','sex'=>'男'));
+ * 插入或更新数据 $db->replace(array('name'=>'GX','sex'=>'男')); //使用的是REPLACE INTO 注意
+ * 更新数据库 $db->update(array('name'=>'GX','sex'=>'男'),array('id'=>'22')|'id = 1 and time>3600');//修改的值，条件
+ * 删除 $db->delete($where);
+ * 删除当前表全部内容 $db->deleteAll();//慎用
+ * 清空当前表 $db->truncate();//慎用
+ * 事务 开始标记 $db->beginTransaction()//需要回滚sql语句之前
+ * 事务 结束标记 $db->commit()//如不需要回滚 用此结束
+ * 事务 回滚标记 $db->rollBack();// 事务如需回滚用此方法
+ * SQL语句输出 $db->getSql();//输出刚执行的sql语句
+ */
+class Mysql {
+	public $connect_rw; // 数据主库连接
+	public $connect_ro; // 数据从库连接
+	public $dbconfig;
+	public $tableName;
+	public $sql_str;
+	
+	/**
+	 * 简化且直接的异常
+	 *
+	 * @param unknown_type $msg        	
+	 */
+	private function _err($msg) {
+		echo '<pre>';
+		throw new Exception ( '数据访问层:' . $msg );
+	}
+	
+	/**
+	 * 构造方法
+	 */
+	public function __construct($db, $tableName = '') {
+		$this->dbconfig = $db;
+		// $dbConfig = $this->$dbConfig;
+		// $dbConfig 不要和全局变量 config文件中的重名 形参参数名定义时
+		var_dump ( $db );
+		
+		// 初始构造数据库连接
+		if (! $this->connect_rw) {
+			try {
+				$this->connect_rw = self::connect ( $db ['Master'], $db ['DBname'] ? $db ['DBname'] : $dbConfig ['Master'] ['DBname'] );
+			} catch ( PDOException $e ) {
+				// test($dbConfig);
+				echo '主库连接 : ' . $e->getMessage ();
+				exit ();
+			}
+		}
+		if (! $this->connect_ro) {
+			if (is_array ( $dbConfig ['Slave'] ) && $dbConfig ['Slave']) { // 当从库不为空的时候
+				$link_ro = $dbConfig ['Slave'] [array_rand ( $dbConfig ['Slave'] )]; // 随机选择一个从库
+				if ($link_ro) {
+					try {
+						$this->connect_ro = self::connect ( $link_ro, $dbConfig ['DBname'] ? $dbConfig ['DBname'] : $link_ro ['DBname'] );
+					} catch ( PDOException $e ) {
+						echo '从库连接：' . $e->getMessage ();
+						exit ();
+					}
+				} else {
+					$this->connect_ro = $this->connect_rw;
+				}
+			}
+		}
+		if ($tableName) {
+			$this->tableName = $tableName;
+		}
+	}
+	
+	/**
+	 * 连接数据库,返回连接句柄
+	 *
+	 * @return 句柄
+	 */
+	private static function connect($db, $DBname) {
+		$host = $db ['DBhost']; // 地址
+		$port = $db ['DBport']; // 端口
+		$name = $DBname; // 数据库名
+		echo $name . '<br/>';
+		$user = $db ['DBuser']; // root
+		$pass = $db ['DBpws']; // 密码
+		echo 'connect<br/>';
+		/*
+		 * 注意在使用PDO CURL 之前确保php.ini中配置的这些功能的动态链接库引用已经打开 vim
+		 * 打开php.ini文件 命令行模式下 输入/extension pdo 或 Dynamic Extensions搜索 并打开
+		 *
+		 */
+		$connect = new PDO ( "mysql:host=$host;dbname=$name;port=$port", $user, $pass, array (
+				PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8",
+				PDO::ATTR_CASE => PDO::CASE_NATURAL,
+				PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+				PDO::ATTR_AUTOCOMMIT => true,
+				PDO::MYSQL_ATTR_USE_BUFFERED_QUERY,
+				true 
+		) );
+		
+		return $connect;
+	}
+	
+	/**
+	 * 查询并返回结果集
+	 *
+	 * @param string $sql        	
+	 * @return array[2]
+	 */
+	function query($sql) {
+		// 要查询的SQL语句必须是字符串
+		if (! is_string ( $sql )) {
+			return $this->_err ( '查询:必须是字符串:' . $this->dump ( $sql ) );
+		}
+		if (preg_match ( "/^(\s*)select/i", $sql )) { // 判断是不是查询
+			$table = self::_query ( $sql );
+		} else { // 写走这里
+			$table = self::_exec ( $sql );
+		}
+		return $table;
+	}
+	
+	/**
+	 * 具体执行数据库查询
+	 *
+	 * @param string $sql        	
+	 * @return 查询结果
+	 */
+	private function _query($sql) {
+		if (! $this->connect_ro) { // 判断从库是不是可用的
+			$this->connect_ro = $this->connect_rw; // 如果不可用则用主库
+		}
+		$this->sql_str = $sql;
+		try {
+			$ret = $this->connect_ro->query ( $sql );
+		} catch ( PDOException $e ) {
+			return false;
+		}
+		if ($ret) {
+			return $ret->fetchAll ( PDO::FETCH_ASSOC ); // FETCH_ASSOC参数决定返回的只有关联数组。
+				                                         // return $ret->fetchAll(PDO::FETCH_BOTH);//FETCH_BOTH是默认的，可省，返回关联和索引。
+				                                         // return $ret->fetchAll(PDO::FETCH_NUM);//FETCH_NUM返回索引数组
+				                                         // return $ret->fetchAll(PDO::FETCH_OBJ);//FETCH_OBJ如果fetch()则返回对象，如果是fetchall(),返回由对象组成的二维数组
+		}
+		return null;
+	}
+	
+	/**
+	 * 连接主库
+	 *
+	 * 2013/3/4 JIATAN
+	 */
+	public function connect_master() {
+		$dbConfig = $this->dbconfig;
+		try {
+			$this->connect_rw = self::connect ( $dbConfig ['Master'], $dbConfig ['DBname'] );
+		} catch ( PDOException $e ) {
+			echo '主库连接 : ' . $e->getMessage ();
+			var_dump ( $dbConfig );
+			exit ();
+		}
+	}
+	
+	/**
+	 * 具体执行数据库语句
+	 *
+	 * @param string $sql        	
+	 * @return boolean 执行是否成功
+	 */
+	private function _exec($sql, $insert = false) {
+		$this->sql_str = $sql;
+		try {
+			$ex = $this->connect_rw->exec ( $sql );
+		} catch ( PDOException $e ) {
+			// 2013/3/4修改以支持长服务--贾坦
+			$message = $e->getMessage ();
+			if ($message == 'SQLSTATE[HY000]: General error: 2006 MySQL server has gone away') {
+				self::connect_master ();
+				$ex = $this->connect_rw->exec ( $sql );
+			} else {
+				return '';
+			}
+		}
+		if ($insert) {
+			$ex = $this->connect_rw->lastInsertId ();
+		}
+		return $ex;
+	}
+	
+	/**
+	 * 返回自动增长的ID
+	 *
+	 * @return unknown
+	 */
+	public function lastInsertId() {
+		return $ex = $this->connect_rw->lastInsertId ();
+	}
+	
+	/**
+	 * 执行SQL语句，并返回执行是否成功
+	 *
+	 * @param string $sql        	
+	 * @return boolean 成功与否
+	 */
+	public function execute($sql) {
+		// 要执行的SQL语句必须是字符串
+		if (! is_string ( $sql )) {
+			return $this->_err ( '执行:必须是字符串:' . $this->dump ( $sql ) );
+		}
+		$ret = self::_exec ( $sql );
+		return $ret;
+	}
+	
+	/**
+	 * 格式化复杂类型变量的值
+	 *
+	 * @param unknown_type $vars
+	 *        	待显示的变量
+	 * @param unknown_type $label
+	 *        	是否显示名称
+	 * @return 字符串
+	 */
+	private function dump($vars, $label = '') {
+		if (ini_get ( 'html_errors' )) {
+			$content = "<pre>\n";
+			if ($label != '') {
+				$content .= "<strong>{$label} :</strong>\n";
+			}
+			$content .= htmlspecialchars ( print_r ( $vars, true ) );
+			$content .= "\n</pre>\n";
+		} else {
+			$content = $label . " :\n" . print_r ( $vars, true );
+		}
+		return $content;
+	}
+	
+	/**
+	 * 统计满足条件的记录数
+	 *
+	 * @param mixed $where
+	 *        	条件
+	 * @return int
+	 */
+	public function count($where = NULL) {
+		$sql = "SELECT COUNT(*) AS cnt FROM `" . $this->tableName . "`";
+		$condition = $this->createWhere ( $where );
+		if ($condition) {
+			$sql .= $condition;
+		}
+		$ret = self::_query ( $sql );
+		
+		$cnt = $ret [0] ['cnt'];
+		return intval ( $cnt );
+	}
+	
+	/**
+	 * 取第一条数据
+	 *
+	 *
+	 * @param mixed $where
+	 *        	条件
+	 * @return array
+	 */
+	public function first($where = NULL) {
+		$sql = "SELECT * FROM `" . $this->tableName . "`";
+		$condition = $this->createWhere ( $where );
+		if ($condition) {
+			$sql .= $condition;
+		}
+		$ret = self::_query ( $sql );
+		return $ret [0];
+	}
+	
+	/**
+	 * 取第一条数据
+	 *
+	 *
+	 * @param mixed $where
+	 *        	条件
+	 * @return array
+	 */
+	public function newFirst($where = NULL) {
+		$sql = "SELECT * FROM `" . $this->tableName . "`";
+		$condition = $this->createWhere ( $where );
+		if ($condition) {
+			$sql .= $condition;
+		}
+		$ret = self::_query ( $sql . ' LIMIT 1;' );
+		return $ret [0];
+	}
+	
+	/**
+	 * 查询记录集
+	 *
+	 * @param mixed $where
+	 *        	条件
+	 * @return array
+	 *
+	 */
+	public function select($fields = NULL, $where = NULL, $groupby = NULL, $orderby = NULL, $limit = NULL) {
+		$sql = "SELECT ";
+		$sql .= $this->createFields ( $fields ); // 生成字段
+		$sql .= " FROM `" . $this->tableName . "`";
+		$condition = $this->createWhere ( $where ); // 生成条件
+		if ($condition) {
+			$sql .= $condition;
+		}
+		$groupby = $this->createGroupby ( $groupby );
+		if ($groupby) {
+			$sql .= $groupby;
+		}
+		$orderby = $this->createOrderby ( $orderby );
+		if ($orderby) {
+			$sql .= $orderby;
+		}
+		$page = $this->createPage ( $limit );
+		if ($page) {
+			$sql .= $page;
+		}
+		$ret = self::_query ( $sql );
+		return $ret;
+	}
+	
+	/**
+	 * 生成WHERE子句
+	 *
+	 * @param mixed $where
+	 *        	参考createCondition
+	 * @return string
+	 */
+	private function createWhere($where) {
+		$condition = $this->createCondition ( $where );
+		if (! $condition) {
+			return '';
+		}
+		
+		$condition = trim ( $condition );
+		if (strpos ( strtoupper ( $condition ), 'WHERE' ) === 0) {
+			return $condition;
+		}
+		
+		return ' WHERE ' . $condition;
+	}
+	
+	/**
+	 * 生成条件表达式，用于Where,Having子句中
+	 *
+	 * @param mixed $condition
+	 *        	string 直接使用
+	 *        	numeric 主键值
+	 *        	object/array and组合
+	 *        	PrimaryKey=>主键值
+	 *        	列名=>列值（string/int）
+	 * @return string 条件表达式,不带WHERE
+	 */
+	private function createCondition($condition = null) {
+		if (is_null ( $condition )) {
+			return '';
+		}
+		
+		if (is_numeric ( $condition )) {
+			return "`id`=" . $condition;
+		}
+		
+		if (is_string ( $condition )) {
+			return trim ( $condition );
+		}
+		
+		if (is_object ( $condition )) {
+			$condition = get_object_vars ( $condition );
+		}
+		
+		// 条件必须是空或字符串或数值或对象或数组
+		if (! is_array ( $condition )) {
+			return $this->_err ( '条件:必须是字符串/数值/数组/对象:' . $this->dump ( $condition ) );
+		}
+		
+		$ret = array ();
+		foreach ( $condition as $key => $value ) {
+			if (! is_int ( $key )) { // 条件中的值,必须是数值或字符串
+				
+				if (! is_numeric ( $value ) && ! is_string ( $value ) && ! is_array ( $value )) {
+					return $this->_err ( '条件:值必须是数值或字符串:' . $this->dump ( $condition, '条件' ) . $this->dump ( $value, '值' ) );
+				}
+				if (is_string ( $value )) {
+					$value = $this->_escape ( trim ( $value ) ); // 过滤
+				}
+				if (is_array ( $value )) {
+					$temparr = array ();
+					$tempcnt = 0;
+					foreach ( $value as $tempval ) {
+						$temparr [] = "'" . $tempval . "'";
+						$tempcnt ++;
+					}
+					if ($tempcnt > 1) {
+						$value = '(' . implode ( ',', $temparr ) . ')';
+						$ret [] = $key . " IN " . $value . "";
+					} else {
+						$value = implode ( ',', $temparr );
+						$ret [] = $key . " = " . $value . "";
+					}
+				} else {
+					$ret [] = $key . "='" . $value . "'";
+				}
+				continue;
+			}
+			// 条件数组中如果未指明键,那么值必须是字符串
+			if (! is_string ( $value )) {
+				return $this->_err ( '条件:值必须是字符串:' . $this->dump ( $condition, '条件' ) . $this->dump ( $value, '值' ) );
+			}
+			$ret [] = $value;
+		}
+		return implode ( ' AND ', $ret );
+	}
+	
+	/**
+	 * 生成字段列表
+	 *
+	 * @param mixed $fields
+	 *        	null/''/0 所有字段
+	 *        	string 一个字段名,或者是用逗号分隔的字段列表
+	 *        	object/array
+	 *        	
+	 *        	=><别名>
+	 * @return string
+	 */
+	private function createFields($fields = null) {
+		if (! $fields) {
+			return '*';
+		}
+		if (is_string ( $fields )) {
+			$fieldArr = explode ( ',', $fields );
+			if (count ( $fieldArr ) == 1) {
+				return $fields;
+			} else {
+				$fields = $fieldArr;
+			}
+		}
+		if (is_object ( $fields )) {
+			$fields = get_object_vars ( $fields );
+		}
+		// 列名信息必须是字符串或对象或数组或0或空
+		if (! is_array ( $fields )) {
+			return $this->_err ( '字段列表:必须是数组或对象:' . $this->dump ( $fields ) );
+		}
+		
+		$ret = array ();
+		foreach ( $fields as $key => $value ) {
+			// 列名必须是字符串
+			if (! is_string ( $value ) or is_numeric ( $value )) {
+				return $this->_err ( '字段列表:字段名必须是字符串:' . $this->dump ( $value ) );
+			}
+			if (is_int ( $key )) {
+				$ret [] = '`' . trim ( $value ) . '`';
+			} else {
+				if (is_numeric ( $key )) {
+					return $this->_err ( '字段列表:字段别名必须是字符串:' . $this->dump ( $key ) );
+				}
+				$ret [] = '`' . trim ( $key ) . '`' . ' AS ' . '`' . trim ( $value ) . '`';
+			}
+		}
+		return implode ( ',', $ret );
+	}
+	
+	/**
+	 * 生成 ORDER BY 子句
+	 *
+	 * @param mixed $orderby
+	 *        	参考createSort
+	 * @return string
+	 */
+	private function createOrderby($orderby = null) {
+		$sort = $this->createSort ( $orderby );
+		if (! $sort) {
+			return '';
+		}
+		$sort = trim ( $sort );
+		if (strpos ( strtoupper ( $sort ), 'ORDER BY ' ) === 0) {
+			return $sort;
+		}
+		return ' ORDER BY ' . $sort;
+	}
+	
+	/**
+	 * 生成 GROUP BY 子句
+	 *
+	 * @param mixed $groupby
+	 *        	参考createSort
+	 * @return string
+	 */
+	/*
+	 * private function createGroupby($groupby){//此方法 会添加排序 如：group by id asc
+	 * $sort = $this->createSort($groupby);
+	 * if(!$sort){
+	 * return '';
+	 * }
+	 * $sort = trim($sort);
+	 * if(strpos(strtoupper($sort),'GROUP')===0){
+	 * return $sort;
+	 * }
+	 * return ' GROUP BY '.$sort;
+	 * }
+	 */
+	private function createGroupby($sort) { // 此方法 只生成 如 group by id
+		if (! $sort) {
+			return '';
+		}
+		if (is_string ( $sort )) {
+			$sort = explode ( ',', $sort );
+		}
+		
+		if (is_object ( $sort )) {
+			$sort = get_object_vars ( $sort );
+		}
+		// orderby或groupby中的排序依据 必须是空或0或字符串或数组或对象
+		if (! is_array ( $sort )) {
+			return $this->_err ( 'GROUP BY:只能是字符串或数组或对象:' . $this->dump ( $sort ) );
+		}
+		foreach ( $sort as $v ) {
+			$v = trim ( $v );
+			$ret [] = $v;
+		}
+		$sort = implode ( ',', $ret );
+		if (! $sort) {
+			return '';
+		}
+		$sort = trim ( $sort );
+		if (strpos ( strtoupper ( $sort ), 'GROUP' ) === 0) {
+			return $sort;
+		}
+		return ' GROUP BY ' . $sort;
+	}
+	
+	/**
+	 * 生成列排序子句，用于Order By与Group By中
+	 *
+	 * @param mixed $sort
+	 *        	string 直接使用
+	 *        	object/arrray
+	 *        	<列名>
+	 *        	[<列名>|<列名>=>,...]
+	 *        	=><列名>
+	 * @return string 不带ORDER BY 或 GROUP BY
+	 */
+	private function createSort($sort = null) {
+		if (! $sort) {
+			return '';
+		}
+		if (is_string ( $sort )) {
+			$sort = explode ( ',', $sort );
+		}
+		
+		if (is_object ( $sort )) {
+			$sort = get_object_vars ( $sort );
+		}
+		
+		// orderby或groupby中的排序依据 必须是空或0或字符串或数组或对象
+		if (! is_array ( $sort )) {
+			return $this->_err ( '排序:只能是字符串或数组或对象:' . $this->dump ( $sort ) );
+		}
+		
+		if (count ( $sort ) == 2 and (strtoupper ( $sort [1] ) == 'ASC' or strtoupper ( $sort [1] ) == 'DESC')) {
+			$sort = array (
+					$sort [0] . ' ' . $sort [1] 
+			);
+		}
+		
+		$ret = array ();
+		foreach ( $sort as $key => $value ) {
+			if (is_int ( $key )) {
+				$value = $this->formatSort ( $value );
+				$arr = explode ( ' ', $value );
+				// 每一项排序依据最多是二项,(列名+升降)
+				if (count ( $arr ) > 2) {
+					return $this->_err ( '排序:格式错误:' . $this->dump ( $arr ) );
+				}
+				if (count ( $arr ) == 1) {
+					$arr [1] = 'asc';
+				}
+				$key = $arr [0];
+				$value = $arr [1];
+			}
+			$key = trim ( $key );
+			$value = trim ( $value );
+			
+			if (strtoupper ( $key ) == 'ASC' or strtoupper ( $key ) == 'DESC') {
+				$tmp = $key;
+				$key = $value;
+				$value = $tmp;
+			}
+			
+			$field = $key;
+			$dim = strtoupper ( $value );
+			
+			// 排序中的方向不被允许
+			if ($dim != 'ASC' and $dim != 'DESC') {
+				return $this->_err ( '排序:方向只能是ASC或DESC:' . $this->dump ( $dim ) );
+			}
+			
+			$ret [] = $field . ' ' . $dim;
+		}
+		return implode ( ',', $ret );
+	}
+	
+	/**
+	 * 生成分页子句
+	 *
+	 * @param mixed $page
+	 *        	string 空格或逗号或冒号分隔的开始与行数
+	 *        	int 只限制行数
+	 *        	array
+	 *        	[<开始>,<行数>]
+	 *        	[<行数>]
+	 * @return array(偏移,行数)
+	 */
+	private function createPage($page = null) {
+		if (! $page) {
+			return 0;
+		}
+		if (is_string ( $page )) {
+			$page = trim ( $page );
+			if (strpos ( $page, ' ' )) {
+				$page = explode ( ' ', $page );
+			} elseif (strpos ( $page, ',' )) {
+				$page = explode ( ',', $page );
+			} elseif (strpos ( $page, ':' )) {
+				$page = explode ( ':', $page );
+			} else {
+				$page = array (
+						0,
+						$page 
+				);
+			}
+		}
+		if (is_int ( $page )) {
+			$page = array (
+					0,
+					$page 
+			);
+		}
+		
+		// 分页参数 必须是空或0或字符串或数组
+		if (! is_array ( $page )) {
+			return $this->_err ( '分页:格式错误,必须是字符串或数组:' . $this->dump ( $page ) );
+		}
+		
+		// return array(intval($page[0]),intval($page[1]));
+		return ' LIMIT ' . intval ( $page [0] ) . ',' . intval ( $page [1] );
+	}
+	
+	/**
+	 * 私有方法,实际进行insert或replace
+	 *
+	 * @param array[1] $row
+	 *        	<列名>=><值>
+	 * @return int
+	 */
+	private function _insert($row, $insert = true) {
+		// 插入时必须指定要插入的数据
+		if (! $row) {
+			return $this->_err ( '插入:未指定要插入数据.' );
+		}
+		
+		if (is_object ( $row )) {
+			$row = get_object_vars ( $row );
+		}
+		
+		// 要插入的数据的格式必须是对象或数组
+		if (! is_array ( $row )) {
+			return $this->_err ( '插入:数据必须是数组或对象格式:' . $this->dump ( $row ) );
+		}
+		
+		$fields = array ();
+		$values = array ();
+		foreach ( $row as $name => $value ) {
+			
+			// 列名必须是字符串
+			if (! is_string ( $name )) {
+				return $this->_err ( '插入:列名必须是字符串:' . $this->dump ( $name ) );
+			}
+			
+			$fields [] = '`' . $name . '`';
+			$values [] = "'" . $this->_escape ( $value ) . "'";
+		}
+		
+		// 没有有效的列名列值对
+		if (! count ( $fields ) or ! count ( $values )) {
+			return $this->_err ( '插入:没有有效的名值对.' . $this->dump ( $fields ) );
+		}
+		
+		// 没有有效的列名列值对
+		if (! count ( $fields ) or ! count ( $values )) {
+			return $this->_err ( TableSystemException::I_FIELD_NEED, array (
+					$row 
+			) );
+		}
+		
+		if ($insert) {
+			$sql = "INSERT INTO `" . $this->tableName . "`" . '(' . implode ( ',', $fields ) . ') VALUES(' . implode ( ',', $values ) . ')';
+			return self::_exec ( $sql, true );
+		}
+		
+		$sql = "REPLACE INTO `" . $this->tableName . '`(' . implode ( ',', $fields ) . ') VALUES(' . implode ( ',', $values ) . ')';
+		$count = self::execute ( $sql );
+		
+		// 插入失败
+		if (! $count) {
+			return $this->_err ( '插入(替换):替换失败:' . $this->dump ( $this->tableName, 'table' ) . $this->dump ( $row, 'row' ) . $this->dump ( $sql, 'sql' ) );
+		}
+		return true;
+	}
+	
+	/**
+	 * 插入一条数据
+	 *
+	 * @param array[1] $row
+	 *        	<列名>=><值>
+	 * @return int 新插入行的ID
+	 */
+	public function insert($row) {
+		$ret = $this->_insert ( $row );
+		return $ret;
+	}
+	
+	/**
+	 * 插入或更新一条数据
+	 *
+	 * @param array[1] $row
+	 *        	<列名>=><值>
+	 * @return int 影响的行数
+	 */
+	public function replace($row) {
+		$ret = $this->_insert ( $row, false );
+		return $ret;
+	}
+	
+	/**
+	 * 修改表中的部分数据
+	 *
+	 * @param array[1] $row
+	 *        	<列名>=><值>
+	 * @param mixed $where
+	 *        	请参考createWhere
+	 * @return int
+	 */
+	public function update($row, $where = null) {
+		
+		// 更新时必须指定要更新的数据
+		if (! $row) {
+			return $this->_err ( '更新:未指定要更新的数据.' );
+		}
+		
+		if (is_object ( $row )) {
+			$row = get_object_vars ( $row );
+		}
+		
+		$condition = $this->createWhere ( $where );
+		if ($condition === false) {
+			return false;
+		}
+		
+		// 更新时未指定条件
+		if (! $condition) {
+			return $this->_err ( '更新:必须指定条件,不允许全表更新' );
+		}
+		
+		$set = array ();
+		if (! is_string ( $row )) {
+			// 要更新的数据必须以对象或数组的方式提供
+			if (! is_array ( $row )) {
+				return $this->_err ( '更新:数据必须是数组或对象格式:' . $this->dump ( $row ) );
+			}
+			foreach ( $row as $name => $value ) {
+				// 更新的数据中,列名必须是字符串
+				if (! is_string ( $name ) or is_numeric ( $name )) {
+					return $this->_err ( '更新:待更新的数据列名必须是字符串:' . $this->dump ( $name ) );
+				}
+				// if(!is_string($value) and !is_numeric($value) and !is_bool($value) and !is_float($value)){
+				// return $this->_err('更新:更新的数据值必须是字符串或数值:' . $name);
+				// }
+				$set [] = "`" . $name . "`='" . $this->_escape ( $value ) . "' ";
+			}
+		} else {
+			$set = explode ( ',', $row );
+		}
+		
+		// 没有有效的更新数据
+		if (! count ( $set )) {
+			return $this->_err ( '更新:没有有效的待更新数据:' . $this->dump ( $this->tableName, 'table' ) . $this->dump ( $row, 'row' ) );
+		}
+		
+		$sql = "UPDATE `" . $this->tableName . "` SET " . implode ( ',', $set ) . " " . $condition;
+		
+		$ret = self::_exec ( $sql );
+		
+		return $ret;
+	}
+	
+	/**
+	 * 删除表中的部分数据
+	 *
+	 * @param mixed $where
+	 *        	请参考createWhere
+	 * @return int
+	 */
+	public function delete($where) {
+		$condition = $this->createWhere ( $where );
+		if ($condition === false) {
+			return false;
+		}
+		
+		// 删除时必须指定条件,不允许全表删除.如需全表删除,请使用deleteAll
+		if (! $condition) {
+			return $this->_err ( '删除:必须指定条件,不允许全表删除.' );
+		}
+		
+		$sql = "DELETE FROM `" . $this->tableName . "` " . $condition;
+		$ret = self::_exec ( $sql );
+		
+		return $ret;
+	}
+	
+	/**
+	 * 删除表中全部数据
+	 *
+	 * @return int
+	 */
+	public function deleteAll() {
+		$sql = "DELETE FROM `" . $this->tableName . '`';
+		
+		$ret = self::_exec ( $sql );
+		
+		return $ret;
+	}
+	
+	/**
+	 * 清空表数据
+	 *
+	 * @return int
+	 */
+	public function truncate() {
+		$sql = "TRUNCATE TABLE `" . $this->tableName . "`";
+		$ret = self::_exec ( $sql );
+		return $ret;
+	}
+	
+	/**
+	 * 事务回滚开始标记
+	 */
+	public function beginTransaction() {
+		$this->connect_rw->setAttribute ( PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION );
+		$this->connect_rw->beginTransaction ();
+	}
+	
+	/**
+	 * 事务回滚结束标记
+	 */
+	/*
+	 * public function commit($val){
+	 * if($val === true){
+	 * $this->connect_ro->commit();
+	 * }else{
+	 * $this->rollBack();
+	 * }
+	 * }
+	 */
+	public function commit() {
+		$this->connect_rw->commit ();
+	}
+	
+	/**
+	 * 事务开始回滚标记
+	 */
+	public function rollBack() {
+		$this->connect_rw->rollBack ();
+	}
+	
+	/**
+	 * 格式化排序依据,将多个空格缩减为一个
+	 *
+	 * @param string $str        	
+	 * @return string
+	 */
+	private function formatSort($str) {
+		$str = trim ( $str );
+		while ( strpos ( $str, '  ' ) ) {
+			$str = str_replace ( '  ', ' ', $str );
+		}
+		return $str;
+	}
+	
+	/**
+	 * MYSQL的防注入
+	 *
+	 * @param unknown_type $str        	
+	 * @return unknown
+	 */
+	private function _escape($str) {
+		// $str = mysql_escape_string($str);
+		$str = str_replace ( '%', '\%', $str );
+		$str = str_replace ( ';', '\;', $str );
+		$str = str_replace ( '-', '\-', $str );
+		return $str;
+	}
+	public function getSql() {
+		return $this->sql_str;
+	}
+}

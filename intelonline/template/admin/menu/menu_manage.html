@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title><{$title}></title>
+<link href="/css/main.css" type="text/css" rel="stylesheet" />
+<link href="/css/menu.css" type="text/css" rel="stylesheet" />
+<link rel="stylesheet" type="text/css" href="/css/skins/blue.css" />
+<script type="text/javascript" src="/js/jquery.js"></script>
+<script type="text/javascript" src="/js/main.js"></script>
+<script type="text/javascript" src="/js/artDialog.js"></script>
+<script type="text/javascript" src="/js/iframeTools.js"></script>
+<script type="text/javascript" src="/js/menu/menu.js"></script>
+<link href="/css/index.css" type="text/css" rel="stylesheet">
+</head>
+<body onload="loadContent('',$('.mainWrap'),'/index.php/menu/menuList')">
+	<div class="container">
+		<style>
+.m_text {
+	text-align: center;
+}
+</style>
+		<{include 'admin/public/header.html'}>
+		<div class="main">
+			<div class="mainWrap"></div>
+		</div>
+		<{include 'admin/public/left_menu.html'}>
+	</div>
+</body>
+</html>

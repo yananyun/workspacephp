@@ -1,0 +1,365 @@
+.m_clr {
+	width: 100%;
+	height: 1px;
+	overflow: hidden;
+	clear: both;
+}
+
+.m_r_head {
+	width: 980px;
+	border-bottom: 1px solid #999;
+	display: inline-block
+}
+
+.m_r_head span {
+	padding: 4px;
+	font-size: 14px;
+	font-weight: bold;
+	color: #666;
+	float: left;
+	display: inline-block
+}
+
+.m_r_msg {
+	background: #666666;
+	color: #fff;
+}
+
+.m_r_msg p {
+	padding: 4px
+}
+
+.m_r_msg p a {
+	color: #fff;
+	text-decoration: underline;
+}
+
+.m_r_title {
+	font-size: 16px;
+	font-weight: bold;
+	width: 100%;
+}
+
+.m_r_content {
+	margin: 15px 0px;
+	border: #999 solid 1px;
+	background: #fff;
+	overflow: hidden;
+}
+
+.m_r_leftMenu {
+	width: 400px;
+	float: left;
+}
+
+.m_r_rightContent {
+	width: 596px;
+	float: left;
+	border-left: 1px solid #999;
+	min-height: 400px;
+}
+
+.m_r_tot {
+	width: 614px;
+	background: #E5E4E4;
+	height: 30px;
+	line-height: 30px;
+	padding-left: 5px;
+}
+
+.m_r_leftMenu ul {
+	padding: 0px;
+}
+
+.m_r_leftMenu ul li {
+	list-style: none;
+	padding-left: 60px;
+	width: 240px;
+	background: url(../images/icon.png) no-repeat top left;
+}
+
+.m_r_li, .m_r_rightMsg {
+	border-bottom: 1px solid #999
+}
+
+.m_r_p1, .m_r_rightMsg {
+	font-weight: bold;
+	font-size: 13px;
+	font-family: "microsoft yahei";
+}
+
+.m_r_rightMsg {
+	float: left;
+	width: 600px;
+	padding: 4px 10px;
+}
+
+.m_r_sucai {
+	float: left;
+	width: 610px;
+}
+
+.m_r_sucai>div {
+	margin-bottom: 10px;
+}
+
+.m_r_sucai ul li {
+	width: 120px;
+	height: 25px;
+	padding: 5px;
+	float: left;
+	display: inline-block;
+	margin: 10px;
+	text-align: center;
+	cursor: pointer
+}
+
+.m_r_con {
+	float: left;
+	width: 590px;
+	min-height: 270px; /*border:1px solid #999;*/
+	margin: 10px;
+}
+
+.m_r_p {
+	width: 100%;
+	margin: 15px 0px;
+	overflow: hidden;
+}
+
+.m_yu {
+	margin-left: 30px;
+	margin-top: 10px;
+	border: 1px solid #999;
+	background: #fff;
+	width: 100px;
+	height: 30px;
+	padding: 5px;
+	cursor: pointer;
+}
+
+.m_public {
+	margin-left: 30px;
+	margin-top: 10px;
+	border: 1px solid #999;
+	background: #5cad4d;
+	width: 100px;
+	height: 30px;
+	padding: 5px;
+	color: #fff;
+	cursor: pointer;
+}
+
+.m_l_c input {
+	width: 10px;
+	float: left;
+}
+
+.m_r_l_menu {
+	width: 400px;
+	height: 30px;
+	background: #e5e4e4;
+	overflow: hidden;
+}
+
+.m_r_l_menu span {
+	line-height: 30px;
+	padding-left: 5px;
+}
+
+.m_r_l_menu .intelBtn {
+	width: 80px;
+	height: 22px;
+	float: right;
+	margin: 4px 5px;
+}
+
+.publishBtn {
+	width: 100px;
+}
+
+.btnGreen {
+	margin-left: 70px;
+	border: 1px solid #999;
+	background: #5cad4d;
+	width: 80px;
+	height: 25px;
+	padding: 5px;
+	color: #fff;
+	margin-top: 3px;
+	cursor: pointer;
+}
+
+.btnGray {
+	margin-top: 3px;
+	margin-left: 8px;
+	border: 1px solid #999;
+	background: #fff;
+	width: 50px;
+	height: 25px;
+	padding: 5px;
+	cursor: pointer;
+}
+
+.navClass {
+	background: #ccc;
+}
+
+.m_determine {
+	float: right;
+	margin: 5px;
+}
+
+.m_wenben, .m_image, .m_yuyin, .m_view {
+	min-height: 240px;
+}
+
+.m_r_con span {
+	display: inline-block;
+	height: 20px;
+	line-height: 20px;
+	float: left;
+	padding-left: 10px;
+}
+
+.m_r_con li {
+	line-height: 20px;
+	margin: 5px 20px;
+	width: 590px;
+	float: left
+}
+
+.m_r_leftMenu .m_ul li {
+	background: none;
+	font-family: "microsoft yahei";
+	padding-left: 0px;
+	width: 100%;
+	overflow: hidden;
+}
+
+.m_menu_l {
+	margin-left: 0px;
+}
+
+.m_menu_l a {
+	text-decoration: none;
+	padding: 0px 5px;
+}
+
+.m_r_uls {
+	min-height: 300px;
+}
+
+.m_ul {
+	margin-bottom: 20px;
+}
+
+.m_ul, #childMenu, #childMenu li {
+	float: left;
+	position: relative;
+	display: block
+}
+
+#childMenu {
+	padding-left: 5%;
+	width: 95%;
+}
+
+.m_r_uls .m_ul .m_ml {
+	margin-bottom: 20px;
+}
+
+.m_pad {
+	padding: 10px 0px;
+	font-size: 14px;
+}
+/*.m_mu{border-right:1px solid #999}*/
+.m_text {
+	color: #000;
+	border: 0;
+	width: 90px;
+	background: #fff;
+	cursor: pointer;
+}
+
+.m_text_li {
+	color: #000;
+	border: 0;
+	width: 90px;
+	background: #fff;
+}
+
+.m_text_span {
+	width: 60px;
+	height: 20px;
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	cursor: pointer;
+	padding-left: 10px;
+}
+
+.m_text_level {
+	width: 60px;
+	height: 20px;
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	cursor: pointer;
+	padding-left: 10px;
+}
+
+.action_type {
+	display: block;
+	padding-top: 10px;
+	text-align: center
+}
+
+.action_btn {
+	color: #333;
+	cursor: pointer;
+	display: inline-block;
+	margin: 0 40px;
+}
+
+.action_icon.send_icon {
+	background-position: 0 0;
+}
+
+.action_icon {
+	background: url("../images/icon144_action_type.png") no-repeat scroll 0
+		0 transparent;
+	display: inline-block;
+	height: 144px;
+	width: 144px;
+}
+
+.action_btn_text {
+	display: block;
+	font-weight: 400;
+}
+
+.action_icon.url_icon {
+	background-position: 0 -144px;
+}
+
+.action_msg {
+	padding: 20px 5px
+}
+
+.updateMenuMsg {
+	display: inline-block;
+	width: 100px;
+	background: rgb(1, 168, 165);
+	color: white;
+	text-align: center;
+}
+
+#textC textarea {
+	width: 400px;
+	height: 240px;
+}
+
+#urlC {
+	margin-top: 10px;
+}

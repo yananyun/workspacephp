@@ -1,0 +1,60 @@
+<!--<p class="checkAllP"><label class="checkAllLabel"><input type="checkbox" class="check" name="" onclick="checlAll(this,$('.memeberListWrap'))" />全选</label></p>-->
+<{foreach $list as $k => $member}>
+<li class="memberList">
+	<div class="memberHead">
+		<img src="<{$member.headimgurl}>" />
+	</div>
+	<div class="memberInfoWrap">
+		<p>
+			<span class="leftCol">昵称：</span><{$member.nickname}>
+		</p>
+		<p>
+			<span class="leftCol">性别：</span><{if $member.sex == 1}>男<{else if
+			$member.sex == 2}>女<{else}>未知<{/if}>
+		</p>
+		<p>
+			<span class="leftCol">地区：</span><{$member.country}>
+			<{$member.province}> <{$member.city}>
+		</p>
+		<p>
+			<span class="leftCol">类型：</span><{if $member.isapprove ==
+			1}>普通会员<{else if $member.isapprove == 2}>购买会员<{else if
+			$member.isapprove == 3}>经销商<{/if}>
+		</p>
+		<p>
+			<span class="leftCol">分组：</span><{$member.groupName}>
+		</p>
+		<p>
+			<span class="leftCol">标签：</span> <{foreach $member.tagName as $tag}>
+			<{$tag.name}> <{/foreach}>
+		</p>
+	</div>
+	<div class="listOperaBottom">
+		<!--<label class=""><input type="checkbox" class="check selectBox" name="ms" value="<{$member.id}>"/>选中</label>-->
+
+		<!-- 	<a href="javascript:void(0);" class="" onclick="showMemberGroup('<{$member.openid}>')">添加到分组</a>
+		<a href="javascript:void(0);" class="" onclick="showMemberTags('<{$member.openid}>')">添加到标签</a>   -->
+
+		<a href="javascript:void(0);" class=""
+			onclick="showMemberDetail(<{$member.id}>)">详情</a>
+	</div> <input type="checkbox" value="<{$member.openid}>"
+	groupName="<{$member.groupName}>">
+</li>
+<{/foreach}> <{$pages}>
+<script>
+ 
+ function showMemberGroup(openid){
+	 
+	 $.post('/index.php/group/ajaxGroupList/openid/'+openid, {}, function(data){
+         $('#groupList').html(data);
+     });
+     $(".clubCon").show();
+ }
+ 
+ function showMemberTags(openid){
+	 $.post('/index.php/tag/ajaxTagList/openid/'+openid, {}, function(data){
+         $('#tagList').html(data);
+     });
+	 $(".labelCon").show();
+ }
+ </script>

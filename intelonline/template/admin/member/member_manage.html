@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>会员管理</title>
+<link href="/css/main.css" type="text/css" rel="stylesheet" />
+<link rel="stylesheet" type="text/css" href="/css/skins/blue.css" />
+<link rel="stylesheet" type="text/css" href="/css/style.css" />
+<link rel="stylesheet" type="text/css" href="/css/index.css" />
+<script type="text/javascript" src="/js/jquery.js"></script>
+<script type="text/javascript" src="/js/main.js"></script>
+<script type="text/javascript" src="/js/base.js"></script>
+<script type="text/javascript" src="/js/artDialog.js"></script>
+<script type="text/javascript" src="/js/iframeTools.js"></script>
+<script type="text/javascript" src="/js/ajaxfileupload.js"></script>
+
+<link href="/jquery-ui.css" rel="stylesheet">
+<script src="/js/jquery-ui.js"></script>
+<script>
+    $(function(){
+        $( "#datepicker" ).datepicker();
+        $( "#datepicker2" ).datepicker();
+        /*添加到分组弹框*/
+        $(".addClub").click(function(){
+            var data        = [];
+            var tmpGroup    = '';
+            $('.intelListWrap').find("[type='checkbox']:checked").each(function(){
+                var openid  = $(this).val();
+                data.push(openid);
+                tmpGroup    += $(this).attr('groupName');
+            });
+            if(data.length < 1)
+            {
+                alert('请选择会员！');
+                return false;
+            }
+            if(tmpGroup.length > 0)
+            {
+                alert('部分会员已有分组！');
+                return false;
+            }
+            $.post('/index.php/group/ajaxGroupList', {}, function(data){
+                $('#groupList').html(data);
+            });
+            $(".clubCon").show();
+        })
+        /*添加到标签弹框*/
+        $(".addLabel").click(function(){
+        	
+        	var data = [];
+            $('.intelListWrap').find("[type='checkbox']:checked").each(function(){
+                var openid    = $(this).val();
+                data.push(openid);
+            });
+            if(data.length < 1)
+            {
+                alert('请选择会员！');
+                return false;
+            }
+        	
+            $.post('/index.php/tag/ajaxTagList', {}, function(data){
+                $('#tagList').html(data);
+            });
+            $(".labelCon").show();
+        })
+        /*关闭弹框*/
+        $(".closeImg").click(function(){
+            $(this).parent().hide();
+        })
+        $(".cancelBtn").click(function(){
+            $(this).parent().parent().parent().hide();
+        })
+    })
+    function checkAll(){
+        if($(".checkAll").attr("checked")){
+            $('.intelListWrap').find("[type='checkbox']").attr("checked",true);
+        }else{
+            $('.intelListWrap').find("[type='checkbox']").attr("checked",false);
+        }
+    }
+    </script>
+<style>
+</style>
+</head>
+<body
+	onload="loadContent('',$('.intelListWrap'),'/index.php/member/list_member')">
+	<div class="container">
+		<{include 'admin/public/header.html'}>
+		<div class="main">
+			<{include 'admin/public/left_menu.html'}>
+			<div class="mainWrap userWarp">
+				<div class="webTitle weixinTitle">
+					<a href="/index.php/member/member_manage" class="nowTitle">粉丝管理</a>
+					<a href="/index.php/group/list_manage">微信用户组管理</a>
+					<!-- <span><input type="text" class="searchTxt"></span> -->
+					<span class="searchBox"><input type="text" class=""
+						name="nickname"><img src="/images/search2.png" alt=""
+						onclick="search();"></span>
+				</div>
+				<div class="fansList">
+					<span>粉丝总数<br />
+					<em><{$memberCount}></em></span> <span>昨日累计增加粉丝数<br />
+					<em><{$guanzhu}></em></span> <span>昨日取消关注粉丝数<br />
+					<em><{$weiguanzhu}></em></span> <span>已有标签用户数<br />
+					<em><{$tagNum}></em></span>
+				</div>
+				<div class="fansCon">
+					<div class="fansRow">
+						<span class="left">地区：</span> <span class="right">
+							<{memberRegion()}> </span>
+					</div>
+					<div class="fansRow">
+						<span class="left">性别：</span> <span class="right"> <input
+							type="radio" name="sex" value="1">男 <input type="radio"
+							name="sex" value="2">女
+						</span>
+					</div>
+					<div class="fansRow">
+						<span class="left">交互时间：</span> <span class="right"> <span
+							style="margin-left: 15px;">开始时间：</span><input type="text"
+							name="interactionStime" id="datepicker"> <span
+							style="margin-left: 15px;">结束时间：</span><input type="text"
+							name="interactionDtime" id="datepicker2">
+						</span>
+					</div>
+					<div class="fansRow">
+						<span class="left">交互次数：</span> <span class="right"> <input
+							type="radio" name="interactionNum" value="0">无限 <input
+							type="radio" name="interactionNum" value="20">大于20 <input
+							type="radio" name="interactionNum" value="50">大于50 <span
+							style="margin-left: 15px; display: inline-block;"> <input
+								type="radio" name="interactionNum" value="custom"> <span
+								class="inputMin">自定义</span><input type="text" name="min">&nbsp;~&nbsp;<input
+								type="text" name="max"></span> <input type="button"
+							name="search" class="searchBtn" value="搜索">
+						</span>
+					</div>
+				</div>
+				<div class="fansTitle">
+					<input type="checkbox"
+						style="vertical-align: middle; margin-top: -4px" class="checkAll"
+						onclick="checkAll()">全选 <span class="addClub">批量添加到分组</span>
+					<span class="addLabel">批量添加到标签</span>
+				</div>
+				<ul class="intelListWrap memeberListWrap"></ul>
+			</div>
+		</div>
+
+	</div>
+	<!-- 添加的框 -->
+	<div class="addCon clubCon" id="groupBox">
+		<p class="">分组名称</p>
+		<div class="group" id="groupList">
+			<!--            <input type="checkbox">分组一
+            <input type="checkbox">分组二
+            <input type="checkbox">分组三-->
+		</div>
+		<div class="groupBtm">
+			<p>P.s 红色代表已进分组或标签，已进入分组用户将不能进入其它分组</p>
+			<span class="right"> <input type="button" value="确定"
+				class="groupBtn confirmBtn" onclick="mem_group_relation()">
+				<input type="button" value="取消" class="groupBtn cancelBtn">
+			</span>
+		</div>
+		<img src="/images/closeTwo.png" alt="" class="closeImg">
+	</div>
+	<div class="addCon labelCon" id="tagBox">
+		<p class="">标签名称</p>
+		<div class="group" id="tagList">
+			<!--            <input type="checkbox">cce
+            <input type="checkbox">edison
+            <input type="checkbox">学生-->
+		</div>
+		<div class="groupBtm">
+			<p>P.s 红色代表已进分组或标签</p>
+			<span class="right"> <input type="button" value="确定"
+				class="groupBtn confirmBtn" onclick="mem_tag_relation()"> <input
+				type="button" value="取消" class="groupBtn cancelBtn">
+			</span>
+		</div>
+		<img src="/images/closeTwo.png" alt="" class="closeImg">
+	</div>
+	<script>
+	function search(){
+		var nickname = $('input[name=nickname]').val();
+		loadContent('',$('.intelListWrap'),'/index.php/member/list_member/nickname/'+nickname);
+	}
+            function mem_group_relation()
+            {
+                var groupId = $('#groupList input:checked').val();
+                if(!groupId)
+                {
+                    alert('请选择分组！');
+                    return false;
+                }
+                var data = [];
+                $('.intelListWrap').find("[type='checkbox']:checked").each(function(){
+//                    console.log($(this).data(""))
+//                    var memberId    = this.attr('memberId');
+                    var openid    = $(this).val();
+                    data.push(openid);
+                });
+                if(data.length < 1)
+                {
+                    alert('请选择会员！');
+                    return false;
+                }
+                $.post('/index.php/group/addMemGroup',{openid:data, groupId:groupId}, function(data){
+                    alert("添加成功");
+                	$('#groupBox').hide();
+                    
+                    window.location='/index.php/member/member_manage';
+                });
+            }
+            function mem_tag_relation()
+            {
+                var tag = [];
+                $('#tagBox').find("[type='checkbox']:checked").each(function(){
+                    var tagid    = $(this).val();
+                    tag.push(tagid);
+                });
+                if(tag.length < 1)
+                {
+                    alert('请选择标签！');
+                    return false;
+                }
+                var data = [];
+                $('.intelListWrap').find("[type='checkbox']:checked").each(function(){
+//                    console.log($(this).data(""))
+//                    var memberId    = this.attr('memberId');
+                    var openid    = $(this).val();
+                    data.push(openid);
+                });
+                if(data.length < 1)
+                {
+                    alert('请选择会员！');
+                    return false;
+                }
+                $.post('/index.php/tag/addMemTag',{openid:data, tagId:tag}, function(data){
+                	alert("添加成功");
+                	$('#tagBox').hide();
+                    window.location='/index.php/member/member_manage';
+                });
+            }
+            setCheckStyle('selectBox');
+            $(':input[name=search]').click(function(){
+                var memberProvince      = $('#memberProvince').val();
+                var memberCity          = $('#memberCity').val();
+                var sex                 = $('input[name=sex]:checked').val();
+                var interactionStime    = $.trim($(':input[name=interactionStime]').val());
+                var interactionDtime    = $.trim($(':input[name=interactionDtime]').val());
+                var interactionNum      = $.trim($('input[name=interactionNum]:checked').val());
+                var interactionMin      = $.trim($(':input[name=min]').val());
+                var interactionMax      = $.trim($(':input[name=max]').val());
+                var interactionStime   = interactionStime.replace('/', '-');
+                var interactionStime   = interactionStime.replace('/', '-');
+                var interactionDtime   = interactionDtime.replace('/', '-');
+                var interactionDtime   = interactionDtime.replace('/', '-');
+                
+                if(typeof(sex) == 'undefined')
+                {
+                    sex = '';
+                }
+                if(typeof(interactionNum) == 'undefined')
+                {
+                    interactionNum = '';
+                }
+                
+                loadContent('',$('.intelListWrap'),'/index.php/member/list_member/provinceId/'+memberProvince+'/cityId/'+memberCity+'/sex/'+sex+'/interactionStime/'+interactionStime+'/interactionDtime/'+interactionDtime+'/interactionNum/'+interactionNum+'/interactionMin/'+interactionMin+'/interactionMax/'+interactionMax);		
+            });
+//            setCheckStyle('selectBox');
+//            $(':input[name=search]').click(function(){
+//                var keyword = $.trim($(':input[name=keyword]').val());
+//                var type=$('#memberType').val();
+//                var memberProvince=$('#memberProvince').val();
+//                var memberCity=$('#memberCity').val();
+//                loadContent('',$('.intelListWrap'),'/index.php/member/list_member/keyword/'+keyword + '/type/'+type+'/provinceId/'+memberProvince+'/cityId/'+memberCity);		
+//            });
+	</script>
+	<!--	<script>
+		setCheckStyle('selectBox');
+		$(':input[name=search]').click(function(){
+			var keyword = $.trim($(':input[name=keyword]').val());
+			var type=$('#memberType').val();
+			var memberProvince=$('#memberProvince').val();
+			var memberCity=$('#memberCity').val();
+			loadContent('',$('.intelListWrap'),'/index.php/member/list_member/keyword/'+keyword + '/type/'+type+'/provinceId/'+memberProvince+'/cityId/'+memberCity);		});
+	</script>-->
+</body>
+</html>

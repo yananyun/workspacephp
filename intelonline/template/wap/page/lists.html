@@ -1,0 +1,9 @@
+<{if $list}> <{foreach $list as $info}>
+<li data-href="/index.php/wapPage/detail/id/<{$info.id}>"
+	flagId='<{$info.id}>'>
+	<h2><{$info.name}></h2>
+	<p><{$info.desc}></p>
+</li>
+<{/foreach}> <{else}>
+<div class="list_no" style="text-align: center">暂无信息</div>
+<{/if}>

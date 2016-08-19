@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>微信用户管理_粉丝管理</title>
+<link rel="stylesheet" href="/css/index.css">
+<link href="/jquery-ui.css" rel="stylesheet">
+<script src="/js/jquery.min.js"></script>
+<script src="/js/index.js"></script>
+<script src="/js/jquery-ui.js"></script>
+<script>
+	$(function(){
+		$( "#datepicker" ).datepicker();
+		$( "#datepicker2" ).datepicker();
+		/*添加到分组弹框*/
+		$(".addClub").click(function(){
+			$(".clubCon").show();
+		})
+		/*添加到标签弹框*/
+		$(".addLabel").click(function(){
+			$(".labelCon").show();
+		})
+		/*关闭弹框*/
+		$(".closeImg").click(function(){
+			$(this).parent().hide();
+		})
+		$(".cancelBtn").click(function(){
+			$(this).parent().parent().parent().hide();
+		})
+	})
+	function checkAll(){
+		if($(".checkAll").attr("checked")){
+			$('.fansPerList').find("[type='checkbox']").attr("checked",true);
+		}else{
+			$('.fansPerList').find("[type='checkbox']").attr("checked",false);
+		}
+	}
+	</script>
+</head>
+<body>
+	<div class="top">
+		<img src="/images/logo.jpg" alt="" />
+		<p>
+			Intel China Online<br /> <em>微信管理后台</em>
+		</p>
+		<div class="topRight">
+			<ul>
+				<li>admin&nbsp;|</li>
+				<li>帮助&nbsp;|</li>
+				<li><a href="">{退出}</a></li>
+			</ul>
+		</div>
+	</div>
+	<div class="con">
+		<div class="leftDiv">
+			<ul id="navigation">
+				<li><a href="weixinManage.html" class="nowRight">微信用户管理</a></li>
+				<li><a href="newInfoManage.html">最新资讯管理</a></li>
+				<li><a href="sendManage.html">主动发送管理</a></li>
+				<li><a href="labelManage.html">标签管理</a></li>
+				<li><a href="serviceManage.html">客服应答</a></li>
+				<li><a href="dateManage.html">数据管理</a></li>
+				<li><a href="fodderManage.html">素材库</a></li>
+			</ul>
+		</div>
+		<div class="rightDiv webDiv">
+			<div class="webTitle weixinTitle">
+				<a href="" class="nowTitle">粉丝管理</a> <a href="weixinUser.html">微信用户组管理</a>
+				<span><input type="text" class="searchTxt"></span>
+			</div>
+			<div class="fansList">
+				<span>粉丝总数<br />
+				<em>20000</em></span> <span>昨日累计增加粉丝数<br />
+				<em>1000</em></span> <span>昨日取消关注粉丝数<br />
+				<em>20000</em></span> <span>已有标签用户数<br />
+				<em>20000</em></span>
+			</div>
+			<div class="fansCon">
+				<div class="fansRow">
+					<span class="left">地区：</span> <span class="right"> <select
+						name="" id="" name="sltCity">
+							<option value="">城市</option>
+					</select> <select name="" id="" name="sltArea" class="sltArea">
+							<option value="">地区</option>
+					</select>
+					</span>
+				</div>
+				<div class="fansRow">
+					<span class="left">性别：</span> <span class="right"> <input
+						type="radio">男 <input type="radio">女
+					</span>
+				</div>
+				<div class="fansRow">
+					<span class="left">交互时间：</span> <span class="right"> 开始时间：<input
+						type="text" id="datepicker"> 结束时间：<input type="text"
+						id="datepicker2">
+					</span>
+				</div>
+				<div class="fansRow">
+					<span class="left">交互次数：</span> <span class="right"> <input
+						type="radio">不限 <input type="radio">大于20 <input
+						type="radio">大于50 <span
+						style="margin-left: 15px; display: inline-block;">自定义<input
+							type="text">-<input type="text"></span> <input
+						type="button" class="searchBtn" value="搜索">
+					</span>
+				</div>
+			</div>
+			<div class="fansPer">
+				<div class="fansTitle">
+					<input type="checkbox"
+						style="vertical-align: middle; margin-top: -4px" class="checkAll"
+						onclick="checkAll()">全选 <span href="" class="addClub">添加到分组</span>
+					<span href="" class="addLabel">添加到标签</span>
+				</div>
+				<div class="fansPerList">
+					<img src="/images/perImg.png" alt="" width="77" height="77">
+					<div class="fansDetail">
+						<span>微信昵称：XiaoXiang</span> <span>粉丝性别：男</span> <span>粉丝区域：中国
+							北京 海淀</span> <span>所属分组：分组一</span> <span>所属标签：标签一</span>
+					</div>
+					<input type="checkbox">
+				</div>
+				<div class="fansPerList">
+					<img src="/images/perImg.png" alt="" width="77" height="77">
+					<div class="fansDetail">
+						<span>微信昵称：XiaoXiang</span> <span>粉丝性别：男</span> <span>粉丝区域：中国
+							北京 海淀</span> <span>所属分组：分组一</span> <span>所属标签：标签一</span>
+					</div>
+					<input type="checkbox">
+				</div>
+				<div class="fansPerList">
+					<img src="/images/perImg.png" alt="" width="77" height="77">
+					<div class="fansDetail">
+						<span>微信昵称：XiaoXiang</span> <span>粉丝性别：男</span> <span>粉丝区域：中国
+							北京 海淀</span> <span>所属分组：分组一</span> <span>所属标签：标签一</span>
+					</div>
+					<input type="checkbox">
+				</div>
+				<div class="fansPerList">
+					<img src="/images/perImg.png" alt="" width="77" height="77">
+					<div class="fansDetail">
+						<span>微信昵称：XiaoXiang</span> <span>粉丝性别：男</span> <span>粉丝区域：中国
+							北京 海淀</span> <span>所属分组：分组一</span> <span>所属标签：标签一</span>
+					</div>
+					<input type="checkbox">
+				</div>
+				<div class="fansPerList">
+					<img src="/images/perImg.png" alt="" width="77" height="77">
+					<div class="fansDetail">
+						<span>微信昵称：XiaoXiang</span> <span>粉丝性别：男</span> <span>粉丝区域：中国
+							北京 海淀</span> <span>所属分组：分组一</span> <span>所属标签：标签一</span>
+					</div>
+					<input type="checkbox">
+				</div>
+				<div class="fansPerList">
+					<img src="/images/perImg.png" alt="" width="77" height="77">
+					<div class="fansDetail">
+						<span>微信昵称：XiaoXiang</span> <span>粉丝性别：男</span> <span>粉丝区域：中国
+							北京 海淀</span> <span>所属分组：分组一</span> <span>所属标签：标签一</span>
+					</div>
+					<input type="checkbox">
+				</div>
+			</div>
+			<div class="page">
+				<span>当前共有6条记录，共1页</span> <a href="">首页</a> <a href="">上一页</a> <a
+					href="">1</a> <a href="">下一页</a> <a href="">末页</a>
+			</div>
+		</div>
+	</div>
+	<div class="addCon clubCon">
+		<p class="">分组名称</p>
+		<div class="group">
+			<input type="checkbox">分组一 <input type="checkbox">分组二
+			<input type="checkbox">分组三
+		</div>
+		<div class="groupBtm">
+			<p>P.s 红色代表已进分组或标签，已进入分组用户将不能进入其它分组</p>
+			<span class="right"> <input type="button" value="确定"
+				class="groupBtn confirmBtn"> <input type="button" value="取消"
+				class="groupBtn cancelBtn">
+			</span>
+		</div>
+		<img src="/images/closeTwo.png" alt="" class="closeImg">
+	</div>
+	<div class="addCon labelCon">
+		<p class="">标签名称</p>
+		<div class="group">
+			<input type="checkbox">cce <input type="checkbox">edison
+			<input type="checkbox">学生
+		</div>
+		<div class="groupBtm">
+			<p>P.s 红色代表已进分组或标签</p>
+			<span class="right"> <input type="button" value="确定"
+				class="groupBtn confirmBtn"> <input type="button" value="取消"
+				class="groupBtn cancelBtn">
+			</span>
+		</div>
+		<img src="/images/closeTwo.png" alt="" class="closeImg">
+	</div>
+</body>
+</html>

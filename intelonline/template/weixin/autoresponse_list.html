@@ -1,0 +1,17 @@
+<{foreach $list as $k=> $key}>
+<li><span class="listOrder"><i><{$k + $baseNum}></i></span> <span
+	class="accountUserName"><{if $key.response_genre eq
+		'keyword'}><{$key.response_keyword}><{else}>----<{/if}></span> <span
+	class="accountUserName" style='width: 40%'><{if
+		$key.response_restime_start eq '0000-00-00'}>< -- 不限 --
+		><{else}><{$key.response_restime_start}> 至
+		<{$key.response_restime_end}><{/if}></span> <span class="accountUserName"><{if
+		$key.response_genre eq 'text'}>非关键字应答<{else if $key.response_genre eq
+		'keyword'}>关键字应答<{else if $key.response_genre eq
+		'subscribe'}>常规关注应答<{/if}></span> <input type="button" class="intelBtnDel"
+	value="删除" scan_id="<{$key.id}>"
+	onclick="del_response(this,<{$key.id}>)" /> <a
+	class="intelBtn editGroupBtn" groupid="<{$key.id}>" name=""
+	href="/index.php/autoresponse/edit_response/response_genre/<{$key.response_genre}>/id/<{$key.id}>">修改</a>
+</li>
+<{/foreach}> <{$pages}>

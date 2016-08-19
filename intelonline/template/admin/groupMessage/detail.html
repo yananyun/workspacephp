@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>微信推送消息--详情</title>
+<link href="/css/main.css" type="text/css" rel="stylesheet" />
+<link rel="stylesheet" type="text/css" href="/css/skins/blue.css" />
+<link rel="stylesheet" type="text/css" href="/css/material.css" />
+<link rel="stylesheet" type="text/css" href="/css/message.css" />
+<script type="text/javascript" src="/js/jquery.js"></script>
+<script type="text/javascript" src="/js/main.js"></script>
+<!-- K -->
+<script type="text/javascript" src="/js/artDialog.js"></script>
+<script type="text/javascript" src="/js/iframeTools.js"></script>
+<link rel="stylesheet" type="text/css" href="/css/material.css" />
+<script type="text/javascript" src="/js/ajaxfileupload.js"></script>
+<script type="text/javascript" src="/js/My97DatePicker/WdatePicker.js"></script>
+<link rel="stylesheet" type="text/css"
+	href="/js/My97DatePicker/skin/WdatePicker.css" />
+</head>
+<body>
+	<div class="container">
+		<{include 'admin/public/header.html'}>
+		<div class="main">
+			<div class="mainWrap">
+				<div class="msgTabWrap">
+					<a class="intelBtn" href="/index.php/groupMessage/add">发布信息</a> <a
+						class="intelBtn" href="/index.php/groupMessage/list_manage">信息列表</a>
+				</div>
+				<div class="msgTabContent currentContent pad-bottom"
+					id="msgTabContent1">
+					<p class="leftPadding80 fansOptionWrap">
+						<span class="leftSpanPos">用户分组：</span> <label><{$gname}></label>
+					</p>
+					<div class="publishBox statu1 gap-top">
+						<div class="publishBoxNavWrap">
+							<{if $info.materialid == ''}> <a class="txtMsgTab"
+								href="javascript:void(0);">文字</a> <{else}> <a
+								class="picTxtMsgTab" href="javascript:void(0);">图文信息</a> <{/if}>
+						</div>
+						<{if $info.materialid == ''}>
+						<div class="messageInput" contenteditable="false" id="wordMsg"><{$info.content}></div>
+						<{else}> <br />当前已使用图文素材：<br />
+						<br /> <{if $single == 1}>
+						<li class="materialPicTxtList oneContent">
+							<p class="materialPicTxtTtl"><{$material['content']['articles'][0]['title']}></p>
+							<p class="materialPicTxtDate"><{date('Y-m-d',$material.uptime)}></p>
+							<div class="materialPicWrapCover">
+								<img src="<{$material['content']['articles'][0]['picurl']}>" />
+							</div>
+							<p class="materialPicTxtComment"><{$material['content']['articles'][0]['description']}></p>
+						</li> <{/if}> <{if $single > 1}>
+						<li class="materialPicTxtList multiContent">
+							<p class="materialPicTxtDate"><{date('Y-m-d',$material.uptime)}></p>
+							<{foreach $material.content.articles as $k => $new}> <{if $k ==
+							0}>
+							<div class="materialPicWrapCover">
+								<img src="<{$new.picurl}>" />
+								<p class="topCoverTtl">
+									<span class="opacityBg"></span> <a class="ttlTxt"
+										style="text-decoration: none;" href="javascript:void(0);"><{$new.title}></a>
+								</p>
+							</div> <{else}>
+							<div class="materialMultiPicWrap">
+								<p><{$new.title}></p>
+								<div class="materialThumb">
+									<img src="<{$new.picurl}>" />
+								</div>
+							</div> <{/if}> <{/foreach}>
+						</li> <{/if}> <{/if}>
+					</div>
+					<p class="leftPadding80 fansOptionWrap" style="margin: 10px 0;">
+						<span class="leftSpanPos">发送类别:</span> <{if $info.mode == 1}> <label>48小时交互推送</label>
+						<{else}> <label>高级群发</label> <{/if}>
+					</p>
+				</div>
+			</div>
+		</div>
+		<{include 'admin/public/left_menu.html'}>
+	</div>
+</body>
+</html>

@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>图文消息</title>
+<link href="/css/main.css" type="text/css" rel="stylesheet" />
+<link rel="stylesheet" type="text/css" href="/css/skins/blue.css" />
+<link rel="stylesheet" type="text/css" href="/css/material.css" />
+<script type="text/javascript" src="/js/jquery.js"></script>
+<script type="text/javascript" src="/js/main.js"></script>
+<script type="text/javascript" src="/js/artDialog.js"></script>
+<script type="text/javascript" src="/js/iframeTools.js"></script>
+</head>
+<body
+	onload="loadContent('',$('.materialPicTxtWrap'),'/index.php/material/list_material')">
+	<div class="container">
+		<{include 'header.html'}>
+		<div class="main">
+			<div class="mainWrap">
+				<a class="intelBtn addPicTxtBtn"
+					href="/index.php/material/creat_pic_txt">+ 单图文消息</a> <a
+					class="intelBtn addPicTxtBtn"
+					href="/index.php/material/creat_pic_txt_multi">+ 多图文消息</a>
+				<ul class="intelListWrap materialPicTxtWrap">
+
+					<li class="oneContent">
+						<p class="materialPicTxtTtl">新的001撒发生非撒啥法萨芬撒的发生发达啥撒旦法萨芬的</p>
+						<p class="materialPicTxtDate">2014-04-01</p>
+						<div class="materialPicWrapCover">
+							<img src="/images/material/proxy.jpg" />
+						</div>
+						<p class="materialPicTxtComment">阿斯顿飞洒阿斯顿飞洒发啊萨菲大厦的发生发生的暗示法撒旦发撒发生非啊沙发撒阿斯顿发生地方萨芬啊沙发撒啊沙发撒啊沙发撒旦法师法暗示法萨芬仨飞萨芬的撒旦飞洒阿斯顿发生啊沙发撒啊沙发撒飞洒撒旦法斯蒂芬啊沙发</p>
+						<div class="materialPicTxtBottom">
+							<a href="javascript:void(0);" onclick="editMaterialBtn()">编辑</a>
+							<a href="javascript:void(0);" onclick="delMaterialBtn()">删除</a> <i></i>
+						</div>
+					</li>
+					<li class="oneContent">
+						<p class="materialPicTxtTtl">新的001撒发生非撒啥</p>
+						<p class="materialPicTxtDate">2014-04-01</p>
+						<div class="materialPicWrapCover">
+							<img src="/images/material/proxy.jpg" />
+						</div>
+						<p class="materialPicTxtComment">发撒啊沙发撒啊沙发撒旦法师法暗示法萨芬仨飞萨芬的撒旦飞洒阿斯顿发生啊沙发撒啊沙发撒飞洒撒旦法斯蒂芬啊沙发</p>
+						<div class="materialPicTxtBottom">
+							<a href="javascript:void(0);" onclick="editMaterialBtn()">编辑</a>
+							<a href="javascript:void(0);" onclick="delMaterialBtn()">删除</a> <i></i>
+						</div>
+					</li>
+					<li class="multiContent">
+						<p class="materialPicTxtDate">2014-04-01</p>
+						<div class="materialPicWrapCover">
+							<img src="/images/material/proxy.jpg" />
+							<p class="topCoverTtl">
+								<span class="opacityBg"></span> <a class="ttlTxt" href="">发撒啊沙发撒啊沙发撒旦法师法暗示法萨芬仨飞萨芬的撒旦飞</a>
+							</p>
+						</div>
+						<div class="materialMultiPicWrap">
+							<p>发撒啊沙发撒啊沙发撒旦法师法暗示法萨芬仨飞萨芬的撒旦飞</p>
+							<div class="materialThumb">
+								<img src="/images/material/proxy.jpg" />
+							</div>
+						</div>
+						<div class="materialMultiPicWrap">
+							<p>发撒啊沙发撒啊沙发撒旦法师法暗示法萨芬仨飞萨芬的撒旦飞</p>
+							<div class="materialThumb">
+								<img src="/images/material/proxy.jpg" />
+							</div>
+						</div>
+						<div class="materialPicTxtBottom">
+							<a href="javascript:void(0);" onclick="editMaterialBtn()">编辑</a>
+							<a href="javascript:void(0);" onclick="delMaterialBtn()">删除</a> <i></i>
+						</div>
+					</li>
+					<li class="multiContent">
+						<p class="materialPicTxtDate">2014-04-01</p>
+						<div class="materialPicWrapCover">
+							<img src="/images/material/proxy.jpg" />
+							<p class="topCoverTtl">
+								<span class="opacityBg"></span> <a class="ttlTxt" href="">发撒啊沙发撒啊沙发撒旦法师法暗示法萨芬</a>
+							</p>
+						</div>
+						<div class="materialMultiPicWrap">
+							<p>发撒啊沙发撒啊沙发撒旦法师法暗示法萨芬仨飞萨芬的撒旦飞</p>
+							<div class="materialThumb">
+								<img src="/images/material/proxy.jpg" />
+							</div>
+						</div>
+						<div class="materialPicTxtBottom">
+							<a href="javascript:void(0);" onclick="editMaterialBtn()">编辑</a>
+							<a href="javascript:void(0);" onclick="delMaterialBtn()">删除</a> <i></i>
+						</div>
+					</li>
+				</ul>
+			</div>
+		</div>
+		<{include 'left_menu.html'}>
+	</div>
+</body>
+</html>
+<script type="text/javascript">
+	//修改文本素材	
+	function editMaterialBtn(id,flag){
+		var url = '/index.php/material/edit_pic_txt/mid/'+id;
+		if(flag == 2){
+			url = '/index.php/material/edit_pic_txt_multi/mid/'+id;
+		}
+		var foo =  confirm("您确定要编辑该素材吗？");
+		if(foo){
+			location.href = url;
+		}
+	}
+	//移除素材
+	function delMaterialBtn(id){
+		var foo =  confirm("您确定要移除该素材吗？");
+		if(foo){
+			$.ajax({
+				url:'/index.php/material/deleteMaterial',
+				data:{mid:id},
+				dataType:'json',
+				type:'post',
+				success:function(data){
+					alert(data.info);
+					if(data.status == 1){
+						location.href = "/index.php/material/pic_txt_msg";
+					}
+				}
+			});
+		}
+	}
+</script>

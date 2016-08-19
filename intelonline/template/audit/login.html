@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+<head>
+<title>登录</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<script src="/js/jquery.js"></script>
+<script>
+	    $(function(){
+		$('.btn').click(function(){
+		    var password = $("[name='password']").val();
+		    var url = "/index.php/audit/login";
+		    $.ajax({
+			url:url,
+			data:{password:password},
+			type:'post',
+			dataType:'json',
+			success:function(data){
+			    if(data.status==true){
+				location.href="/index.php/audit/index";
+			    }else{
+				alert(data.info);
+			    }
+			}
+		    })
+		})
+	    });
+	</script>
+<style>
+.login {
+	border: 1px solid #ccc;
+	margin: auto;
+	width: 600px;
+	height: 300px;
+	margin-top: 150px;
+}
+
+.forminfo {
+	padding-left: 23px;
+	padding-bottom: 50px;
+}
+
+ul {
+	display: block;
+	list-style: outside none none;
+	margin: 0;
+	padding: 0;
+}
+
+.forminfo li {
+	clear: both;
+	margin-bottom: 13px;
+}
+
+li {
+	display: block;
+	list-style: outside none none;
+	margin: 0;
+	padding: 0;
+}
+
+.dfinput {
+	background: url("../images/inputbg.gif") repeat-x scroll 0 0
+		rgba(0, 0, 0, 0);
+	border-color: #a7b5bc #ced9df #ced9df #a7b5bc;
+	border-style: solid;
+	border-width: 1px;
+	height: 32px;
+	line-height: 32px;
+	text-indent: 10px;
+	width: 345px;
+}
+
+.textinput {
+	background: url("../images/inputbg.gif") repeat-x scroll 0 0
+		rgba(0, 0, 0, 0);
+	border-color: #a7b5bc #ced9df #ced9df #a7b5bc;
+	border-style: solid;
+	border-width: 1px;
+	height: 135px;
+	line-height: 20px;
+	overflow: hidden;
+	padding: 10px;
+	width: 504px;
+}
+
+.forminfo li label {
+	display: block;
+	float: left;
+	line-height: 34px;
+	width: 86px;
+}
+
+select {
+	height: 32px;
+	width: 100px;
+}
+
+.btn {
+	background: url("/template/audit/btnbg.png") no-repeat scroll 0 0
+		rgba(0, 0, 0, 0);
+	color: #fff;
+	cursor: pointer;
+	font-size: 14px;
+	font-weight: bold;
+	height: 35px;
+	width: 137px;
+	margin-left: 100px;
+	margin-top: 30px;
+}
+
+select {
+	border: 1px solid #ccc;
+}
+
+.title {
+	background-color: #959595;
+	margin-bottom: 30px;
+	height: 32px;
+	line-height: 32px;
+}
+
+.title h3 {
+	margin-left: 12px;
+}
+</style>
+</head>
+<body>
+	<div class="login">
+		<div class="title"
+			style="background-color: #959595; margin-bottom: 30px;">
+			<h3>管理员登录</h3>
+		</div>
+		<div>
+			<ul class="forminfo">
+				<li><label>用户名:</label><input type="text" class="dfinput"
+					value="intel" disabled="disabled" /><i></i></li>
+				<li><label> 密 码 :</label><input type="password" class="dfinput"
+					name="password" value="<{$info.website}>" /></li>
+				<li><label>&nbsp;</label><input type='button' class='btn'
+					value=" 登 录 " /></li>
+			</ul>
+		</div>
+	</div>
+</body>
+</html>

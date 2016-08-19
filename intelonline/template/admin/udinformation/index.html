@@ -1,0 +1,45 @@
+<{include 'admin/public/head.html'}>
+<script type="text/javascript" src="/js/company.js"></script>
+<body
+	onload="loadContent('',$('.intelListWrap'),'/index.php/udinformation/lists/')">
+	<div class="container">
+		<{include 'admin/public/header.html'}>
+		<div class="main">
+			<div class="mainWrap">
+				<!-- <select name="status" class="addGroupBtn">
+					<option value=''>全部</option>
+					<option value='1'>通过</option>
+					<option value='0'>未通过</option>
+				</select>
+				<a class="intelBtn addGroupBtn" href="javascript:void(0)" onclick="search_status();">+ 查询</a>	 -->
+				<ul class="intelListWrap"></ul>
+			</div>
+		</div>
+		<{include 'admin/public/left_menu.html'}>
+	</div>
+	<script>
+	
+		
+	
+		function search_status(){
+			var status = $('select[name=status]').val();
+			
+			loadContent('',$('.intelListWrap'),'/index.php/udinformation/lists/status/'+status);
+		}
+		function del_recruitment(id){
+			$.ajax({
+				url:"/index.php/recruitment/del_recruitment",
+				dataType:"json",
+				type:"post",
+				data:{id:id},
+				success: function (data){
+					alert(data.info);
+					if(data.status){
+						window.location.href ="/index.php/udinformation/index";
+					}
+				},
+			});
+		}
+	</script>
+</body>
+</html>

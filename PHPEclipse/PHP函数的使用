@@ -1,0 +1,318 @@
+php中的函数使用
+
+php的模块化程序结构是使用函数与对象实现的  
+函数是一个被命名的
+独立的代码段
+它执行特定任务
+并可以给调用它的程序返回一个值
+
+函数的优点
+  1、提高程序的重用性
+  2、提高程序的可维护性
+  3、提高软件的开发效率
+  4、提高软件的可靠性
+  5、控制程序的复杂性
+
+函数必须调用才能执行
+
+第一  函数的声名  使用 function 关键字 
+function  函数名()
+{
+}
+function 函数名(参数1，参数2，参数..)//参数列表 如果有多个用逗号分开
+{ 
+     函数体
+}
+
+function 函数名()
+{
+	函数体
+	返回值
+}
+function 函数体(参数列表)
+{
+	函数体
+	返回值
+}
+第一 函数必须调用才能执行 ，可以在声明之前调用 ，也可以在声明之后调用 
+（C语言中 只能在声明之后调用）
+第二 函数命名和变量一样 要驼峰结构
+第三 函数在声明时 不能重名
+
+第四 可以通过向函数传递参数 改变函数的行为 
+形参 就在声明函数时 声明的参数 参数就是变量 多个参数 用逗号分开
+实参 调用 函数时 传给形参的数值 （数据 也可以是变量）
+
+第五 如果函数没有返回值 称为过程 
+
+第六  有返回值 通过return返回处理结果  存储到数据库或者利用
+
+
+PHP函数的使用
+php的变量的作用域  
+局部变量 在函数中声明的变量 只能在自己的函数内部使用
+全局变量 在函数外声明 在变量声明以后直到整个脚本结束前都可以使用
+
+php变量 区分不出变量是声明还是使用
+（javascript中 var obj; obj javascript可以区分出声明还是使用）
+php中使用全局变量 要通过global关键字将这个全局变量包括到函数中才能使用
+
+$a;
+function demo()
+{
+	global $a;
+	$a+=5;
+	echo $a.'demo function go<br/>';
+}
+
+函数参数 是局部变量 可以调用时去赋值
+
+PHP的静态变量
+
+静态变量只能在函数中（类中），不能在全局声明；
+使用static 在变量前
+（理解静态变量 －－－被共用了  －可以类比－全局变量   ；）
+一个变量可以在同一个函数在多次调用中同用
+1、静态变量在静态代码段中保存
+2、一个函数多次调用之间共用 ，但只在第一次调用 函数声明到内存 以后再调用该函数 就不再声明 而直接使用
+
+
+PHP的变量函数
+
+如果一个变量后面有括号 $var＝hello；$var()；就将寻找与变量值同名的函数，调用并执行；
+通过给变量赋值不同的函数名 动态调用函数
+实现 回调 ；实现 多态；
+
+
+
+函数的使用
+
+1、函数的功能－－－－－－－－－－－－－－－ 决定是否使用这个函数
+2、函数的参数－－－－－－－－－－－－－－－－决定函数怎么调用
+3、函数的返回值－－－－－－－－－－－－－－－调用后怎么处理这个函数
+
+php给了2000多个函数 都属于系统函数 可以直接使用；
+但是mysqli pdo这些 扩展库要装了才可以使用；
+
+1、常规函数
+	bool copy(string source,string dest);
+2、带有mixed	mixed可以传任何类型的数据
+	bool chown(string filename,mixed user);
+3、带有&符参数的函数 ， 表示引用赋值， 这个参数不能传数值  只能传一个变量，然后函数中将变量的值改变 我们在使用这个
+变量时 值也是变化的
+例如：
+$array=array(1,9,4,6,3);
+bool arsort (array &array [,int sort_flags]);
+
+4、默认函数 带有［］的函数 表示这个参数是可选的，如果你传值了就使用你穿的值 ，如果没有传值则使用默认值，
+直接在声明函数时 就为参数给初值 (实参比形参少)
+
+function demo($a,$b=20,$c=50)
+{
+	echo "#### $a ######## $b ################ $c";
+}
+
+5、带有...的参数函数 ,....表示可以传任意多个参数 (实参比形参多)
+int array_unshift(array &array,mixed var [,mixed ....]);
+function demo()
+{
+	$args=func_get_args();
+	echo count($args);
+}
+function demo1()
+
+{
+
+  $sum=0;
+  for($i =0;$i<func_num_args();$i++)
+  {
+   $sum+=func_get_arg($i);
+  
+  }
+}
+
+6、回调函数 带有callback，就是调用这个函数时 需要我们传一个函数进来（函数，函数名字串）；
+
+array array_filter(array input [,callback callback]);
+
+//类似变量函数？？？？
+
+$a=array(1,2,-3,4,-5,6,-7,8,9);
+print_r(array_filter($a,demo));
+function demo($a)
+{
+	if($a>0)
+	{
+	  return true;
+	}else
+	{
+	 return false;
+	}
+}
+
+
+1、内部函数 
+PHP 可以在函数内部声明 函数 目的就是在函数内部调用 ；
+以后的面向对象
+function score($php,$java,$donet)
+{
+
+		function php($php)
+		{
+			if($php>60)
+			 return '及格';
+			else
+			 return '不及格'; 
+		}
+		
+		
+		function java($java)
+		{
+			if($java>60)
+			 return '及格';
+			else
+			 return '不及格'; 
+		}
+		
+		function donet($donet)
+		{
+			if($donet>60)
+			 return '及格';
+			else
+			 return '不及格'; 
+		}
+		
+		$total=$php+$java+$donet;
+		$av=$total/3;
+		
+		echo"你的php成绩是$php ,php($php)<br/>";
+			echo"你的java成绩是$java ,java($java)<br/>";
+				echo"你的php成绩是$donet ,donet($donet)<br/>";
+
+
+
+}
+
+2、递归函数 就是在自己内部调用自己
+
+层层进入 层层退出 直到退出最后一层递归
+
+function demo($num)
+{
+
+  echo $num.'<br/>';
+  
+  if($num>0)
+  {
+  	demo($num);
+  }else
+  {
+    echo '---------------<br/>';
+  }
+  
+
+  
+  echo $num.'<br/>';
+
+}
+
+
+
+
+3、重用函数
+
+使用自己定义的函数库 ；
+要做到这一点 需要用到几个系统函数(系统指令)
+require include require_once include_once
+
+include(文件名);系统函数
+include "文件名";系统指令
+
+echo "sssssss"; 系统指令
+echo ("ssssss");系统函数
+break;系统指令
+exit;系统指令
+
+
+
+4、一些系统函数的调用
+
+
+// 遍历目录下 多少子目录 多少个文件
+ 资源 opendir('目录名');
+ readdir(资源);
+ is_dir(文件);判断是文件 还是 目录
+ 
+ 
+ 
+ 
+ function total($dirname)
+ {
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ }
+
+$dirnum=0;$filenum=0;
+
+//根目录遍历
+function total($dirname,&$dirnum,&$filenum)
+{
+	$dir=opendir($dirname);
+	echo readdir($dir).'<br/>';
+	echo readdir($dir).'<br/>';
+	while($filename=readdir($dir))
+	{
+		echo $filename.'<br/>';
+		
+		$newfile=$dirname.'/'.$filename;
+		
+		if(is_dir($newfile))
+		{
+		
+		//子目录遍历 用到递归
+		total($newfile,$dirnum,$filename);
+		
+			$dirnum++;	
+				
+		}else
+		{
+			$filenum++;
+		}
+		
+		
+	}
+	
+	closedir($dir);
+}
+
+echo '目录总数'.$dirnum.'<br/>';
+
+echo '文件总数'.$dirnum.'<br/>';
+
+echo '目录总数'.$dirnum.'<br/>';
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

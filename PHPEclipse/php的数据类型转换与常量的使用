@@ -1,0 +1,69 @@
+数据类型之间相互转换
+
+		一种是强制转换 setType('变量'，‘类型’);//int integer float double real bool boolen string array object
+		这个函数将愿变量的类型改变
+		$a=(int)"123456";
+		$变量 = intval(变量或值);
+		$变量 = floatval(变量或值);
+		$变量 = dtringval(变量或值);
+		整型在内存中占4个字节 浮点型占8个字节
+		
+与变量和类型有关的一些常用函数
+isSet() 判断变量是否存在 值如果是null就是不存在 empty()//在变量存在的情况下 判断变量是否为空“”，“  ”;
+ unset() 释放变量;
+  setType() 转换数据类型;
+  getType() 获取数据类型;
+  is_int is_integer is_long;is_array(); is_resource();is_null(); is_scalar()是否标量 整型 浮点型 字符串 is_numberic();is_object;
+常量的声明与使用
+ 常量是一个简单值的标识
+ 常量定义后不能改变它的值 也不能使用unset取消
+ 常量可以不用理会变量的范围的规则在任何地方可以定义和访问
+ 常量使用define（"常量名",值）;
+ 常量声名在声明或者使用都不使用$符
+ 常量的值只能用标量类型（int float bool string）
+ 常量声名时一定要赋值
+ define("HOME","aaaaaaaaa");
+ $a = 100;
+ 
+ function demo()
+ {
+   echo $a;
+   echo $HOME;
+   
+ }
+ 
+ demo();
+ 发现$a无法输出  因为是全局变量 调用时有限制
+ 如下：
+  function demo()
+ {
+ 	global $a;
+   echo $a;
+   echo $HOME;
+   
+ }
+ 
+ 判断常量是否存在使用defined("常量");
+ 
+ define("HOME","aaaaaaasssss");
+ if(defined("HOME"))
+ {
+		echo HOME; 
+ }else
+ {
+ 	define("HOME","bbbbbbbbbb");
+ 
+ }
+ echo HOME;
+ 
+ 系统预定义常量 就是不定义就可以使用 魔术常量 而魔术常量 比如 __FILE__ 输出当前文件名
+ __LINE__输出当前是哪一行
+ __FUNCTION__函数中 输出函数名
+PHP_VERSION 输出php当前的版本
+ 
+ 
+ 
+ 
+ 
+ 
+ 

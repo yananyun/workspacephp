@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<script type="text/javascript">
+	var str= "akdisisis 1234yuwskdhdj9000sjjskks2345";
+	
+	//创建一个正则表达式 (\d)表示子表达式
+	var reg = /(\d)(\d)(\d)(\d)/gi;//找一百个数字相连的串/(\d){4}/gi
+	//显示创建
+	var reg2= new RegExp("(\\d){4}","gi");
+	var res = "";
+	while(res = reg.exec(str))//res表示找到一个结果 该结果是一个数组 
+		{
+		document.write(res);
+		}
+//从一个子串中寻找一个四个数字相连的
+//找到四个数字，个位和千位要相同 十位和百位相同
+	var reg3=/(\d)(\d)\2\1/gi;
+	//这里是第一个子表达式 第二个子表达式捕获
+	// \2表示的位置必须出现第二个子表达式出现的值 
+	// \1表示
+	//反向捕获 专业术语
+	//找出 9个连续的数字/(\d)\1\1(\d)\2\2(\d)\3\3\3/
+	
+	</script>
+</body>
+</html>

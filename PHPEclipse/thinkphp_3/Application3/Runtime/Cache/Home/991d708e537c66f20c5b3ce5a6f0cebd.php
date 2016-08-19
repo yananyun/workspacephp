@@ -1,0 +1,21 @@
+<?php if (!defined('THINK_PATH')) exit();?><!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<script type="text/javascript">
+	//js中把 基本数据类型也是当作对象来处理
+	var num1 = 7;
+	var num2 = 3;
+	var res = num1/num2;
+	/* res= res + "";
+	var index = res.indexOf("."); */
+	/* var res1=res.substring(0,index+3);//3却是保留两位小数
+	 */
+    document.write(res.toFixed(3));
+	</script>
+	
+</body>
+</html>

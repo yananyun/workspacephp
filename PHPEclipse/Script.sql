@@ -1,0 +1,19 @@
+--<ScriptOptions statementTerminator="GO"/>
+
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+SET ANSI_PADDING ON
+GO
+
+CREATE TABLE dimuser (
+	ID INT
+)
+GO
+
+SET ANSI_PADDING OFF
+GO
+

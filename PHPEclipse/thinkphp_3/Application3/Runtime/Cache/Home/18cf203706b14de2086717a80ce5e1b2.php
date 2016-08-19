@@ -1,0 +1,41 @@
+<?php if (!defined('THINK_PATH')) exit();?><!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+  <script type = "text/javascript">
+  		function abc(){
+  			
+  			//先得到用户输入
+  			var inputCon = document.getElementById("inputtext").value;
+  			var text1 = document.getElementById("text1").value;
+  			var text2 = document.getElementById("text2").value;
+  			var reg = "/"+text1+"/gi";
+  			//str怎么当作对象来处理
+  			var newString = inputCon.replace(eval(reg),text2);
+  			//把新的串放入到第二个文本域
+  			document.getElementById("resulttext").innerText=newString;
+  			
+  			
+  			
+  		}
+  
+  
+  </script>
+  
+  <h1>替换小测试</h1>
+  <textarea rows="7" cols="30" id="inputtext">
+  </textarea>
+  &nbsp;&nbsp;&nbsp;
+  <textarea rows="7" cols="30" id="resulttext"
+  ></textarea>
+  <br/>
+   <br/>
+    <br/>
+  <p>请输入你要查找的字符串</p><input type = "text" id = "text1"/><br/>
+  <p>请输入你要替换成什么串</p><input type = "text" id = "text2" /><br/>
+  <input type = "button" value = "开始替换"   onclick = "abc()"/>
+</body>
+</html>

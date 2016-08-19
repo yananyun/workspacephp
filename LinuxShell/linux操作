@@ -1,0 +1,19 @@
+shell脚本 就是 windows下的bat脚本
+
+shell的作用－－命令解释器 
+工作流程：
+计算机用户 输入 shell命令语言 控制 linux内核 调用 系统硬件 显示器等
+
+使用方式一 
+在 终端使用 shell bash shell命令
+
+使用方式二
+通过编写shell脚本
+要执行这个脚本 
+第一：不能直接执行 
+终端下  for.sh
+第二：要用命令解析器执行
+终端下 bash for.sh
+第三：要直接执行这个shell脚本 需要 修改该for.sh的权限 加可执行权限
+
+

@@ -31,7 +31,8 @@ class loginAction extends Action {
 		
 			$result = $this->M->getInfoByWhere ( $where );
 			if ($result) {
-				
+				echo '<br/>result<br/>';
+				var_dump($result);
 				$this->loginSuccess ( $result [0] ['id'] );
 				$_SESSION ['userinfo'] = $result [0];
 				$_SESSION ['accountinfo'] = $this->M->getAccountInfo ();
@@ -39,7 +40,7 @@ class loginAction extends Action {
 				// $_SESSION['userinfo']['rankArr'][] = 'login';
 				// $_SESSION['userinfo']['rankArr'][] = 'norank';
 				
-				redirect ( '/index.php/statistical/index' );
+// 				redirect ( '/index.php/statistical/index' );
 			} else {
 			
 				redirect ( '/index.php/login/index/', 1, '用户名或密码错误' );

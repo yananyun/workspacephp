@@ -48,6 +48,7 @@ class Mysql {
 		$this->dbconfig = $db;
 		// $dbConfig = $this->$dbConfig;
 		// $dbConfig 不要和全局变量 config文件中的重名 形参参数名定义时
+		echo '<br/>';
 		var_dump ( $db );
 		
 		// 初始构造数据库连接
@@ -89,7 +90,7 @@ class Mysql {
 		$host = $db ['DBhost']; // 地址
 		$port = $db ['DBport']; // 端口
 		$name = $DBname; // 数据库名
-		echo $name . '<br/>';
+		echo '<br/>'.$name . '<br/>';
 		$user = $db ['DBuser']; // root
 		$pass = $db ['DBpws']; // 密码
 		echo 'connect<br/>';

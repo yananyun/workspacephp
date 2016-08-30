@@ -1,0 +1,26 @@
+-- VERSION_4
+-- START DISKCACHE_2
+/Users/lixiaoyan/Documents/workspacephp/workspacephp/.metadata/.plugins/org.eclipse.core.resources/.projects/PythonObject/com.python.pydev.analysis/v2_indexcache
+com.__init__|1468568608000000000|/Users/lixiaoyan/Documents/workspacephp/workspacephp/PythonObject/com/__init__.py
+com.bjcric.__init__|1468568608000000000|/Users/lixiaoyan/Documents/workspacephp/workspacephp/PythonObject/com/bjcric/__init__.py
+com.bjcric.pythontest.__init__|1468573899000000000|/Users/lixiaoyan/Documents/workspacephp/workspacephp/PythonObject/com/bjcric/pythontest/__init__.py
+-- END DISKCACHE
+-- START DICTIONARY
+1
+1=com.bjcric.pythontest.__init__
+-- END DICTIONARY
+-- START TREE 1
+9
+a|1|a!11@
+f10|1|f100!11@
+fib|2|fib!10@fib2!10@
+hei|1|height!11@
+hel|1|hello!11@
+m|1|m!11@
+wid|1|width!11@
+wor|1|words!11@
+x|1|x!11@
+-- END TREE
+-- START TREE 2
+0
+-- END TREE

@@ -29,6 +29,6 @@ if (! ERROR_REPORT) {
 	error_reporting ( E_ALL ^ (E_NOTICE | E_WARNING) );
 }
 require_once ROOT_PATH . 'common/commonArray.php';
-echo ROOT_PATH . '我要知道项目的根路径documentroot<br/>';
+echo ROOT_PATH . '<br/>我要知道项目的根路径documentroot<br/>';
 session_start (); // 开启session
 ?>

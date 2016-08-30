@@ -32,10 +32,14 @@ class Module {
 	 */
 	public function connect() {
 		global $dbConfig;
+		echo '111<br/>';
 		var_dump ( $dbConfig );
 		$this->config = $dbConfig ['default'];
+		echo '222<br/>';
 		var_dump ( $dbConfig ['default'] );
+		echo '333<br/>';
 		var_dump ( $this->config );
+		echo '444<br/>';
 		$con = $this->config;
 		$tableName = $con ['DBname'];
 		$this->db = new Mysql ( $this->config, $tableName );

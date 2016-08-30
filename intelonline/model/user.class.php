@@ -34,6 +34,7 @@ class user extends Module {
 	public function getInfoByWhere($where) {
 		$return = $this->select ( NULL, $where );
 		// p($this->db->getSql());exit;
+		echo  'getInfoByWhere<br/>';
 		return $return;
 	}
 	public function mymd5($string) {

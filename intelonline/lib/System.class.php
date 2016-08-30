@@ -181,22 +181,22 @@ class System {
 		echo 'test execute <br/>';
 		
 		if (self::$module == 'api') {
-			echo $object . '<br/>';
-			echo $action . '<br/>';
+			echo self::$module . '<br/>';
+			echo self::$action . '<br/>';
 			$control = 'main';
 		} else {
-			echo $object . '<br/>';
-			echo $action . '<br/>';
+			echo self::$module . '<br/>';
+			echo self::$action . '<br/>';
 			$control = self::$module . "Action";
 		}
 		if (! class_exists ( $control )) {
-			echo $object . '<br/>';
-			echo $action . '<br/>';
+		   echo self::$module . '<br/>';
+			echo self::$action . '<br/>';
 			apiData ( "此类不存在！", 1027, '/system' );
 			die ();
 		}
-		echo $object . '模块名 具体文件在action文件夹下<br/>';
-		echo $action . '方法名 具体文件在action文件夹下<br/>';
+		echo self::$module . '模块名 具体文件在action文件夹下<br/>';
+		echo self::$action . '方法名 具体文件在action文件夹下<br/>';
 		
 		$object = new $control (); // 实例化模块对象
 		
@@ -211,5 +211,32 @@ class System {
 		$object->$action ();
 	}
 }
+/*index php intel online11
+intel online3
+intel online2
+/Users/lixiaoyan/Documents/workspacephp/workspacephp/intelonline/我要知道项目的根路径documentroot
 
+init system success
+parse url success
+/index.php当前文件的路径
+/index.php/login/index获取完整的路径包含?之后的字符串
+10
+1
+/index.php
+/login/index---1111
+/login/index---2222
+login/index---2222
+login模块名
+index除去模块名后的url字符串
+error----方法名
+
+test execute 
+
+
+模块名 具体文件在action文件夹下
+方法名 具体文件在action文件夹下
+array(1) { ["default"]=> array(2) { ["Master"]=> array(4) { ["DBhost"]=> string(9) "localhost" ["DBport"]=> string(4) "3306" ["DBuser"]=> string(4) "root" ["DBpws"]=> string(9) "dyn123456" } ["DBname"]=> string(11) "intelonline" } } array(2) { ["Master"]=> array(4) { ["DBhost"]=> string(9) "localhost" ["DBport"]=> string(4) "3306" ["DBuser"]=> string(4) "root" ["DBpws"]=> string(9) "dyn123456" } ["DBname"]=> string(11) "intelonline" } array(2) { ["Master"]=> array(4) { ["DBhost"]=> string(9) "localhost" ["DBport"]=> string(4) "3306" ["DBuser"]=> string(4) "root" ["DBpws"]=> string(9) "dyn123456" } ["DBname"]=> string(11) "intelonline" } array(2) { ["Master"]=> array(4) { ["DBhost"]=> string(9) "localhost" ["DBport"]=> string(4) "3306" ["DBuser"]=> string(4) "root" ["DBpws"]=> string(9) "dyn123456" } ["DBname"]=> string(11) "intelonline" } intelonline
+connect
+主库连接 : SQLSTATE[HY000] [2002] No such file or directory
+ * */
 ?>

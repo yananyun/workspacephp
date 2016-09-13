@@ -1,0 +1,415 @@
+/*幽灵效果的页面布局*/
+*{
+	margin:0;
+	padding:0;
+
+}
+
+
+body{
+
+	background: #333;
+
+}
+/*
+	这里如果content的宽度 
+	放不下三个div 即便 下边设置了float 
+	也没有将块级元素调为一行的
+		效果
+*/
+
+/*
+	媒体查询
+
+*/
+@media screen and(min-width: 980px) {
+
+	.content .box{
+
+ 	width:205px;
+ 	height: 220px;
+ 	background: green;
+ 	float: left;
+ 	margin: 0 60px;
+
+ }
+}
+
+@media screen and(min-width: 600px) {
+
+	.content .box{
+
+ 	width:205px;
+ 	height: 220px;
+ 	background: green;
+ /*	float: left;
+ 	margin: 0 60px;
+*/
+ }
+}
+
+
+
+
+.content{
+
+	width: 1000px;
+	height:400px;
+	/*background: red;*/
+	margin: 50px auto;
+
+}
+.content .box{
+
+ 	width:205px;
+ 	height: 220px;
+ 	background: green;
+ 	float: left;
+ 	margin: 0 60px;
+
+}
+/*
+icon 这里是内敛元素 
+设置宽高是没有效果的
+ 那么display改为块级元素的显示模式
+
+ 这里 icon 设置 背景图片 三个div都是同样的图片了 解决
+ */
+.box-mission .icon
+{
+ width: 174px;
+ height:155px;
+ display: block;
+ background: pink url(.img/mission.png) background-repeat: no-repeat;
+ margin: 0 auto; 
+/* 过渡效果*/
+transition: all 0.2s;
+-webkit-transition: all 0.2s;
+-o-transition: all 0.2s;
+-moz-transition: all 0.2s;
+
+
+}
+
+/*
+
+*/
+
+
+.box-mission .icon:hover
+{
+
+	/*放大图片 并 旋转图片 但是这样单独的动画 看不出效果
+	太快了 看不出来  需要添加过渡效果*/
+	transform: scale(1.2) transform: rotate(360deg);
+	/*兼容浏览器  -webkit-谷歌与苹果浏览器 o 兼容欧朋浏览器 moz兼容火狐 */
+	 -webkit-transform: scale(1.2) transform: rotate(360deg);
+	  -o-transform: scale(1.2) transform: rotate(360deg);
+	   -moz-transform: scale(1.2) transform: rotate(360deg);
+}
+
+
+
+.box-play .icon
+{
+ width: 174px;
+ height:155px;
+ display: block;
+ background: pink url(.img/play.png) background-repeat: no-repeat;
+ margin: 0 auto; 
+/* 过渡效果*/
+transition: all 0.2s;
+-webkit-transition: all 0.2s;
+-o-transition: all 0.2s;
+-moz-transition: all 0.2s;
+
+
+}
+
+/*
+
+*/
+
+
+.box-play .icon:hover
+{
+
+	/*放大图片 并 旋转图片 但是这样单独的动画 看不出效果
+	太快了 看不出来  需要添加过渡效果*/
+	transform: scale(1.2) transform: rotate(360deg);
+	/*兼容浏览器  -webkit-谷歌与苹果浏览器 o 兼容欧朋浏览器 moz兼容火狐 */
+	 -webkit-transform: scale(1.2) transform: rotate(360deg);
+	  -o-transform: scale(1.2) transform: rotate(360deg);
+	   -moz-transform: scale(1.2) transform: rotate(360deg);
+}
+
+.box-touch .icon
+{
+ width: 174px;
+ height:155px;
+ display: block;
+ background: pink url(.img/touch.png) background-repeat: no-repeat;
+ margin: 0 auto; 
+/* 过渡效果*/
+transition: all 0.2s;
+-webkit-transition: all 0.2s;
+-o-transition: all 0.2s;
+-moz-transition: all 0.2s;
+
+
+}
+
+/*
+
+*/
+
+
+.box-touch .icon:hover
+{
+
+	/*放大图片 并 旋转图片 但是这样单独的动画 看不出效果
+	太快了 看不出来  需要添加过渡效果*/
+	transform: scale(1.2) transform: rotate(360deg);
+	/*兼容浏览器  -webkit-谷歌与苹果浏览器 o 兼容欧朋浏览器 moz兼容火狐 */
+	 -webkit-transform: scale(1.2) transform: rotate(360deg);
+	  -o-transform: scale(1.2) transform: rotate(360deg);
+	   -moz-transform: scale(1.2) transform: rotate(360deg);
+}
+
+/*添加按钮的过渡效果
+
+我们的按钮是 a 超链接
+a元素 是行内元素 设置宽高没用 需要修改 块级元素
+    水平居中
+	margin: 0 auto; 
+	设置字体
+	font-family: "微软雅黑";
+ 	font-size: 18px;
+	font-weight: bolder;加粗
+	text-decoration: none; 下划线去掉
+	文本要在a元素中垂直居中
+	需要考虑 单行文本在已知高度的块级元素垂直居中的做法 是父元素
+	高度一致
+	添加
+	line-height: 45px;
+	要设置不紧靠块级元素左侧
+		padding-left: 20px;
+
+
+*/
+ 
+ .box .button
+ {
+ 	width: 156px;
+ 	height: 45px;
+ 	line-height: 45px;
+ 	display: block;
+ 	background: pink;
+ 	margin: 0 auto;
+ 	font-family: "微软雅黑";
+ 	font-size: 18px;
+ 	font-weight: bolder;
+ 	color: #2ecc71;
+ 	text-decoration: none;
+ 	background:  url(./img/allow.png)  background-repeat: no-repeat 130px;
+ 	padding-left: 20px;
+ /*	border: 2px solid #FFF;*/
+	border: 2px solid rgb(255,255,255,0.8);
+	transition: all 0.2s;
+	-webkit-transition: all 0.2s ease;
+	-o-transition: all 0.2s ease;
+	-moz-transition: all 0.2s ease;
+	position: relative;
+
+ }
+
+.box .button:hover
+{
+	/*北京图片位置移动 需要添加过渡效果*/
+	background-position: 140px align-content: center;
+	/*由透明0.8到完全显示 不透明 就是显示*/
+	border:2px solid rgb(255,255,255,1);
+}
+
+
+
+/*
+设置顶部和底部的线条效果
+*/
+
+.box .line
+{
+	background-color: #FFF;
+}
+/*
+顶部线条从左到右过渡到按钮的上边框位置
+高度不变 2px
+宽度由 0-》180px
+
+按钮要设置相对定位
+顶部线条设置绝对定位
+结合 top left 
+
+结合 right bottome
+*/
+
+.box .line-top
+{
+	width: 0px;
+	height: 2px;
+	display: block;
+	position: absolute;
+	top: -2px;
+/*	负值才往左？？*/
+	left: -100%;
+	-webkit-transition: all 0.2s ease;
+	-o-transition: all 0.2s ease;
+	-moz-transition: all 0.2s ease;
+
+}
+
+.box .button:hover .line-top
+{
+	width: 180px;
+	left: -2px;
+
+}
+
+/*
+底部是从右向左到底部边框的位置
+这里绝对定位 要改为使用
+*/
+
+.box .line-bottome
+{
+	width: 0px;
+	height: 2px;
+	display: block;
+	position: absolute;
+	bottome: -2px;
+/*	负值才往右？？*/
+	right: -100%;
+	-webkit-transition: all 0.2s ease;
+	-o-transition: all 0.2s ease;
+	-moz-transition: all 0.2s ease;
+
+}
+
+.box .button:hover .line-bottome
+{
+	width: 180px;
+	right: -2px;
+
+}
+
+/*
+设置左部和右部的线条
+左侧 从下往上过渡 宽度不变 高度 由0变为边框的高度
+*/
+
+.box .line-left
+{
+	width: 2px;
+	height: 0px;
+	display: block;
+	position: absolute;
+	/*负值往下*/
+	bottome: －100%;
+/*	负值才往左？？*/
+	left: -2px;
+	-webkit-transition: all 0.2s ease;
+	-o-transition: all 0.2s ease;
+	-moz-transition: all 0.2s ease;
+
+}
+
+.box .button:hover .line-left
+{
+	height: 49px;
+	bottome: -2px;
+
+}
+
+
+.box .line-right
+{
+	width: 2px;
+	height: 49px;
+	display: block;
+	position: absolute;
+	/*负值往上*/
+	top:-100%;
+/*	负值才往右？？*/
+	right: -2px;
+	-webkit-transition: all 0.2s ease;
+	-o-transition: all 0.2s ease;
+	-moz-transition: all 0.2s ease;
+
+}
+
+.box .button:hover .line-right
+{
+	height: 49px;
+	top: -2px;
+
+}
+
+/*
+     优化及响应式的布局
+	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
